@@ -18,7 +18,7 @@ collections:
       item_duplication_fields: null
       note: 日更文章主数据
       preview_url: >-
-        https://blog.easybreak.top/preview/posts/{{slug}}?secret=b67296c37162f9c4b8dc999e3dc4c2902912bbe9ef02f39ef39e8e7bc186af99
+        https://blog.easybreak.top/preview/posts/{{slug}}?secret=${PREVIEW_SECRET}
       singleton: false
       sort: null
       sort_field: null

@@ -1,7 +1,7 @@
 ---
 import Hero from '@/components/Hero.astro';
 import ShareCard from '@/components/ShareCard.astro';
-import { addHeadingIds, buildTableOfContents, calculateReadingMinutes } from '@/lib/content';
+import { addHeadingIds, buildTableOfContents, calculateReadingMinutes, renderStructuredBlocks } from '@/lib/content';
 import { buildAssetUrl, buildPostUrl, runtimeConfig } from '@/lib/routes';
 import type { Article } from '@/lib/types';
 
@@ -16,7 +16,7 @@ const { article, preview = false } = Astro.props;
 const config = runtimeConfig();
 const cover = buildAssetUrl(article.cover_image, config);
 const canonical = buildPostUrl(article.slug, config);
-const content = addHeadingIds(article.content);
+const content = addHeadingIds(`${article.content}${renderStructuredBlocks(article.blocks)}`);
 const toc = buildTableOfContents(content);
 const readingMinutes = article.reading_minutes || calculateReadingMinutes(content);
 const category = typeof article.category === 'object' && article.category ? article.category : null;

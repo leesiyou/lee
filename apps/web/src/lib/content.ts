@@ -1,6 +1,6 @@
 import sanitizeHtml from 'sanitize-html';
 
-import type { Article } from './types';
+import type { Article, StructuredContent } from './types';
 
 export interface TableOfContentsItem {
   depth: 2 | 3;
@@ -72,6 +72,51 @@ export function sanitizeArticleHtml(input: string): string {
       }),
     },
   });
+}
+
+function blockValue(value: unknown): string {
+  if (typeof value === 'string' || typeof value === 'number') return String(value);
+  if (value && typeof value === 'object' && 'content' in value) {
+    return blockValue((value as { content?: unknown }).content);
+  }
+  return '';
+}
+
+export function renderStructuredBlocks(content: StructuredContent | null | undefined): string {
+  if (!content?.blocks || !Array.isArray(content.blocks)) return '';
+  const rendered = content.blocks
+    .map((block) => {
+      const data = block.data ?? {};
+      switch (block.type) {
+        case 'paragraph':
+          return `<p>${blockValue(data.text)}</p>`;
+        case 'header': {
+          const level = [2, 3, 4].includes(Number(data.level)) ? Number(data.level) : 2;
+          return `<h${level}>${blockValue(data.text)}</h${level}>`;
+        }
+        case 'list': {
+          const tag = data.style === 'ordered' ? 'ol' : 'ul';
+          const items = Array.isArray(data.items) ? data.items : [];
+          return `<${tag}>${items.map((item) => `<li>${blockValue(item)}</li>`).join('')}</${tag}>`;
+        }
+        case 'quote':
+          return `<blockquote><p>${blockValue(data.text)}</p>${data.caption ? `<figcaption>${blockValue(data.caption)}</figcaption>` : ''}</blockquote>`;
+        case 'delimiter':
+          return '<hr>';
+        case 'code':
+          return `<pre><code>${blockValue(data.code)}</code></pre>`;
+        case 'image': {
+          const file = data.file && typeof data.file === 'object' ? data.file as Record<string, unknown> : {};
+          const source = blockValue(file.url ?? data.url);
+          if (!source) return '';
+          return `<figure><img src="${source}" alt="${blockValue(data.caption)}" loading="lazy">${data.caption ? `<figcaption>${blockValue(data.caption)}</figcaption>` : ''}</figure>`;
+        }
+        default:
+          return '';
+      }
+    })
+    .join('');
+  return sanitizeArticleHtml(rendered);
 }
 
 function plainText(input: string): string {

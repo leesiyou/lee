@@ -2,6 +2,9 @@ node_modules/
 dist/
 !infra/directus/extensions/blog-slug/dist/
 !infra/directus/extensions/blog-slug/dist/index.js
+!infra/directus/extensions/gazi-wechat-draft/dist/
+!infra/directus/extensions/gazi-wechat-draft/dist/app.js
+!infra/directus/extensions/gazi-wechat-draft/dist/api.js
 .astro/
 .env
 .env.*

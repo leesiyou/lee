@@ -1,24 +1,14 @@
 import type { APIRoute } from 'astro';
 
-import { authorizeAutomationRequest, getWechatDraftAvailability } from '@/lib/wechat';
+import { runtimeConfig } from '@/lib/routes';
+import {
+  WechatDraftError,
+  authorizeAutomationRequest,
+  createWechatDraftFromArticle,
+  getWechatDraftAvailability,
+} from '@/lib/wechat';
 
 export const prerender = false;
-
-interface DraftRequest {
-  author?: string;
-  content: string;
-  content_source_url: string;
-  digest: string;
-  show_cover_pic?: 0 | 1;
-  thumb_media_id: string;
-  title: string;
-}
-
-interface WechatTokenResponse {
-  access_token?: string;
-  errcode?: number;
-  errmsg?: string;
-}
 
 export const POST: APIRoute = async ({ request }) => {
   if (
@@ -35,42 +25,34 @@ export const POST: APIRoute = async ({ request }) => {
     return Response.json(availability, { status: 503 });
   }
 
-  let payload: DraftRequest;
+  let payload: { article_id?: number | string };
   try {
-    payload = (await request.json()) as DraftRequest;
+    payload = (await request.json()) as { article_id?: number | string };
   } catch {
     return Response.json({ message: '请求 JSON 无效' }, { status: 400 });
   }
-  if (!payload.title || !payload.content || !payload.thumb_media_id || !payload.content_source_url) {
-    return Response.json({ message: '缺少标题、正文、封面媒体或阅读原文地址' }, { status: 400 });
+  if (payload.article_id === undefined || payload.article_id === null || payload.article_id === '') {
+    return Response.json({ message: '缺少文章 ID' }, { status: 400 });
   }
 
-  const tokenUrl = new URL('https://api.weixin.qq.com/cgi-bin/token');
-  tokenUrl.searchParams.set('grant_type', 'client_credential');
-  tokenUrl.searchParams.set('appid', process.env.WECHAT_APP_ID ?? '');
-  tokenUrl.searchParams.set('secret', process.env.WECHAT_APP_SECRET ?? '');
-  const tokenResponse = await fetch(tokenUrl);
-  const tokenPayload = (await tokenResponse.json()) as WechatTokenResponse;
-  if (!tokenResponse.ok || !tokenPayload.access_token) {
-    return Response.json(
-      { message: '获取微信公众号访问令牌失败', wechatError: tokenPayload.errmsg ?? 'unknown' },
-      { status: 502 },
-    );
+  try {
+    const config = runtimeConfig();
+    const result = await createWechatDraftFromArticle({
+      articleId: payload.article_id,
+      directusToken: process.env.DIRECTUS_PREVIEW_TOKEN ?? '',
+      directusUrl: config.directusInternalUrl,
+      publicBaseUrl: config.publicBaseUrl,
+      wechatAppId: process.env.WECHAT_APP_ID ?? '',
+      wechatAppSecret: process.env.WECHAT_APP_SECRET ?? '',
+    });
+    return Response.json(result, { status: 201 });
+  } catch (error) {
+    if (error instanceof WechatDraftError) {
+      return Response.json(
+        { message: error.message, ...(error.wechatError ? { wechatError: error.wechatError } : {}) },
+        { status: error.status },
+      );
+    }
+    return Response.json({ message: '公众号草稿服务暂时不可用' }, { status: 503 });
   }
-
-  const draftUrl = new URL('https://api.weixin.qq.com/cgi-bin/draft/add');
-  draftUrl.searchParams.set('access_token', tokenPayload.access_token);
-  const draftResponse = await fetch(draftUrl, {
-    body: JSON.stringify({ articles: [{ ...payload, show_cover_pic: payload.show_cover_pic ?? 1 }] }),
-    headers: { 'content-type': 'application/json' },
-    method: 'POST',
-  });
-  const draftPayload = (await draftResponse.json()) as Record<string, unknown>;
-  if (!draftResponse.ok || draftPayload.errcode) {
-    return Response.json(
-      { message: '创建微信公众号草稿失败', wechatError: draftPayload.errmsg ?? 'unknown' },
-      { status: 502 },
-    );
-  }
-  return Response.json({ mediaId: draftPayload.media_id, status: 'draft_created' }, { status: 201 });
 };

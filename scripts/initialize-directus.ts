@@ -383,6 +383,74 @@ async function ensureAuthoringMetadata(
   });
 }
 
+const wechatDraftFlowId = '68012484-42dc-4e2d-a87e-14973d118bce';
+const wechatDraftOperationId = '2f0e121c-a74e-4ae3-a969-c8a42b6a63a5';
+
+export function buildWechatDraftFlowDefinition(enabled: boolean): {
+  flow: Record<string, unknown>;
+  operation: Record<string, unknown>;
+} {
+  return {
+    flow: {
+      accountability: '$trigger',
+      description: enabled
+        ? '从当前文章生成微信公众号草稿，最终发表仍需人工审核。'
+        : '尚未配置公众号接口；博客发布不受影响。',
+      icon: 'draft',
+      id: wechatDraftFlowId,
+      name: enabled ? '生成公众号草稿' : '生成公众号草稿｜尚未配置公众号接口',
+      operation: wechatDraftOperationId,
+      options: {
+        async: false,
+        collections: ['articles'],
+        error_on_reject: true,
+        location: 'item',
+        requireConfirmation: true,
+        confirmationDescription: '只生成公众号草稿，不会自动群发。',
+      },
+      status: 'active',
+      trigger: 'manual',
+    },
+    operation: {
+      flow: wechatDraftFlowId,
+      id: wechatDraftOperationId,
+      key: 'create_wechat_draft',
+      name: '生成公众号草稿',
+      options: { articleIds: '{{ $trigger.keys }}' },
+      position_x: 19,
+      position_y: 1,
+      reject: null,
+      resolve: null,
+      type: 'gazi-wechat-draft',
+    },
+  };
+}
+
+async function ensureWechatDraftFlow(
+  client: DirectusAdminClient,
+  enabled: boolean,
+): Promise<boolean> {
+  const definition = buildWechatDraftFlowDefinition(enabled);
+  const existingFlow = await findOne(client, '/flows', 'id', wechatDraftFlowId);
+  if (!existingFlow) {
+    await createItem(client, '/flows', { ...definition.flow, operation: null });
+  }
+  const existingOperation = await findOne(client, '/operations', 'id', wechatDraftOperationId);
+  if (existingOperation) {
+    await client.request(`/operations/${wechatDraftOperationId}`, {
+      body: JSON.stringify(definition.operation),
+      method: 'PATCH',
+    });
+  } else {
+    await createItem(client, '/operations', definition.operation);
+  }
+  await client.request(`/flows/${wechatDraftFlowId}`, {
+    body: JSON.stringify(definition.flow),
+    method: 'PATCH',
+  });
+  return !existingFlow;
+}
+
 async function ensureSeedItem(
   client: DirectusAdminClient,
   collection: string,
@@ -439,6 +507,7 @@ export interface BootstrapResult extends BootstrapPlan {
   createdPreviewUser: boolean;
   createdRelations: number;
   createdSeedItems: number;
+  createdWechatDraftFlow: boolean;
 }
 
 export async function initializeDirectus(environment = process.env): Promise<BootstrapResult> {
@@ -518,6 +587,13 @@ export async function initializeDirectus(environment = process.env): Promise<Boo
   const createdRelations = await ensureRelations(client);
   const permissionResult = await ensurePermissions(client, previewToken);
   await ensureAuthoringMetadata(client, publicBaseUrl, previewSecret);
+  const createdWechatDraftFlow = await ensureWechatDraftFlow(
+    client,
+    environment.WECHAT_DRAFT_ENABLED === 'true' &&
+      Boolean(environment.WECHAT_APP_ID) &&
+      Boolean(environment.WECHAT_APP_SECRET) &&
+      Boolean(environment.WECHAT_AUTOMATION_SECRET),
+  );
   const createdSeedItems = await ensureSeedData(client);
   return {
     createCollections: plan.createCollections,
@@ -526,6 +602,7 @@ export async function initializeDirectus(environment = process.env): Promise<Boo
     createdPreviewUser: permissionResult.createdPreviewUser,
     createdRelations,
     createdSeedItems,
+    createdWechatDraftFlow,
     updateFieldTypes: updatePlan.updateFieldTypes,
   };
 }

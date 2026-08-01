@@ -5,10 +5,12 @@ import {
   buildPublishedArticleUrl,
   buildPublishedArticlesUrl,
   buildPreviewArticleUrl,
+  buildPreviewArticleByIdUrl,
   buildPublicCollectionUrl,
   fetchPublishedArticle,
   fetchPublishedArticles,
   fetchPreviewArticle,
+  fetchPreviewArticleById,
 } from './directus';
 
 describe('buildPublishedArticlesUrl', () => {
@@ -83,6 +85,27 @@ describe('draft preview queries', () => {
       { apiUrl: 'http://directus:8055', slug: 'draft-post', token: 'server-token' },
       request,
     );
+    const [, init] = request.mock.calls[0] ?? [];
+    expect(new Headers(init?.headers).get('authorization')).toBe('Bearer server-token');
+  });
+
+  it('retrieves one private article by id for an authenticated automation', async () => {
+    const url = new URL(
+      buildPreviewArticleByIdUrl({ baseUrl: 'http://directus:8055', id: 42 }),
+    );
+    expect(url.pathname).toBe('/items/articles/42');
+
+    const article = { id: 42, slug: 'private-draft' };
+    const request = vi.fn(
+      async (_input: string | URL | RequestInfo, _init?: RequestInit) =>
+        new Response(JSON.stringify({ data: article }), { status: 200 }),
+    );
+    await expect(
+      fetchPreviewArticleById(
+        { apiUrl: 'http://directus:8055', id: 42, token: 'server-token' },
+        request,
+      ),
+    ).resolves.toEqual(article);
     const [, init] = request.mock.calls[0] ?? [];
     expect(new Headers(init?.headers).get('authorization')).toBe('Bearer server-token');
   });

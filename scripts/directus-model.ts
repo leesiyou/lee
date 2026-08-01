@@ -40,6 +40,7 @@ export const collections: Record<string, ModelCollection> = {
       { field: 'subtitle', meta: { interface: 'input' }, schema: { is_nullable: true, max_length: 300 }, type: 'string' },
       { field: 'summary', meta: { interface: 'input-multiline', required: true }, schema: { is_nullable: false }, type: 'text' },
       { field: 'content', meta: { interface: 'input-rich-text-html', required: true }, schema: { is_nullable: false }, type: 'text' },
+      { field: 'blocks', meta: { interface: 'input-block-editor', note: '可选：用结构化内容块补充富文本正文' }, schema: { is_nullable: true }, type: 'json' },
       { field: 'cover_image', meta: { interface: 'file-image', special: ['file'] }, schema: { is_nullable: true }, type: 'uuid' },
       { field: 'share_image', meta: { interface: 'file-image', special: ['file'] }, schema: { is_nullable: true }, type: 'uuid' },
       { field: 'template', meta: { choices: ['philosophy', 'business', 'diary', 'retrospective'].map((value) => ({ text: value, value })), interface: 'select-dropdown', required: true }, schema: { default_value: 'philosophy', is_nullable: false, max_length: 40 }, type: 'string' },

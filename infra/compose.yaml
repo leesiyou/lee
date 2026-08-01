@@ -98,6 +98,7 @@ services:
       STORAGE_LOCAL_ROOT: /directus/uploads
       TELEMETRY: "false"
       TZ: Asia/Shanghai
+      WECHAT_AUTOMATION_SECRET: ${WECHAT_AUTOMATION_SECRET}
       WEBSOCKETS_ENABLED: "true"
     volumes:
       - ${RUNTIME_DIR}/directus-uploads:/directus/uploads

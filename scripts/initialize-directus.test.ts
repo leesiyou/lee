@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { planBootstrap } from './initialize-directus';
+import { buildWechatDraftFlowDefinition, planBootstrap } from './initialize-directus';
 
 describe('planBootstrap', () => {
   it('creates only missing collections and fields', () => {
@@ -42,5 +42,22 @@ describe('planBootstrap', () => {
 
     expect(operations.createFields.articles).not.toContain('author');
     expect(operations.updateFieldTypes.articles).toContain('author');
+  });
+});
+
+describe('公众号草稿手动流程', () => {
+  it('creates an item-page action without persisting an automation secret', () => {
+    const definition = buildWechatDraftFlowDefinition(false);
+
+    expect(definition.flow).toMatchObject({
+      name: '生成公众号草稿｜尚未配置公众号接口',
+      trigger: 'manual',
+      options: { collections: ['articles'], location: 'item' },
+    });
+    expect(definition.operation).toMatchObject({
+      type: 'gazi-wechat-draft',
+      options: { articleIds: '{{ $trigger.keys }}' },
+    });
+    expect(JSON.stringify(definition)).not.toContain('AUTOMATION_SECRET');
   });
 });

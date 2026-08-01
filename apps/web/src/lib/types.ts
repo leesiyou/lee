@@ -38,6 +38,7 @@ export interface Article {
   subtitle?: string | null;
   summary: string;
   content: string;
+  blocks?: StructuredContent | null;
   cover_image?: DirectusFile | string | null;
   share_image?: DirectusFile | string | null;
   template: ArticleTemplate;
@@ -58,6 +59,18 @@ export interface Article {
   wechat_content?: string | null;
   reading_minutes?: number | null;
   sort?: number | null;
+}
+
+export interface StructuredBlock {
+  data?: Record<string, unknown>;
+  id?: string;
+  type?: string;
+}
+
+export interface StructuredContent {
+  blocks?: StructuredBlock[];
+  time?: number;
+  version?: string;
 }
 
 export interface DirectusListResponse<T> {

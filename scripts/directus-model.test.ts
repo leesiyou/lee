@@ -20,7 +20,7 @@ describe('Directus blog model', () => {
     const articleFields = collections.articles.fields.map((field) => field.field);
     expect(articleFields).toEqual(
       expect.arrayContaining([
-        'id', 'status', 'title', 'slug', 'subtitle', 'summary', 'content', 'cover_image',
+        'id', 'status', 'title', 'slug', 'subtitle', 'summary', 'content', 'blocks', 'cover_image',
         'share_image', 'template', 'theme', 'author', 'category', 'tags', 'featured',
         'published_at', 'created_at', 'updated_at', 'seo_title', 'seo_description',
         'seo_keywords', 'wechat_title', 'wechat_summary', 'wechat_cover', 'wechat_content',
@@ -28,6 +28,9 @@ describe('Directus blog model', () => {
       ]),
     );
     expect(articleStatuses).toEqual(['draft', 'scheduled', 'published', 'archived']);
+    expect(
+      collections.articles.fields.find((field) => field.field === 'blocks')?.meta?.interface,
+    ).toBe('input-block-editor');
   });
 
   it('defines seven categories, four templates, the default author, and site name', () => {
@@ -98,5 +101,17 @@ describe('first formal article', () => {
     for (const section of ['核心矛盾', '时间', '价值', '风险', '能力', '关系', '失败', '终局']) {
       expect(article.content).toContain(section);
     }
+  });
+});
+
+describe('Directus schema snapshot', () => {
+  it('redacts the live preview secret before the snapshot enters Git', async () => {
+    const schema = await readFile(
+      new URL('../infra/directus/schema.yaml', import.meta.url),
+      'utf8',
+    );
+
+    expect(schema).toContain('secret=${PREVIEW_SECRET}');
+    expect(schema).not.toMatch(/secret=[a-f0-9]{32,}/);
   });
 });

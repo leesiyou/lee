@@ -55,6 +55,17 @@ interface PreviewArticleOptions {
   token: string;
 }
 
+interface PreviewArticleByIdUrlOptions {
+  baseUrl: string;
+  id: number | string;
+}
+
+interface PreviewArticleByIdOptions {
+  apiUrl: string;
+  id: number | string;
+  token: string;
+}
+
 type Request = (input: string | URL | RequestInfo, init?: RequestInit) => Promise<Response>;
 type PublicCollection = 'authors' | 'categories' | 'site_settings' | 'tags' | 'template_presets';
 
@@ -72,6 +83,10 @@ const articleFields = [
   'cover_image.width',
   'cover_image.height',
   'cover_image.title',
+  'cover_image.type',
+  'wechat_cover.id',
+  'wechat_cover.title',
+  'wechat_cover.type',
   'category.id',
   'category.name',
   'category.slug',
@@ -126,6 +141,14 @@ export function buildPreviewArticleUrl(options: PreviewArticleUrlOptions): strin
   const url = new URL(`${normalizedBaseUrl(options.baseUrl)}/items/articles`);
   url.searchParams.set('filter[slug][_eq]', options.slug);
   url.searchParams.set('limit', '1');
+  url.searchParams.set('fields', articleFields);
+  return url.toString();
+}
+
+export function buildPreviewArticleByIdUrl(options: PreviewArticleByIdUrlOptions): string {
+  const url = new URL(
+    `${normalizedBaseUrl(options.baseUrl)}/items/articles/${encodeURIComponent(String(options.id))}`,
+  );
   url.searchParams.set('fields', articleFields);
   return url.toString();
 }
@@ -227,6 +250,30 @@ export async function fetchPreviewArticle(
     return payload.data[0] ?? null;
   } catch {
     throw new DirectusRequestError(502, '预览服务返回了无效数据');
+  }
+}
+
+export async function fetchPreviewArticleById(
+  options: PreviewArticleByIdOptions,
+  request: Request = fetch,
+): Promise<Article | null> {
+  if (!options.token) throw new DirectusRequestError(503, '公众号草稿服务尚未配置内容凭据');
+  const response = await request(
+    buildPreviewArticleByIdUrl({ baseUrl: options.apiUrl, id: options.id }),
+    {
+      headers: {
+        accept: 'application/json',
+        authorization: `Bearer ${options.token}`,
+      },
+    },
+  );
+  if (response.status === 404) return null;
+  if (!response.ok) throw new DirectusRequestError(response.status, '内容服务暂时不可用');
+  try {
+    const payload = (await response.json()) as { data?: Article };
+    return payload.data ?? null;
+  } catch {
+    throw new DirectusRequestError(502, '内容服务返回了无效数据');
   }
 }
 

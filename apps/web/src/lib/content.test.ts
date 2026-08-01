@@ -4,6 +4,7 @@ import {
   buildTableOfContents,
   buildWechatMaterial,
   calculateReadingMinutes,
+  renderStructuredBlocks,
   sanitizeArticleHtml,
 } from './content';
 import type { Article } from './types';
@@ -52,6 +53,22 @@ describe('article helpers', () => {
     expect(buildTableOfContents(article.content)).toEqual([
       { depth: 2, id: '核心矛盾', text: '核心矛盾' },
     ]);
+  });
+
+  it('renders supported Editor.js blocks and strips executable markup', () => {
+    const output = renderStructuredBlocks({
+      blocks: [
+        { type: 'header', data: { level: 2, text: '结构化标题' } },
+        { type: 'paragraph', data: { text: '安全正文<script>alert(1)</script>' } },
+        { type: 'list', data: { style: 'ordered', items: ['第一步', '第二步'] } },
+        { type: 'quote', data: { text: '长期主义', caption: '嘎子' } },
+      ],
+    });
+
+    expect(output).toContain('<h2>结构化标题</h2>');
+    expect(output).toContain('<ol><li>第一步</li><li>第二步</li></ol>');
+    expect(output).toContain('<blockquote><p>长期主义</p><figcaption>嘎子</figcaption></blockquote>');
+    expect(output).not.toContain('<script');
   });
 });
 
