@@ -166,8 +166,8 @@ services:
       web:
         condition: service_healthy
     ports:
-      - "19080:8080"
-      - "19081:8081"
+      - "18432:8080"
+      - "18055:8081"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ${RUNTIME_DIR}/caddy-data:/data

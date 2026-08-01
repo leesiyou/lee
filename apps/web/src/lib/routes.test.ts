@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { buildAssetUrl, buildPostUrl, resolveRuntimeConfig } from './routes';
 
 describe('route helpers', () => {
-  it('builds canonical post and Directus asset URLs from runtime configuration', () => {
+  it('builds canonical post and same-origin asset URLs from runtime configuration', () => {
     const config = resolveRuntimeConfig({
       DIRECTUS_INTERNAL_URL: 'http://directus:8055/',
       DIRECTUS_PUBLIC_URL: 'https://admin.example.com/',
@@ -14,7 +14,7 @@ describe('route helpers', () => {
     expect(buildPostUrl('startup-vs-speculation', config)).toBe(
       'https://blog.example.com/posts/startup-vs-speculation',
     );
-    expect(buildAssetUrl('file-id', config)).toBe('https://admin.example.com/assets/file-id');
+    expect(buildAssetUrl('file-id', config)).toBe('https://blog.example.com/assets/file-id');
   });
 
   it('rejects non-http public URLs instead of emitting unsafe links', () => {

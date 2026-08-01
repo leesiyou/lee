@@ -30,6 +30,8 @@
   }
   @static path /_astro/* /scripts/* /favicon.* /robots.txt
   header @static >Cache-Control "public, max-age=31536000, immutable"
+  @directus_assets path /assets/*
+  reverse_proxy @directus_assets directus:8055
   reverse_proxy web:4321
 }
 

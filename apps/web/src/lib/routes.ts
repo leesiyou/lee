@@ -50,5 +50,5 @@ export function buildAssetUrl(
 ): string | null {
   if (!file) return null;
   const id = typeof file === 'string' ? file : file.id;
-  return new URL(`assets/${encodeURIComponent(id)}`, `${config.directusPublicUrl}/`).toString();
+  return new URL(`assets/${encodeURIComponent(id)}`, `${config.publicBaseUrl}/`).toString();
 }

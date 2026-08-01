@@ -41,7 +41,7 @@ describe('production compose', () => {
     expect(services.redis.ports).toBeUndefined();
     expect(services.directus.ports).toBeUndefined();
     expect(services.web.ports).toBeUndefined();
-    expect(services.caddy.ports).toEqual(['19080:8080', '19081:8081']);
+    expect(services.caddy.ports).toEqual(['18432:8080', '18055:8081']);
     expect(compose.networks.blog_internal.internal).toBe(true);
     expect(compose.networks.blog_egress.internal).not.toBe(true);
     expect(services.web.networks).toEqual(['blog_internal', 'blog_egress']);
@@ -69,5 +69,7 @@ describe('production compose', () => {
 
     expect(caddy).toContain('/scripts/*');
     expect(caddy).toContain('>Cache-Control "public, max-age=31536000, immutable"');
+    expect(caddy).toContain('@directus_assets path /assets/*');
+    expect(caddy).toContain('reverse_proxy @directus_assets directus:8055');
   });
 });
