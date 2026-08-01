@@ -67,3 +67,24 @@ export interface DirectusListResponse<T> {
     total_count?: number;
   };
 }
+
+export interface SiteSettings {
+  id: string | number;
+  site_name: string;
+  site_description: string;
+  logo?: DirectusFile | string | null;
+  favicon?: DirectusFile | string | null;
+  default_share_image?: DirectusFile | string | null;
+  footer_text?: string | null;
+  wechat_account_name?: string | null;
+  analytics_code?: string | null;
+  theme?: string | null;
+}
+
+export interface TemplatePresetRecord {
+  id: string | number;
+  key: ArticleTemplate;
+  name: string;
+  description?: string | null;
+  structure?: string[] | null;
+}

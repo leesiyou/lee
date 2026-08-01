@@ -1,0 +1,32 @@
+---
+import { buildAssetUrl, runtimeConfig } from '@/lib/routes';
+import type { Article } from '@/lib/types';
+
+interface Props {
+  article: Article;
+  featured?: boolean;
+}
+
+const { article, featured = false } = Astro.props;
+const cover = buildAssetUrl(article.cover_image, runtimeConfig());
+const category = typeof article.category === 'object' && article.category ? article.category : null;
+---
+
+<article class:list={['article-card', { 'article-card--featured': featured }]}>
+  <a class="article-card__cover" href={`/posts/${article.slug}`} aria-label={`阅读 ${article.title}`}>
+    {cover ? (
+      <img src={cover} alt="" width="720" height="450" loading="lazy" />
+    ) : (
+      <span class="article-card__placeholder" aria-hidden="true">GAZI / DAILY</span>
+    )}
+  </a>
+  <div class="article-card__body">
+    <div class="article-card__meta">
+      <span>{category?.name || '创业日更'}</span>
+      <time datetime={article.published_at}>{new Date(article.published_at).toLocaleDateString('zh-CN')}</time>
+    </div>
+    <h2><a href={`/posts/${article.slug}`}>{article.title}</a></h2>
+    <p>{article.summary}</p>
+    <a class="article-card__link" href={`/posts/${article.slug}`}>继续阅读 <span aria-hidden="true">→</span></a>
+  </div>
+</article>

@@ -1,0 +1,14 @@
+---
+import ArticleCard from '@/components/ArticleCard.astro';
+import { fetchPublishedArticles } from '@/lib/directus';
+import { runtimeConfig } from '@/lib/routes';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const slug = Astro.params.slug ?? '';
+const articles = (await fetchPublishedArticles({ apiUrl: runtimeConfig().directusInternalUrl, tag: slug, limit: 100 })).data;
+---
+
+<BaseLayout title="标签文章">
+  <section class="page-hero"><p>TAG</p><h1>#{slug}</h1></section>
+  <section class="content-section">{articles.length ? <div class="article-grid">{articles.map((article) => <ArticleCard article={article} />)}</div> : <p class="empty-state">这个标签暂时没有已发布文章。</p>}</section>
+</BaseLayout>

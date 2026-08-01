@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+
+import { runtimeConfig } from '@/lib/routes';
+
+interface Props {
+  canonical?: string;
+  description?: string;
+  image?: string | null;
+  title?: string;
+  type?: 'article' | 'website';
+}
+
+const config = runtimeConfig();
+const {
+  canonical = `${config.publicBaseUrl}${Astro.url.pathname}`,
+  description = '记录创业、制造、AI、文化与真实项目的长期实验。',
+  image,
+  title = '嘎子的创业实验室',
+  type = 'website',
+} = Astro.props;
+const fullTitle = title === '嘎子的创业实验室' ? title : `${title}｜嘎子的创业实验室`;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0b0c" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="嘎子的创业实验室 RSS" href={`${config.publicBaseUrl}/rss.xml`} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="嘎子的创业实验室" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {image && <meta property="og:image" content={image} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到正文</a>
+    <header class="site-header">
+      <a class="site-brand" href="/" aria-label="嘎子的创业实验室首页">
+        <span class="site-brand__mark">G</span>
+        <span>嘎子的创业实验室</span>
+      </a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="/archive">归档</a>
+        <a href="/search">搜索</a>
+        <a href={config.publicAdminUrl}>写文章</a>
+      </nav>
+    </header>
+    <main id="main-content"><slot /></main>
+    <footer class="site-footer">
+      <p>把时间投入能留下来的东西。</p>
+      <p>© 2026 嘎子的创业实验室</p>
+    </footer>
+  </body>
+</html>

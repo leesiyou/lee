@@ -45,6 +45,15 @@ interface PublishedArticleOptions {
 }
 
 type Request = (input: string | URL | RequestInfo, init?: RequestInit) => Promise<Response>;
+type PublicCollection = 'authors' | 'categories' | 'site_settings' | 'tags' | 'template_presets';
+
+interface PublicCollectionUrlOptions {
+  baseUrl: string;
+  collection: string;
+  fields?: string;
+  limit?: number;
+  sort?: string;
+}
 
 const articleFields = [
   '*',
@@ -102,6 +111,27 @@ export function buildPublishedArticleUrl(options: PublishedArticleUrlOptions): s
   return url.toString();
 }
 
+const publicCollections = new Set<PublicCollection>([
+  'authors',
+  'categories',
+  'site_settings',
+  'tags',
+  'template_presets',
+]);
+
+export function buildPublicCollectionUrl(options: PublicCollectionUrlOptions): string {
+  if (!publicCollections.has(options.collection as PublicCollection)) {
+    throw new Error('Collection is not public');
+  }
+  const url = new URL(
+    `${normalizedBaseUrl(options.baseUrl)}/items/${encodeURIComponent(options.collection)}`,
+  );
+  url.searchParams.set('fields', options.fields ?? '*');
+  url.searchParams.set('limit', String(options.limit ?? -1));
+  if (options.sort) url.searchParams.set('sort', options.sort);
+  return url.toString();
+}
+
 export async function fetchPublishedArticles(
   options: PublishedArticlesOptions,
   request: Request = fetch,
@@ -153,6 +183,24 @@ export async function fetchPublishedArticle(
   try {
     const payload = (await response.json()) as DirectusListResponse<Article>;
     return payload.data[0] ?? null;
+  } catch {
+    throw new DirectusRequestError(502, '内容服务返回了无效数据');
+  }
+}
+
+export async function fetchPublicCollection<T>(
+  options: PublicCollectionUrlOptions,
+  request: Request = fetch,
+): Promise<T[]> {
+  const response = await request(buildPublicCollectionUrl(options), {
+    headers: { accept: 'application/json' },
+  });
+  if (!response.ok) {
+    throw new DirectusRequestError(response.status, '内容服务暂时不可用');
+  }
+  try {
+    const payload = (await response.json()) as DirectusListResponse<T>;
+    return payload.data;
   } catch {
     throw new DirectusRequestError(502, '内容服务返回了无效数据');
   }

@@ -4,6 +4,7 @@ import {
   DirectusRequestError,
   buildPublishedArticleUrl,
   buildPublishedArticlesUrl,
+  buildPublicCollectionUrl,
   fetchPublishedArticle,
   fetchPublishedArticles,
 } from './directus';
@@ -141,5 +142,25 @@ describe('fetchPublishedArticle', () => {
         request,
       ),
     ).resolves.toBeNull();
+  });
+});
+
+describe('buildPublicCollectionUrl', () => {
+  it('only permits project-owned public collections', () => {
+    const url = new URL(
+      buildPublicCollectionUrl({
+        baseUrl: 'http://directus:8055',
+        collection: 'categories',
+        sort: 'name',
+      }),
+    );
+    expect(url.pathname).toBe('/items/categories');
+    expect(url.searchParams.get('sort')).toBe('name');
+    expect(() =>
+      buildPublicCollectionUrl({
+        baseUrl: 'http://directus:8055',
+        collection: 'directus_users',
+      }),
+    ).toThrow('Collection is not public');
   });
 });
