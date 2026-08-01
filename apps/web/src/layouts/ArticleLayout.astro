@@ -9,9 +9,10 @@ import BaseLayout from './BaseLayout.astro';
 
 interface Props {
   article: Article;
+  preview?: boolean;
 }
 
-const { article } = Astro.props;
+const { article, preview = false } = Astro.props;
 const config = runtimeConfig();
 const cover = buildAssetUrl(article.cover_image, config);
 const canonical = buildPostUrl(article.slug, config);
@@ -31,6 +32,7 @@ const tags = article.tags
   title={article.seo_title || article.title}
   type="article"
 >
+  {preview && <aside class="preview-banner" role="status">草稿预览 · 此页面不会被公开索引</aside>}
   <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
   <article class={`article article--${article.template}`} style={`--article-accent:${article.theme || '#c6a96b'}`}>
     <Hero title={article.title} subtitle={article.subtitle} eyebrow={category?.name || '创业日更'} />

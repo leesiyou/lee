@@ -57,7 +57,7 @@ services:
 
   directus:
     <<: *service-defaults
-    image: directus/directus:12.2.0
+    image: directus/directus:11.17.4
     depends_on:
       postgres:
         condition: service_healthy
@@ -69,7 +69,6 @@ services:
       CACHE_AUTO_PURGE: "true"
       CACHE_ENABLED: "true"
       CACHE_STORE: redis
-      CACHE_REDIS: redis://:${REDIS_PASSWORD}@redis:6379/0
       CORS_ALLOWED_HEADERS: Content-Type,Authorization
       CORS_CREDENTIALS: "true"
       CORS_ENABLED: "true"
@@ -90,7 +89,7 @@ services:
       RATE_LIMITER_GLOBAL_DURATION: "1"
       RATE_LIMITER_POINTS: "20"
       RATE_LIMITER_STORE: redis
-      RATE_LIMITER_REDIS: redis://:${REDIS_PASSWORD}@redis:6379/1
+      REDIS: redis://:${REDIS_PASSWORD}@redis:6379/0
       SECRET: ${DIRECTUS_SECRET}
       STORAGE_LOCATIONS: local
       STORAGE_LOCAL_DRIVER: local
@@ -103,7 +102,7 @@ services:
       - ${RUNTIME_DIR}/directus-extensions:/directus/extensions
       - ./directus:/directus/schema
     healthcheck:
-      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8055/server/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8055/server/ping').then(async r=>process.exit(r.ok&&(await r.text())==='pong'?0:1)).catch(()=>process.exit(1))"]
       interval: 10s
       timeout: 5s
       retries: 18
@@ -130,7 +129,9 @@ services:
         condition: service_healthy
     environment:
       DIRECTUS_INTERNAL_URL: http://directus:8055
+      DIRECTUS_PREVIEW_TOKEN: ${DIRECTUS_PREVIEW_TOKEN}
       DIRECTUS_PUBLIC_URL: ${DIRECTUS_PUBLIC_URL}
+      PREVIEW_SECRET: ${PREVIEW_SECRET}
       PUBLIC_ADMIN_URL: ${PUBLIC_ADMIN_URL}
       PUBLIC_BASE_URL: ${PUBLIC_BASE_URL}
       TZ: Asia/Shanghai
@@ -152,6 +153,9 @@ services:
 
   caddy:
     <<: *service-defaults
+    networks:
+      - blog_internal
+      - blog_egress
     image: caddy:2.11.4-alpine
     depends_on:
       directus:

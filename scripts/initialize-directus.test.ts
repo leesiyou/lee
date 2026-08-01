@@ -30,5 +30,17 @@ describe('planBootstrap', () => {
 
     expect(second.createCollections).toEqual([]);
     expect(Object.values(second.createFields).flat()).toEqual([]);
+    expect(Object.values(second.updateFieldTypes).flat()).toEqual([]);
+  });
+
+  it('repairs a mismatched relation key type without recreating its field', () => {
+    const operations = planBootstrap({
+      collections: new Set(['articles']),
+      fields: new Map([['articles', new Set(['author'])]]),
+      fieldTypes: new Map([['articles', new Map([['author', 'uuid']])]]),
+    });
+
+    expect(operations.createFields.articles).not.toContain('author');
+    expect(operations.updateFieldTypes.articles).toContain('author');
   });
 });

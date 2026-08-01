@@ -4,9 +4,11 @@ import {
   DirectusRequestError,
   buildPublishedArticleUrl,
   buildPublishedArticlesUrl,
+  buildPreviewArticleUrl,
   buildPublicCollectionUrl,
   fetchPublishedArticle,
   fetchPublishedArticles,
+  fetchPreviewArticle,
 } from './directus';
 
 describe('buildPublishedArticlesUrl', () => {
@@ -20,7 +22,7 @@ describe('buildPublishedArticlesUrl', () => {
     );
 
     expect(url.pathname).toBe('/items/articles');
-    expect(url.searchParams.get('filter[status][_eq]')).toBe('published');
+    expect(url.searchParams.get('filter[status][_in]')).toBe('published,scheduled');
     expect(url.searchParams.get('filter[published_at][_lte]')).toBe(
       '2026-08-01T05:00:00.000Z',
     );
@@ -58,11 +60,31 @@ describe('buildPublishedArticleUrl', () => {
     );
 
     expect(url.searchParams.get('filter[slug][_eq]')).toBe('startup-vs-speculation');
-    expect(url.searchParams.get('filter[status][_eq]')).toBe('published');
+    expect(url.searchParams.get('filter[status][_in]')).toBe('published,scheduled');
     expect(url.searchParams.get('filter[published_at][_lte]')).toBe(
       '2026-08-01T05:00:00.000Z',
     );
     expect(url.searchParams.get('limit')).toBe('1');
+  });
+});
+
+describe('draft preview queries', () => {
+  it('uses a server-only token and does not apply the public publication gate', async () => {
+    const url = new URL(
+      buildPreviewArticleUrl({ baseUrl: 'http://directus:8055', slug: 'draft-post' }),
+    );
+    expect(url.searchParams.get('filter[slug][_eq]')).toBe('draft-post');
+    expect(url.searchParams.has('filter[status][_in]')).toBe(false);
+
+    const request = vi.fn(async (_input: string | URL | RequestInfo, _init?: RequestInit) =>
+      new Response(JSON.stringify({ data: [{ id: 2, slug: 'draft-post' }] }), { status: 200 }),
+    );
+    await fetchPreviewArticle(
+      { apiUrl: 'http://directus:8055', slug: 'draft-post', token: 'server-token' },
+      request,
+    );
+    const [, init] = request.mock.calls[0] ?? [];
+    expect(new Headers(init?.headers).get('authorization')).toBe('Bearer server-token');
   });
 });
 

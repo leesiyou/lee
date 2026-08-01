@@ -1,0 +1,35 @@
+---
+import ArticleLayout from '@/layouts/ArticleLayout.astro';
+import { fetchPreviewArticle } from '@/lib/directus';
+import { authorizePreview } from '@/lib/preview';
+import { runtimeConfig } from '@/lib/routes';
+import type { Article } from '@/lib/types';
+
+const secret = Astro.url.searchParams.get('secret') ?? undefined;
+Astro.response.headers.set('Cache-Control', 'private, no-store, max-age=0');
+Astro.response.headers.set('X-Robots-Tag', 'noindex, noarchive, nosnippet');
+
+let article: Article | null = null;
+if (!authorizePreview(secret, process.env.PREVIEW_SECRET)) {
+  Astro.response.status = 404;
+} else {
+  try {
+    article = await fetchPreviewArticle({
+      apiUrl: runtimeConfig().directusInternalUrl,
+      slug: Astro.params.slug ?? '',
+      token: process.env.DIRECTUS_PREVIEW_TOKEN ?? '',
+    });
+    if (!article) Astro.response.status = 404;
+  } catch {
+    Astro.response.status = 503;
+  }
+}
+---
+
+{article ? (
+  <ArticleLayout article={article} preview />
+) : (
+  <p class="standalone-error">
+    {Astro.response.status === 503 ? '预览服务暂时不可用。' : '预览链接无效或文章不存在。'}
+  </p>
+)}

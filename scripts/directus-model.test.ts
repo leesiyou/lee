@@ -11,6 +11,7 @@ import {
   editorAllowedCollections,
   editorDeniedSystemCollections,
   publicArticleFilter,
+  relations,
   slugifyTitle,
 } from './directus-model';
 
@@ -43,7 +44,7 @@ describe('Directus blog model', () => {
   it('limits public reads and keeps Editor away from system administration', () => {
     expect(publicArticleFilter).toEqual({
       _and: [
-        { status: { _eq: 'published' } },
+        { status: { _in: ['published', 'scheduled'] } },
         { published_at: { _lte: '$NOW' } },
       ],
     });
@@ -53,6 +54,28 @@ describe('Directus blog model', () => {
     expect(editorDeniedSystemCollections).toEqual(
       expect.arrayContaining(['directus_users', 'directus_roles', 'directus_settings', 'directus_extensions']),
     );
+  });
+
+  it('uses integer relation keys that match Directus default collection IDs', () => {
+    const field = (collection: keyof typeof collections, name: string) =>
+      collections[collection].fields.find((item) => item.field === name);
+
+    expect(field('articles', 'author')?.type).toBe('integer');
+    expect(field('articles_tags', 'articles_id')?.type).toBe('integer');
+    expect(relations).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ collection: 'articles', field: 'author', related_collection: 'authors' }),
+        expect.objectContaining({ collection: 'articles_tags', field: 'articles_id', meta: { junction_field: 'tags_id', one_field: 'tags' } }),
+      ]),
+    );
+  });
+
+  it('allows the authoring UI to leave article slug blank for the server hook', () => {
+    const slug = collections.articles.fields.find((field) => field.field === 'slug');
+
+    expect(slug?.meta?.required).toBe(false);
+    expect(slug?.schema?.is_nullable).toBe(false);
+    expect(slug?.schema?.is_unique).toBe(true);
   });
 
   it('generates a URL-safe deterministic identifier for Chinese titles', () => {

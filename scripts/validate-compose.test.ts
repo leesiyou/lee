@@ -7,6 +7,7 @@ interface Service {
   depends_on?: Record<string, { condition?: string }>;
   deploy?: { resources?: { limits?: Record<string, string> } };
   healthcheck?: Record<string, unknown>;
+  environment?: Record<string, string>;
   image?: string;
   logging?: { options?: Record<string, string> };
   networks?: string[];
@@ -26,7 +27,11 @@ describe('production compose', () => {
     expect(Object.keys(services)).toEqual(['postgres', 'redis', 'directus', 'web', 'caddy']);
     expect(services.postgres.image).toBe('postgres:16.14-alpine');
     expect(services.redis.image).toBe('redis:7.4.10-alpine');
-    expect(services.directus.image).toBe('directus/directus:12.2.0');
+    expect(services.directus.image).toBe('directus/directus:11.17.4');
+    expect(services.directus.environment?.REDIS).toBe('redis://:${REDIS_PASSWORD}@redis:6379/0');
+    expect(services.directus.environment?.CACHE_REDIS).toBeUndefined();
+    expect(services.directus.environment?.RATE_LIMITER_REDIS).toBeUndefined();
+    expect(JSON.stringify(services.directus.healthcheck)).toContain('/server/ping');
     expect(services.caddy.image).toBe('caddy:2.11.4-alpine');
     expect(services.postgres.ports).toBeUndefined();
     expect(services.redis.ports).toBeUndefined();
@@ -36,6 +41,9 @@ describe('production compose', () => {
     expect(compose.networks.blog_internal.internal).toBe(true);
     expect(compose.networks.blog_egress.internal).not.toBe(true);
     expect(services.web.networks).toEqual(['blog_internal', 'blog_egress']);
+    expect(services.web.environment?.DIRECTUS_PREVIEW_TOKEN).toBe('${DIRECTUS_PREVIEW_TOKEN}');
+    expect(services.web.environment?.PREVIEW_SECRET).toBe('${PREVIEW_SECRET}');
+    expect(services.caddy.networks).toEqual(['blog_internal', 'blog_egress']);
     expect(services.postgres.networks).toEqual(['blog_internal']);
     expect(services.redis.networks).toEqual(['blog_internal']);
 

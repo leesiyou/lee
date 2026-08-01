@@ -69,6 +69,7 @@ button, input { font: inherit; }
 .archive-month time { flex: 0 0 76px; color: var(--muted); font-size: 13px; }
 
 .reading-progress { position: fixed; z-index: 50; top: 0; left: 0; width: 100%; height: 3px; }
+.preview-banner { position: sticky; z-index: 45; top: 65px; margin: 0; padding: 12px 24px; border-bottom: 1px solid #8b6e2e; background: #2b2415; color: #f4d98d; text-align: center; font-size: 13px; }
 .reading-progress span { display: block; width: 100%; height: 100%; transform: scaleX(0); transform-origin: left; background: var(--gold); }
 .article { --article-accent: var(--gold); max-width: 980px; margin: 0 auto; padding: 0 24px; }
 .article-hero { padding: clamp(80px, 13vw, 170px) 0 44px; }

@@ -44,6 +44,17 @@ interface PublishedArticleOptions {
   slug: string;
 }
 
+interface PreviewArticleUrlOptions {
+  baseUrl: string;
+  slug: string;
+}
+
+interface PreviewArticleOptions {
+  apiUrl: string;
+  slug: string;
+  token: string;
+}
+
 type Request = (input: string | URL | RequestInfo, init?: RequestInit) => Promise<Response>;
 type PublicCollection = 'authors' | 'categories' | 'site_settings' | 'tags' | 'template_presets';
 
@@ -79,7 +90,7 @@ function normalizedBaseUrl(baseUrl: string): string {
 
 export function buildPublishedArticlesUrl(options: PublishedArticlesUrlOptions): string {
   const url = new URL(`${normalizedBaseUrl(options.baseUrl)}/items/articles`);
-  url.searchParams.set('filter[status][_eq]', 'published');
+  url.searchParams.set('filter[status][_in]', 'published,scheduled');
   url.searchParams.set('filter[published_at][_lte]', options.now.toISOString());
   url.searchParams.set('sort', '-published_at');
   url.searchParams.set('limit', String(options.limit ?? 20));
@@ -104,8 +115,16 @@ export function buildPublishedArticlesUrl(options: PublishedArticlesUrlOptions):
 export function buildPublishedArticleUrl(options: PublishedArticleUrlOptions): string {
   const url = new URL(`${normalizedBaseUrl(options.baseUrl)}/items/articles`);
   url.searchParams.set('filter[slug][_eq]', options.slug);
-  url.searchParams.set('filter[status][_eq]', 'published');
+  url.searchParams.set('filter[status][_in]', 'published,scheduled');
   url.searchParams.set('filter[published_at][_lte]', options.now.toISOString());
+  url.searchParams.set('limit', '1');
+  url.searchParams.set('fields', articleFields);
+  return url.toString();
+}
+
+export function buildPreviewArticleUrl(options: PreviewArticleUrlOptions): string {
+  const url = new URL(`${normalizedBaseUrl(options.baseUrl)}/items/articles`);
+  url.searchParams.set('filter[slug][_eq]', options.slug);
   url.searchParams.set('limit', '1');
   url.searchParams.set('fields', articleFields);
   return url.toString();
@@ -185,6 +204,29 @@ export async function fetchPublishedArticle(
     return payload.data[0] ?? null;
   } catch {
     throw new DirectusRequestError(502, '内容服务返回了无效数据');
+  }
+}
+
+export async function fetchPreviewArticle(
+  options: PreviewArticleOptions,
+  request: Request = fetch,
+): Promise<Article | null> {
+  if (!options.token) throw new DirectusRequestError(503, '预览服务尚未配置');
+  const response = await request(
+    buildPreviewArticleUrl({ baseUrl: options.apiUrl, slug: options.slug }),
+    {
+      headers: {
+        accept: 'application/json',
+        authorization: `Bearer ${options.token}`,
+      },
+    },
+  );
+  if (!response.ok) throw new DirectusRequestError(response.status, '预览服务暂时不可用');
+  try {
+    const payload = (await response.json()) as DirectusListResponse<Article>;
+    return payload.data[0] ?? null;
+  } catch {
+    throw new DirectusRequestError(502, '预览服务返回了无效数据');
   }
 }
 

@@ -16,8 +16,8 @@ export interface ModelCollection {
 const idField: ModelField = {
   field: 'id',
   meta: { hidden: true, interface: 'input', readonly: true },
-  schema: { data_type: 'uuid', is_primary_key: true },
-  type: 'uuid',
+  schema: { data_type: 'integer', has_auto_increment: true, is_primary_key: true },
+  type: 'integer',
 };
 
 const slugFields: ModelField[] = [
@@ -36,7 +36,7 @@ export const collections: Record<string, ModelCollection> = {
       idField,
       { field: 'status', meta: { choices: articleStatuses.map((value) => ({ text: value, value })), interface: 'select-dropdown', required: true }, schema: { default_value: 'draft', is_nullable: false, max_length: 24 }, type: 'string' },
       { field: 'title', meta: { interface: 'input', required: true }, schema: { is_nullable: false, max_length: 240 }, type: 'string' },
-      { field: 'slug', meta: { interface: 'input', note: '留空时初始化/自动流程生成安全标识', required: true }, schema: { is_nullable: false, is_unique: true, max_length: 180 }, type: 'string' },
+      { field: 'slug', meta: { interface: 'input', note: '可留空，由服务器自动生成安全且唯一的地址标识', required: false }, schema: { is_nullable: false, is_unique: true, max_length: 180 }, type: 'string' },
       { field: 'subtitle', meta: { interface: 'input' }, schema: { is_nullable: true, max_length: 300 }, type: 'string' },
       { field: 'summary', meta: { interface: 'input-multiline', required: true }, schema: { is_nullable: false }, type: 'text' },
       { field: 'content', meta: { interface: 'input-rich-text-html', required: true }, schema: { is_nullable: false }, type: 'text' },
@@ -44,8 +44,8 @@ export const collections: Record<string, ModelCollection> = {
       { field: 'share_image', meta: { interface: 'file-image', special: ['file'] }, schema: { is_nullable: true }, type: 'uuid' },
       { field: 'template', meta: { choices: ['philosophy', 'business', 'diary', 'retrospective'].map((value) => ({ text: value, value })), interface: 'select-dropdown', required: true }, schema: { default_value: 'philosophy', is_nullable: false, max_length: 40 }, type: 'string' },
       { field: 'theme', meta: { interface: 'select-color' }, schema: { default_value: '#c6a96b', is_nullable: true, max_length: 20 }, type: 'string' },
-      { field: 'author', meta: { interface: 'select-dropdown-m2o', special: ['m2o'] }, schema: { is_nullable: true }, type: 'uuid' },
-      { field: 'category', meta: { interface: 'select-dropdown-m2o', special: ['m2o'] }, schema: { is_nullable: true }, type: 'uuid' },
+      { field: 'author', meta: { interface: 'select-dropdown-m2o', special: ['m2o'] }, schema: { is_nullable: true }, type: 'integer' },
+      { field: 'category', meta: { interface: 'select-dropdown-m2o', special: ['m2o'] }, schema: { is_nullable: true }, type: 'integer' },
       { field: 'tags', meta: { interface: 'list-m2m', special: ['m2m'] }, schema: null, type: 'alias' },
       { field: 'featured', meta: { interface: 'boolean' }, schema: { default_value: false, is_nullable: false }, type: 'boolean' },
       { field: 'published_at', meta: { interface: 'datetime', required: true }, schema: { is_nullable: false }, type: 'timestamp' },
@@ -108,11 +108,39 @@ export const collections: Record<string, ModelCollection> = {
     note: '文章与标签关系',
     fields: [
       idField,
-      { field: 'articles_id', meta: { hidden: true, interface: 'select-dropdown-m2o', special: ['m2o'] }, schema: { is_nullable: false }, type: 'uuid' },
-      { field: 'tags_id', meta: { hidden: true, interface: 'select-dropdown-m2o', special: ['m2o'] }, schema: { is_nullable: false }, type: 'uuid' },
+      { field: 'articles_id', meta: { hidden: true, interface: 'select-dropdown-m2o', special: ['m2o'] }, schema: { is_nullable: false }, type: 'integer' },
+      { field: 'tags_id', meta: { hidden: true, interface: 'select-dropdown-m2o', special: ['m2o'] }, schema: { is_nullable: false }, type: 'integer' },
     ],
   },
 };
+
+export interface ModelRelation {
+  collection: string;
+  field: string;
+  meta?: { junction_field?: string; one_field?: string };
+  related_collection: string;
+  schema?: { on_delete?: 'CASCADE' | 'SET NULL' };
+}
+
+export const relations: ModelRelation[] = [
+  { collection: 'articles', field: 'author', related_collection: 'authors', schema: { on_delete: 'SET NULL' } },
+  { collection: 'articles', field: 'category', related_collection: 'categories', schema: { on_delete: 'SET NULL' } },
+  { collection: 'articles', field: 'cover_image', related_collection: 'directus_files', schema: { on_delete: 'SET NULL' } },
+  { collection: 'articles', field: 'share_image', related_collection: 'directus_files', schema: { on_delete: 'SET NULL' } },
+  { collection: 'articles', field: 'wechat_cover', related_collection: 'directus_files', schema: { on_delete: 'SET NULL' } },
+  { collection: 'authors', field: 'avatar', related_collection: 'directus_files', schema: { on_delete: 'SET NULL' } },
+  { collection: 'site_settings', field: 'logo', related_collection: 'directus_files', schema: { on_delete: 'SET NULL' } },
+  { collection: 'site_settings', field: 'favicon', related_collection: 'directus_files', schema: { on_delete: 'SET NULL' } },
+  { collection: 'site_settings', field: 'default_share_image', related_collection: 'directus_files', schema: { on_delete: 'SET NULL' } },
+  {
+    collection: 'articles_tags',
+    field: 'articles_id',
+    meta: { junction_field: 'tags_id', one_field: 'tags' },
+    related_collection: 'articles',
+    schema: { on_delete: 'CASCADE' },
+  },
+  { collection: 'articles_tags', field: 'tags_id', related_collection: 'tags', schema: { on_delete: 'CASCADE' } },
+];
 
 export const defaultCategories = [
   { name: '创业与商业', slug: 'startup-business', sort: 10 },
@@ -141,7 +169,10 @@ export const defaultSiteSettings = {
 } as const;
 
 export const publicArticleFilter = {
-  _and: [{ status: { _eq: 'published' } }, { published_at: { _lte: '$NOW' } }],
+  _and: [
+    { status: { _in: ['published', 'scheduled'] } },
+    { published_at: { _lte: '$NOW' } },
+  ],
 };
 export const editorAllowedCollections = ['articles', 'categories', 'tags', 'articles_tags', 'directus_files'];
 export const editorDeniedSystemCollections = ['directus_users', 'directus_roles', 'directus_settings', 'directus_extensions'];
