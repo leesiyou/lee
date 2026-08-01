@@ -26,7 +26,7 @@ Directus 是内容主数据库。文章发布后由 Astro SSR 即时读取，不
 
 | 服务 | 版本/镜像 |
 | --- | --- |
-| Astro Web | `ghcr.io/leesiyou/lee-web:v0.1.0-rc.2`（当前 NAS 不可变版本） |
+| Astro Web | `ghcr.io/leesiyou/lee-web:v0.1.0-rc.3`（当前 NAS 不可变版本） |
 | Directus | `directus/directus:11.17.4` |
 | PostgreSQL | `postgres:16.14-alpine` |
 | Redis | `redis:7.4.10-alpine` |

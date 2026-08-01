@@ -21,7 +21,7 @@
 | 结构化编辑 | PASS | 原生 Block Editor 字段与安全 SSR 渲染已验证 |
 | 微信草稿预留 | PASS_WITH_LIMITATIONS | Editor 操作可见；未配置时返回中性提示；真实公众号凭据未提供 |
 | GitHub CI | PASS | 最新实现 push 与 PR 两次 CI 均成功 |
-| GHCR | PASS | `v0.1.0-rc.2` linux/amd64 镜像发布成功，可匿名拉取 |
+| GHCR | PASS | `v0.1.0-rc.3` linux/amd64 镜像发布成功，可匿名拉取 |
 | NAS 自动部署 | PASS | 两分钟轮询、只重建 web、真实 digest 更新和坏镜像回滚均通过 |
 | 内容导出 | PASS_WITH_LIMITATIONS | 已发布文章已进入 `content-backup`；NAS cron 因缺细粒度 Token 未安装 |
 | 备份 | PASS | 每日/每周 cron 已安装，真实归档和 SHA256 校验通过 |

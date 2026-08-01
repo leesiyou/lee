@@ -6,7 +6,7 @@
 - 项目根目录：`/vol6/1000/Docker部署盘/03_网站项目/104-h5-blog`
 - Compose：`repo/infra/compose.yaml`
 - 受限环境文件：`secrets/.env`，权限 `600`
-- 当前 Web 镜像：`ghcr.io/leesiyou/lee-web:v0.1.0-rc.2`
+- 当前 Web 镜像：`ghcr.io/leesiyou/lee-web:v0.1.0-rc.3`
 - 局域网前台：`http://192.168.5.104:19080`
 - 局域网后台：`http://192.168.5.104:19081`
 

@@ -15,7 +15,7 @@
 11. **容器健康状态**：五个容器均 `healthy`
 12. **数据持久化目录**：`runtime/postgres`、`runtime/redis`、`runtime/directus-uploads`、`runtime/directus-extensions`、`runtime/caddy-data`、`runtime/caddy-config`、`runtime/logs`
 13. **自动部署方式**：GitHub Actions 发布 GHCR；NAS cron 每两分钟检查 digest，只重建 web，失败自动回滚
-14. **GitHub Actions 运行结果**：最新实现分支 push 与 Draft PR 的 CI 均成功；`v0.1.0-rc.2` GHCR 发布成功
+14. **GitHub Actions 运行结果**：最新实现分支 push 与 Draft PR 的 CI 均成功；`v0.1.0-rc.3` GHCR 发布成功
 15. **备份路径**：`/vol6/1000/Docker部署盘/03_网站项目/104-h5-blog/backups/blog`
 16. **最近一次备份结果**：每日归档 `daily/blog-daily-20260801-152738.tar.gz` PASS；最近周归档 `weekly/blog-weekly-20260801-143305.tar.gz` PASS；均有 SHA256
 17. **恢复测试结果**：临时数据库隔离恢复、正式完整数据库/uploads 恢复、恢复后内容与权限门禁均 PASS
