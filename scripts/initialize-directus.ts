@@ -200,12 +200,19 @@ async function ensureRolePolicyAccess(
   await createItem(client, '/access', { policy, role, sort: 1 });
 }
 
-interface PermissionDefinition {
+export interface PermissionDefinition {
   action: 'create' | 'read' | 'update' | 'delete';
   collection: string;
   fields?: string[];
   permissions?: Record<string, unknown> | null;
 }
+
+export const editorWechatFlowPermission: PermissionDefinition = {
+  action: 'read',
+  collection: 'directus_flows',
+  fields: ['id', 'name', 'icon', 'description', 'status', 'trigger', 'options', 'operation'],
+  permissions: { id: { _eq: '68012484-42dc-4e2d-a87e-14973d118bce' } },
+};
 
 async function ensurePermission(
   client: DirectusAdminClient,
@@ -326,6 +333,7 @@ async function ensurePermissions(
       (action): PermissionDefinition => ({ action, collection }),
     ),
   );
+  editorDefinitions.push(editorWechatFlowPermission);
   const previewDefinitions: PermissionDefinition[] = [
     { action: 'read', collection: 'articles' },
     ...['categories', 'tags', 'authors', 'site_settings', 'template_presets', 'articles_tags'].map(

@@ -95,7 +95,7 @@ export async function verifyEditor(environment = process.env): Promise<Record<st
   const suffix = String(Date.now());
   const fixture = buildEditorFixture(suffix);
   const staticToken = randomBytes(32).toString('hex');
-  const created: { article?: string | number; category?: string | number; file?: string; rejectedFile?: string; tag?: string | number; user?: string } = {};
+  const created: { article?: string | number; category?: string | number; file?: string; notification?: string | number; rejectedFile?: string; tag?: string | number; user?: string } = {};
 
   try {
     const roles = await admin.request<{ data: Array<{ id: string }> }>(
@@ -171,6 +171,30 @@ export async function verifyEditor(environment = process.env): Promise<Record<st
     if (!/^post-[a-f0-9]{10}$/.test(slug)) throw new Error('Editor blank slug was not generated');
     if ((await anonymousCount(directusUrl, slug)) !== 0) throw new Error('Editor draft leaked publicly');
 
+    const wechatFlowId = '68012484-42dc-4e2d-a87e-14973d118bce';
+    const wechatFlow = await editor.request<{ data: { id: string; name: string } }>(
+      `/flows/${wechatFlowId}?fields=id,name`,
+    );
+    if (!wechatFlow.data.name.includes('尚未配置公众号接口')) {
+      throw new Error('Editor WeChat action did not display its disabled state');
+    }
+    await editor.request(`/flows/trigger/${wechatFlowId}`, {
+      body: JSON.stringify({ collection: 'articles', keys: [created.article] }),
+      method: 'POST',
+    });
+    const notifications = await editor.request<{
+      data: Array<{ id: string | number; message: string }>;
+    }>(
+      `/notifications?filter[subject][_eq]=${encodeURIComponent('公众号草稿操作结果')}&sort=-timestamp&fields=id,message&limit=1`,
+    );
+    const notification = notifications.data[0];
+    if (!notification || notification.message !== '尚未配置公众号接口') {
+      throw new Error('Editor WeChat action did not return the explicit not-configured notice');
+    }
+    created.notification = notification.id;
+    await editor.request(`/notifications/${created.notification}`, { method: 'DELETE' });
+    created.notification = undefined;
+
     await editor.request(`/items/articles/${created.article}`, {
       body: JSON.stringify({ status: 'published' }),
       method: 'PATCH',
@@ -236,11 +260,14 @@ export async function verifyEditor(environment = process.env): Promise<Record<st
       rejectedUploadStatus: rejectedUpload.status,
       systemMetadataStatuses,
       updateVisible: true,
+      wechatDraftActionVisible: true,
+      wechatNotConfiguredNotice: true,
     };
   } finally {
     const cleanup: Array<Promise<unknown>> = [];
     if (created.article) cleanup.push(admin.request(`/items/articles/${created.article}`, { method: 'DELETE' }));
     if (created.file) cleanup.push(admin.request(`/files/${created.file}`, { method: 'DELETE' }));
+    if (created.notification) cleanup.push(admin.request(`/notifications/${created.notification}`, { method: 'DELETE' }));
     if (created.rejectedFile) cleanup.push(admin.request(`/files/${created.rejectedFile}`, { method: 'DELETE' }));
     if (created.tag) cleanup.push(admin.request(`/items/tags/${created.tag}`, { method: 'DELETE' }));
     if (created.category) cleanup.push(admin.request(`/items/categories/${created.category}`, { method: 'DELETE' }));

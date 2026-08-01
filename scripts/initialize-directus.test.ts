@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildWechatDraftFlowDefinition, planBootstrap } from './initialize-directus';
+import {
+  buildWechatDraftFlowDefinition,
+  editorWechatFlowPermission,
+  planBootstrap,
+} from './initialize-directus';
 
 describe('planBootstrap', () => {
   it('creates only missing collections and fields', () => {
@@ -67,5 +71,14 @@ describe('公众号草稿手动流程', () => {
       },
     });
     expect(JSON.stringify(definition)).not.toContain('AUTOMATION_SECRET');
+  });
+
+  it('allows Editor to read only the one manual flow without managing flows', () => {
+    expect(editorWechatFlowPermission).toEqual({
+      action: 'read',
+      collection: 'directus_flows',
+      fields: ['id', 'name', 'icon', 'description', 'status', 'trigger', 'options', 'operation'],
+      permissions: { id: { _eq: '68012484-42dc-4e2d-a87e-14973d118bce' } },
+    });
   });
 });
