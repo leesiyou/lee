@@ -2,7 +2,7 @@
 import Hero from '@/components/Hero.astro';
 import ShareCard from '@/components/ShareCard.astro';
 import { addHeadingIds, buildTableOfContents, calculateReadingMinutes, renderStructuredBlocks } from '@/lib/content';
-import { buildAssetUrl, buildPostUrl, runtimeConfig } from '@/lib/routes';
+import { buildArticleCoverUrl, buildPostUrl, runtimeConfig } from '@/lib/routes';
 import type { Article } from '@/lib/types';
 
 import BaseLayout from './BaseLayout.astro';
@@ -14,7 +14,7 @@ interface Props {
 
 const { article, preview = false } = Astro.props;
 const config = runtimeConfig();
-const cover = buildAssetUrl(article.cover_image, config);
+const cover = buildArticleCoverUrl(article, config);
 const canonical = buildPostUrl(article.slug, config);
 const content = addHeadingIds(`${article.content}${renderStructuredBlocks(article.blocks)}`);
 const toc = buildTableOfContents(content);

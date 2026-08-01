@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  buildArticleCoverUrl,
   buildAssetUrl,
   buildPostUrl,
   buildWechatMaterialUrl,
@@ -23,6 +24,16 @@ describe('route helpers', () => {
     expect(buildWechatMaterialUrl('startup-vs-speculation', config)).toBe(
       'https://blog.example.com/wechat/material/startup-vs-speculation',
     );
+    expect(
+      buildArticleCoverUrl(
+        { cover_image: null, slug: 'china-street-dance-decade-review' },
+        config,
+      ),
+    ).toBe('https://blog.example.com/images/streetdance-decade-review-cover.png');
+    expect(
+      buildArticleCoverUrl({ cover_image: 'directus-cover', slug: 'another-post' }, config),
+    ).toBe('https://blog.example.com/assets/directus-cover');
+    expect(buildArticleCoverUrl({ cover_image: null, slug: 'another-post' }, config)).toBeNull();
   });
 
   it('rejects non-http public URLs instead of emitting unsafe links', () => {

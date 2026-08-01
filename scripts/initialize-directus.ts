@@ -506,6 +506,8 @@ async function ensureSeedItem(
   return { created: true, item: await createItem(client, `/items/${collection}`, data) };
 }
 
+const seedArticleFiles = ['first-article.json', 'streetdance-decade-review.json'] as const;
+
 async function ensureSeedData(client: DirectusAdminClient): Promise<number> {
   let created = 0;
   for (const category of defaultCategories) {
@@ -522,25 +524,27 @@ async function ensureSeedData(client: DirectusAdminClient): Promise<number> {
     created += 1;
   }
 
-  const articleSource = JSON.parse(
-    await readFile(new URL('../content/first-article.json', import.meta.url), 'utf8'),
-  ) as Record<string, unknown> & { author_name: string; category_slug: string; slug: string };
-  const category = await findOne(client, '/items/categories', 'slug', articleSource.category_slug);
-  const author = await findOne(client, '/items/authors', 'name', articleSource.author_name);
-  if (!category || !author) throw new Error('First article dependencies were not seeded');
-  const { author_name: _authorName, category_slug: _categorySlug, ...article } = articleSource;
-  void _authorName;
-  void _categorySlug;
-  if (
-    (
-      await ensureSeedItem(client, 'articles', 'slug', articleSource.slug, {
-        ...article,
-        author: author.id,
-        category: category.id,
-      })
-    ).created
-  ) {
-    created += 1;
+  for (const articleFile of seedArticleFiles) {
+    const articleSource = JSON.parse(
+      await readFile(new URL(`../content/${articleFile}`, import.meta.url), 'utf8'),
+    ) as Record<string, unknown> & { author_name: string; category_slug: string; slug: string };
+    const category = await findOne(client, '/items/categories', 'slug', articleSource.category_slug);
+    const author = await findOne(client, '/items/authors', 'name', articleSource.author_name);
+    if (!category || !author) throw new Error(`Seed article dependencies were not found: ${articleFile}`);
+    const { author_name: _authorName, category_slug: _categorySlug, ...article } = articleSource;
+    void _authorName;
+    void _categorySlug;
+    if (
+      (
+        await ensureSeedItem(client, 'articles', 'slug', articleSource.slug, {
+          ...article,
+          author: author.id,
+          category: category.id,
+        })
+      ).created
+    ) {
+      created += 1;
+    }
   }
   return created;
 }

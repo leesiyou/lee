@@ -5,7 +5,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { buildWechatMaterial } from '@/lib/content';
 import { fetchPublishedArticle } from '@/lib/directus';
 import {
-  buildAssetUrl,
+  buildArticleCoverUrl,
   buildWechatMaterialUrl,
   runtimeConfig,
 } from '@/lib/routes';
@@ -32,7 +32,10 @@ if (!article && !unavailable) Astro.response.status = 404;
 
 const material = article ? buildWechatMaterial(article, `${config.publicBaseUrl}/`) : null;
 const cover = article
-  ? buildAssetUrl(article.wechat_cover || article.cover_image, config)
+  ? buildArticleCoverUrl(
+      { cover_image: article.wechat_cover || article.cover_image, slug: article.slug },
+      config,
+    )
   : null;
 const qrDataUrl = material
   ? await QRCode.toDataURL(material.qrContent, {

@@ -1,3 +1,5 @@
+import { readFile } from 'node:fs/promises';
+
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -46,6 +48,17 @@ describe('planBootstrap', () => {
 
     expect(operations.createFields.articles).not.toContain('author');
     expect(operations.updateFieldTypes.articles).toContain('author');
+  });
+});
+
+describe('seed articles', () => {
+  it('seeds both formal articles by stable slug without deleting history', async () => {
+    const source = await readFile(new URL('./initialize-directus.ts', import.meta.url), 'utf8');
+
+    expect(source).toContain("'first-article.json'");
+    expect(source).toContain("'streetdance-decade-review.json'");
+    expect(source).toContain('for (const articleFile of seedArticleFiles)');
+    expect(source).toContain("ensureSeedItem(client, 'articles', 'slug'");
   });
 });
 

@@ -102,6 +102,27 @@ describe('first formal article', () => {
       expect(article.content).toContain(section);
     }
   });
+
+  it('keeps the street dance review as the newest featured article', async () => {
+    const path = new URL('../content/streetdance-decade-review.json', import.meta.url);
+    const article = JSON.parse(
+      await readFile(path, 'utf8').catch(() => '{}'),
+    ) as Record<string, string | boolean | number>;
+
+    expect(article).toMatchObject({
+      category_slug: 'street-dance-culture',
+      featured: true,
+      slug: 'china-street-dance-decade-review',
+      status: 'published',
+      template: 'retrospective',
+      title: '中国街舞 2015—2026：从热度到资产',
+    });
+    expect(String(article.wechat_content ?? '')).toMatch(/<p>.+<\/p>/);
+    expect(String(article.wechat_content ?? '').match(/<p>/g)).toHaveLength(5);
+    expect(new Date(String(article.published_at)).getTime()).toBeGreaterThan(
+      new Date('2026-08-01T05:30:00.000Z').getTime(),
+    );
+  });
 });
 
 describe('Directus schema snapshot', () => {

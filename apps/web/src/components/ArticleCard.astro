@@ -1,5 +1,5 @@
 ---
-import { buildAssetUrl, runtimeConfig } from '@/lib/routes';
+import { buildArticleCoverUrl, runtimeConfig } from '@/lib/routes';
 import type { Article } from '@/lib/types';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { article, featured = false } = Astro.props;
-const cover = buildAssetUrl(article.cover_image, runtimeConfig());
+const cover = buildArticleCoverUrl(article, runtimeConfig());
 const category = typeof article.category === 'object' && article.category ? article.category : null;
 ---
 

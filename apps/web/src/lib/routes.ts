@@ -1,3 +1,5 @@
+import type { Article } from './types';
+
 export interface RuntimeConfig {
   directusInternalUrl: string;
   directusPublicUrl: string;
@@ -61,4 +63,19 @@ export function buildAssetUrl(
   if (!file) return null;
   const id = typeof file === 'string' ? file : file.id;
   return new URL(`assets/${encodeURIComponent(id)}`, `${config.publicBaseUrl}/`).toString();
+}
+
+export function buildArticleCoverUrl(
+  article: Pick<Article, 'cover_image' | 'slug'>,
+  config: RuntimeConfig = runtimeConfig(),
+): string | null {
+  const directusCover = buildAssetUrl(article.cover_image, config);
+  if (directusCover) return directusCover;
+  if (article.slug === 'china-street-dance-decade-review') {
+    return new URL(
+      'images/streetdance-decade-review-cover.png',
+      `${config.publicBaseUrl}/`,
+    ).toString();
+  }
+  return null;
 }
