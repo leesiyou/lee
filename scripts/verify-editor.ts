@@ -192,7 +192,7 @@ export async function verifyEditor(environment = process.env): Promise<Record<st
       throw new Error('Editor WeChat action did not return the explicit not-configured notice');
     }
     created.notification = notification.id;
-    await editor.request(`/notifications/${created.notification}`, { method: 'DELETE' });
+    await admin.request(`/notifications/${created.notification}`, { method: 'DELETE' });
     created.notification = undefined;
 
     await editor.request(`/items/articles/${created.article}`, {
