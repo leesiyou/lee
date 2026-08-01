@@ -1,0 +1,13 @@
+---
+interface Props {
+  text: string;
+  title?: string;
+}
+
+const { text, title = '终局结论' } = Astro.props;
+---
+
+<footer class="article-conclusion">
+  <p class="article-conclusion__label">{title}</p>
+  <p class="article-conclusion__text">{text}</p>
+</footer>

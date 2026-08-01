@@ -1,0 +1,40 @@
+---
+interface Props {
+  summary: string;
+  title: string;
+  url: string;
+}
+
+const { summary, title, url } = Astro.props;
+---
+
+<aside class="share-card" data-share-card data-share-title={title} data-share-text={summary} data-share-url={url}>
+  <p class="share-card__label">SHARE</p>
+  <h2 class="share-card__title">把值得积累的观点，分享给同路人</h2>
+  <div class="share-card__actions">
+    <button class="share-card__button" type="button" data-share-native>分享文章</button>
+    <button class="share-card__button share-card__button--secondary" type="button" data-share-copy>复制链接</button>
+  </div>
+  <p class="share-card__status" data-share-status aria-live="polite"></p>
+</aside>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-share-card]').forEach((card) => {
+    const url = card.dataset.shareUrl ?? window.location.href;
+    const title = card.dataset.shareTitle ?? document.title;
+    const text = card.dataset.shareText ?? '';
+    const status = card.querySelector<HTMLElement>('[data-share-status]');
+    card.querySelector('[data-share-copy]')?.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(url);
+      if (status) status.textContent = '链接已复制。';
+    });
+    card.querySelector('[data-share-native]')?.addEventListener('click', async () => {
+      if (navigator.share) {
+        await navigator.share({ text, title, url });
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      if (status) status.textContent = '当前浏览器不支持系统分享，链接已复制。';
+    });
+  });
+</script>

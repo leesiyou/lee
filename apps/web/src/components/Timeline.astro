@@ -1,0 +1,25 @@
+---
+interface TimelineItem {
+  label: string;
+  text: string;
+}
+
+interface Props {
+  items: TimelineItem[];
+  title?: string;
+}
+
+const { items, title = '过程' } = Astro.props;
+---
+
+<section class="timeline-block">
+  <h2 class="timeline-block__title">{title}</h2>
+  <ol class="timeline-block__list">
+    {items.map((item) => (
+      <li class="timeline-block__item">
+        <span class="timeline-block__label">{item.label}</span>
+        <p>{item.text}</p>
+      </li>
+    ))}
+  </ol>
+</section>

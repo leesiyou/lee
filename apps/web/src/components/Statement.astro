@@ -1,0 +1,13 @@
+---
+interface Props {
+  label?: string;
+  text?: string;
+}
+
+const { label = '核心命题', text } = Astro.props;
+---
+
+<section class="statement-card">
+  <span class="statement-card__label">{label}</span>
+  {text ? <p class="statement-card__text">{text}</p> : <div class="statement-card__text"><slot /></div>}
+</section>

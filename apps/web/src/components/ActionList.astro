@@ -1,0 +1,20 @@
+---
+interface Props {
+  items: string[];
+  title?: string;
+}
+
+const { items, title = '下一步行动' } = Astro.props;
+---
+
+<section class="action-list">
+  <h2 class="action-list__title">{title}</h2>
+  <ol class="action-list__items">
+    {items.map((item, index) => (
+      <li class="action-list__item">
+        <span class="action-list__index">{String(index + 1).padStart(2, '0')}</span>
+        <span>{item}</span>
+      </li>
+    ))}
+  </ol>
+</section>

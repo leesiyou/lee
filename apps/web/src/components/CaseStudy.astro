@@ -1,0 +1,16 @@
+---
+interface Props {
+  outcome?: string;
+  summary: string;
+  title: string;
+}
+
+const { outcome, summary, title } = Astro.props;
+---
+
+<article class="case-study">
+  <p class="case-study__kicker">CASE STUDY</p>
+  <h3 class="case-study__title">{title}</h3>
+  <p class="case-study__summary">{summary}</p>
+  {outcome && <p class="case-study__outcome">结果：{outcome}</p>}
+</article>
