@@ -1,0 +1,186 @@
+name: 104-h5-blog
+
+x-service-defaults: &service-defaults
+  restart: unless-stopped
+  networks:
+    - blog_internal
+  logging:
+    driver: json-file
+    options:
+      max-size: 10m
+      max-file: "5"
+
+services:
+  postgres:
+    <<: *service-defaults
+    image: postgres:16.14-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_INITDB_ARGS: --data-checksums
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      TZ: Asia/Shanghai
+    volumes:
+      - ${RUNTIME_DIR}/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+          memory: 1G
+
+  redis:
+    <<: *service-defaults
+    image: redis:7.4.10-alpine
+    command: ["redis-server", "--appendonly", "yes", "--appendfsync", "everysec", "--requirepass", "${REDIS_PASSWORD}"]
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      TZ: Asia/Shanghai
+    volumes:
+      - ${RUNTIME_DIR}/redis:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$$REDIS_PASSWORD\" --no-auth-warning ping | grep -q PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+
+  directus:
+    <<: *service-defaults
+    image: directus/directus:12.2.0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+      CACHE_AUTO_PURGE: "true"
+      CACHE_ENABLED: "true"
+      CACHE_STORE: redis
+      CACHE_REDIS: redis://:${REDIS_PASSWORD}@redis:6379/0
+      CORS_ALLOWED_HEADERS: Content-Type,Authorization
+      CORS_CREDENTIALS: "true"
+      CORS_ENABLED: "true"
+      CORS_METHODS: GET,POST,PATCH,DELETE,OPTIONS
+      CORS_ORIGIN: ${CORS_ORIGIN}
+      DB_CLIENT: pg
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_HOST: postgres
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_PORT: "5432"
+      DB_USER: ${POSTGRES_USER}
+      EXTENSIONS_AUTO_RELOAD: "false"
+      LOG_LEVEL: info
+      MAX_PAYLOAD_SIZE: 25mb
+      PUBLIC_URL: ${DIRECTUS_PUBLIC_URL}
+      RATE_LIMITER_ENABLED: "true"
+      RATE_LIMITER_GLOBAL_RATE: "80"
+      RATE_LIMITER_GLOBAL_DURATION: "1"
+      RATE_LIMITER_POINTS: "20"
+      RATE_LIMITER_STORE: redis
+      RATE_LIMITER_REDIS: redis://:${REDIS_PASSWORD}@redis:6379/1
+      SECRET: ${DIRECTUS_SECRET}
+      STORAGE_LOCATIONS: local
+      STORAGE_LOCAL_DRIVER: local
+      STORAGE_LOCAL_ROOT: /directus/uploads
+      TELEMETRY: "false"
+      TZ: Asia/Shanghai
+      WEBSOCKETS_ENABLED: "true"
+    volumes:
+      - ${RUNTIME_DIR}/directus-uploads:/directus/uploads
+      - ${RUNTIME_DIR}/directus-extensions:/directus/extensions
+      - ./directus:/directus/schema
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8055/server/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: "1.50"
+          memory: 1536M
+
+  web:
+    <<: *service-defaults
+    networks:
+      - blog_internal
+      - blog_egress
+    image: ${WEB_IMAGE:-ghcr.io/leesiyou/lee-web:v0.1.0}
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+      args:
+        BUILD_VERSION: ${BUILD_VERSION:-dev}
+    depends_on:
+      directus:
+        condition: service_healthy
+    environment:
+      DIRECTUS_INTERNAL_URL: http://directus:8055
+      DIRECTUS_PUBLIC_URL: ${DIRECTUS_PUBLIC_URL}
+      PUBLIC_ADMIN_URL: ${PUBLIC_ADMIN_URL}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL}
+      TZ: Asia/Shanghai
+      WECHAT_APP_ID: ${WECHAT_APP_ID:-}
+      WECHAT_APP_SECRET: ${WECHAT_APP_SECRET:-}
+      WECHAT_AUTOMATION_SECRET: ${WECHAT_AUTOMATION_SECRET}
+      WECHAT_DRAFT_ENABLED: ${WECHAT_DRAFT_ENABLED:-false}
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4321/health').then(r=>r.json()).then(j=>process.exit(j.status==='ok'?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 25s
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+          memory: 768M
+
+  caddy:
+    <<: *service-defaults
+    image: caddy:2.11.4-alpine
+    depends_on:
+      directus:
+        condition: service_healthy
+      web:
+        condition: service_healthy
+    ports:
+      - "19080:8080"
+      - "19081:8081"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ${RUNTIME_DIR}/caddy-data:/data
+      - ${RUNTIME_DIR}/caddy-config:/config
+      - ${RUNTIME_DIR}/logs/caddy:/var/log/caddy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 256M
+
+networks:
+  blog_internal:
+    driver: bridge
+    internal: true
+  blog_egress:
+    driver: bridge
