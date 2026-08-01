@@ -1,5 +1,7 @@
 node_modules/
 dist/
+!infra/directus/extensions/blog-slug/dist/
+!infra/directus/extensions/blog-slug/dist/index.js
 .astro/
 .env
 .env.*
