@@ -1,0 +1,31 @@
+{
+  "name": "lee-h5-blog",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace @lee/web",
+    "check:compose": "node scripts/validate-compose.mjs infra/compose.yaml",
+    "lint": "eslint apps/web/src scripts tests",
+    "test": "vitest run",
+    "typecheck": "npm run typecheck --workspace @lee/web"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "26.1.2",
+    "@types/qrcode": "1.5.6",
+    "@types/sanitize-html": "2.16.1",
+    "eslint": "10.8.0",
+    "eslint-plugin-astro": "3.0.1",
+    "globals": "17.8.0",
+    "qrcode": "1.5.4",
+    "tsx": "4.23.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.65.0",
+    "vitest": "4.1.10",
+    "yaml": "2.9.0"
+  }
+}
