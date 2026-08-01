@@ -57,6 +57,14 @@ describe('公众号草稿手动流程', () => {
     expect(definition.operation).toMatchObject({
       type: 'gazi-wechat-draft',
       options: { articleIds: '{{ $trigger.keys }}' },
+      resolve: definition.notificationOperation.id,
+    });
+    expect(definition.notificationOperation).toMatchObject({
+      type: 'notification',
+      options: {
+        message: '{{ create_wechat_draft.message }}',
+        recipient: '{{ $accountability.user }}',
+      },
     });
     expect(JSON.stringify(definition)).not.toContain('AUTOMATION_SECRET');
   });

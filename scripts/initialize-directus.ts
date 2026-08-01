@@ -385,9 +385,11 @@ async function ensureAuthoringMetadata(
 
 const wechatDraftFlowId = '68012484-42dc-4e2d-a87e-14973d118bce';
 const wechatDraftOperationId = '2f0e121c-a74e-4ae3-a969-c8a42b6a63a5';
+const wechatDraftNotificationOperationId = '81aeacdf-350e-4e57-8132-41549dd91c69';
 
 export function buildWechatDraftFlowDefinition(enabled: boolean): {
   flow: Record<string, unknown>;
+  notificationOperation: Record<string, unknown>;
   operation: Record<string, unknown>;
 } {
   return {
@@ -420,8 +422,27 @@ export function buildWechatDraftFlowDefinition(enabled: boolean): {
       position_x: 19,
       position_y: 1,
       reject: null,
-      resolve: null,
+      resolve: wechatDraftNotificationOperationId,
       type: 'gazi-wechat-draft',
+    },
+    notificationOperation: {
+      flow: wechatDraftFlowId,
+      id: wechatDraftNotificationOperationId,
+      key: 'notify_wechat_draft_result',
+      name: '显示公众号草稿结果',
+      options: {
+        collection: 'articles',
+        item: '{{ $trigger.keys[0] }}',
+        message: '{{ create_wechat_draft.message }}',
+        permissions: '$full',
+        recipient: '{{ $accountability.user }}',
+        subject: '公众号草稿操作结果',
+      },
+      position_x: 37,
+      position_y: 1,
+      reject: null,
+      resolve: null,
+      type: 'notification',
     },
   };
 }
@@ -434,6 +455,20 @@ async function ensureWechatDraftFlow(
   const existingFlow = await findOne(client, '/flows', 'id', wechatDraftFlowId);
   if (!existingFlow) {
     await createItem(client, '/flows', { ...definition.flow, operation: null });
+  }
+  const existingNotification = await findOne(
+    client,
+    '/operations',
+    'id',
+    wechatDraftNotificationOperationId,
+  );
+  if (existingNotification) {
+    await client.request(`/operations/${wechatDraftNotificationOperationId}`, {
+      body: JSON.stringify(definition.notificationOperation),
+      method: 'PATCH',
+    });
+  } else {
+    await createItem(client, '/operations', definition.notificationOperation);
   }
   const existingOperation = await findOne(client, '/operations', 'id', wechatDraftOperationId);
   if (existingOperation) {

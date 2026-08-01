@@ -14,7 +14,12 @@ export default {
       method: 'POST',
     });
     const payload = await response.json().catch(() => ({ message: '公众号草稿服务返回无效数据' }));
-    if (!response.ok) throw new Error(payload.message || '生成公众号草稿失败');
-    return payload;
+    if (!response.ok && payload.status !== 'not_configured') {
+      throw new Error(payload.message || '生成公众号草稿失败');
+    }
+    return {
+      ...payload,
+      message: payload.message || '公众号草稿已生成，请在公众号后台人工审核。',
+    };
   },
 };
