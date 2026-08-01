@@ -7,6 +7,35 @@ interface FixtureRecord {
   sort: number;
 }
 
+interface RateLimitRetryOptions {
+  fetcher?: typeof fetch;
+  maxAttempts?: number;
+  sleep?: (delayMs: number) => Promise<void>;
+}
+
+export async function fetchWithRateLimitRetry(
+  input: RequestInfo | URL,
+  init?: RequestInit,
+  options: RateLimitRetryOptions = {},
+): Promise<Response> {
+  const fetcher = options.fetcher ?? fetch;
+  const maxAttempts = options.maxAttempts ?? 4;
+  const sleep = options.sleep ?? ((delayMs: number) => new Promise((resolve) => setTimeout(resolve, delayMs)));
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    const response = await fetcher(input, init);
+    if (response.status !== 429 || attempt === maxAttempts) return response;
+
+    const retrySeconds = Number.parseFloat(response.headers.get('retry-after') ?? '');
+    const delayMs = Number.isFinite(retrySeconds) && retrySeconds >= 0
+      ? Math.ceil(retrySeconds * 1000) + 50
+      : 1100;
+    await sleep(delayMs);
+  }
+
+  throw new Error('Directus rate-limit retry loop ended unexpectedly');
+}
+
 export function buildEditorFixture(suffix: string): {
   article: Record<string, unknown>;
   category: FixtureRecord;
@@ -34,7 +63,7 @@ class DirectusClient {
   ) {}
 
   async request<T>(path: string, init?: RequestInit): Promise<T> {
-    const response = await fetch(`${this.baseUrl}${path}`, {
+    const response = await fetchWithRateLimitRetry(`${this.baseUrl}${path}`, {
       ...init,
       headers: {
         accept: 'application/json',
@@ -53,7 +82,7 @@ class DirectusClient {
 
   async status(path: string): Promise<number> {
     return (
-      await fetch(`${this.baseUrl}${path}`, {
+      await fetchWithRateLimitRetry(`${this.baseUrl}${path}`, {
         headers: { accept: 'application/json', authorization: `Bearer ${this.token}` },
       })
     ).status;
@@ -61,7 +90,7 @@ class DirectusClient {
 }
 
 async function login(baseUrl: string, email: string, password: string): Promise<string> {
-  const response = await fetch(`${baseUrl}/auth/login`, {
+  const response = await fetchWithRateLimitRetry(`${baseUrl}/auth/login`, {
     body: JSON.stringify({ email, password }),
     headers: { 'content-type': 'application/json' },
     method: 'POST',
@@ -80,7 +109,7 @@ function requireEnvironment(environment: NodeJS.ProcessEnv, name: string): strin
 
 async function anonymousCount(baseUrl: string, slug: string): Promise<number> {
   const query = new URLSearchParams({ 'filter[slug][_eq]': slug, fields: 'id', limit: '1' });
-  const response = await fetch(`${baseUrl}/items/articles?${query}`);
+  const response = await fetchWithRateLimitRetry(`${baseUrl}/items/articles?${query}`);
   if (!response.ok) throw new Error(`Anonymous Editor acceptance query failed (${response.status})`);
   const payload = (await response.json()) as { data?: unknown[] };
   return payload.data?.length ?? 0;
@@ -140,7 +169,7 @@ export async function verifyEditor(environment = process.env): Promise<Record<st
     created.file = file.data.id;
     const rejectedForm = new FormData();
     rejectedForm.append('file', new Blob(['not an image'], { type: 'text/plain' }), 'blocked.txt');
-    const rejectedUpload = await fetch(`${directusUrl}/files`, {
+    const rejectedUpload = await fetchWithRateLimitRetry(`${directusUrl}/files`, {
       body: rejectedForm,
       headers: { authorization: `Bearer ${staticToken}` },
       method: 'POST',

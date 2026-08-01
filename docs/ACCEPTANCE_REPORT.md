@@ -31,4 +31,4 @@
 | Lighthouse（LAN HTTP） | PASS_WITH_LIMITATIONS | Performance 100、Accessibility 100、SEO 100、Best Practices 78；后者仅因 LAN HTTP/无 HTTPS |
 | 公网 HTTPS/微信外网 | BLOCKED | 公共权威 DNS 与节点小宝映射尚未完成 |
 
-本地自动化最终基线为 21 个测试文件、70 个测试。完整验证还包含 TypeScript、ESLint、Astro production build、Compose 结构/插值和 Docker image build。
+本地自动化最终基线为 21 个测试文件、71 个测试。完整验证还包含 TypeScript、ESLint、Astro production build、Compose 结构/插值和 Docker image build。

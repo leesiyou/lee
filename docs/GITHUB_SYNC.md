@@ -7,7 +7,7 @@
 - Draft PR：`https://github.com/leesiyou/lee/pull/1`
 - GHCR：`ghcr.io/leesiyou/lee-web`
 
-`CI` 在 PR、`main` 和 `feature/**` push 上执行锁定依赖安装、TypeScript、ESLint、70 项单元测试、Astro build、Compose 结构/插值校验和 Docker build。
+`CI` 在 PR、`main` 和 `feature/**` push 上执行锁定依赖安装、TypeScript、ESLint、71 项单元测试、Astro build、Compose 结构/插值校验和 Docker build。
 
 `Publish web image` 在 `main`、版本 tag 或人工触发时构建 `linux/amd64` 镜像，写入 OCI source/revision/created 标签，并发布 `latest`、短 SHA 和版本 tag。它仅使用 GitHub 内置 `GITHUB_TOKEN`，不包含 NAS 或应用秘密。
 
