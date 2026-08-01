@@ -36,7 +36,7 @@ export class WechatDraftError extends Error {
 export interface WechatDraftAvailability {
   enabled: boolean;
   message: string;
-  status: 'disabled' | 'enabled' | 'not_configured';
+  status: 'disabled' | 'enabled' | 'material_ready';
 }
 
 export function authorizeAutomationRequest(
@@ -56,8 +56,9 @@ export function getWechatDraftAvailability(
   if (!environment.WECHAT_APP_ID || !environment.WECHAT_APP_SECRET) {
     return {
       enabled: false,
-      message: '尚未配置公众号接口',
-      status: 'not_configured',
+      message:
+        '当前已生成公众号发布素材。自动写入公众号草稿箱功能尚未配置，不影响博客发布。',
+      status: 'material_ready',
     };
   }
   if (environment.WECHAT_DRAFT_ENABLED !== 'true') {

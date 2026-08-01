@@ -404,11 +404,11 @@ export function buildWechatDraftFlowDefinition(enabled: boolean): {
     flow: {
       accountability: '$trigger',
       description: enabled
-        ? '从当前文章生成微信公众号草稿，最终发表仍需人工审核。'
-        : '尚未配置公众号接口；博客发布不受影响。',
+        ? '生成公众号发布素材，并在接口已启用时写入草稿箱；最终发表仍需人工审核。'
+        : '生成可复制的公众号发布素材；未配置草稿接口不影响博客发布。',
       icon: 'draft',
       id: wechatDraftFlowId,
-      name: enabled ? '生成公众号草稿' : '生成公众号草稿｜尚未配置公众号接口',
+      name: '生成公众号素材',
       operation: wechatDraftOperationId,
       options: {
         async: false,
@@ -416,7 +416,7 @@ export function buildWechatDraftFlowDefinition(enabled: boolean): {
         error_on_reject: true,
         location: 'item',
         requireConfirmation: true,
-        confirmationDescription: '只生成公众号草稿，不会自动群发。',
+        confirmationDescription: '生成可复制的公众号素材；不会自动群发。',
       },
       status: 'active',
       trigger: 'manual',
@@ -424,8 +424,8 @@ export function buildWechatDraftFlowDefinition(enabled: boolean): {
     operation: {
       flow: wechatDraftFlowId,
       id: wechatDraftOperationId,
-      key: 'create_wechat_draft',
-      name: '生成公众号草稿',
+      key: 'generate_wechat_material',
+      name: '生成公众号素材',
       options: { articleIds: '{{ $trigger.keys }}' },
       position_x: 19,
       position_y: 1,
@@ -436,15 +436,15 @@ export function buildWechatDraftFlowDefinition(enabled: boolean): {
     notificationOperation: {
       flow: wechatDraftFlowId,
       id: wechatDraftNotificationOperationId,
-      key: 'notify_wechat_draft_result',
-      name: '显示公众号草稿结果',
+      key: 'notify_wechat_material_result',
+      name: '显示公众号素材结果',
       options: {
         collection: 'articles',
         item: '{{ $trigger.keys[0] }}',
-        message: '{{ create_wechat_draft.message }}',
+        message: '{{ generate_wechat_material.message }}',
         permissions: '$full',
         recipient: '{{ $accountability.user }}',
-        subject: '公众号草稿操作结果',
+        subject: '公众号素材操作结果',
       },
       position_x: 37,
       position_y: 1,

@@ -62,16 +62,22 @@ describe('seed articles', () => {
   });
 });
 
-describe('公众号草稿手动流程', () => {
+describe('公众号素材手动流程', () => {
   it('creates an item-page action without persisting an automation secret', () => {
     const definition = buildWechatDraftFlowDefinition(false);
 
     expect(definition.flow).toMatchObject({
-      name: '生成公众号草稿｜尚未配置公众号接口',
+      name: '生成公众号素材',
       trigger: 'manual',
-      options: { collections: ['articles'], location: 'item' },
+      options: {
+        collections: ['articles'],
+        confirmationDescription: '生成可复制的公众号素材；不会自动群发。',
+        location: 'item',
+      },
     });
     expect(definition.operation).toMatchObject({
+      key: 'generate_wechat_material',
+      name: '生成公众号素材',
       type: 'gazi-wechat-draft',
       options: { articleIds: '{{ $trigger.keys }}' },
       resolve: definition.notificationOperation.id,
@@ -79,7 +85,7 @@ describe('公众号草稿手动流程', () => {
     expect(definition.notificationOperation).toMatchObject({
       type: 'notification',
       options: {
-        message: '{{ create_wechat_draft.message }}',
+        message: '{{ generate_wechat_material.message }}',
         recipient: '{{ $accountability.user }}',
       },
     });

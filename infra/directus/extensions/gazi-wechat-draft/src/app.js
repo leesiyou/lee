@@ -1,8 +1,8 @@
 export default {
   id: 'gazi-wechat-draft',
-  name: '生成公众号草稿',
+  name: '生成公众号素材',
   icon: 'draft',
-  description: '从当前文章生成公众号草稿，只进入草稿箱，不自动群发。',
+  description: '生成可复制的公众号发布素材；接口启用时可写入草稿箱，但不会自动群发。',
   overview: ({ articleIds }) => [
     {
       label: '文章 ID',

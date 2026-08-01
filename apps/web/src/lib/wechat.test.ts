@@ -16,7 +16,7 @@ describe('authorizeAutomationRequest', () => {
 });
 
 describe('getWechatDraftAvailability', () => {
-  it('reports missing credentials without pretending to create a draft', () => {
+  it('reports material success without pretending to create a draft', () => {
     expect(
       getWechatDraftAvailability({
         WECHAT_APP_ID: undefined,
@@ -25,8 +25,9 @@ describe('getWechatDraftAvailability', () => {
       }),
     ).toEqual({
       enabled: false,
-      message: '尚未配置公众号接口',
-      status: 'not_configured',
+      message:
+        '当前已生成公众号发布素材。自动写入公众号草稿箱功能尚未配置，不影响博客发布。',
+      status: 'material_ready',
     });
   });
 

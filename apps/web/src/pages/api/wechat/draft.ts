@@ -22,7 +22,9 @@ export const POST: APIRoute = async ({ request }) => {
 
   const availability = getWechatDraftAvailability(process.env);
   if (!availability.enabled) {
-    return Response.json(availability, { status: 503 });
+    return Response.json(availability, {
+      status: availability.status === 'material_ready' ? 200 : 503,
+    });
   }
 
   let payload: { article_id?: number | string };
