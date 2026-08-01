@@ -9,7 +9,7 @@
   "scripts": {
     "build": "npm run build --workspace @lee/web",
     "check:compose": "node scripts/validate-compose.mjs infra/compose.yaml",
-    "lint": "eslint apps/web/src scripts tests",
+    "lint": "eslint apps/web/src scripts tests eslint.config.mjs apps/web/astro.config.mjs --no-error-on-unmatched-pattern",
     "test": "vitest run",
     "typecheck": "npm run typecheck --workspace @lee/web"
   },
