@@ -82,4 +82,24 @@ describe('buildWechatMaterial', () => {
       highlights: ['创业是在不确定中建设。', '投机是在波动中押注。'],
     });
   });
+
+  it('prefers WeChat copy and falls back to the summary for the quote', () => {
+    const material = buildWechatMaterial(
+      {
+        ...article,
+        wechat_content:
+          '<p>第一段精华。</p><p>第二段精华。</p><p>第三段精华。</p><p>第四段精华。</p><p>第五段精华。</p><p>第六段不会进入。</p>',
+      },
+      'https://blog.example.com/',
+    );
+
+    expect(material.highlights).toEqual([
+      '第一段精华。',
+      '第二段精华。',
+      '第三段精华。',
+      '第四段精华。',
+      '第五段精华。',
+    ]);
+    expect(material.quote).toBe(article.summary);
+  });
 });

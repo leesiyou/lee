@@ -44,6 +44,16 @@ export function buildPostUrl(slug: string, config: RuntimeConfig = runtimeConfig
   return new URL(`posts/${encodeURIComponent(slug)}`, `${config.publicBaseUrl}/`).toString();
 }
 
+export function buildWechatMaterialUrl(
+  slug: string,
+  config: RuntimeConfig = runtimeConfig(),
+): string {
+  return new URL(
+    `wechat/material/${encodeURIComponent(slug)}`,
+    `${config.publicBaseUrl}/`,
+  ).toString();
+}
+
 export function buildAssetUrl(
   file: string | { id: string } | null | undefined,
   config: RuntimeConfig = runtimeConfig(),

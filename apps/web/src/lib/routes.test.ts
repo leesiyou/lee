@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildAssetUrl, buildPostUrl, resolveRuntimeConfig } from './routes';
+import {
+  buildAssetUrl,
+  buildPostUrl,
+  buildWechatMaterialUrl,
+  resolveRuntimeConfig,
+} from './routes';
 
 describe('route helpers', () => {
   it('builds canonical post and same-origin asset URLs from runtime configuration', () => {
@@ -15,6 +20,9 @@ describe('route helpers', () => {
       'https://blog.example.com/posts/startup-vs-speculation',
     );
     expect(buildAssetUrl('file-id', config)).toBe('https://blog.example.com/assets/file-id');
+    expect(buildWechatMaterialUrl('startup-vs-speculation', config)).toBe(
+      'https://blog.example.com/wechat/material/startup-vs-speculation',
+    );
   });
 
   it('rejects non-http public URLs instead of emitting unsafe links', () => {

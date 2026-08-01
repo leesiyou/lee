@@ -171,14 +171,14 @@ export function addHeadingIds(input: string): string {
 }
 
 export function buildWechatMaterial(article: Article, publicBaseUrl: string): WechatMaterial {
-  const safeContent = sanitizeArticleHtml(article.content);
+  const safeContent = sanitizeArticleHtml(article.wechat_content?.trim() || article.content);
   const highlights = [...safeContent.matchAll(/<p(?:\s[^>]*)?>([\s\S]*?)<\/p>/gi)]
     .map((match) => plainText(match[1] ?? ''))
     .filter(Boolean)
     .slice(0, 5);
   const quoteMatch = safeContent.match(/<blockquote(?:\s[^>]*)?>([\s\S]*?)<\/blockquote>/i);
   const sourceUrl = new URL(`posts/${encodeURIComponent(article.slug)}`, publicBaseUrl).toString();
-  const quote = quoteMatch ? plainText(quoteMatch[1] ?? '') : null;
+  const quote = quoteMatch ? plainText(quoteMatch[1] ?? '') : article.summary;
 
   return {
     highlights,
