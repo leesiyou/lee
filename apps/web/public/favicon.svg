@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="嘎子的创业实验室">
+  <rect width="64" height="64" rx="32" fill="#f7f4ec"/>
+  <circle cx="32" cy="32" r="25" fill="none" stroke="#c6a96b" stroke-width="3"/>
+  <path d="M40.5 23.5c-2.2-2.3-5-3.5-8.4-3.5-7.3 0-12.1 5-12.1 12.1 0 7.2 4.8 11.9 12.2 11.9 3.5 0 6.7-1 9.1-2.7V31H31v5h4.8v2.1c-1 .5-2.1.8-3.5.8-4.1 0-6.7-2.7-6.7-6.9 0-4.1 2.7-6.9 6.7-6.9 2 0 3.6.7 5.1 2.1z" fill="#181716"/>
+</svg>

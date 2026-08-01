@@ -67,16 +67,4 @@ const tags = article.tags
   <button class="back-to-top" type="button" data-back-to-top aria-label="返回顶部">↑</button>
 </BaseLayout>
 
-<script>
-  const progress = document.querySelector<HTMLElement>('[data-reading-progress]');
-  const topButton = document.querySelector<HTMLButtonElement>('[data-back-to-top]');
-  const updateProgress = () => {
-    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    const ratio = scrollable > 0 ? Math.min(1, window.scrollY / scrollable) : 0;
-    if (progress) progress.style.transform = `scaleX(${ratio})`;
-    topButton?.classList.toggle('is-visible', window.scrollY > 600);
-  };
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  topButton?.addEventListener('click', () => window.scrollTo({ behavior: 'smooth', top: 0 }));
-  updateProgress();
-</script>
+<script is:inline type="module" src="/scripts/article.js"></script>

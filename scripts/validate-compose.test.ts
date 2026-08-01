@@ -31,6 +31,10 @@ describe('production compose', () => {
     expect(services.directus.environment?.REDIS).toBe('redis://:${REDIS_PASSWORD}@redis:6379/0');
     expect(services.directus.environment?.CACHE_REDIS).toBeUndefined();
     expect(services.directus.environment?.RATE_LIMITER_REDIS).toBeUndefined();
+    expect(services.directus.environment?.FILES_MAX_UPLOAD_SIZE).toBe('20mb');
+    expect(services.directus.environment?.FILES_MIME_TYPE_ALLOW_LIST).toBe(
+      'image/jpeg,image/png,image/webp,image/avif,image/gif',
+    );
     expect(JSON.stringify(services.directus.healthcheck)).toContain('/server/ping');
     expect(services.caddy.image).toBe('caddy:2.11.4-alpine');
     expect(services.postgres.ports).toBeUndefined();
@@ -58,5 +62,12 @@ describe('production compose', () => {
     expect(services.directus.depends_on?.redis.condition).toBe('service_healthy');
     expect(services.caddy.depends_on?.web.condition).toBe('service_healthy');
     expect(services.caddy.depends_on?.directus.condition).toBe('service_healthy');
+  });
+
+  it('keeps public assets immutable without duplicate upstream cache headers', async () => {
+    const caddy = await readFile(new URL('../infra/Caddyfile', import.meta.url), 'utf8');
+
+    expect(caddy).toContain('/scripts/*');
+    expect(caddy).toContain('>Cache-Control "public, max-age=31536000, immutable"');
   });
 });

@@ -81,6 +81,8 @@ services:
       DB_PORT: "5432"
       DB_USER: ${POSTGRES_USER}
       EXTENSIONS_AUTO_RELOAD: "false"
+      FILES_MAX_UPLOAD_SIZE: 20mb
+      FILES_MIME_TYPE_ALLOW_LIST: image/jpeg,image/png,image/webp,image/avif,image/gif
       LOG_LEVEL: info
       MAX_PAYLOAD_SIZE: 25mb
       PUBLIC_URL: ${DIRECTUS_PUBLIC_URL}
