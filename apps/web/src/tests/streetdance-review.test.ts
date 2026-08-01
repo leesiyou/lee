@@ -9,7 +9,7 @@ async function optionalSource(url: URL): Promise<string> {
 describe('street dance decade review H5', () => {
   it('uses Directus publication state as the gate for the dedicated route', async () => {
     const route = await optionalSource(
-      new URL('./china-street-dance-decade-review.ts', import.meta.url),
+      new URL('../pages/posts/china-street-dance-decade-review.ts', import.meta.url),
     );
 
     expect(route).toContain('fetchPublishedArticle');
@@ -22,7 +22,7 @@ describe('street dance decade review H5', () => {
 
   it('publishes all twelve evidence modules without local development paths', async () => {
     const document = await optionalSource(
-      new URL('../../content/china-street-dance-decade-review.html', import.meta.url),
+      new URL('../content/china-street-dance-decade-review.html', import.meta.url),
     );
 
     expect(document).toContain('中国街舞 2015—2026：从热度到资产');
@@ -59,7 +59,7 @@ describe('street dance decade review H5', () => {
 
   it('keeps all interaction code in the same-origin external script', async () => {
     const script = await optionalSource(
-      new URL('../../../public/scripts/streetdance-review.js', import.meta.url),
+      new URL('../../public/scripts/streetdance-review.js', import.meta.url),
     );
 
     expect(script).toContain("document.querySelectorAll('.tab')");

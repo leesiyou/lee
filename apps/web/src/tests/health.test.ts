@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { GET } from './health';
+import { GET } from '../pages/health';
 
 describe('GET /health', () => {
   it('returns a machine-readable healthy response', async () => {

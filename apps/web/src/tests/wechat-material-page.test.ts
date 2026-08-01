@@ -8,7 +8,9 @@ async function optionalSource(url: URL): Promise<string> {
 
 describe('public WeChat material page', () => {
   it('is a published-only noindex workspace with copy and download actions', async () => {
-    const source = await optionalSource(new URL('./[slug].astro', import.meta.url));
+    const source = await optionalSource(
+      new URL('../pages/wechat/material/[slug].astro', import.meta.url),
+    );
 
     expect(source).toContain('fetchPublishedArticle');
     expect(source).toContain('noindex, nofollow');
@@ -24,7 +26,7 @@ describe('public WeChat material page', () => {
 
   it('keeps clipboard behavior in a same-origin external script', async () => {
     const source = await optionalSource(
-      new URL('../../../../public/scripts/wechat-material.js', import.meta.url),
+      new URL('../../public/scripts/wechat-material.js', import.meta.url),
     );
 
     expect(source).toContain('navigator.clipboard.writeText');

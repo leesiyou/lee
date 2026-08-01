@@ -43,8 +43,10 @@ PROJECT_ROOT='/vol6/1000/Docker部署盘/03_网站项目/104-h5-blog'; export PR
 初始化器可重复运行且不会重复创建默认数据。管理员凭据从 NAS 的受限环境文件读取，禁止把值复制到命令历史、聊天或 Git。
 
 ```sh
-PROJECT_ROOT='/vol6/1000/Docker部署盘/03_网站项目/104-h5-blog'; export PROJECT_ROOT; cd "$PROJECT_ROOT/repo" && set -a && . "$PROJECT_ROOT/secrets/.env" && set +a && DIRECTUS_URL='http://127.0.0.1:18055' node --experimental-strip-types scripts/initialize-directus.ts
+PROJECT_ROOT='/vol6/1000/Docker部署盘/03_网站项目/104-h5-blog'; export PROJECT_ROOT; docker run --rm --network host --env-file "$PROJECT_ROOT/secrets/.env" -e DIRECTUS_URL='http://127.0.0.1:18055' -v "$PROJECT_ROOT/repo:/workspace:ro" node:22.23.2-alpine node --experimental-strip-types /workspace/scripts/initialize-directus.ts
 ```
+
+初始化器通过隔离的 Node 容器运行，不要求在飞牛宿主机安装 Node.js。
 
 ## 更新与回滚
 

@@ -9,7 +9,7 @@ import {
   defaultTemplatePresets,
   publicArticleFilter,
   relations,
-} from './directus-model';
+} from './directus-model.ts';
 
 export interface ExistingModelState {
   collections: Set<string>;
@@ -44,12 +44,15 @@ export function planBootstrap(existing: ExistingModelState): BootstrapPlan {
 
 class DirectusAdminClient {
   private token = '';
+  private readonly baseUrl: string;
+  private readonly email: string;
+  private readonly password: string;
 
-  constructor(
-    private readonly baseUrl: string,
-    private readonly email: string,
-    private readonly password: string,
-  ) {}
+  constructor(baseUrl: string, email: string, password: string) {
+    this.baseUrl = baseUrl;
+    this.email = email;
+    this.password = password;
+  }
 
   async login(): Promise<void> {
     const response = await fetch(`${this.baseUrl}/auth/login`, {

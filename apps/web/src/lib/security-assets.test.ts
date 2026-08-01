@@ -1,8 +1,14 @@
-import { access, readFile } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
 
 import { describe, expect, it } from 'vitest';
 
 describe('strict CSP browser assets', () => {
+  it('keeps test modules outside Astro production routes', async () => {
+    const entries = await readdir(new URL('../pages', import.meta.url), { recursive: true });
+
+    expect(entries.filter((entry) => entry.endsWith('.test.ts'))).toEqual([]);
+  });
+
   it('loads article interactions from same-origin external files', async () => {
     const files = [
       new URL('../layouts/ArticleLayout.astro', import.meta.url),

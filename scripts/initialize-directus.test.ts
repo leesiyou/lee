@@ -1,4 +1,6 @@
 import { readFile } from 'node:fs/promises';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 
@@ -59,6 +61,26 @@ describe('seed articles', () => {
     expect(source).toContain("'streetdance-decade-review.json'");
     expect(source).toContain('for (const articleFile of seedArticleFiles)');
     expect(source).toContain("ensureSeedItem(client, 'articles', 'slug'");
+  });
+});
+
+describe('NAS initializer runtime', () => {
+  it('imports with the Node strip-only TypeScript runtime used by deployment', () => {
+    const result = spawnSync(
+      process.execPath,
+      [
+        '--experimental-strip-types',
+        '--input-type=module',
+        '--eval',
+        "import('./scripts/initialize-directus.ts')",
+      ],
+      {
+        cwd: fileURLToPath(new URL('../', import.meta.url)),
+        encoding: 'utf8',
+      },
+    );
+
+    expect(result.status, result.stderr).toBe(0);
   });
 });
 
