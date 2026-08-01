@@ -2,11 +2,11 @@
 
 ## 已实施控制
 
-- PostgreSQL、Redis、Directus 和 web 不直接映射公网；宿主机只暴露 Caddy 的 `19080/19081`。
+- PostgreSQL、Redis、Directus 和 web 不直接映射公网；宿主机只暴露 Caddy 的前台 `18432` 和局域网后台 `18055`，节点小宝只公开 `127.0.0.1:18432`。
 - 固定基础镜像版本、容器健康检查、资源限制、日志轮转和独立网络已配置。
 - `.env` 位于 NAS `secrets/.env`，目录 `700`、文件 `600`，已被 Git 忽略；前端 bundle、GHCR 和 workflow 不包含管理员 Token。
 - Directus SECRET、数据库/Redis/管理员/预览/自动化秘密使用随机值。
-- CORS 精确到正式域名和两个 LAN 验收入口；上传仅允许常见图片 MIME，限制为 20 MB，请求限制为 25 MB。
+- CORS 精确到节点小宝实际 HTTPS 基址和两个 LAN 验收入口；上传仅允许常见图片 MIME，限制为 20 MB，请求限制为 25 MB。
 - Caddy 设置 CSP、`nosniff`、Referrer Policy、Permissions Policy 和 `X-Frame-Options: DENY`。
 - 富文本和结构化内容块在 SSR 输出前经过白名单清理，脚本标签回归测试通过。
 - 匿名策略只读已发布内容；草稿、未来排期和系统集合不公开。Editor 无系统管理权限。

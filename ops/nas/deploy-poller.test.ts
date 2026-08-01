@@ -12,6 +12,8 @@ describe('NAS deploy poller', () => {
     expect(script).toContain('previous_image_id');
     expect(script).toContain('rollback');
     expect(script).toContain('.State.Health.Status');
+    expect(script).toContain('http://127.0.0.1:18432/health');
+    expect(script).not.toMatch(/19080|19081/);
     expect(script).not.toMatch(/up -d\s+(postgres|redis|directus|caddy)/);
     expect(script).not.toContain('docker compose down');
   });

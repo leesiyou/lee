@@ -11,6 +11,8 @@ describe('GitHub published content sync', () => {
     expect(script).toContain('GIT_ASKPASS');
     expect(script).toContain('content-backup');
     expect(script).toContain('content: sync published articles');
+    expect(script).toContain("DIRECTUS_PUBLIC_URL='http://127.0.0.1:18055'");
+    expect(script).not.toMatch(/19080|19081/);
     expect(script).toContain('git diff --cached --quiet');
     expect(script).not.toContain('gh auth token');
     expect(script).not.toContain('https://$GITHUB_CONTENT_TOKEN@');

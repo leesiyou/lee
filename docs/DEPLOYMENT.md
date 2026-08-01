@@ -7,8 +7,8 @@
 - Compose：`repo/infra/compose.yaml`
 - 受限环境文件：`secrets/.env`，权限 `600`
 - 当前 Web 镜像：`ghcr.io/leesiyou/lee-web:v0.1.0-rc.3`
-- 局域网前台：`http://192.168.5.104:19080`
-- 局域网后台：`http://192.168.5.104:19081`
+- 局域网前台：`http://192.168.5.104:18432`
+- 局域网后台：`http://192.168.5.104:18055`
 
 ## 目录布局
 
@@ -43,7 +43,7 @@ PROJECT_ROOT='/vol6/1000/Docker部署盘/03_网站项目/104-h5-blog'; export PR
 初始化器可重复运行且不会重复创建默认数据。管理员凭据从 NAS 的受限环境文件读取，禁止把值复制到命令历史、聊天或 Git。
 
 ```sh
-PROJECT_ROOT='/vol6/1000/Docker部署盘/03_网站项目/104-h5-blog'; export PROJECT_ROOT; cd "$PROJECT_ROOT/repo" && set -a && . "$PROJECT_ROOT/secrets/.env" && set +a && DIRECTUS_URL='http://127.0.0.1:19081' node --experimental-strip-types scripts/initialize-directus.ts
+PROJECT_ROOT='/vol6/1000/Docker部署盘/03_网站项目/104-h5-blog'; export PROJECT_ROOT; cd "$PROJECT_ROOT/repo" && set -a && . "$PROJECT_ROOT/secrets/.env" && set +a && DIRECTUS_URL='http://127.0.0.1:18055' node --experimental-strip-types scripts/initialize-directus.ts
 ```
 
 ## 更新与回滚

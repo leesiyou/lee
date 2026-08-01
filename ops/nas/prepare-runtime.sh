@@ -44,12 +44,12 @@ if [ ! -f "$ENV_FILE" ]; then
     printf 'POSTGRES_PASSWORD=%s\n' "$postgres_password"
     printf 'REDIS_PASSWORD=%s\n' "$redis_password"
     printf 'DIRECTUS_SECRET=%s\n' "$directus_secret"
-    printf 'DIRECTUS_ADMIN_EMAIL=admin@easybreak.top\n'
+    printf 'DIRECTUS_ADMIN_EMAIL=admin@local.invalid\n'
     printf 'DIRECTUS_ADMIN_PASSWORD=%s\n' "$directus_password"
-    printf 'DIRECTUS_PUBLIC_URL=https://blog-admin.easybreak.top\n'
-    printf 'PUBLIC_BASE_URL=https://blog.easybreak.top\n'
-    printf 'PUBLIC_ADMIN_URL=https://blog-admin.easybreak.top\n'
-    printf 'CORS_ORIGIN=https://blog.easybreak.top,https://blog-admin.easybreak.top,http://192.168.5.104:19080,http://192.168.5.104:19081\n'
+    printf 'DIRECTUS_PUBLIC_URL=http://192.168.5.104:18055\n'
+    printf 'PUBLIC_BASE_URL=http://192.168.5.104:18432\n'
+    printf 'PUBLIC_ADMIN_URL=http://192.168.5.104:18055\n'
+    printf 'CORS_ORIGIN=http://192.168.5.104:18432,http://192.168.5.104:18055\n'
     printf 'WECHAT_DRAFT_ENABLED=false\n'
     printf 'WECHAT_APP_ID=\n'
     printf 'WECHAT_APP_SECRET=\n'

@@ -72,7 +72,7 @@ attempt=0
 while [ "$attempt" -lt "$health_attempts" ]; do
   container_id="$(docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" ps -q web)"
   status="$(docker inspect -f '{{.State.Health.Status}}' "$container_id" 2>/dev/null || true)"
-  if [ "$status" = healthy ] && curl -fsS 'http://127.0.0.1:19080/health' >/dev/null 2>&1; then
+  if [ "$status" = healthy ] && curl -fsS 'http://127.0.0.1:18432/health' >/dev/null 2>&1; then
     healthy=yes
     break
   fi
@@ -89,7 +89,7 @@ if [ "$healthy" != yes ]; then
   while [ "$attempt" -lt "$health_attempts" ]; do
     container_id="$(docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" ps -q web)"
     status="$(docker inspect -f '{{.State.Health.Status}}' "$container_id" 2>/dev/null || true)"
-    if [ "$status" = healthy ] && curl -fsS 'http://127.0.0.1:19080/health' >/dev/null 2>&1; then
+    if [ "$status" = healthy ] && curl -fsS 'http://127.0.0.1:18432/health' >/dev/null 2>&1; then
       rollback_healthy=yes
       break
     fi

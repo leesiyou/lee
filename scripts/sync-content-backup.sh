@@ -41,7 +41,7 @@ printf '%s\n' 'case "$1" in *Username*) printf "%s\n" "x-access-token" ;; *) pri
 export GIT_ASKPASS="$askpass"
 
 docker run --rm --network host --user "$(id -u):$(id -g)" \
-  -e DIRECTUS_PUBLIC_URL='http://127.0.0.1:19081' \
+  -e DIRECTUS_PUBLIC_URL='http://127.0.0.1:18055' \
   -e CONTENT_EXPORT_DIR='/workspace/content-export' \
   -v "$REPO_DIR:/workspace" \
   node:22.23.2-alpine \

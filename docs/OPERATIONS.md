@@ -9,7 +9,7 @@ PROJECT_ROOT='/vol6/1000/Docker部署盘/03_网站项目/104-h5-blog'; COMPOSE="
 ## 每日检查
 
 ```sh
-docker compose -f "$COMPOSE" --env-file "$ENV_FILE" ps && curl -fsS http://127.0.0.1:19080/health && curl -fsS http://127.0.0.1:19081/server/ping
+docker compose -f "$COMPOSE" --env-file "$ENV_FILE" ps && curl -fsS http://127.0.0.1:18432/health && curl -fsS http://127.0.0.1:18055/server/ping
 ```
 
 正常结果为五个容器 healthy、前台 `{"status":"ok"}`、Directus `pong`。故障时先检查项目日志，不要重启旧业务容器：
@@ -27,7 +27,7 @@ docker compose -f "$COMPOSE" --env-file "$ENV_FILE" logs --tail=200 caddy web di
 - 日更入口：Directus 后台的文章集合。
 - 发布条件：`status=published`，或 `status=scheduled` 且 `published_at` 已到。
 - 草稿预览链接是私有链接，不得公开转发。
-- “生成公众号草稿”默认显示“尚未配置公众号接口”；即使未来启用，也只生成草稿，必须在公众号后台人工审核。
+- “生成公众号素材”始终生成可复制文案、阅读原文和二维码；草稿接口未配置不影响博客发布。即使未来启用，也必须在公众号后台人工审核，系统不自动群发。
 
 ## 备份
 
@@ -47,5 +47,5 @@ PROJECT_ROOT="$PROJECT_ROOT" "$PROJECT_ROOT/repo/scripts/backup.sh" weekly
 
 - 数据库/上传异常：停止写入，保留日志，选择已校验归档执行恢复。
 - 前端更新异常：检查轮询器自动回滚，不要重启数据库。
-- 外网异常但 LAN 正常：检查公共 DNS 和节点小宝，不要改 Compose 数据层。
+- 外网异常但 LAN 正常：检查节点小宝前台映射，不要改 Compose 数据层。
 - 凭据疑似泄漏：先旋转对应凭据，再检查 Git/日志；不要用删除日志代替轮换。

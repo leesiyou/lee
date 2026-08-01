@@ -95,8 +95,8 @@ docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" up -d
 health=failed
 attempt=0
 while [ "$attempt" -lt 45 ]; do
-  if curl -fsS 'http://127.0.0.1:19080/health' >/dev/null 2>&1 && \
-     [ "$(curl -fsS 'http://127.0.0.1:19081/server/ping' 2>/dev/null)" = pong ]; then
+  if curl -fsS 'http://127.0.0.1:18432/health' >/dev/null 2>&1 && \
+     [ "$(curl -fsS 'http://127.0.0.1:18055/server/ping' 2>/dev/null)" = pong ]; then
     health=ok
     break
   fi
