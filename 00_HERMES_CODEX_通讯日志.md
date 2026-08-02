@@ -53,6 +53,51 @@
 
 **任务令**：只处理素材页，不处理其他需求。分层探测 → 对比构建产物 → 失败测试 → 最小修复 → 验证 → 部署提交。
 
-### 探测记录
+### 分层探测结果（2026-08-02 19:2x）
 
-（进行中，见后续追加）
+| 层 | 素材页 | 素材 API | 结论 |
+|---|---|---|---|
+| L1 web 容器 4321 | 404 | 200 | 404 产生于 Astro SSR 内部 |
+| L2 Caddy 18432 | 404 | — | 透传，非 Caddy 问题 |
+| L3 节点小宝公网 | 404 | 200 | 透传，非节点小宝问题 |
+| L4 素材 API | — | 200 | 同函数不同结果 |
+
+**关键异常**：`/api/wechat/material/[slug]` 200 但 `/wechat/material/[slug]` 404，同一 `fetchPublishedArticle` 函数。entry.mjs 中两条路由均注册。
+
+### 根因确认（ROOT CAUSE）
+
+容器实际运行镜像为 `ghcr.io/leesiyou/lee-web:latest` = **b7a2fbc**（2026-08-01 15:52 构建的旧镜像），**不是**手动部署的 `main-8188ff9`。
+
+**机制**：NAS deploy-poller 每 2 分钟拉 `:latest`，检测到 digest 变化后重建 web 容器，把手动部署的 8188ff9 覆盖回滚到 latest（b7a2fbc）。该旧镜像素材页渲染 404（当时功能未就绪），且 `latest` 标签只随 main 更新，feature 分支修复永远被覆盖。
+
+**决定性验证**：手动 `WEB_IMAGE=main-8188ff9` 重建 web 后素材页 **200**；poller 手动运行（带 override）后仍保持 200，日志 `deploy=PASS changed=no`。
+
+### 最小修复
+
+修改 NAS deploy-poller cron，加入 `DEPLOY_POLLER_IMAGE_OVERRIDE="ghcr.io/leesiyou/lee-web:main-8188ff9"`，让 poller 跟踪 feature 分支镜像而非 latest。crontab 已更新。
+
+### 新增失败测试（防回归）
+
+`apps/web/src/tests/wechat-material-page.test.ts` 新增：读取 `dist/server/entry.mjs`，断言 `/wechat/material/[slug]` 页面路由与 `/api/wechat/material/[slug]` endpoint 路由真实注册（含 component 路径）。该测试能抓住"路由从构建清单消失"的运行时回归。
+
+### 验证结果
+
+- 素材页公网 200 ✅
+- 素材 API 公网 200 ✅
+- 首页 200 ✅
+- 文章页 200 ✅
+- 首页源码 0 处 192.168.5.104 泄漏 ✅
+- 84 测试通过（含新增）✅ typecheck 0 ✅ lint 通过 ✅ build 通过 ✅
+
+### 提交
+
+- 709061d：新增测试 + 通讯日志（已 push，CI queued）
+- 部署镜像：`ghcr.io/leesiyou/lee-web:main-8188ff9`（NAS 当前运行，poller 已锁定该镜像）
+
+### REMAINING
+
+- CI 完成确认（709061d）
+- 节点小宝层 `/sitemap.xml` 404（另一任务，未处理）
+- NAS 内容同步 Token（另一任务，未处理）
+- 公众号草稿凭据（非阻塞）
+
