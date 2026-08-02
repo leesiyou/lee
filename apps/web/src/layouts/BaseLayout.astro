@@ -20,6 +20,23 @@ const {
   type = 'website',
 } = Astro.props;
 const fullTitle = title === '嘎子的创业实验室' ? title : `${title}｜嘎子的创业实验室`;
+
+function isPrivateAdminUrl(url: string): boolean {
+  try {
+    const hostname = new URL(url).hostname;
+    return (
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1' ||
+      hostname.startsWith('192.168.') ||
+      hostname.startsWith('10.') ||
+      hostname.startsWith('172.16.') ||
+      hostname.startsWith('172.31.')
+    );
+  } catch {
+    return true;
+  }
+}
+const showAdminLink = !isPrivateAdminUrl(config.publicAdminUrl);
 ---
 
 <!doctype html>
@@ -53,7 +70,7 @@ const fullTitle = title === '嘎子的创业实验室' ? title : `${title}｜嘎
       <nav class="site-nav" aria-label="主导航">
         <a href="/archive">归档</a>
         <a href="/search">搜索</a>
-        <a href={config.publicAdminUrl}>写文章</a>
+        {showAdminLink && <a href={config.publicAdminUrl}>写文章</a>}
       </nav>
     </header>
     <main id="main-content"><slot /></main>
