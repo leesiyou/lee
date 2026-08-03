@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#08080c" />
+  <meta name="description" content="104印花研究所｜15年专注T恤印花｜广州实体工厂｜团体定制、小单定制" />
+  <meta property="og:title" content="104印花研究所｜3D工厂体验" />
+  <meta property="og:description" content="进入广州实体工厂，看样衣、看工艺、看海报、获取定制方案。" />
+  <meta property="og:image" content="assets/poster-01.webp" />
+  <title>104印花研究所｜3D工厂体验</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/webp" href="assets/logo.webp" />
+</head>
+<body>
+
+  <!-- ========== 1. LOADING SCREEN ========== -->
+  <section id="loading-screen" class="screen active" aria-label="页面加载中">
+    <div class="loading-inner">
+      <div class="loading-logo-glow"></div>
+      <div class="loading-title">104 <span class="accent">印花研究所</span></div>
+      <div class="loading-sub">PRINT LAB</div>
+      <div class="loading-bar-track"><div id="loading-bar" class="loading-bar-fill"></div></div>
+      <div id="loading-text" class="loading-text">正在开启3D工厂...</div>
+    </div>
+  </section>
+
+  <!-- ========== 2. WELCOME SCREEN ========== -->
+  <section id="welcome-screen" class="screen" aria-label="欢迎页">
+    <div class="welcome-bg" aria-hidden="true"></div>
+    <div class="welcome-content">
+      <div class="welcome-logo-area">
+        <div class="welcome-logo-ring" aria-hidden="true"></div>
+        <img class="welcome-logo" src="assets/logo.webp" alt="104印花研究所标志" />
+      </div>
+      <h1 class="welcome-brand">104 印花研究所</h1>
+      <p class="welcome-tagline">PRINT LAB · GUANGZHOU</p>
+      <div class="welcome-divider"></div>
+      <p class="welcome-desc">15年专注 T恤印花<br />广州实体工厂 · 团体定制 / 小单定制</p>
+      <span class="welcome-season">8—10月 活动季</span>
+      <div style="height:20px"></div>
+      <button id="btn-explore" class="btn-explore" type="button">
+        进入3D工厂 <span class="btn-explore-arrow">→</span>
+      </button>
+      <p class="welcome-hint">点击热点区域，查看品牌 / 样衣 / 工艺 / 活动</p>
+    </div>
+  </section>
+
+  <!-- ========== 3. MAIN 3D SCENE ========== -->
+  <section id="main-scene" class="screen" aria-label="3D工厂展厅">
+    <div id="three-container"></div>
+
+    <header class="scene-header">
+      <div class="scene-header-brand">104 印花研究所 <span>PRINT LAB</span></div>
+      <div class="scene-header-sub">拖拽视角 · 点击热点探索</div>
+    </header>
+
+    <div id="hotspot-labels" class="hotspot-labels">
+      <button class="hotspot-label" data-zone="brand" type="button" style="left:22%;top:30%">品牌墙</button>
+      <button class="hotspot-label" data-zone="product" type="button" style="left:72%;top:32%">T恤展示</button>
+      <button class="hotspot-label" data-zone="sample" type="button" style="left:24%;top:52%">样衣区</button>
+      <button class="hotspot-label" data-zone="poster" type="button" style="left:74%;top:50%">海报墙</button>
+      <button class="hotspot-label" data-zone="craft" type="button" style="left:42%;top:44%">印花工艺</button>
+      <button class="hotspot-label" data-zone="activity" type="button" style="left:30%;top:70%">活动信息</button>
+      <button class="hotspot-label" data-zone="factory" type="button" style="left:70%;top:70%">实体工厂</button>
+      <button class="hotspot-label" data-zone="order" type="button" style="left:50%;top:82%">咨询下单</button>
+    </div>
+
+    <div id="scene-hint" class="scene-hint">
+      <span class="hint-dot"></span> 拖动视角 · 点击发光点探索
+    </div>
+  </section>
+
+  <!-- ========== 4. MODAL SYSTEM ========== -->
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true">
+    <div id="modal-sheet" class="modal-sheet" role="dialog" aria-modal="true">
+      <button id="modal-close" class="modal-close" type="button" aria-label="关闭">×</button>
+
+      <!-- 品牌墙 -->
+      <div id="modal-brand" class="modal-content">
+        <div class="modal-brand-logo"><img src="assets/logo.webp" alt="104印花研究所" /></div>
+        <h2 class="modal-title">104 印花研究所</h2>
+        <p class="modal-desc">15 年专注 T 恤印花，广州实体工厂。从设计到出货，一条产线自己把控，团体定制与 20 件小单都能接。</p>
+        <div class="modal-tags">
+          <span>15年工厂</span><span>广州实体</span><span>自产自控</span><span>团体定制</span><span>小单可做</span>
+        </div>
+      </div>
+
+      <!-- T恤展示 -->
+      <div id="modal-product" class="modal-content">
+        <h2 class="modal-title">T恤展示</h2>
+        <p class="modal-desc">热销款与团体定制款，颜色、版型、前后印都能按需做。</p>
+        <div class="modal-gallery">
+          <div class="gallery-main"><img src="assets/products/tee-01.webp" alt="T恤展示" /></div>
+          <div class="gallery-thumbs">
+            <button class="thumb active" type="button" data-src="assets/products/tee-01.webp">T1</button>
+            <button class="thumb" type="button" data-src="assets/products/tee-02.webp">T2</button>
+            <button class="thumb" type="button" data-src="assets/products/tee-03.webp">T3</button>
+          </div>
+        </div>
+        <div class="modal-info-cards">
+          <div class="info-card highlight"><strong>20件起订</strong><span>小单也能做</span></div>
+          <div class="info-card"><strong>支持先看样</strong><span>确认品质再下单</span></div>
+          <div class="info-card"><strong>前后印</strong><span>印花 / 压烫 / 刺绣</span></div>
+          <div class="info-card"><strong>按需版型</strong><span>多款版型可选</span></div>
+        </div>
+      </div>
+
+      <!-- 样衣区 -->
+      <div id="modal-sample" class="modal-content">
+        <h2 class="modal-title">样衣区</h2>
+        <p class="modal-desc">颜色、版型、印花工艺都可以先看样衣再决定，满意再量产。</p>
+        <div class="modal-gallery">
+          <div class="gallery-main"><img src="assets/products/sample-01.webp" alt="样衣展示" /></div>
+          <div class="gallery-thumbs">
+            <button class="thumb active" type="button" data-src="assets/products/sample-01.webp">样衣</button>
+            <button class="thumb" type="button" data-src="assets/products/tee-02.webp">T2</button>
+            <button class="thumb" type="button" data-src="assets/products/tee-03.webp">T3</button>
+          </div>
+        </div>
+        <div class="modal-tags">
+          <span>先看样</span><span>确认再产</span><span>颜色可调</span><span>版型可调</span>
+        </div>
+      </div>
+
+      <!-- 海报墙 -->
+      <div id="modal-poster" class="modal-content">
+        <h2 class="modal-title">活动海报展</h2>
+        <p class="modal-desc">左右滑动浏览活动海报，点击可查看。</p>
+        <div class="poster-swiper" id="poster-swiper">
+          <div class="poster-slide active">
+            <div class="poster-img"><img src="assets/poster-01.webp" alt="活动海报1" /></div>
+            <div class="poster-caption">好穿，才有人愿意一直穿</div>
+          </div>
+          <div class="poster-slide">
+            <div class="poster-img"><img src="assets/poster-02.webp" alt="活动海报2" /></div>
+            <div class="poster-caption">从样衣到大货</div>
+          </div>
+          <div class="poster-slide">
+            <div class="poster-img"><img src="assets/poster-03.webp" alt="活动海报3" /></div>
+            <div class="poster-caption">团体定制季</div>
+          </div>
+          <div class="poster-slide">
+            <div class="poster-img"><img src="assets/poster-04.webp" alt="活动海报4" /></div>
+            <div class="poster-caption">团队门面</div>
+          </div>
+          <div class="poster-slide">
+            <div class="poster-img"><img src="assets/poster-05.webp" alt="活动海报5" /></div>
+            <div class="poster-caption">小单定制</div>
+          </div>
+          <div class="poster-slide">
+            <div class="poster-img"><img src="assets/poster-06.webp" alt="活动海报6" /></div>
+            <div class="poster-caption">品质细节</div>
+          </div>
+          <div class="poster-slide">
+            <div class="poster-img"><img src="assets/poster-07.webp" alt="活动海报7" /></div>
+            <div class="poster-caption">印花工艺</div>
+          </div>
+          <div class="poster-slide">
+            <div class="poster-img"><img src="assets/poster-08.webp" alt="活动海报8" /></div>
+            <div class="poster-caption">广州实体工厂</div>
+          </div>
+        </div>
+        <div class="poster-nav">
+          <button id="poster-prev" type="button" aria-label="上一张">‹</button>
+          <span id="poster-index" class="poster-index">1 / 8</span>
+          <button id="poster-next" type="button" aria-label="下一张">›</button>
+        </div>
+      </div>
+
+      <!-- 印花工艺 -->
+      <div id="modal-craft" class="modal-content">
+        <h2 class="modal-title">印花工艺</h2>
+        <p class="modal-desc">水印、胶印、烫画、刺绣，按面料和图案选最合适的工艺。</p>
+        <div class="modal-gallery">
+          <div class="gallery-main"><img src="assets/factory/craft-01.webp" alt="印花工艺" /></div>
+        </div>
+        <div class="modal-process">印花 → 压烫/烘干 → 质检 → 包装出货</div>
+        <div class="modal-tags">
+          <span>水印</span><span>胶印</span><span>烫画</span><span>刺绣</span><span>前后印</span>
+        </div>
+      </div>
+
+      <!-- 活动信息 -->
+      <div id="modal-activity" class="modal-content">
+        <h2 class="modal-title">活动信息</h2>
+        <div class="activity-highlight">
+          <span class="activity-badge">8—10月活动季</span>
+          <div class="activity-title">团体定制 / 小单定制</div>
+        </div>
+        <div class="modal-info-cards">
+          <div class="info-card highlight"><strong>20件起订</strong><span>小单也能做</span></div>
+          <div class="info-card"><strong>支持先看样</strong><span>确认品质再下单</span></div>
+          <div class="info-card"><strong>交付周期</strong><span>按订单量排产</span></div>
+          <div class="info-card"><strong>广州工厂</strong><span>欢迎实地考察</span></div>
+        </div>
+      </div>
+
+      <!-- 实体工厂 -->
+      <div id="modal-factory" class="modal-content">
+        <h2 class="modal-title">实体工厂</h2>
+        <p class="modal-desc">广州自有印花工厂，15 年专注 T 恤印花，产线自己把控。</p>
+        <div class="modal-gallery">
+          <div class="gallery-main"><img src="assets/factory/factory-01.webp" alt="实体工厂" /></div>
+          <div class="gallery-thumbs">
+            <button class="thumb active" type="button" data-src="assets/factory/factory-01.webp">工厂</button>
+            <button class="thumb" type="button" data-src="assets/factory/factory-02.webp">产线</button>
+            <button class="thumb" type="button" data-src="assets/factory/factory-03.webp">车间</button>
+          </div>
+        </div>
+        <div class="modal-tags">
+          <span>广州实体</span><span>15年工厂</span><span>自产自控</span><span>欢迎考察</span>
+        </div>
+      </div>
+
+      <!-- 咨询下单 -->
+      <div id="modal-order" class="modal-content">
+        <h2 class="modal-title">咨询下单</h2>
+        <p class="modal-desc">发图案、报数量，先看样再下单。</p>
+        <div class="order-flow">
+          <div class="flow-step"><span class="flow-num">1</span><div><strong>发需求</strong><p>图案 / 数量 / 颜色 / 版型</p></div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step"><span class="flow-num">2</span><div><strong>出方案</strong><p>推荐工艺与报价，20件起订</p></div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step"><span class="flow-num">3</span><div><strong>看样确认</strong><p>先看样衣，满意再量产</p></div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-step"><span class="flow-num">4</span><div><strong>生产出货</strong><p>排产生产，质检后发货</p></div></div>
+        </div>
+        <div class="order-cta">
+          <button id="btn-consult" class="btn-cta primary" type="button">私信咨询</button>
+          <button id="btn-quote" class="btn-cta secondary" type="button">获取报价</button>
+        </div>
+        <p class="order-note">请通过公众号私信联系我们，发送你的图案 / 需求</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== 5. BOTTOM NAV ========== -->
+  <nav id="bottom-nav" class="bottom-nav" aria-label="页面导航">
+    <button class="nav-btn" type="button" data-action="product">
+      <span class="nav-icon">Ｔ</span><span class="nav-text">T恤</span>
+    </button>
+    <button class="nav-btn" type="button" data-action="craft">
+      <span class="nav-icon">✦</span><span class="nav-text">工艺</span>
+    </button>
+    <button class="nav-btn cta-btn" type="button" data-action="order">
+      <span class="nav-icon">¥</span><span class="nav-text">下单</span>
+    </button>
+    <button class="nav-btn" type="button" data-action="activity">
+      <span class="nav-icon">◫</span><span class="nav-text">活动</span>
+    </button>
+    <button class="nav-btn" type="button" data-action="share">
+      <span class="nav-icon">↗</span><span class="nav-text">分享</span>
+    </button>
+  </nav>
+
+  <!-- ========== 6. TOAST ========== -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Three.js 本地模块 -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./js/lib/three.module.js"
+      }
+    }
+  </script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
