@@ -258,14 +258,7 @@
   <!-- ========== 6. TOAST ========== -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <!-- Three.js 本地模块 -->
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "./js/lib/three.module.js"
-      }
-    }
-  </script>
+  <!-- Three.js 本地模块(相对路径导入,兼容 CSP script-src 'self') -->
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

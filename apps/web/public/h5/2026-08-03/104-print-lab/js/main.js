@@ -4,7 +4,7 @@
    基于 Three.js 构建等距视角微型工厂空间
    ============================================================ */
 
-import * as THREE from 'three';
+import * as THREE from './lib/three.module.js';
 
 // ==================== DOM 引用 ====================
 const $ = (sel) => document.querySelector(sel);
