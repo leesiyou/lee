@@ -70,7 +70,7 @@ const answers = new Map();
 const totalQuestions = 12;
 const quiz = document.querySelector('#identity-quiz');
 const progressText = document.querySelector('#quiz-progress');
-const status = document.querySelector('#quiz-status');
+const quizStatus = document.querySelector('#quiz-status');
 const resultPanel = document.querySelector('#quiz-result');
 const resultTitle = document.querySelector('#result-title');
 const resultScore = document.querySelector('#result-score');
@@ -86,18 +86,18 @@ function updateQuizProgress() {
   const answered = answers.size;
   progressText.textContent = `${answered} / ${totalQuestions} 已回答`;
   if (answered === totalQuestions) {
-    status.textContent = '全部完成，可以生成身份报告';
-    status.classList.remove('is-error');
+    quizStatus.textContent = '全部完成，可以生成身份报告';
+    quizStatus.classList.remove('is-error');
   } else {
-    status.textContent = `还缺少 ${totalQuestions - answered} 题`;
+    quizStatus.textContent = `还缺少 ${totalQuestions - answered} 题`;
   }
 }
 
 function renderResult() {
   if (answers.size !== totalQuestions) {
     const missing = totalQuestions - answers.size;
-    status.textContent = `还缺少 ${missing} 题，请完成后再生成报告`;
-    status.classList.add('is-error');
+    quizStatus.textContent = `还缺少 ${missing} 题，请完成后再生成报告`;
+    quizStatus.classList.add('is-error');
     const firstMissing = Array.from({ length: totalQuestions }, (_, index) => String(index + 1))
       .find((question) => !answers.has(question));
     document.querySelector(`.quiz-question[data-question="${firstMissing}"]`)?.scrollIntoView({
@@ -122,8 +122,8 @@ function renderResult() {
     return item;
   }));
   resultPanel.hidden = false;
-  status.textContent = '报告已生成。它是当前状态，不是永久标签。';
-  status.classList.remove('is-error');
+  quizStatus.textContent = '报告已生成。它是当前状态，不是永久标签。';
+  quizStatus.classList.remove('is-error');
   resultPanel.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
 }
 
@@ -171,8 +171,8 @@ function resetQuiz() {
   resultPanel.hidden = true;
   resultPanel.removeAttribute('data-profile');
   copyStatus.textContent = '';
-  status.textContent = '请完成全部 12 题';
-  status.classList.remove('is-error');
+  quizStatus.textContent = '请完成全部 12 题';
+  quizStatus.classList.remove('is-error');
   updateQuizProgress();
   document.querySelector('.quiz-intro')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
 }

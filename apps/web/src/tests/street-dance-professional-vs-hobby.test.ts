@@ -81,6 +81,10 @@ describe('street dance professional versus hobby H5', () => {
     expect(html).toContain('id="back-to-top"');
     expect(css).toContain('env(safe-area-inset-bottom)');
     expect(css).toContain('@media (prefers-reduced-motion: reduce)');
+    expect(css).toContain('.reveal.is-visible');
+    expect(css).toContain('opacity: 1 !important');
+    expect(css).toContain('transform: none !important');
+    expect(css).toContain('transition: none !important');
     expect(script).toContain('function scoreProfile');
     expect(script).toContain('answers.size');
     expect(script).toContain('navigator.clipboard.writeText');
