@@ -52,6 +52,57 @@ describe('street dance professional versus hobby H5', () => {
     expect(html).not.toMatch(/128\.6|18432|全国街舞从业者|全国平均收入/);
   });
 
+  it('separates industry scale estimates from unique participants and professionals', async () => {
+    const html = await source('index.html');
+
+    for (const statement of [
+      '近 300 万',
+      '超过 1000 万人次',
+      '超万家',
+      '行业报告估算',
+      '人次不是去重人数',
+      '24 个省市',
+      '500 余名',
+      '不能外推为全国街舞人口',
+    ]) {
+      expect(html).toContain(statement);
+    }
+
+    for (const layer of ['学习 / 活动人次', '去重参与者', '有偿从业者', '稳定职业者']) {
+      expect(html).toContain(layer);
+    }
+  });
+
+  it('defines professional dance as sustained accountable labor and invites discussion', async () => {
+    const html = await source('index.html');
+
+    for (const definition of [
+      '艺术身份',
+      '有偿参与',
+      '职业劳动',
+      '主业职业',
+      '最近 12 个月',
+      '持续有偿',
+      '可重复交付',
+      '外部责任',
+      '副业型职业舞者',
+    ]) {
+      expect(html).toContain(definition);
+    }
+
+    for (const url of [
+      'https://www.sport.gov.cn/n20001280/n20067608/n20067635/c26569792/content.html',
+      'https://www.sport.gov.cn/n14471/n14488/n14525/c28742235/content.html',
+      'https://www.ilo.org/sites/default/files/wcmsp5/groups/public/%40dgreports/%40dcomm/%40publ/documents/publication/wcms_172572.pdf',
+      'https://www.unesco.org/creativity/en/1980-recommendation-concerning-status-artist',
+    ]) {
+      expect(html).toContain(url);
+    }
+
+    expect(html).toContain('城市＋舞种＋当前身份＋街舞是否主要收入＋最不同意本文哪一点');
+    expect(html).toContain('职业不是荣誉等级');
+  });
+
   it('keeps assets same-origin and blocks private or obsolete data', async () => {
     const [html, css, script] = await Promise.all([
       source('index.html'),
