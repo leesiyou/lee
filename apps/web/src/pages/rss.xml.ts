@@ -17,6 +17,6 @@ export async function GET() {
       title: article.title,
     })),
     site: config.publicBaseUrl,
-    title: '嘎子的创业实验室',
+    title: '李思友的思想实验室',
   });
 }

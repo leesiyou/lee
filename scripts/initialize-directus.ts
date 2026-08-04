@@ -109,6 +109,20 @@ interface IdentifiedItem {
   id: number | string;
 }
 
+interface ManagedAuthorItem extends IdentifiedItem {
+  name?: unknown;
+}
+
+export function selectManagedAuthorAction(
+  authors: ManagedAuthorItem[],
+  targetName: string,
+): { id?: number | string; kind: 'create' | 'update' | 'use' } {
+  const target = authors.find((author) => author.name === targetName);
+  if (target) return { id: target.id, kind: 'use' };
+  if (authors.length === 1) return { id: authors[0].id, kind: 'update' };
+  return { kind: 'create' };
+}
+
 async function findOne(
   client: DirectusAdminClient,
   path: string,
@@ -519,12 +533,32 @@ async function ensureSeedData(client: DirectusAdminClient): Promise<number> {
   for (const preset of defaultTemplatePresets) {
     if ((await ensureSeedItem(client, 'template_presets', 'key', preset.key, { ...preset })).created) created += 1;
   }
-  const authorResult = await ensureSeedItem(client, 'authors', 'name', defaultAuthor.name, { ...defaultAuthor });
-  if (authorResult.created) created += 1;
+  const authorPayload = await client.request<{ data: ManagedAuthorItem[] }>(
+    '/items/authors?fields=id,name&limit=-1',
+  );
+  const authorAction = selectManagedAuthorAction(authorPayload.data, defaultAuthor.name);
+  let managedAuthor: IdentifiedItem;
+  if (authorAction.kind === 'use') {
+    managedAuthor = { id: authorAction.id as number | string };
+  } else if (authorAction.kind === 'update') {
+    managedAuthor = { id: authorAction.id as number | string };
+    await client.request(`/items/authors/${managedAuthor.id}`, {
+      body: JSON.stringify({ ...defaultAuthor }),
+      method: 'PATCH',
+    });
+  } else {
+    managedAuthor = await createItem(client, '/items/authors', { ...defaultAuthor });
+    created += 1;
+  }
   const settings = await client.request<{ data: IdentifiedItem[] }>('/items/site_settings?fields=id&limit=1');
   if (settings.data.length === 0) {
     await createItem(client, '/items/site_settings', { ...defaultSiteSettings });
     created += 1;
+  } else {
+    await client.request(`/items/site_settings/${settings.data[0].id}`, {
+      body: JSON.stringify({ site_name: defaultSiteSettings.site_name }),
+      method: 'PATCH',
+    });
   }
 
   for (const articleFile of seedArticleFiles) {
@@ -532,21 +566,22 @@ async function ensureSeedData(client: DirectusAdminClient): Promise<number> {
       await readFile(new URL(`../content/${articleFile}`, import.meta.url), 'utf8'),
     ) as Record<string, unknown> & { author_name: string; category_slug: string; slug: string };
     const category = await findOne(client, '/items/categories', 'slug', articleSource.category_slug);
-    const author = await findOne(client, '/items/authors', 'name', articleSource.author_name);
-    if (!category || !author) throw new Error(`Seed article dependencies were not found: ${articleFile}`);
+    if (!category) throw new Error(`Seed article dependencies were not found: ${articleFile}`);
     const { author_name: _authorName, category_slug: _categorySlug, ...article } = articleSource;
     void _authorName;
     void _categorySlug;
-    if (
-      (
-        await ensureSeedItem(client, 'articles', 'slug', articleSource.slug, {
-          ...article,
-          author: author.id,
-          category: category.id,
-        })
-      ).created
-    ) {
+    const articleResult = await ensureSeedItem(client, 'articles', 'slug', articleSource.slug, {
+      ...article,
+      author: managedAuthor.id,
+      category: category.id,
+    });
+    if (articleResult.created) {
       created += 1;
+    } else {
+      await client.request(`/items/articles/${articleResult.item.id}`, {
+        body: JSON.stringify({ author: managedAuthor.id }),
+        method: 'PATCH',
+      });
     }
   }
   return created;

@@ -1,4 +1,4 @@
-# 嘎子的创业实验室
+# 李思友的思想实验室
 
 移动端优先的日更 H5 博客。Astro Node SSR 负责前台，Directus 负责内容编辑，PostgreSQL 和 Redis 负责持久化与缓存，Caddy 提供唯一入口。
 

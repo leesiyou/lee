@@ -218,7 +218,7 @@ Expected: FAIL，新文章数据不存在。
 
 - [ ] **Step 3: 最小实现**
 
-新 JSON 包含正式标题、slug、摘要、5 段 `wechat_content`、SEO、`published_at` 晚于旧文章、`sort: 100`、街舞分类和嘎子作者。初始化器遍历两个固定文件名并用现有 `ensureSeedItem` 按 slug 幂等创建。
+新 JSON 包含正式标题、slug、摘要、5 段 `wechat_content`、SEO、`published_at` 晚于旧文章、`sort: 100`、街舞分类和李思友作者。初始化器遍历两个固定文件名并用现有 `ensureSeedItem` 按 slug 幂等创建。
 
 - [ ] **Step 4: 运行测试**
 

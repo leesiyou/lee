@@ -8,6 +8,7 @@ import {
   buildWechatDraftFlowDefinition,
   editorWechatFlowPermission,
   planBootstrap,
+  selectManagedAuthorAction,
 } from './initialize-directus';
 
 describe('planBootstrap', () => {
@@ -54,6 +55,37 @@ describe('planBootstrap', () => {
 });
 
 describe('seed articles', () => {
+  it('updates a single existing author to the managed identity', () => {
+    expect(selectManagedAuthorAction([{ id: 1, name: '旧作者' }], '李思友')).toEqual({
+      id: 1,
+      kind: 'update',
+    });
+  });
+
+  it('reuses the managed identity when it already exists', () => {
+    expect(
+      selectManagedAuthorAction(
+        [
+          { id: 1, name: '其他作者' },
+          { id: 2, name: '李思友' },
+        ],
+        '李思友',
+      ),
+    ).toEqual({ id: 2, kind: 'use' });
+  });
+
+  it('creates a managed identity instead of overwriting multiple authors', () => {
+    expect(
+      selectManagedAuthorAction(
+        [
+          { id: 1, name: '作者甲' },
+          { id: 2, name: '作者乙' },
+        ],
+        '李思友',
+      ),
+    ).toEqual({ kind: 'create' });
+  });
+
   it('seeds both formal articles by stable slug without deleting history', async () => {
     const source = await readFile(new URL('./initialize-directus.ts', import.meta.url), 'utf8');
 

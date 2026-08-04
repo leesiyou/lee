@@ -142,7 +142,7 @@ export async function createWechatDraftFromArticle(
   }
 
   const material = buildWechatMaterial(article, `${options.publicBaseUrl.replace(/\/+$/, '')}/`);
-  const author = article.author && typeof article.author === 'object' ? article.author.name : '嘎子';
+  const author = article.author && typeof article.author === 'object' ? article.author.name : '李思友';
   const draftUrl = new URL('https://api.weixin.qq.com/cgi-bin/draft/add');
   draftUrl.searchParams.set('access_token', accessToken);
   const draftResponse = await request(draftUrl, {

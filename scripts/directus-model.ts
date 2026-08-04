@@ -160,11 +160,11 @@ export const defaultTemplatePresets = [
   { key: 'retrospective', name: '项目复盘', sort: 40, structure: ['目标', '投入', '过程', '结果', '偏差', '原因', '经验', '下一轮动作'] },
 ] as const;
 
-export const defaultAuthor = { bio: '创业者、制造业实践者、长期主义实验者。', name: '嘎子', social_links: {} } as const;
+export const defaultAuthor = { bio: '创业者、制造业实践者、长期主义实验者。', name: '李思友', social_links: {} } as const;
 export const defaultSiteSettings = {
   footer_text: '把时间投入能留下来的东西。',
   site_description: '记录创业、制造、AI、文化与真实项目的长期实验。',
-  site_name: '嘎子的创业实验室',
+  site_name: '李思友的思想实验室',
   theme: 'auto',
   wechat_account_name: '',
 } as const;

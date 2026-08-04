@@ -40,8 +40,8 @@ describe('Directus blog model', () => {
     expect(defaultTemplatePresets.map((item) => item.name)).toEqual([
       '哲学思辨', '商业拆解', '创业日记', '项目复盘',
     ]);
-    expect(defaultAuthor.name).toBe('嘎子');
-    expect(defaultSiteSettings.site_name).toBe('嘎子的创业实验室');
+    expect(defaultAuthor.name).toBe('李思友');
+    expect(defaultSiteSettings.site_name).toBe('李思友的思想实验室');
   });
 
   it('limits public reads and keeps Editor away from system administration', () => {

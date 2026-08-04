@@ -61,13 +61,13 @@ describe('article helpers', () => {
         { type: 'header', data: { level: 2, text: '结构化标题' } },
         { type: 'paragraph', data: { text: '安全正文<script>alert(1)</script>' } },
         { type: 'list', data: { style: 'ordered', items: ['第一步', '第二步'] } },
-        { type: 'quote', data: { text: '长期主义', caption: '嘎子' } },
+        { type: 'quote', data: { text: '长期主义', caption: '李思友' } },
       ],
     });
 
     expect(output).toContain('<h2>结构化标题</h2>');
     expect(output).toContain('<ol><li>第一步</li><li>第二步</li></ol>');
-    expect(output).toContain('<blockquote><p>长期主义</p><figcaption>嘎子</figcaption></blockquote>');
+    expect(output).toContain('<blockquote><p>长期主义</p><figcaption>李思友</figcaption></blockquote>');
     expect(output).not.toContain('<script');
   });
 });

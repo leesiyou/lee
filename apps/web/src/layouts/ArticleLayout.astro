@@ -19,6 +19,9 @@ const canonical = buildPostUrl(article.slug, config);
 const content = addHeadingIds(`${article.content}${renderStructuredBlocks(article.blocks)}`);
 const toc = buildTableOfContents(content);
 const readingMinutes = article.reading_minutes || calculateReadingMinutes(content);
+const authorName = typeof article.author === 'object' && article.author?.name
+  ? article.author.name
+  : '李思友';
 const category = typeof article.category === 'object' && article.category ? article.category : null;
 const tags = article.tags
   ?.map((entry) => (typeof entry.tags_id === 'object' ? entry.tags_id : null))
@@ -37,7 +40,7 @@ const tags = article.tags
   <article class={`article article--${article.template}`} style={`--article-accent:${article.theme || '#c6a96b'}`}>
     <Hero title={article.title} subtitle={article.subtitle} eyebrow={category?.name || '创业日更'} />
     <div class="article-meta">
-      <span>嘎子</span>
+      <span>{authorName}</span>
       <time datetime={article.published_at}>{new Date(article.published_at).toLocaleDateString('zh-CN')}</time>
       <span>{readingMinutes} 分钟阅读</span>
     </div>
