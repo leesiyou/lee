@@ -184,3 +184,98 @@ After at least one scheduled poller run, confirm the web container still uses th
 - [ ] **Step 4: Verify the public experience**
 
 Require HTTP 200 for the H5 URL, CSS, JavaScript, Logo and poster; confirm the HTML contains 12 questions and the two publisher names; copy the public URL to the clipboard.
+
+### Task 9: Add evidence-layered scale and profession definitions
+
+**Files:**
+- Modify: `apps/web/src/tests/street-dance-professional-vs-hobby.test.ts`
+- Modify: `apps/web/public/h5/2026-08-04/street-dance-professional-vs-hobby/index.html`
+- Modify: `apps/web/public/h5/2026-08-04/street-dance-professional-vs-hobby/css/style.css`
+
+- [ ] **Step 1: Write failing contract tests**
+
+Add assertions requiring the page to contain all of the following exact evidence boundaries:
+
+```ts
+for (const statement of [
+  '近 300 万',
+  '超过 1000 万人次',
+  '超万家',
+  '行业报告估算',
+  '人次不是去重人数',
+  '24 个省市',
+  '500 余名',
+  '不能外推为全国街舞人口',
+]) {
+  expect(html).toContain(statement);
+}
+
+for (const definition of [
+  '艺术身份',
+  '有偿参与',
+  '职业劳动',
+  '主业职业',
+  '最近 12 个月',
+  '可重复交付',
+  '外部责任',
+  '副业型职业舞者',
+]) {
+  expect(html).toContain(definition);
+}
+```
+
+Require the two new official URLs, ILO ISCO and UNESCO artist-status URL. Require the comment prompt `城市＋舞种＋当前身份＋街舞是否主要收入＋最不同意本文哪一点`.
+
+- [ ] **Step 2: Verify RED**
+
+Run: `npm test -- --run apps/web/src/tests/street-dance-professional-vs-hobby.test.ts`
+
+Expected: FAIL because the new evidence statements, definitions and discussion prompt are absent.
+
+- [ ] **Step 3: Implement the scale chapter**
+
+Insert a section before the China chapter containing:
+
+- the three industry-report estimates with a visible `行业报告估算` label;
+- a four-level funnel for participation-times, unique participants, paid practitioners and stable professionals;
+- the 2025 Wuhan event observation;
+- explicit warnings that person-times are not unique people and event entrants cannot be extrapolated nationwide.
+
+- [ ] **Step 4: Implement the profession matrix and conclusion**
+
+Insert a four-level matrix for artistic identity, paid participation, professional labor and primary profession. Add the 12-month evidence rule and explain primary versus side-professional work. Replace the short conclusion with a three-part evidence summary and a WeChat-native comment invitation.
+
+- [ ] **Step 5: Add responsive styles**
+
+Style `.data-snapshot`, `.data-funnel`, `.definition-matrix`, `.verdict-grid`, and `.discussion-call` using the existing silver/acid/blue system. Preserve 390px no-overflow behavior and reduced motion.
+
+- [ ] **Step 6: Verify GREEN**
+
+Run: `npm test -- --run apps/web/src/tests/street-dance-professional-vs-hobby.test.ts`
+
+Expected: all focused tests PASS.
+
+### Task 10: Update publication material and release
+
+**Files:**
+- Modify: `content-export/2026/08/street-dance-professional-vs-hobby-wechat.md`
+
+- [ ] **Step 1: Add the evidence summary and comment prompt**
+
+Add the three scale estimates with the same methodological warning, the four-layer profession definition, and the exact comment format used in the H5.
+
+- [ ] **Step 2: Run release gates**
+
+Run focused tests, full tests, typecheck, lint, build, `git diff --check`, sensitive-data scan and a 390×844 browser acceptance. All must exit successfully with zero console errors and no horizontal overflow.
+
+- [ ] **Step 3: Commit and push**
+
+Commit only the spec, plan, focused test, H5 HTML/CSS and WeChat material. Preserve unrelated untracked `104-print-lab` files. Push `feature/h5-blog-system`.
+
+- [ ] **Step 4: Deploy the immutable image**
+
+Wait for CI and image publication, deploy `ghcr.io/leesiyou/lee-web:main-<shortsha>` to the existing NAS Compose project, update the poller override to the identical tag, and verify five healthy containers after a poller interval.
+
+- [ ] **Step 5: Verify the public URL**
+
+Require HTTP 200 for the page and same-origin assets, verify the public HTML contains the new evidence statements and discussion prompt, then copy the unchanged public URL to the clipboard.
