@@ -18,7 +18,7 @@
 - Create `apps/web/public/h5/2026-08-04/street-dance-professional-vs-hobby/js/main.js`: reveal, progress, 12-question scoring, result, copy, reset and back-to-top behavior.
 - Create `apps/web/public/h5/2026-08-04/street-dance-professional-vs-hobby/assets/logo.webp`: same-origin copy of the selected street-dance gas-station shield visual.
 - Create `apps/web/public/h5/2026-08-04/street-dance-professional-vs-hobby/assets/wechat-poster.png`: 1080×1440 WeChat reading-original poster.
-- Create `content-backup/wechat/2026-08-04-street-dance-professional-vs-hobby.md`: copy-ready WeChat title, summary, body, Moments copy and original URL.
+- Create `content-export/2026/08/street-dance-professional-vs-hobby-wechat.md`: copy-ready WeChat title, summary, body, Moments copy and original URL, following the repository's existing export structure.
 - Modify NAS deployment-poller image override after image publication to prevent the scheduled job from reverting the new image.
 
 ### Task 1: Lock the static H5 contract
@@ -130,7 +130,7 @@ git commit -m "feat: add professional versus hobby street dance H5"
 ### Task 6: Add copy-ready WeChat publication material
 
 **Files:**
-- Create: `content-backup/wechat/2026-08-04-street-dance-professional-vs-hobby.md`
+- Create: `content-export/2026/08/street-dance-professional-vs-hobby-wechat.md`
 
 - [ ] **Step 1: Write the publication bundle**
 
@@ -141,7 +141,7 @@ Include a title under 64 Chinese characters, a summary under 120 characters, fiv
 Run:
 
 ```bash
-git add content-backup/wechat/2026-08-04-street-dance-professional-vs-hobby.md
+git add content-export/2026/08/street-dance-professional-vs-hobby-wechat.md
 git commit -m "content: add WeChat material for street dance identity H5"
 ```
 
