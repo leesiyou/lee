@@ -29,6 +29,6 @@
 | 容器持久化 | PASS | PostgreSQL 单独重启、完整 Compose down/up 后文章和上传文件 SHA256 保持一致 |
 | 移动 H5 | PASS | 375×812、390×844 无横向溢出，首页和文章页截图验收通过 |
 | Lighthouse（LAN HTTP） | PASS_WITH_LIMITATIONS | Performance 100、Accessibility 100、SEO 100、Best Practices 78；后者仅因 LAN HTTP/无 HTTPS |
-| 公网 HTTPS/微信外网 | PASS | `https://gazidaily.iepose.cn` 首页、文章页、素材页、RSS、API 均 HTTP 200；canonical/OG 使用公网域名；首页无内网地址泄漏；封面图公网正常加载 |
+| 公网 HTTPS/微信外网 | PASS | `https://myhooddaily.iepose.cn` 首页、文章页、素材页、RSS、API 均 HTTP 200；canonical/OG 使用公网域名；首页无内网地址泄漏；封面图公网正常加载 |
 
 本地自动化最终基线为 21 个测试文件、71 个测试。完整验证还包含 TypeScript、ESLint、Astro production build、Compose 结构/插值和 Docker image build。

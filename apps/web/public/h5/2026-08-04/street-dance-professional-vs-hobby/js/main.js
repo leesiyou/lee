@@ -139,7 +139,7 @@ function resultText() {
     `留意：${resultRisk.textContent}`,
     '接下来 90 天：',
     actions,
-    'https://gazidaily.iepose.cn/h5/2026-08-04/street-dance-professional-vs-hobby/',
+    'https://myhooddaily.iepose.cn/h5/2026-08-04/street-dance-professional-vs-hobby/',
     '街舞星球 × 街舞加油站 出品',
   ].join('\n');
 }

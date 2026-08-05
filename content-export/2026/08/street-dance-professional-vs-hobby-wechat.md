@@ -3,7 +3,7 @@ title: "职业还是爱好？别急着给街舞人生贴标签"
 date: "2026-08-04"
 publisher: "街舞星球 × 街舞加油站"
 format: "wechat-h5-material"
-source_url: "https://gazidaily.iepose.cn/h5/2026-08-04/street-dance-professional-vs-hobby/"
+source_url: "https://myhooddaily.iepose.cn/h5/2026-08-04/street-dance-professional-vs-hobby/"
 poster: "apps/web/public/h5/2026-08-04/street-dance-professional-vs-hobby/assets/wechat-poster.png"
 ---
 
@@ -45,7 +45,7 @@ poster: "apps/web/public/h5/2026-08-04/street-dance-professional-vs-hobby/assets
 
 ## 阅读原文
 
-https://gazidaily.iepose.cn/h5/2026-08-04/street-dance-professional-vs-hobby/
+https://myhooddaily.iepose.cn/h5/2026-08-04/street-dance-professional-vs-hobby/
 
 公众号正文可放精华和海报，完整动态体验、12 题测试及来源说明通过底部“阅读原文”打开。
 
@@ -56,7 +56,7 @@ https://gazidaily.iepose.cn/h5/2026-08-04/street-dance-professional-vs-hobby/
 近 300 万从业者、超过 1000 万学习人次，不等于同一批人，更不等于 300 万职业舞者。街舞星球 × 街舞加油站用数据口径、劳动关系和 12 题测试，把职业与爱好的边界说清楚。
 
 测试结果不是标签，是下一步的地图。点开体验：
-https://gazidaily.iepose.cn/h5/2026-08-04/street-dance-professional-vs-hobby/
+https://myhooddaily.iepose.cn/h5/2026-08-04/street-dance-professional-vs-hobby/
 
 ## 发布说明
 

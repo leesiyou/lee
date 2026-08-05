@@ -17,7 +17,7 @@ set -euo pipefail
 # ---------- 配置 ----------
 BLOG_ROOT="/Volumes/开发盘加数据 1t/2026年开发/李思友思想实验室博客系统"
 PUBLIC_H5_REL="apps/web/public/h5"
-PUBLIC_BASE_URL="https://gazidaily.iepose.cn"
+PUBLIC_BASE_URL="${PUBLIC_BASE_URL:-https://myhooddaily.iepose.cn}"
 DATE="$(date +%Y-%m-%d)"
 
 # ---------- 参数 ----------

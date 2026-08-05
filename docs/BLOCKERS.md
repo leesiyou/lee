@@ -2,9 +2,9 @@
 
 ## BLOCKED：公网 /sitemap.xml 被节点小宝层拦截
 
-`https://gazidaily.iepose.cn/sitemap.xml` 返回 404（openresty 404 页）。博客本身正常：web 容器直连、Caddy LAN（`127.0.0.1:18432`）均返回 200。根因是节点小宝的 openresty 对该路径有拦截或缓存。其余路径（`/`、`/rss.xml`、`/robots.txt`、`/favicon.svg`、文章页、素材页、API）公网均 200。
+`https://myhooddaily.iepose.cn/sitemap.xml` 返回 404（openresty 404 页）。博客本身正常：web 容器直连、Caddy LAN（`127.0.0.1:18432`）均返回 200。根因是节点小宝的 openresty 对该路径有拦截或缓存。其余路径（`/`、`/rss.xml`、`/robots.txt`、`/favicon.svg`、文章页、素材页、API）公网均 200。
 
-解除条件：登录节点小宝刷新该路径缓存或调整转发规则。完成后重新验证 `https://gazidaily.iepose.cn/sitemap.xml` 返回 200。
+解除条件：登录节点小宝刷新该路径缓存或调整转发规则。完成后重新验证 `https://myhooddaily.iepose.cn/sitemap.xml` 返回 200。
 
 ## BLOCKED：NAS 内容定时推送
 

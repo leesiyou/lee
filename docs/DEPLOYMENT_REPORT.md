@@ -9,7 +9,7 @@
 5. **飞牛实际部署目录**：`/vol6/1000/Docker部署盘/03_网站项目/104-h5-blog`
 6. **博客局域网地址**：`http://192.168.5.104:18432`
 7. **后台局域网地址**：`http://192.168.5.104:18055`（仅局域网，禁止公网）
-8. **博客外网 HTTPS 地址**：`https://gazidaily.iepose.cn`；已验证首页、文章页、素材页、RSS、API 全部 HTTP 200
+8. **博客外网 HTTPS 地址**：`https://myhooddaily.iepose.cn`；已验证首页、文章页、素材页、RSS、API 全部 HTTP 200
 9. **后台外网 HTTPS 地址**：不提供；Directus 后台禁止公网暴露
 10. **Docker 容器清单**：`104-h5-blog-caddy-1`、`104-h5-blog-web-1`、`104-h5-blog-directus-1`、`104-h5-blog-postgres-1`、`104-h5-blog-redis-1`
 11. **容器健康状态**：五个容器均 `healthy`
@@ -19,7 +19,7 @@
 15. **备份路径**：`/vol6/1000/Docker部署盘/03_网站项目/104-h5-blog/backups/blog`
 16. **最近一次备份结果**：每日归档 `daily/blog-daily-20260801-152738.tar.gz` PASS；最近周归档 `weekly/blog-weekly-20260802-181545.tar.gz` PASS；均有 SHA256
 17. **恢复测试结果**：临时数据库隔离恢复、正式完整数据库/uploads 恢复、恢复后内容与权限门禁均 PASS
-18. **节点小宝新增映射**：已新增「104-H5日更博客」网页服务，内网 `http://127.0.0.1:18432` → 公网 `https://gazidaily.iepose.cn`，访问规则公开；原有映射未修改、未删除、未重启
+18. **节点小宝博客映射**：已将「104-H5日更博客」网页服务更新为内网 `http://127.0.0.1:18432` → 公网 `https://myhooddaily.iepose.cn`，访问规则公开；`easybreakwebapp` 映射未修改、未删除、未重启
 19. **未修改的原有映射说明**：节点小宝进程、私密配置和全部旧映射未修改、未删除、未重启；已有根域名和 `www` 未改动
 20. **仍需用户提供的唯一凭据**：不能诚实归并为一个凭据；强制闭环仍需节点小宝/域名管理授权，以及一个仅限本仓库 Contents Read/Write 的细粒度 GitHub Token。微信公众号凭据为可选项
 21. **管理员账号名称**：`admin@easybreak.top`

@@ -119,6 +119,17 @@ describe('street dance professional versus hobby H5', () => {
     expect(combined).not.toMatch(/127\.0\.0\.1|192\.168\.|\/Users\/|DIRECTUS_TOKEN|嘎子/);
   });
 
+  it('publishes and copies the Myhood Daily public URL', async () => {
+    const [html, script] = await Promise.all([source('index.html'), source('js/main.js')]);
+    const publicUrl =
+      'https://myhooddaily.iepose.cn/h5/2026-08-04/street-dance-professional-vs-hobby/';
+
+    expect(html).toContain(`<meta property="og:url" content="${publicUrl}">`);
+    expect(html).toContain(`<link rel="canonical" href="${publicUrl}">`);
+    expect(script).toContain(publicUrl);
+    expect(`${html}\n${script}`).not.toContain('gazidaily.iepose.cn');
+  });
+
   it('implements accessible scoring, failure feedback, and reduced motion', async () => {
     const [html, css, script] = await Promise.all([
       source('index.html'),
