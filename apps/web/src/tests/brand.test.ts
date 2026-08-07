@@ -5,6 +5,9 @@ import { describe, expect, it } from 'vitest';
 const sourceFiles = [
   '../layouts/BaseLayout.astro',
   '../layouts/ArticleLayout.astro',
+  '../components/ArticleCard.astro',
+  '../components/Hero.astro',
+  '../pages/index.astro',
   '../pages/rss.xml.ts',
   '../lib/wechat.ts',
   '../../public/favicon.svg',
@@ -21,6 +24,7 @@ describe('site brand', () => {
 
     expect(combined).toContain('李思友的思想实验室');
     expect(combined).toContain('李思友');
+    expect(combined).not.toContain('GAZI');
     expect(combined).not.toContain(legacyAuthor);
   });
 });
