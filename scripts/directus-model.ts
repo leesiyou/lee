@@ -40,6 +40,7 @@ export const collections: Record<string, ModelCollection> = {
       { field: 'subtitle', meta: { interface: 'input' }, schema: { is_nullable: true, max_length: 300 }, type: 'string' },
       { field: 'summary', meta: { interface: 'input-multiline', required: true }, schema: { is_nullable: false }, type: 'text' },
       { field: 'content', meta: { interface: 'input-rich-text-html', required: true }, schema: { is_nullable: false }, type: 'text' },
+      { field: 'h5_path', meta: { interface: 'input', note: '可选：填写以 /h5/ 开头的站内 H5 路径，博客卡片将直接进入 H5' }, schema: { is_nullable: true, max_length: 500 }, type: 'string' },
       { field: 'blocks', meta: { interface: 'input-block-editor', note: '可选：用结构化内容块补充富文本正文' }, schema: { is_nullable: true }, type: 'json' },
       { field: 'cover_image', meta: { interface: 'file-image', special: ['file'] }, schema: { is_nullable: true }, type: 'uuid' },
       { field: 'share_image', meta: { interface: 'file-image', special: ['file'] }, schema: { is_nullable: true }, type: 'uuid' },

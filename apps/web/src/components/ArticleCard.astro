@@ -1,4 +1,5 @@
 ---
+import { articleHref } from '@/lib/article-link';
 import { buildArticleCoverUrl, runtimeConfig } from '@/lib/routes';
 import type { Article } from '@/lib/types';
 
@@ -10,10 +11,11 @@ interface Props {
 const { article, featured = false } = Astro.props;
 const cover = buildArticleCoverUrl(article, runtimeConfig());
 const category = typeof article.category === 'object' && article.category ? article.category : null;
+const href = articleHref(article);
 ---
 
 <article class:list={['article-card', { 'article-card--featured': featured }]}>
-  <a class="article-card__cover" href={`/posts/${article.slug}`} aria-label={`阅读 ${article.title}`}>
+  <a class="article-card__cover" href={href} aria-label={`阅读 ${article.title}`}>
     {cover ? (
       <img src={cover} alt="" width="720" height="450" loading="lazy" />
     ) : (
@@ -25,8 +27,8 @@ const category = typeof article.category === 'object' && article.category ? arti
       <span>{category?.name || '创业日更'}</span>
       <time datetime={article.published_at}>{new Date(article.published_at).toLocaleDateString('zh-CN')}</time>
     </div>
-    <h2><a href={`/posts/${article.slug}`}>{article.title}</a></h2>
+    <h2><a href={href}>{article.title}</a></h2>
     <p>{article.summary}</p>
-    <a class="article-card__link" href={`/posts/${article.slug}`}>继续阅读 <span aria-hidden="true">→</span></a>
+    <a class="article-card__link" href={href}>继续阅读 <span aria-hidden="true">→</span></a>
   </div>
 </article>

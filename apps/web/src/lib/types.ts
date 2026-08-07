@@ -38,6 +38,7 @@ export interface Article {
   subtitle?: string | null;
   summary: string;
   content: string;
+  h5_path?: string | null;
   blocks?: StructuredContent | null;
   cover_image?: DirectusFile | string | null;
   share_image?: DirectusFile | string | null;

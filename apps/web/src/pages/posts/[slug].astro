@@ -1,5 +1,6 @@
 ---
 import ArticleCard from '@/components/ArticleCard.astro';
+import { articleHref } from '@/lib/article-link';
 import { fetchPublishedArticle, fetchPublishedArticles } from '@/lib/directus';
 import { runtimeConfig } from '@/lib/routes';
 import type { Article } from '@/lib/types';
@@ -19,6 +20,9 @@ try {
   }
 } catch {
   Astro.response.status = 503;
+}
+if (article && articleHref(article) !== `/posts/${article.slug}`) {
+  return Astro.redirect(articleHref(article), 302);
 }
 if (!article && Astro.response.status !== 503) Astro.response.status = 404;
 ---
