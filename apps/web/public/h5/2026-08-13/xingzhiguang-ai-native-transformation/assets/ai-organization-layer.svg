@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">AI Native 组织中间层结构图</title>
+  <desc id="desc">老板驾驶舱通过 AI 中台连接外贸、内销、仓储、产品供应链、HR 训练和前端工程组。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#07101e"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="960" height="720" rx="42" fill="url(#bg)"/>
+  <g opacity=".24" stroke="#334155" stroke-width="1">
+    <path d="M80 124H880M80 224H880M80 324H880M80 424H880M80 524H880"/>
+    <path d="M180 80V640M300 80V640M420 80V640M540 80V640M660 80V640M780 80V640"/>
+  </g>
+  <g font-family="PingFang SC, Arial, sans-serif">
+    <rect x="322" y="62" width="316" height="86" rx="28" fill="#b6ff25" filter="url(#glow)"/>
+    <text x="480" y="104" font-size="28" font-weight="900" text-anchor="middle" fill="#07111f">老板驾驶舱</text>
+    <text x="480" y="132" font-size="16" font-weight="800" text-anchor="middle" fill="#17210a">目标 · 客户 · 库存 · 现金流 · 人效</text>
+    <rect x="252" y="284" width="456" height="132" rx="38" fill="#0f172a" stroke="#38bdf8" stroke-width="4" filter="url(#glow)"/>
+    <text x="480" y="340" font-size="42" font-weight="900" text-anchor="middle" fill="#38bdf8">AI 中台</text>
+    <text x="480" y="380" font-size="22" font-weight="800" text-anchor="middle" fill="#dbeafe">统一事实层 · SOP 层 · 复盘层 · 客户推进层</text>
+    <path d="M480 148V284" stroke="#b6ff25" stroke-width="5" stroke-linecap="round"/>
+    <path d="M480 416V504" stroke="#38bdf8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M172 226H788M172 504H788" stroke="#64748b" stroke-width="3" stroke-dasharray="8 12"/>
+    <path d="M172 226L252 316M788 226L708 316M172 504L252 384M788 504L708 384" stroke="#64748b" stroke-width="3" fill="none"/>
+    <g font-size="20" font-weight="900">
+      <g transform="translate(68 178)">
+        <rect width="210" height="86" rx="24" fill="#111827" stroke="#b6ff25"/>
+        <text x="105" y="37" text-anchor="middle" fill="#f8fbff">外贸增长组</text>
+        <text x="105" y="65" text-anchor="middle" font-size="15" fill="#9fb1ca">询盘 · 报价 · 样品 · 复购</text>
+      </g>
+      <g transform="translate(682 178)">
+        <rect width="210" height="86" rx="24" fill="#111827" stroke="#38bdf8"/>
+        <text x="105" y="37" text-anchor="middle" fill="#f8fbff">内销增长组</text>
+        <text x="105" y="65" text-anchor="middle" font-size="15" fill="#9fb1ca">客户分层 · 爆品 · 回款</text>
+      </g>
+      <g transform="translate(68 462)">
+        <rect width="210" height="86" rx="24" fill="#111827" stroke="#ff8a1d"/>
+        <text x="105" y="37" text-anchor="middle" fill="#f8fbff">仓储现货组</text>
+        <text x="105" y="65" text-anchor="middle" font-size="15" fill="#9fb1ca">SKU · 库龄 · 出库 · 补货</text>
+      </g>
+      <g transform="translate(682 462)">
+        <rect width="210" height="86" rx="24" fill="#111827" stroke="#b6ff25"/>
+        <text x="105" y="37" text-anchor="middle" fill="#f8fbff">产品供应链组</text>
+        <text x="105" y="65" text-anchor="middle" font-size="15" fill="#9fb1ca">款式 · 成本 · 质量 · 交期</text>
+      </g>
+      <g transform="translate(220 588)">
+        <rect width="230" height="72" rx="22" fill="#111827" stroke="#94a3b8"/>
+        <text x="115" y="32" text-anchor="middle" fill="#f8fbff">HR 与训练组</text>
+        <text x="115" y="56" text-anchor="middle" font-size="14" fill="#9fb1ca">招聘 · 入职 · AI 训练</text>
+      </g>
+      <g transform="translate(510 588)">
+        <rect width="230" height="72" rx="22" fill="#111827" stroke="#94a3b8"/>
+        <text x="115" y="32" text-anchor="middle" fill="#f8fbff">前端工程组</text>
+        <text x="115" y="56" text-anchor="middle" font-size="14" fill="#9fb1ca">工具台 · 数据看板 · 自动化</text>
+      </g>
+    </g>
+    <text x="60" y="76" font-size="24" font-weight="900" fill="#f8fbff">公司骨架 SOP</text>
+    <text x="60" y="112" font-size="18" font-weight="700" fill="#94a3b8">让 AI 成为上下衔接的中间层，而不是某个员工私人的聊天工具。</text>
+  </g>
+</svg>
