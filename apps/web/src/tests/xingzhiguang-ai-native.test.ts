@@ -32,8 +32,10 @@ describe('xingzhiguang AI native transformation H5', () => {
     expect(html).toContain('4500㎡');
     expect(html).toContain('约 200 万件现货');
     expect(html).toContain('两台服务器 + 一台 GPU');
-    expect(html).toContain('外贸客户 3 个');
-    expect(html).toContain('内销客户 3 个');
+    expect(html).toContain('外贸客服 3 名');
+    expect(html).toContain('内销客服 3 名');
+    expect(html).not.toContain('外贸客户 3 个');
+    expect(html).not.toContain('内销客户 3 个');
     expect(html).toContain('所有员工必须使用公司提供的 AI 工具');
     expect(html).toContain('AI 复盘回收所有员工的工作进度');
     expect(html).toContain('闭环且实战带转化的工作流');
@@ -61,6 +63,7 @@ describe('xingzhiguang AI native transformation H5', () => {
       '90 天转型路线图',
       '第 1-7 天：统一入口',
       '第 8-30 天：跑通闭环',
+      '由 3 名外贸客服 + 3 名内销客服各选 3 条客户线索做样板',
       '第 31-60 天：放大增长',
       '第 61-90 天：固化制度',
     ]) {
