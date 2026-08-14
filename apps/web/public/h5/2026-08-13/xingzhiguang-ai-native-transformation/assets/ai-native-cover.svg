@@ -1,34 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">星之光 T 恤市场缝隙决策报告</title>
-  <desc id="desc">河北制造与广州履约构成的标准化空白 T 供应服务战略</desc>
+  <title id="title">星之光 T 恤市场风险与竞争对标报告</title>
+  <desc id="desc">展示市场风险、竞争差距、超越预警和反击路线的老板决策报告</desc>
   <defs>
     <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
       <path d="M60 0H0V60" fill="none" stroke="#fff" stroke-opacity=".07"/>
     </pattern>
-    <linearGradient id="gold" x1="0" x2="1">
-      <stop stop-color="#bb8b47"/><stop offset="1" stop-color="#e4c995"/>
+    <linearGradient id="risk" x1="0" x2="1">
+      <stop stop-color="#8f1117"/><stop offset="1" stop-color="#d71920"/>
     </linearGradient>
   </defs>
-  <rect width="1200" height="630" fill="#0c1d2b"/>
+  <rect width="1200" height="630" fill="#101820"/>
+  <path d="M0 0h1200v630H0z" fill="#8f1117" opacity=".1"/>
   <rect width="1200" height="630" fill="url(#grid)"/>
   <rect x="58" y="52" width="1084" height="526" fill="none" stroke="#fff" stroke-opacity=".18"/>
   <path d="M58 156h1084M790 52v526" stroke="#fff" stroke-opacity=".18"/>
-  <rect x="58" y="52" width="10" height="526" fill="url(#gold)"/>
-  <text x="104" y="105" fill="#e4c995" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" letter-spacing="5">HEBEI × GUANGZHOU</text>
-  <text x="104" y="232" fill="#fff" font-family="Songti SC, STSong, serif" font-size="58">星之光 T 恤</text>
-  <text x="104" y="335" fill="#fff" font-family="Songti SC, STSong, serif" font-size="92" font-weight="700">市场缝隙</text>
-  <text x="104" y="430" fill="#fff" font-family="Songti SC, STSong, serif" font-size="92" font-weight="700">决策报告</text>
-  <text x="106" y="510" fill="#e4c995" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="23">市场不缺更便宜的 T 恤，缺的是可重复采购的供应服务。</text>
-  <g transform="translate(836 120)">
-    <circle cx="125" cy="125" r="118" fill="none" stroke="#e4c995" stroke-opacity=".45"/>
-    <circle cx="125" cy="125" r="76" fill="none" stroke="#e4c995" stroke-opacity=".24"/>
-    <path d="M125 7v236M7 125h236" stroke="#fff" stroke-opacity=".16"/>
-    <path d="M56 195 125 55l72 70-72 66z" fill="#2f695a" fill-opacity=".82" stroke="#e4c995"/>
-    <circle cx="125" cy="55" r="10" fill="#e4c995"/>
-    <circle cx="197" cy="125" r="10" fill="#e4c995"/>
-    <circle cx="125" cy="191" r="10" fill="#e4c995"/>
-    <circle cx="56" cy="195" r="10" fill="#e4c995"/>
-    <text x="125" y="282" text-anchor="middle" fill="#fff" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="700">数据罗盘 · 战略选择 · 90 天证据</text>
+  <rect x="58" y="52" width="12" height="526" fill="url(#risk)"/>
+  <text x="104" y="105" fill="#ff8a8f" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" letter-spacing="5">COMPETITIVE RISK INTELLIGENCE</text>
+  <text x="104" y="218" fill="#fff" font-family="Songti SC, STSong, serif" font-size="56">星之光 T 恤</text>
+  <text x="104" y="322" fill="#fff" font-family="Songti SC, STSong, serif" font-size="78" font-weight="700">市场风险与</text>
+  <text x="104" y="412" fill="#fff" font-family="Songti SC, STSong, serif" font-size="78" font-weight="700">竞争对标报告</text>
+  <text x="106" y="500" fill="#ffb3b6" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="22">谁正在逼近 · 谁可能超越 · 星之光如何反击</text>
+  <g transform="translate(824 112)">
+    <rect width="278" height="340" rx="6" fill="#0b1117" stroke="#fff" stroke-opacity=".2"/>
+    <text x="24" y="38" fill="#ff8a8f" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="700" letter-spacing="2">RED ALERT</text>
+    <text x="24" y="81" fill="#fff" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="700">SKU</text>
+    <rect x="88" y="62" width="20" height="24" fill="#d71920"/><rect x="116" y="62" width="128" height="24" fill="#fff" opacity=".2"/>
+    <text x="88" y="111" fill="#ff8a8f" font-family="Menlo, monospace" font-size="13">星之光 30 / 标杆 340</text>
+    <text x="24" y="156" fill="#fff" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="700">MOQ</text>
+    <rect x="88" y="137" width="156" height="24" fill="#d71920"/><rect x="88" y="169" width="8" height="8" fill="#fff" opacity=".7"/>
+    <text x="104" y="178" fill="#ff8a8f" font-family="Menlo, monospace" font-size="13">1000 / 标杆 1</text>
+    <text x="24" y="225" fill="#fff" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="700">响应</text>
+    <rect x="88" y="206" width="107" height="24" fill="#d71920"/><rect x="195" y="206" width="49" height="24" fill="#fff" opacity=".2"/>
+    <text x="88" y="254" fill="#ff8a8f" font-family="Menlo, monospace" font-size="13">69% / 标杆 99%</text>
+    <path d="M24 281h230" stroke="#fff" stroke-opacity=".16"/>
+    <text x="24" y="312" fill="#fff" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="15">30 天止血 · 90 天追平</text>
   </g>
-  <text x="836" y="535" fill="#fff" fill-opacity=".62" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="16">李总决策版 · 2026.08.14</text>
+  <text x="824" y="535" fill="#fff" fill-opacity=".62" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="16">李总决策版 · 2026.08.14</text>
 </svg>

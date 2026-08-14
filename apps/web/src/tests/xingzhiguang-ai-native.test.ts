@@ -15,17 +15,16 @@ async function source(path: string): Promise<string> {
   return readFile(new URL(path, h5Root), 'utf8').catch(() => '');
 }
 
-describe('xingzhiguang market-gap decision H5', () => {
-  it('opens with a boss-facing market decision instead of an AI transformation pitch', async () => {
+describe('xingzhiguang competitive-risk decision H5', () => {
+  it('opens with a boss-facing competitive warning instead of an AI transformation pitch', async () => {
     const html = await source('index.html');
 
-    expect(html).toContain('星之光 T 恤市场缝隙决策报告');
-    expect(html).toContain('给李总的核心结论');
-    expect(html).toContain('市场不缺更便宜的 T 恤，缺的是可重复采购的供应服务');
+    expect(html).toContain('星之光 T 恤市场风险与竞争对标报告');
+    expect(html).toContain('给李总的红色预警');
+    expect(html).toContain('星之光不会输在厂房，而会输在 SKU、起订门槛、响应速度和数据透明度');
     expect(html).toContain('河北自营工厂');
     expect(html).toContain('广州自有仓库');
     expect(html).toContain('广州销售团队');
-    expect(html).toContain('印花厂、团服客户和小批量品牌客户');
     expect(html).toContain('2026.08.14');
     expect(html).not.toContain('2026.08.15');
     expect(html).not.toContain('从传统加工企业到 AI Native 国际贸易组织');
@@ -35,17 +34,18 @@ describe('xingzhiguang market-gap decision H5', () => {
     );
   });
 
-  it('builds the data compass with explicit scope and evidence boundaries', async () => {
+  it('builds a quantified market-risk dashboard with explicit scope and evidence boundaries', async () => {
     const html = await source('index.html');
 
     for (const expected of [
-      '数据罗盘',
-      '2024｜近 200 亿元',
-      '2025｜175 亿元',
-      '2026｜140 亿元',
-      '口径不同，不能直接计算涨跌',
-      '10 亿件',
-      'T 恤、保暖内衣、运动卫衣等针织服饰',
+      '市场风险数据罗盘',
+      '1511.8 亿美元',
+      '−5.0%',
+      '−8.9%',
+      '+3.9%',
+      '−7.9%',
+      '−27.34%',
+      '4.05%',
       '80%',
       '近 2 亿单',
       'A｜官方与权威媒体',
@@ -53,30 +53,43 @@ describe('xingzhiguang market-gap decision H5', () => {
       'C｜企业内部待确认',
       '23 家可见样本',
       '固定样本，不是全量普查',
-      '服务响应率，不是准时履约率',
+      'responseRate 是服务响应率',
+      'protectionRate 才是准时履约字段',
+      '星之光暂无准时履约数据',
     ]) {
       expect(html).toContain(expected);
     }
 
-    expect(html).not.toMatch(/两年(?:下降|下滑|减少)\s*30%/);
-    expect(html).not.toMatch(/星之光.{0,12}(?:履约率|准时履约).{0,8}(?:68|69)%/s);
-    expect(html).not.toMatch(/(?:盛元.{0,8}97%|兰泽.{0,8}99%|三海鲸.{0,8}92%)/s);
+    expect(html).not.toMatch(/星之光.{0,16}(?:履约率|准时履约).{0,8}(?:68|69)%/s);
   });
 
-  it('answers the market gap, competition, risk, and strategic-choice questions', async () => {
+  it('benchmarks competitors and identifies who could overtake Xingzhiguang', async () => {
     const html = await source('index.html');
 
     for (const expected of [
-      '四个可抢的市场缝隙',
-      '标准货号',
-      '分层起订',
-      '河北制造 × 广州履约',
-      '批次证据',
-      '肃宁工厂群',
-      '库员外',
+      '七家同口径对标',
+      '谁最可能超越星之光',
+      '威胁等级不是销售排名',
+      'SKU 数',
+      '定制 MOQ',
+      '服务响应率',
+      '回头率',
+      '准时履约字段',
+      '欣绣',
+      '盛元',
+      '兰泽',
+      '宇邦',
       '三海鲸',
-      'AG / Gildan',
-      '星之光如何对抗',
+      '佳绒',
+      '库员外',
+      'P0｜直接超越风险',
+      'P1｜逼近风险',
+      '已领先维度',
+      '对手正在做什么',
+      '星之光如何反击',
+      '30 天止血',
+      '90 天追平',
+      '180 天建立壁垒',
       '明确不做',
       '不打全网最低价战争',
       '不一次铺几百个 SKU',
@@ -88,6 +101,17 @@ describe('xingzhiguang market-gap decision H5', () => {
       '河北—广州断层',
       '数据失真',
       'AI 越权承诺',
+    ]) {
+      expect(html).toContain(expected);
+    }
+
+    for (const expected of [
+      '星之光</strong><span>30</span><span>1000 件</span><span>69%</span><span>82%</span><span>暂无数据</span>',
+      '欣绣</strong><span>200</span><span>1 件</span><span>77%</span><span>76%</span><span>100%</span>',
+      '盛元</strong><span>185</span><span>1000 件</span><span>97%</span><span>75%</span><span>100%</span>',
+      '兰泽</strong><span>134</span><span>2000 件</span><span>99%</span><span>74%</span><span>100%</span>',
+      '三海鲸</strong><span>340</span><span>5 件</span><span>92%</span><span>83%</span><span>暂无数据</span>',
+      '佳绒</strong><span>535</span><span>50 件</span><span>83%</span><span>60%</span><span>99%</span>',
     ]) {
       expect(html).toContain(expected);
     }
@@ -115,7 +139,7 @@ describe('xingzhiguang market-gap decision H5', () => {
       expect(html).toContain(expected);
     }
 
-    expect(html.indexOf('四个可抢的市场缝隙')).toBeLessThan(html.indexOf('全新 AI 组织架构'));
+    expect(html.indexOf('谁最可能超越星之光')).toBeLessThan(html.indexOf('全新 AI 组织架构'));
   });
 
   it('cites official sources and remains self-contained, mobile-safe, and secret-free', async () => {
@@ -155,7 +179,12 @@ describe('xingzhiguang market-gap decision H5', () => {
     expect(css).toContain('overflow-wrap: anywhere');
     expect(script).toContain('IntersectionObserver');
     expect(script).toContain('navigator.clipboard.writeText');
-    expect(material).toContain('市场缝隙决策报告');
+    expect(script).toContain("document.addEventListener('click'");
+    expect(script).toContain('sectionNavScroller.scrollTo');
+    expect(script).toContain("document.documentElement.style.scrollBehavior = 'auto'");
+    expect(script).toContain('window.scrollTo({ top: targetTop });');
+    expect(script).not.toContain("active?.scrollIntoView({ behavior: 'smooth'");
+    expect(material).toContain('市场风险与竞争对标报告');
     expect(material).toContain('阅读原文');
     expect(combined).not.toMatch(
       /127\.0\.0\.1|192\.168\.|DIRECTUS_TOKEN|BEGIN [A-Z ]*PRIVATE KEY|\/Users\/|gazidaily|嘎子/,

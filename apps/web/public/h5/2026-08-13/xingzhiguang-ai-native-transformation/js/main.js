@@ -4,6 +4,7 @@ const progressBar = document.querySelector('#reading-progress-bar');
 const backToTop = document.querySelector('#back-to-top');
 const toast = document.querySelector('#toast');
 const sectionNav = document.querySelector('#section-nav');
+const sectionNavScroller = sectionNav?.querySelector('.section-nav-inner');
 const navLinks = [...document.querySelectorAll('.section-nav a')];
 const sections = [...document.querySelectorAll('main section[id]')];
 
@@ -64,7 +65,10 @@ const sectionObserver = new IntersectionObserver(
 
     const active = navLinks.find((link) => link.getAttribute('href') === `#${visible.target.id}`);
     for (const link of navLinks) link.classList.toggle('is-active', link === active);
-    active?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    if (active && sectionNavScroller) {
+      const left = active.offsetLeft - (sectionNavScroller.clientWidth - active.offsetWidth) / 2;
+      sectionNavScroller.scrollTo({ left, behavior: 'smooth' });
+    }
   },
   { rootMargin: '-24% 0px -60% 0px', threshold: [0, 0.1, 0.4] },
 );
@@ -81,13 +85,24 @@ for (const dot of document.querySelectorAll('[data-gap]')) {
 document.querySelector('#copy-url')?.addEventListener('click', () => copyText(reportUrl));
 backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-sectionNav?.addEventListener('click', (event) => {
+document.addEventListener('click', (event) => {
   const link = event.target.closest('a[href^="#"]');
   if (!link) return;
-  const target = document.querySelector(link.getAttribute('href'));
+  const href = link.getAttribute('href');
+  if (!href || href === '#') return;
+  const target = document.querySelector(href);
   if (!target) return;
   event.preventDefault();
-  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const navOffset = sectionNav?.offsetHeight ?? 0;
+  const targetTop = Math.max(0, target.getBoundingClientRect().top + window.scrollY - navOffset - 16);
+  const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+  document.documentElement.style.scrollBehavior = 'auto';
+  if (window.location.hash === href) window.history.replaceState(null, '', href);
+  else window.history.pushState(null, '', href);
+  window.scrollTo({ top: targetTop });
+  window.requestAnimationFrame(() => {
+    document.documentElement.style.scrollBehavior = previousScrollBehavior;
+  });
 });
 
 window.addEventListener('scroll', updateProgress, { passive: true });
