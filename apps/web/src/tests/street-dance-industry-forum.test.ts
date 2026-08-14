@@ -7,193 +7,189 @@ const h5Root = new URL(
   import.meta.url,
 );
 
-const expectedCourses = [
-  '艺考新规下的招生与交付系统',
-  '小机构标准化：把经验变成流程',
-  '本地生活直播：从搭建到复盘',
-  '赛事数据化：报名、办赛与资源联动',
-  '门店增长作战图：获客、转化、复购',
-  '长青品牌：街舞机构如何跨周期',
-  '舞团IP内容增长：从人设到矩阵',
-  '用AI做街舞机构的IP视觉系统',
-];
-
-const whyAttend = [
-  '看懂变化，少走弯路',
-  '直面经营，不讲空话',
-  '带走工具，回去开工',
-  '连接同行，找到协作',
-];
-
-const learningOutcomes = [
-  '趋势判断',
-  '产品交付',
-  '门店标准化',
-  '流量转化',
-  '赛事联动',
-  '品牌与 AI',
-];
-
-const forumGuests = [
-  '夏锐',
+const expectedGuests = [
   '卜希霆',
+  '夏锐',
   '陆伟',
   '李宗齐',
-  '锋爷',
+  '郑锋',
   '桂鑫',
-  '海边',
+  '潘域',
   '吉顺',
   '周政',
   '袁康',
-  '朱颜棋（猪猪）',
-  '陈施（美子）',
-  '周营利（盈利）',
+  '朱颜棋',
+  '陈施',
+  '周营利',
+  '嘎子',
+];
+
+const expectedCourses = [
+  '新形势下流行舞艺考',
+  '小企业标准化管理',
+  '抖音直播搭建与实战',
+  '赛事系统与行业数据',
+  '门店逆袭方法论',
+  '28 年长青品牌运营',
+  '头部舞团 IP 运营',
+  '潮流 IP 与视觉体系',
+];
+
+const expectedCozeLinks = [
+  'https://www.coze.cn/s/lA1KH6CvgGQ/',
+  'https://www.coze.cn/s/sN6glvnH0b0/',
+  'https://www.coze.cn/s/pIVw89Z8TyM/',
 ];
 
 async function source(path: string): Promise<string> {
-  return readFile(new URL(path, h5Root), 'utf8').catch(() => '');
+  return readFile(new URL(path, h5Root), 'utf8');
 }
 
-describe('street dance industry forum static H5', () => {
-  it('publishes the fixed public path with campaign theme and eight course cards', async () => {
+function localReferences(markup: string): string[] {
+  return [...markup.matchAll(/\b(?:src|href)="([^"]+)"/g)]
+    .map((match) => match[1])
+    .filter(
+      (ref) =>
+        !ref.startsWith('#') &&
+        !ref.startsWith('http') &&
+        !ref.startsWith('tel:') &&
+        !ref.startsWith('mailto:') &&
+        !ref.startsWith('data:'),
+    );
+}
+
+describe('street dance industry forum v3 static H5', () => {
+  it('keeps the fixed public H5 slot while rendering the new campaign title', async () => {
     const html = await source('index.html');
 
-    expect(html).toContain('https://myhooddaily.iepose.cn/h5/2026-08-13/street-dance-industry-forum/');
-    expect(html).toContain('2026街舞文化产业发展大会');
+    expect(html).toContain('2026新兴文化产业发展大会｜街舞文化产业发展大会');
+    expect(html).toContain('2026 中国文化和旅游产业博览会同期活动');
     expect(html).toContain('潮流新时代');
     expect(html).toContain('舞出新经济');
-    expect(html).toContain('两天八课');
-    expect(html).toContain('证据边界');
-    expect(html).toContain('首版不写具体数字');
-    expect(html).toContain('未获独立来源前不作为承诺');
-    expect(html).toContain('2026-09-05');
-    expect(html).toContain('SAT');
-
-    for (const course of expectedCourses) {
-      expect(html).toContain(course);
-    }
-
-    const courseCards = html.match(/class="course-card"/g) ?? [];
-    expect(courseCards).toHaveLength(8);
-    expect(html).not.toMatch(/月销千万|单店单月100万|5300万粉丝|600亿播放|保过|保证盈利|郑锋|郑峰|潘域|潘彧/);
+    expect(html).toContain('中国 · 天津 · 梅江会展中心');
+    expect(html).toContain('9 月 5 日下午，500 人公益大会');
   });
 
-  it('includes v2 value proposition, learning outcomes, forum guests and the tentative forum agenda', async () => {
+  it('contains the three-day arrangement without reverting to old v2 copy', async () => {
     const html = await source('index.html');
 
-    expect(html).toContain('为什么值得来');
-    expect(html).toContain('你将带走什么');
-    expect(html.match(/data-worth-item=/g) ?? []).toHaveLength(4);
-    expect(html.match(/data-outcome-item=/g) ?? []).toHaveLength(6);
-
-    for (const item of [...whyAttend, ...learningOutcomes, ...forumGuests]) {
+    expect(html.match(/class="day /g) ?? []).toHaveLength(3);
+    for (const item of [
+      'DAY 0 · 09.05 周六',
+      '发展大会',
+      '14:00—17:00 · 梅江 N7 · 公益免费 · 500 席',
+      'DAY 1 · 09.06 周日',
+      '研修班 上午+下午',
+      'DAY 2 · 09.07 周一',
+      '研修班 收官',
+    ]) {
       expect(html).toContain(item);
     }
 
-    expect(html.match(/class="guest-card"/g) ?? []).toHaveLength(forumGuests.length);
-    expect(html).toContain('assets/forum-speaker-lineup.png');
-    expect(html).toContain('论坛议程为拟定版本');
+    expect(html).not.toContain('首版不写具体数字');
+    expect(html).not.toContain('论坛议程为拟定版本');
+  });
+
+  it('lists fourteen speaker cards and only optimized WebP guest images', async () => {
+    const html = await source('index.html');
+
+    expect(html.match(/<article class="speak\b/g) ?? []).toHaveLength(14);
+    for (const guest of expectedGuests) {
+      expect(html).toContain(`<h3>${guest}</h3>`);
+    }
+
+    const guestImages = [
+      ...html.matchAll(/<img src="(assets\/optimized\/guests\/[^"]+\.webp)"/g),
+    ].map((match) => match[1]);
+    expect(guestImages).toHaveLength(14);
+    for (const asset of guestImages) {
+      await access(new URL(asset, h5Root));
+    }
+
+    expect(html).not.toMatch(/assets\/guests\/|assets\/official\//);
+  });
+
+  it('renders eight course rows with the current source titles', async () => {
+    const html = await source('index.html');
+
+    expect(html.match(/<article class="cls\b/g) ?? []).toHaveLength(8);
+    for (const course of expectedCourses) {
+      expect(html).toContain(`<h3>${course}</h3>`);
+    }
 
     for (const item of [
-      '14:00—14:20',
-      '大会开场与产业倡议',
-      '14:20—14:40',
-      '新兴文化产业与青年经济观察',
-      '14:40—15:00',
-      '街舞内容如何走向大众表达',
-      '15:00—15:20',
-      '内容平台与街舞产业协同',
-      '15:20—15:40',
-      '街舞内容 IP 的运营实践',
-      '15:40—16:00',
-      '中国街舞文化产业新路径',
-      '16:00—16:40',
-      '产业生态：内容、平台与城市机会',
-      '16:40—17:00',
-      '机构经营与区域协同',
+      '09.06 09:00',
+      '09.06 10:40',
+      '09.06 14:00',
+      '09.06 15:40',
+      '09.07 09:00',
+      '09.07 10:40',
+      '09.07 14:00',
+      '09.07 15:40',
     ]) {
       expect(html).toContain(item);
     }
   });
 
-  it('renders workshop agendas with lunch placed between morning and afternoon courses', async () => {
+  it('keeps exactly three unique Coze CTA destinations', async () => {
     const html = await source('index.html');
+    const cozeLinks = [...new Set(html.match(/https:\/\/www\.coze\.cn\/s\/[^"]+/g) ?? [])];
 
-    for (const day of ['2026-09-06', '2026-09-07']) {
-      const block = html.match(new RegExp(`<article class="agenda-day workshop-day" data-agenda-day="${day}">([\\s\\S]*?)</article>`))?.[1] ?? '';
-      expect(block).toContain('12:10—14:00');
-      const firstMorning = block.indexOf('09:00—10:30');
-      const secondMorning = block.indexOf('10:40—12:10');
-      const lunch = block.indexOf('午休 · 交流');
-      const firstAfternoon = block.indexOf('14:00—15:30');
-      const secondAfternoon = block.indexOf('15:40—17:10');
-      expect(firstMorning).toBeGreaterThan(-1);
-      expect(secondMorning).toBeGreaterThan(firstMorning);
-      expect(lunch).toBeGreaterThan(secondMorning);
-      expect(firstAfternoon).toBeGreaterThan(lunch);
-      expect(secondAfternoon).toBeGreaterThan(firstAfternoon);
+    expect(cozeLinks).toEqual(expectedCozeLinks);
+    for (const label of ['免费报名大会', '报名研修班', '预订 SVIP']) {
+      expect(html).toContain(label);
     }
   });
 
-  it('keeps exactly three takeaways and one information note for every course', async () => {
-    const html = await source('index.html');
-    const courseBlocks = html.match(/<article class="course-card"[\s\S]*?<\/article>/g) ?? [];
-
-    expect(courseBlocks).toHaveLength(8);
-    for (const block of courseBlocks) {
-      expect(block.match(/data-takeaway=/g) ?? []).toHaveLength(3);
-      expect(block).toContain('课程与嘉宾信息说明');
-      expect(block).toContain('source-note');
-    }
-  });
-
-  it('ships local static assets without external scripts or leaked paths', async () => {
+  it('ships only the v3 local CSS, JS and optimized WebP image references', async () => {
     const [html, css, script] = await Promise.all([
       source('index.html'),
-      source('css/style.css'),
-      source('js/main.js'),
+      source('css/main.css'),
+      source('js/app.js'),
+    ]);
+
+    expect(html).toContain('href="css/main.css"');
+    expect(html).toContain('src="js/app.js"');
+    expect(html).toContain('assets/optimized/hero.webp');
+    expect(html).toContain('assets/optimized/official/kv.webp');
+    expect(html).toContain('assets/optimized/official/lineup.webp');
+    expect(html).toContain('assets/optimized/official/courses.webp');
+    expect(css).toContain('../assets/optimized/hero.webp');
+
+    for (const ref of localReferences(html)) {
+      await access(new URL(ref, h5Root));
+    }
+
+    const imgRefs = [...html.matchAll(/<img src="([^"]+)"/g)].map((match) => match[1]);
+    expect(imgRefs).toHaveLength(18);
+    for (const ref of imgRefs) {
+      expect(ref).toMatch(/^assets\/optimized\/.+\.webp$/);
+    }
+
+    expect(script).toContain('IntersectionObserver');
+  });
+
+  it('prevents font regressions, sub-class conflicts, leaks and mobile overflow regressions', async () => {
+    const [html, css, script] = await Promise.all([
+      source('index.html'),
+      source('css/main.css'),
+      source('js/app.js'),
     ]);
     const combined = `${html}\n${css}\n${script}`;
 
-    for (const asset of [
-      'assets/campaign-hero.png',
-      'assets/guests/fengye.png',
-      'assets/guests/guixin.png',
-      'assets/guests/haibian.png',
-      'assets/guests/jishun.png',
-      'assets/guests/meizi.png',
-      'assets/guests/yingli.png',
-      'assets/guests/yuankang.png',
-      'assets/guests/zhuyq.png',
-      'assets/forum-speaker-lineup.png',
-      'assets/posters/01_主视觉_潮流新时代舞出新经济.png',
-      'css/style.css',
-      'js/main.js',
-    ]) {
-      await access(new URL(asset, h5Root));
-      expect(html).toContain(asset);
-    }
+    expect(combined).not.toMatch(/fonts\.googleapis|fonts\.gstatic|Google Fonts|@import\s+url/i);
+    expect(css).toContain('-apple-system');
+    expect(css).toContain('PingFang SC');
+    expect(css).not.toMatch(/(^|[\s,{])\.sub\b/);
+    expect(html).not.toMatch(/class="[^"]*\bsub\b[^"]*"/);
+    expect(combined).not.toMatch(/127\.0\.0\.1|192\.168\.|DIRECTUS_TOKEN|GITHUB_TOKEN|\/Users\/|gazidaily/i);
 
-    expect(html).not.toMatch(/<script[^>]+src="https?:\/\//);
-    expect(combined).not.toMatch(/127\.0\.0\.1|192\.168\.|DIRECTUS_TOKEN|\/Users\/|gazidaily|嘎子/);
-  });
-
-  it('keeps mobile interaction and overflow protection in the static build', async () => {
-    const [html, css, script] = await Promise.all([
-      source('index.html'),
-      source('css/style.css'),
-      source('js/main.js'),
-    ]);
-
-    expect(html).toContain('id="reading-progress-bar"');
-    expect(html).toContain('id="back-to-top"');
-    expect(html).toContain('aria-live="polite"');
-    expect(css).toContain('overflow-x: hidden');
+    expect(css).toContain('overflow-x: clip');
     expect(css).toContain('max-width: 100%');
-    expect(css).toContain('@media (max-width: 780px)');
+    expect(css).toContain('@media (max-width: 560px)');
+    expect(css).toContain('.ggrid, .q8 { grid-template-columns: 1fr; }');
     expect(css).toContain('env(safe-area-inset-bottom)');
     expect(css).toContain('@media (prefers-reduced-motion: reduce)');
-    expect(script).toContain('IntersectionObserver');
-    expect(script).toContain('document.documentElement.scrollWidth');
+    expect(script).not.toContain('document.documentElement.scrollWidth');
   });
 });
