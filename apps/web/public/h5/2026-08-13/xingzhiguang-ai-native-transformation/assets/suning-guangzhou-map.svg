@@ -1,55 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
-  <title id="title">河北肃宁到广州前端的供应链地图</title>
-  <desc id="desc">河北肃宁源头工厂连接广州仓配前端，再连接全球客户的 AI Native 供应链路径。</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700" role="img" aria-labelledby="title desc">
+  <title id="title">星之光河北制造与广州仓配销售双中心</title>
+  <desc id="desc">河北负责标准制造，广州负责近客仓配和销售，以货号、批次、库存和异常台账连接</desc>
   <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#08111e"/>
-      <stop offset="100%" stop-color="#121a2a"/>
-    </linearGradient>
-    <linearGradient id="route" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0%" stop-color="#b6ff25"/>
-      <stop offset="48%" stop-color="#38bdf8"/>
-      <stop offset="100%" stop-color="#ff8a1d"/>
-    </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#102230" stroke-opacity=".07"/></pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#bb8b47"/></marker>
   </defs>
-  <rect width="900" height="560" rx="36" fill="url(#bg)"/>
-  <circle cx="122" cy="96" r="170" fill="#18324e" opacity=".45"/>
-  <circle cx="780" cy="452" r="210" fill="#172d28" opacity=".5"/>
-  <path d="M130 350 C250 155 430 108 548 228 C655 337 709 256 778 150" fill="none" stroke="url(#route)" stroke-width="10" stroke-linecap="round" filter="url(#glow)"/>
-  <path d="M130 350 C250 155 430 108 548 228 C655 337 709 256 778 150" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="12 18" opacity=".52"/>
-  <g font-family="PingFang SC, Arial, sans-serif">
-    <g transform="translate(74 300)">
-      <circle cx="56" cy="56" r="48" fill="#b6ff25" filter="url(#glow)"/>
-      <text x="56" y="48" font-size="19" font-weight="900" text-anchor="middle" fill="#07111f">河北</text>
-      <text x="56" y="76" font-size="25" font-weight="900" text-anchor="middle" fill="#07111f">肃宁</text>
-      <text x="0" y="138" font-size="28" font-weight="900" fill="#f8fbff">源头制造</text>
-      <text x="0" y="176" font-size="20" font-weight="700" fill="#9eb2ca">纱线 · 织布 · 染色 · 成衣</text>
+  <rect width="1400" height="700" fill="#f5f3ed"/>
+  <rect width="1400" height="700" fill="url(#grid)"/>
+  <text x="70" y="78" fill="#102230" font-family="Songti SC, STSong, serif" font-size="42" font-weight="700">双中心不是两套公司，是一套客户承诺</text>
+  <text x="70" y="116" fill="#647480" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18">唯一货号 · 唯一批次 · 唯一库存 · 唯一异常责任</text>
+  <g transform="translate(70 185)">
+    <rect width="480" height="390" fill="#0c1d2b"/>
+    <rect x="28" y="28" width="424" height="334" fill="none" stroke="#fff" stroke-opacity=".2"/>
+    <text x="52" y="83" fill="#e4c995" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="700" letter-spacing="4">HEBEI · SU NING</text>
+    <text x="52" y="145" fill="#fff" font-family="Songti SC, STSong, serif" font-size="44" font-weight="700">河北制造中心</text>
+    <line x1="52" y1="176" x2="428" y2="176" stroke="#fff" stroke-opacity=".2"/>
+    <g fill="#fff" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="20">
+      <text x="72" y="225">01 · 货号与金样</text><text x="72" y="270">02 · 批次与排产</text><text x="72" y="315">03 · 过程质量与入库</text>
     </g>
-    <g transform="translate(396 162)">
-      <rect x="0" y="0" width="170" height="112" rx="28" fill="#0f1726" stroke="#38bdf8" stroke-width="3"/>
-      <text x="85" y="48" font-size="26" font-weight="900" text-anchor="middle" fill="#38bdf8">AI 中台</text>
-      <text x="85" y="82" font-size="18" font-weight="700" text-anchor="middle" fill="#dbeafe">统一客户 / 库存 / 任务</text>
-    </g>
-    <g transform="translate(665 86)">
-      <circle cx="56" cy="56" r="48" fill="#38bdf8" filter="url(#glow)"/>
-      <text x="56" y="49" font-size="20" font-weight="900" text-anchor="middle" fill="#07111f">广州</text>
-      <text x="56" y="76" font-size="22" font-weight="900" text-anchor="middle" fill="#07111f">前端</text>
-      <text x="-14" y="138" font-size="28" font-weight="900" fill="#f8fbff">仓配与销售</text>
-      <text x="-14" y="176" font-size="20" font-weight="700" fill="#9eb2ca">现货 · 内销 · 外贸 · 履约</text>
-    </g>
-    <g transform="translate(575 390)">
-      <rect x="0" y="0" width="244" height="86" rx="28" fill="#111827" stroke="#ff8a1d" stroke-width="3"/>
-      <text x="26" y="36" font-size="24" font-weight="900" fill="#ff8a1d">全球客户经营</text>
-      <text x="26" y="66" font-size="18" font-weight="700" fill="#d8e1ef">B2B 询盘 · 报价 · 复购</text>
-    </g>
-    <text x="56" y="60" font-size="24" font-weight="900" fill="#f8fbff">供应链新路径</text>
-    <text x="56" y="96" font-size="18" font-weight="700" fill="#94a3b8">不是把货从北方搬到南方，而是把数据、客户与库存统一到 AI 经营层。</text>
+    <circle cx="50" cy="217" r="6" fill="#bb8b47"/><circle cx="50" cy="262" r="6" fill="#bb8b47"/><circle cx="50" cy="307" r="6" fill="#bb8b47"/>
   </g>
+  <g transform="translate(850 185)">
+    <rect width="480" height="390" fill="#2f695a"/>
+    <rect x="28" y="28" width="424" height="334" fill="none" stroke="#fff" stroke-opacity=".24"/>
+    <text x="52" y="83" fill="#e4c995" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="700" letter-spacing="4">GUANGZHOU</text>
+    <text x="52" y="145" fill="#fff" font-family="Songti SC, STSong, serif" font-size="44" font-weight="700">广州履约中心</text>
+    <line x1="52" y1="176" x2="428" y2="176" stroke="#fff" stroke-opacity=".24"/>
+    <g fill="#fff" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="20">
+      <text x="72" y="225">01 · 客户与选款</text><text x="72" y="270">02 · 现货与补货</text><text x="72" y="315">03 · 发货与复购</text>
+    </g>
+    <circle cx="50" cy="217" r="6" fill="#e4c995"/><circle cx="50" cy="262" r="6" fill="#e4c995"/><circle cx="50" cy="307" r="6" fill="#e4c995"/>
+  </g>
+  <path d="M560 310H840" fill="none" stroke="#bb8b47" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M840 448H560" fill="none" stroke="#bb8b47" stroke-width="4" marker-end="url(#arrow)"/>
+  <g transform="translate(595 258)">
+    <rect width="210" height="104" fill="#fff" stroke="#bb8b47"/>
+    <text x="105" y="42" text-anchor="middle" fill="#102230" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="700">标准 + 批次 + 库存</text>
+    <text x="105" y="72" text-anchor="middle" fill="#647480" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="15">生产事实向前端同步</text>
+  </g>
+  <g transform="translate(595 396)">
+    <rect width="210" height="104" fill="#fff" stroke="#bb8b47"/>
+    <text x="105" y="42" text-anchor="middle" fill="#102230" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="700">订单 + 反馈 + 异常</text>
+    <text x="105" y="72" text-anchor="middle" fill="#647480" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="15">客户事实向工厂回流</text>
+  </g>
+  <text x="700" y="640" text-anchor="middle" fill="#aa4b3f" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="19" font-weight="700">如果两端没有同一套事实，双中心只会增加沟通成本。</text>
 </svg>

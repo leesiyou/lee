@@ -15,86 +15,125 @@ async function source(path: string): Promise<string> {
   return readFile(new URL(path, h5Root), 'utf8').catch(() => '');
 }
 
-describe('xingzhiguang AI native transformation H5', () => {
-  it('publishes a boss-facing AI Native transformation diagnosis', async () => {
-    const [html, css, script] = await Promise.all([
-      source('index.html'),
-      source('css/style.css'),
-      source('js/main.js'),
-    ]);
-    const combined = `${html}\n${css}\n${script}`;
+describe('xingzhiguang market-gap decision H5', () => {
+  it('opens with a boss-facing market decision instead of an AI transformation pitch', async () => {
+    const html = await source('index.html');
 
-    expect(html).toContain('星之光 T 恤供应链');
-    expect(html).toContain('从传统加工企业到 AI Native 国际贸易组织');
-    expect(html).toContain('AI 不是工具，是公司的中间层');
-    expect(html).toContain('河北肃宁');
-    expect(html).toContain('广州前端');
-    expect(html).toContain('4500㎡');
-    expect(html).toContain('约 200 万件现货');
-    expect(html).toContain('两台服务器 + 一台 GPU');
-    expect(html).toContain('外贸客服 3 名');
-    expect(html).toContain('内销客服 3 名');
-    expect(html).not.toContain('外贸客户 3 个');
-    expect(html).not.toContain('内销客户 3 个');
-    expect(html).toContain('所有员工必须使用公司提供的 AI 工具');
-    expect(html).toContain('AI 复盘回收所有员工的工作进度');
-    expect(html).toContain('闭环且实战带转化的工作流');
-    expect(html).toContain('https://myhooddaily.iepose.cn/h5/2026-08-13/xingzhiguang-ai-native-transformation/');
-    expect(html).toContain('content="assets/ai-native-cover.svg"');
-    expect(combined).not.toMatch(/127\.0\.0\.1|192\.168\.|DIRECTUS_TOKEN|\/Users\/|gazidaily|嘎子/);
-    expect(html).not.toMatch(/<script[^>]+src="https?:\/\//);
+    expect(html).toContain('星之光 T 恤市场缝隙决策报告');
+    expect(html).toContain('给李总的核心结论');
+    expect(html).toContain('市场不缺更便宜的 T 恤，缺的是可重复采购的供应服务');
+    expect(html).toContain('河北自营工厂');
+    expect(html).toContain('广州自有仓库');
+    expect(html).toContain('广州销售团队');
+    expect(html).toContain('印花厂、团服客户和小批量品牌客户');
+    expect(html).toContain('2026.08.14');
+    expect(html).not.toContain('2026.08.15');
+    expect(html).not.toContain('从传统加工企业到 AI Native 国际贸易组织');
+    expect(html).not.toContain('AI 不是工具，是公司的中间层');
+    expect(html).toContain(
+      'https://myhooddaily.iepose.cn/h5/2026-08-13/xingzhiguang-ai-native-transformation/',
+    );
   });
 
-  it('defines the organization skeleton, operating loops, and department SOPs', async () => {
+  it('builds the data compass with explicit scope and evidence boundaries', async () => {
     const html = await source('index.html');
 
     for (const expected of [
-      '老板驾驶舱',
-      'AI 中台',
-      '外贸增长组',
-      '内销增长组',
-      '仓储现货组',
-      '产品供应链组',
-      'HR 与训练组',
-      '前端工程组',
-      '询盘 → 报价 → 打样 → 下单 → 出库 → 复购',
-      '客户 24 小时推进表',
-      'SKU 现货健康表',
-      '90 天转型路线图',
-      '第 1-7 天：统一入口',
-      '第 8-30 天：跑通闭环',
-      '由 3 名外贸客服 + 3 名内销客服各选 3 条客户线索做样板',
-      '第 31-60 天：放大增长',
-      '第 61-90 天：固化制度',
+      '数据罗盘',
+      '2024｜近 200 亿元',
+      '2025｜175 亿元',
+      '2026｜140 亿元',
+      '口径不同，不能直接计算涨跌',
+      '10 亿件',
+      'T 恤、保暖内衣、运动卫衣等针织服饰',
+      '80%',
+      '近 2 亿单',
+      'A｜官方与权威媒体',
+      'B｜平台商家自报',
+      'C｜企业内部待确认',
+      '23 家可见样本',
+      '固定样本，不是全量普查',
+      '服务响应率，不是准时履约率',
+    ]) {
+      expect(html).toContain(expected);
+    }
+
+    expect(html).not.toMatch(/两年(?:下降|下滑|减少)\s*30%/);
+    expect(html).not.toMatch(/星之光.{0,12}(?:履约率|准时履约).{0,8}(?:68|69)%/s);
+    expect(html).not.toMatch(/(?:盛元.{0,8}97%|兰泽.{0,8}99%|三海鲸.{0,8}92%)/s);
+  });
+
+  it('answers the market gap, competition, risk, and strategic-choice questions', async () => {
+    const html = await source('index.html');
+
+    for (const expected of [
+      '四个可抢的市场缝隙',
+      '标准货号',
+      '分层起订',
+      '河北制造 × 广州履约',
+      '批次证据',
+      '肃宁工厂群',
+      '库员外',
+      '三海鲸',
+      'AG / Gildan',
+      '星之光如何对抗',
+      '明确不做',
+      '不打全网最低价战争',
+      '不一次铺几百个 SKU',
+      '不把未验证的外贸能力包装成订单',
+      '风险与止损线',
+      '价格与毛利',
+      '库存与现金',
+      '批次质量',
+      '河北—广州断层',
+      '数据失真',
+      'AI 越权承诺',
     ]) {
       expect(html).toContain(expected);
     }
   });
 
-  it('keeps evidence boundaries and cites public industry sources', async () => {
+  it('uses AI organization and SOP only as the 90-day execution system', async () => {
     const html = await source('index.html');
 
-    expect(html).toContain('公开资料');
-    expect(html).toContain('现场诊断口径');
-    expect(html).toContain('肃宁县星之光制衣有限公司');
-    expect(html).toContain('成立于 2015 年');
-    expect(html).toContain('年产量 1500 万件');
-    expect(html).toContain('肃宁针纺相关生产企业 1200 余家');
-    expect(html).toContain('广州拥有 187 家服装专业批发市场');
-    expect(html).toContain('2024 年广州纺织服装大类商品出口 460.9 亿元');
-    expect(html).toContain('https://www.douyin.com/user/MS4wLjABAAAAKXxYoXw3mN4H73sk8ncrGrmY-8eK3qFUsvGJnrbyzSM');
-    expect(html).toContain('https://epaper.hbjjrb.com/Pad/jjrb/202507/11/con175848.html');
-    expect(html).toContain('https://www.gz.gov.cn/zt/zzyyzq/bmdt/content/post_10472154.html');
-    expect(html).toContain('https://www.mckinsey.com/capabilities/business-building/our-insights/the-seven-operating-truths-of-ai-native-companies');
+    for (const expected of [
+      '全新 AI 组织架构',
+      'AI 经营办公室',
+      '商品标准组',
+      '河北生产单元',
+      '广州仓配单元',
+      '销售增长单元',
+      '质量与数据官',
+      '询盘 → 选款 → 报价 → 打样 → 下单 → 生产/备货 → 质检 → 发货 → 复购',
+      '90 天证据计划',
+      '0—30 天｜冻结标准',
+      '31—60 天｜跑通小闭环',
+      '61—90 天｜凭证据扩张',
+      '待李总确认',
+      '建议目标',
+    ]) {
+      expect(html).toContain(expected);
+    }
+
+    expect(html.indexOf('四个可抢的市场缝隙')).toBeLessThan(html.indexOf('全新 AI 组织架构'));
   });
 
-  it('includes local assets, mobile interaction, and copy-ready WeChat material', async () => {
+  it('cites official sources and remains self-contained, mobile-safe, and secret-free', async () => {
     const [html, css, script, material] = await Promise.all([
       source('index.html'),
       source('css/style.css'),
       source('js/main.js'),
       readFile(wechatMaterial, 'utf8').catch(() => ''),
     ]);
+    const combined = `${html}\n${css}\n${script}\n${material}`;
+
+    for (const url of [
+      'http://epaper.hbjjrb.com/att/202507/11/c4028f68-e325-43b8-aaf5-223b7aa044d4.pdf',
+      'http://he.people.com.cn/n2/2026/0731/c192235-41656085.html',
+      'https://suning.gov.cn/suning/ADD06333/202603/db9d8119ccf34a9cb997ee529956cf40.shtml',
+    ]) {
+      expect(html).toContain(url);
+    }
 
     for (const asset of [
       'assets/ai-native-cover.svg',
@@ -106,19 +145,21 @@ describe('xingzhiguang AI native transformation H5', () => {
     }
 
     expect(html).toContain('id="reading-progress-bar"');
+    expect(html).toContain('id="section-nav"');
+    expect(html).toContain('id="source-register"');
     expect(html).toContain('id="copy-url"');
-    expect(html).toContain('id="copy-boss-summary"');
-    expect(html).toContain('id="copy-sales-pitch"');
     expect(html).toContain('id="back-to-top"');
     expect(html).toContain('aria-live="polite"');
+    expect(css).toContain('@media (max-width: 720px)');
     expect(css).toContain('@media (prefers-reduced-motion: reduce)');
-    expect(css).toContain('env(safe-area-inset-bottom)');
+    expect(css).toContain('overflow-wrap: anywhere');
     expect(script).toContain('IntersectionObserver');
     expect(script).toContain('navigator.clipboard.writeText');
-    expect(material).toContain('公众号正文精华');
-    expect(material).toContain('朋友圈文案');
+    expect(material).toContain('市场缝隙决策报告');
     expect(material).toContain('阅读原文');
-    expect(material).toContain('https://myhooddaily.iepose.cn/h5/2026-08-13/xingzhiguang-ai-native-transformation/');
-    expect(material).not.toMatch(/127\.0\.0\.1|192\.168\.|DIRECTUS_TOKEN|\/Users\/|gazidaily|嘎子/);
+    expect(combined).not.toMatch(
+      /127\.0\.0\.1|192\.168\.|DIRECTUS_TOKEN|BEGIN [A-Z ]*PRIVATE KEY|\/Users\/|gazidaily|嘎子/,
+    );
+    expect(html).not.toMatch(/<script[^>]+src="https?:\/\//);
   });
 });

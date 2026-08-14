@@ -1,68 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
-  <title id="title">AI Native 组织中间层结构图</title>
-  <desc id="desc">老板驾驶舱通过 AI 中台连接外贸、内销、仓储、产品供应链、HR 训练和前端工程组。</desc>
-  <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#07101e"/>
-      <stop offset="100%" stop-color="#111827"/>
-    </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-  <rect width="960" height="720" rx="42" fill="url(#bg)"/>
-  <g opacity=".24" stroke="#334155" stroke-width="1">
-    <path d="M80 124H880M80 224H880M80 324H880M80 424H880M80 524H880"/>
-    <path d="M180 80V640M300 80V640M420 80V640M540 80V640M660 80V640M780 80V640"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850" role="img" aria-labelledby="title desc">
+  <title id="title">星之光全新 AI 组织架构</title>
+  <desc id="desc">李总经营委员会、AI经营办公室、商品标准、河北生产、广州仓配、销售增长和质量数据官的责任结构</desc>
+  <rect width="1400" height="850" fill="#f5f3ed"/>
+  <text x="70" y="72" fill="#102230" font-family="Songti SC, STSong, serif" font-size="42" font-weight="700">全新 AI 组织架构</text>
+  <text x="70" y="108" fill="#647480" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="18">AI 汇总与预警，人定义标准并对承诺负责</text>
+  <g transform="translate(410 145)">
+    <rect width="580" height="112" fill="#0c1d2b"/>
+    <text x="290" y="45" text-anchor="middle" fill="#e4c995" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="16" font-weight="700" letter-spacing="4">DECISION</text>
+    <text x="290" y="83" text-anchor="middle" fill="#fff" font-family="Songti SC, STSong, serif" font-size="31" font-weight="700">李总 / 经营委员会</text>
   </g>
-  <g font-family="PingFang SC, Arial, sans-serif">
-    <rect x="322" y="62" width="316" height="86" rx="28" fill="#b6ff25" filter="url(#glow)"/>
-    <text x="480" y="104" font-size="28" font-weight="900" text-anchor="middle" fill="#07111f">老板驾驶舱</text>
-    <text x="480" y="132" font-size="16" font-weight="800" text-anchor="middle" fill="#17210a">目标 · 客户 · 库存 · 现金流 · 人效</text>
-    <rect x="252" y="284" width="456" height="132" rx="38" fill="#0f172a" stroke="#38bdf8" stroke-width="4" filter="url(#glow)"/>
-    <text x="480" y="340" font-size="42" font-weight="900" text-anchor="middle" fill="#38bdf8">AI 中台</text>
-    <text x="480" y="380" font-size="22" font-weight="800" text-anchor="middle" fill="#dbeafe">统一事实层 · SOP 层 · 复盘层 · 客户推进层</text>
-    <path d="M480 148V284" stroke="#b6ff25" stroke-width="5" stroke-linecap="round"/>
-    <path d="M480 416V504" stroke="#38bdf8" stroke-width="5" stroke-linecap="round"/>
-    <path d="M172 226H788M172 504H788" stroke="#64748b" stroke-width="3" stroke-dasharray="8 12"/>
-    <path d="M172 226L252 316M788 226L708 316M172 504L252 384M788 504L708 384" stroke="#64748b" stroke-width="3" fill="none"/>
-    <g font-size="20" font-weight="900">
-      <g transform="translate(68 178)">
-        <rect width="210" height="86" rx="24" fill="#111827" stroke="#b6ff25"/>
-        <text x="105" y="37" text-anchor="middle" fill="#f8fbff">外贸增长组</text>
-        <text x="105" y="65" text-anchor="middle" font-size="15" fill="#9fb1ca">询盘 · 报价 · 样品 · 复购</text>
-      </g>
-      <g transform="translate(682 178)">
-        <rect width="210" height="86" rx="24" fill="#111827" stroke="#38bdf8"/>
-        <text x="105" y="37" text-anchor="middle" fill="#f8fbff">内销增长组</text>
-        <text x="105" y="65" text-anchor="middle" font-size="15" fill="#9fb1ca">客户分层 · 爆品 · 回款</text>
-      </g>
-      <g transform="translate(68 462)">
-        <rect width="210" height="86" rx="24" fill="#111827" stroke="#ff8a1d"/>
-        <text x="105" y="37" text-anchor="middle" fill="#f8fbff">仓储现货组</text>
-        <text x="105" y="65" text-anchor="middle" font-size="15" fill="#9fb1ca">SKU · 库龄 · 出库 · 补货</text>
-      </g>
-      <g transform="translate(682 462)">
-        <rect width="210" height="86" rx="24" fill="#111827" stroke="#b6ff25"/>
-        <text x="105" y="37" text-anchor="middle" fill="#f8fbff">产品供应链组</text>
-        <text x="105" y="65" text-anchor="middle" font-size="15" fill="#9fb1ca">款式 · 成本 · 质量 · 交期</text>
-      </g>
-      <g transform="translate(220 588)">
-        <rect width="230" height="72" rx="22" fill="#111827" stroke="#94a3b8"/>
-        <text x="115" y="32" text-anchor="middle" fill="#f8fbff">HR 与训练组</text>
-        <text x="115" y="56" text-anchor="middle" font-size="14" fill="#9fb1ca">招聘 · 入职 · AI 训练</text>
-      </g>
-      <g transform="translate(510 588)">
-        <rect width="230" height="72" rx="22" fill="#111827" stroke="#94a3b8"/>
-        <text x="115" y="32" text-anchor="middle" fill="#f8fbff">前端工程组</text>
-        <text x="115" y="56" text-anchor="middle" font-size="14" fill="#9fb1ca">工具台 · 数据看板 · 自动化</text>
-      </g>
+  <path d="M700 257v64" stroke="#bb8b47" stroke-width="3"/>
+  <g transform="translate(310 321)">
+    <rect width="780" height="116" fill="#2f695a"/>
+    <text x="390" y="43" text-anchor="middle" fill="#e4c995" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="16" font-weight="700" letter-spacing="4">OPERATING SYSTEM</text>
+    <text x="390" y="83" text-anchor="middle" fill="#fff" font-family="Songti SC, STSong, serif" font-size="32" font-weight="700">AI 经营办公室</text>
+  </g>
+  <path d="M700 437v74M180 511h1040" stroke="#bb8b47" stroke-width="3"/>
+  <g font-family="PingFang SC, Microsoft YaHei, sans-serif">
+    <g transform="translate(70 511)">
+      <path d="M110 0v42" stroke="#bb8b47" stroke-width="3"/>
+      <rect y="42" width="220" height="176" fill="#fff" stroke="#cfd6d9"/>
+      <rect y="42" width="220" height="10" fill="#bb8b47"/>
+      <text x="110" y="94" text-anchor="middle" fill="#102230" font-size="22" font-weight="700">商品标准组</text>
+      <text x="110" y="131" text-anchor="middle" fill="#647480" font-size="15">货号 · BOM · 金样</text>
+      <text x="110" y="158" text-anchor="middle" fill="#647480" font-size="15">报价规则 · 版本</text>
+      <text x="110" y="197" text-anchor="middle" fill="#2f695a" font-size="14" font-weight="700">标准唯一</text>
     </g>
-    <text x="60" y="76" font-size="24" font-weight="900" fill="#f8fbff">公司骨架 SOP</text>
-    <text x="60" y="112" font-size="18" font-weight="700" fill="#94a3b8">让 AI 成为上下衔接的中间层，而不是某个员工私人的聊天工具。</text>
+    <g transform="translate(330 511)">
+      <path d="M110 0v42" stroke="#bb8b47" stroke-width="3"/>
+      <rect y="42" width="220" height="176" fill="#fff" stroke="#cfd6d9"/>
+      <rect y="42" width="220" height="10" fill="#bb8b47"/>
+      <text x="110" y="94" text-anchor="middle" fill="#102230" font-size="22" font-weight="700">河北生产单元</text>
+      <text x="110" y="131" text-anchor="middle" fill="#647480" font-size="15">排产 · 批次 · 交期</text>
+      <text x="110" y="158" text-anchor="middle" fill="#647480" font-size="15">首件 · 过程异常</text>
+      <text x="110" y="197" text-anchor="middle" fill="#2f695a" font-size="14" font-weight="700">制造可追溯</text>
+    </g>
+    <g transform="translate(590 511)">
+      <path d="M110 0v42" stroke="#bb8b47" stroke-width="3"/>
+      <rect y="42" width="220" height="176" fill="#fff" stroke="#cfd6d9"/>
+      <rect y="42" width="220" height="10" fill="#bb8b47"/>
+      <text x="110" y="94" text-anchor="middle" fill="#102230" font-size="22" font-weight="700">广州仓配单元</text>
+      <text x="110" y="131" text-anchor="middle" fill="#647480" font-size="15">库存 · 库龄 · 拣配</text>
+      <text x="110" y="158" text-anchor="middle" fill="#647480" font-size="15">发货 · 退换原因</text>
+      <text x="110" y="197" text-anchor="middle" fill="#2f695a" font-size="14" font-weight="700">履约可查询</text>
+    </g>
+    <g transform="translate(850 511)">
+      <path d="M110 0v42" stroke="#bb8b47" stroke-width="3"/>
+      <rect y="42" width="220" height="176" fill="#fff" stroke="#cfd6d9"/>
+      <rect y="42" width="220" height="10" fill="#bb8b47"/>
+      <text x="110" y="94" text-anchor="middle" fill="#102230" font-size="22" font-weight="700">销售增长单元</text>
+      <text x="110" y="131" text-anchor="middle" fill="#647480" font-size="15">客户 · 报价 · 打样</text>
+      <text x="110" y="158" text-anchor="middle" fill="#647480" font-size="15">成交 · 回款 · 复购</text>
+      <text x="110" y="197" text-anchor="middle" fill="#2f695a" font-size="14" font-weight="700">客户可复购</text>
+    </g>
+    <g transform="translate(1110 511)">
+      <path d="M110 0v42" stroke="#bb8b47" stroke-width="3"/>
+      <rect y="42" width="220" height="176" fill="#aa4b3f"/>
+      <rect y="42" width="220" height="10" fill="#e4c995"/>
+      <text x="110" y="94" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">质量与数据官</text>
+      <text x="110" y="131" text-anchor="middle" fill="#fff" fill-opacity=".75" font-size="15">证据 · 完整性 · 权限</text>
+      <text x="110" y="158" text-anchor="middle" fill="#fff" fill-opacity=".75" font-size="15">异常 · AI 承诺边界</text>
+      <text x="110" y="197" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">拥有退回权</text>
+    </g>
+  </g>
+  <g transform="translate(70 778)">
+    <rect width="1260" height="40" fill="#e6e1d7"/>
+    <text x="630" y="27" text-anchor="middle" fill="#102230" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="16" font-weight="700">共同事实层：客户 · 货号 · 价格规则 · 批次 · 库存 · 质量 · 订单 · 反馈</text>
   </g>
 </svg>

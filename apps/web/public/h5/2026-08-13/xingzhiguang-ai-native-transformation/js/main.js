@@ -1,103 +1,95 @@
-const PUBLIC_URL = 'https://myhooddaily.iepose.cn/h5/2026-08-13/xingzhiguang-ai-native-transformation/';
+const reportUrl = 'https://myhooddaily.iepose.cn/h5/2026-08-13/xingzhiguang-ai-native-transformation/';
 
-const progressBar = document.getElementById('reading-progress-bar');
-const backToTop = document.getElementById('back-to-top');
-const toast = document.getElementById('toast');
+const progressBar = document.querySelector('#reading-progress-bar');
+const backToTop = document.querySelector('#back-to-top');
+const toast = document.querySelector('#toast');
+const sectionNav = document.querySelector('#section-nav');
+const navLinks = [...document.querySelectorAll('.section-nav a')];
+const sections = [...document.querySelectorAll('main section[id]')];
+
+let toastTimer;
 
 function updateProgress() {
-  const scrollTop = window.scrollY || document.documentElement.scrollTop;
-  const max = document.documentElement.scrollHeight - window.innerHeight;
-  const ratio = max > 0 ? Math.min(scrollTop / max, 1) : 0;
-  if (progressBar) {
-    progressBar.style.width = `${ratio * 100}%`;
-  }
-  if (backToTop) {
-    backToTop.classList.toggle('show', scrollTop > 520);
-  }
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollable > 0 ? Math.min(1, window.scrollY / scrollable) : 0;
+  if (progressBar) progressBar.style.width = `${progress * 100}%`;
+  backToTop?.classList.toggle('visible', window.scrollY > 720);
 }
 
 function showToast(message) {
   if (!toast) return;
+  window.clearTimeout(toastTimer);
   toast.textContent = message;
   toast.classList.add('show');
-  window.clearTimeout(showToast.timer);
-  showToast.timer = window.setTimeout(() => toast.classList.remove('show'), 2200);
+  toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2200);
 }
 
-async function copyText(text, success) {
+async function copyText(value) {
   try {
-    await navigator.clipboard.writeText(text);
-    showToast(success);
+    await navigator.clipboard.writeText(value);
+    showToast('报告地址已复制');
   } catch {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.setAttribute('readonly', '');
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    textarea.remove();
-    showToast(success);
+    const field = document.createElement('textarea');
+    field.value = value;
+    field.setAttribute('readonly', '');
+    field.style.position = 'fixed';
+    field.style.opacity = '0';
+    document.body.append(field);
+    field.select();
+    const copied = document.execCommand('copy');
+    field.remove();
+    showToast(copied ? '报告地址已复制' : '复制失败，请长按地址复制');
   }
 }
 
-const bossSummary = `星之光 T 恤供应链今天不是缺资源，而是缺一套能让资源自动协同的经营系统。建议把 AI 定位为公司中间层：所有客户、库存、报价、任务、复盘都进入统一事实层；老板看驾驶舱，各部门按 SOP 推进，AI 每天回收进度并暴露卡点。第一阶段先用 90 天跑通一个闭环：询盘 → 报价 → 打样 → 下单 → 出库 → 复购。`;
+const revealObserver = new IntersectionObserver(
+  (entries, observer) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  },
+  { threshold: 0.08, rootMargin: '0px 0px -8% 0px' },
+);
 
-const salesPitch = `我们不是单纯卖 T 恤现货，而是用河北肃宁源头制造、广州仓配前端和 AI 客户推进系统，为国内外客户提供稳定、快速、可追踪的 T 恤供应链服务。客户要的不只是低价，而是确认货在、报价快、交期准、复购省心。`;
+for (const node of document.querySelectorAll('.reveal')) revealObserver.observe(node);
 
-document.getElementById('copy-url')?.addEventListener('click', () => {
-  copyText(PUBLIC_URL, 'H5 公网地址已复制，可以发给老板。');
-});
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
 
-document.getElementById('copy-boss-summary')?.addEventListener('click', () => {
-  copyText(bossSummary, '老板摘要已复制。');
-});
+    const active = navLinks.find((link) => link.getAttribute('href') === `#${visible.target.id}`);
+    for (const link of navLinks) link.classList.toggle('is-active', link === active);
+    active?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  },
+  { rootMargin: '-24% 0px -60% 0px', threshold: [0, 0.1, 0.4] },
+);
 
-document.getElementById('copy-sales-pitch')?.addEventListener('click', () => {
-  copyText(salesPitch, '营销话术已复制。');
-});
+for (const section of sections) sectionObserver.observe(section);
 
-backToTop?.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+for (const dot of document.querySelectorAll('[data-gap]')) {
+  dot.addEventListener('click', () => {
+    const target = document.querySelector(`#${dot.dataset.gap}`);
+    target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+}
+
+document.querySelector('#copy-url')?.addEventListener('click', () => copyText(reportUrl));
+backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+sectionNav?.addEventListener('click', (event) => {
+  const link = event.target.closest('a[href^="#"]');
+  if (!link) return;
+  const target = document.querySelector(link.getAttribute('href'));
+  if (!target) return;
+  event.preventDefault();
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
 window.addEventListener('scroll', updateProgress, { passive: true });
-window.addEventListener('resize', updateProgress);
+window.addEventListener('resize', updateProgress, { passive: true });
 updateProgress();
-
-const revealItems = document.querySelectorAll('.reveal');
-if ('IntersectionObserver' in window) {
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
-  );
-  revealItems.forEach(item => observer.observe(item));
-} else {
-  revealItems.forEach(item => item.classList.add('in'));
-}
-
-document.querySelectorAll('[data-count]').forEach(el => {
-  const target = Number(el.getAttribute('data-count'));
-  if (!Number.isFinite(target)) return;
-  let current = 0;
-  const steps = 36;
-  const increment = target / steps;
-  const tick = () => {
-    current += increment;
-    if (current >= target) {
-      el.textContent = target.toLocaleString('zh-CN');
-      return;
-    }
-    el.textContent = Math.round(current).toLocaleString('zh-CN');
-    requestAnimationFrame(tick);
-  };
-  tick();
-});
