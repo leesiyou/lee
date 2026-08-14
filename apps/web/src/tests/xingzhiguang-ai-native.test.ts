@@ -168,6 +168,16 @@ describe('xingzhiguang competitive-risk decision H5', () => {
       expect(html).toContain(asset);
     }
 
+    for (const versionedAsset of [
+      'css/style.css?v=20260814-competitive-risk',
+      'js/main.js?v=20260814-competitive-risk',
+      'assets/ai-native-cover.svg?v=20260814-competitive-risk',
+      'assets/suning-guangzhou-map.svg?v=20260814-competitive-risk',
+      'assets/ai-organization-layer.svg?v=20260814-competitive-risk',
+    ]) {
+      expect(html).toContain(versionedAsset);
+    }
+
     expect(html).toContain('id="reading-progress-bar"');
     expect(html).toContain('id="section-nav"');
     expect(html).toContain('id="source-register"');
