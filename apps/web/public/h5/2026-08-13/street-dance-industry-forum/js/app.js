@@ -16,23 +16,15 @@
       g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + d);
       o.connect(g).connect(c.destination); o.start(); o.stop(c.currentTime + d + 0.02);
     },
-    noise(d, v) {
-      const c = this.ctx, n = Math.floor(c.sampleRate * d);
-      const b = c.createBuffer(1, n, c.sampleRate), data = b.getChannelData(0);
-      for (let i = 0; i < n; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / n);
-      const src = c.createBufferSource(), g = c.createGain(), f = c.createBiquadFilter();
-      f.type = "lowpass"; f.frequency.value = 860; src.buffer = b; g.gain.value = v;
-      src.connect(f).connect(g).connect(c.destination); src.start();
-    },
     play(name) {
       if (!this.on || !this.ctx) return;
       const now = performance.now();
       if (name === "chime" && now - this.last < 1200) return;
       if (name === "chime") this.last = now;
-      if (name === "whoosh") { this.noise(.4, .1); this.tone(170, .38, "sine", .045, 70); }
-      if (name === "tick") this.tone(1720, .05, "triangle", .035);
-      if (name === "hover") this.tone(2360, .04, "sine", .022);
-      if (name === "chime") { this.tone(523, .28, "sine", .03); this.tone(659, .26, "sine", .02); }
+      if (name === "whoosh") this.tone(170, .38, "sine", .04, 70);
+      if (name === "tick") this.tone(1720, .05, "triangle", .03);
+      if (name === "hover") this.tone(2360, .04, "sine", .02);
+      if (name === "chime") { this.tone(523, .28, "sine", .025); this.tone(659, .26, "sine", .018); }
     }
   };
 
@@ -62,8 +54,7 @@
     });
   }, { threshold: .16 });
   $$(".reveal, [data-chime]").forEach((el) => io.observe(el));
-
-  $$(".btn, .speak, .day").forEach((el) => {
+  $$(".btn, .speak, .day, .guide a").forEach((el) => {
     el.addEventListener("mouseenter", () => audio.play("hover"));
     el.addEventListener("click", () => audio.play("tick"));
   });
