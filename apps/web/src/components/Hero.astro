@@ -1,0 +1,15 @@
+---
+interface Props {
+  eyebrow?: string;
+  subtitle?: string | null;
+  title: string;
+}
+
+const { eyebrow = 'GAZI DAILY', subtitle, title } = Astro.props;
+---
+
+<header class="article-hero">
+  <p class="article-hero__eyebrow">{eyebrow}</p>
+  <h1 class="article-hero__title">{title}</h1>
+  {subtitle && <p class="article-hero__subtitle">{subtitle}</p>}
+</header>

@@ -1,0 +1,13 @@
+---
+interface Props {
+  cite?: string;
+  text: string;
+}
+
+const { cite, text } = Astro.props;
+---
+
+<figure class="editorial-quote">
+  <blockquote class="editorial-quote__body">“{text}”</blockquote>
+  {cite && <figcaption class="editorial-quote__cite">— {cite}</figcaption>}
+</figure>

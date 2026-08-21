@@ -1,0 +1,22 @@
+---
+import { fetchPublishedArticles } from '@/lib/directus';
+import { runtimeConfig } from '@/lib/routes';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const articles = (await fetchPublishedArticles({ apiUrl: runtimeConfig().directusInternalUrl, limit: 1000 })).data;
+const groups = new Map<string, typeof articles>();
+for (const article of articles) {
+  const date = new Date(article.published_at);
+  const key = `${date.getFullYear()} 年 ${date.getMonth() + 1} 月`;
+  groups.set(key, [...(groups.get(key) ?? []), article]);
+}
+---
+
+<BaseLayout title="文章归档">
+  <section class="page-hero"><p>ARCHIVE</p><h1>日更归档</h1></section>
+  <section class="archive-list">
+    {[...groups.entries()].map(([month, items]) => (
+      <section class="archive-month"><h2>{month}</h2><ol>{items.map((article) => <li><time datetime={article.published_at}>{new Date(article.published_at).toLocaleDateString('zh-CN', { day: '2-digit', month: '2-digit' })}</time><a href={`/posts/${article.slug}`}>{article.title}</a></li>)}</ol></section>
+    ))}
+  </section>
+</BaseLayout>

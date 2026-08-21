@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>中国街舞 2015—2026：从热度到资产</title>
+  <meta name="description" content="五位专家独立研究、数据对齐与十年证据复盘：哪些沉淀成了资产，哪些只是热度泡沫。" />
+  <link rel="canonical" href="__CANONICAL_URL__" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="中国街舞 2015—2026：从热度到资产" />
+  <meta property="og:description" content="五位专家独立研究、数据对齐与十年证据复盘。" />
+  <meta property="og:url" content="__CANONICAL_URL__" />
+  <meta property="og:image" content="__COVER_URL__" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    :root {
+      --bg: #070a0f;
+      --panel: #0f1520;
+      --panel2: #151d2b;
+      --line: #2a3548;
+      --text: #eef2f7;
+      --muted: #8b98ab;
+      --cyan: #5eead4;
+      --violet: #a78bfa;
+      --amber: #fbbf24;
+      --rose: #fb7185;
+      --blue: #60a5fa;
+      --ok: #34d399;
+      --radius: 16px;
+      --max: 1080px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Helvetica Neue", "Noto Sans SC", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 18px 80px; }
+
+    /* top */
+    .top {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: blur(14px);
+      background: rgba(7,10,15,.9);
+      border-bottom: 1px solid var(--line);
+    }
+    .top-inner {
+      max-width: var(--max); margin: 0 auto;
+      padding: 12px 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .badge {
+      font-size: 11px; letter-spacing: .08em;
+      padding: 4px 8px; border-radius: 999px;
+      border: 1px solid rgba(167,139,250,.45);
+      color: var(--violet); background: rgba(167,139,250,.08);
+    }
+    .nav { display: flex; gap: 10px; flex-wrap: wrap; font-size: 12px; }
+    .nav a { color: var(--muted); }
+    .nav a:hover { color: var(--text); }
+
+    /* hero */
+    .hero {
+      padding: 48px 0 28px;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(900px 320px at 10% -10%, rgba(96,165,250,.18), transparent 55%),
+        radial-gradient(700px 280px at 90% 0%, rgba(167,139,250,.14), transparent 50%);
+    }
+    .kicker {
+      color: var(--cyan); font-size: 12px; letter-spacing: .16em; font-weight: 700;
+      margin: 0 0 12px;
+    }
+    h1 {
+      margin: 0 0 14px; font-size: clamp(28px, 6vw, 44px);
+      line-height: 1.15; letter-spacing: -.02em;
+    }
+    h1 span { color: transparent; background: linear-gradient(90deg, var(--cyan), var(--violet)); -webkit-background-clip: text; background-clip: text; }
+    .lead { color: var(--muted); max-width: 720px; margin: 0 0 20px; font-size: 16px; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+    .pill {
+      border: 1px solid var(--line); background: var(--panel);
+      border-radius: 999px; padding: 6px 12px; font-size: 12px; color: var(--muted);
+    }
+    .pill b { color: var(--text); }
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    }
+    .stat {
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 14px;
+    }
+    .stat strong { display: block; font-size: 24px; color: var(--cyan); }
+    .stat span { color: var(--muted); font-size: 12px; }
+
+    section { padding: 36px 0; border-bottom: 1px solid var(--line); }
+    .sec-k { color: var(--violet); font-size: 12px; letter-spacing: .14em; font-weight: 700; margin: 0 0 8px; }
+    h2 { margin: 0 0 8px; font-size: clamp(22px, 4vw, 28px); }
+    .sec-intro { color: var(--muted); margin: 0 0 20px; max-width: 780px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .card {
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 16px;
+    }
+    .card h3 { margin: 0 0 8px; font-size: 16px; }
+    .card p, .card li { color: var(--muted); font-size: 13.5px; }
+    .card ul { margin: 0; padding-left: 18px; }
+
+    .grade {
+      display: inline-flex; align-items: center;
+      font-size: 11px; font-weight: 700; letter-spacing: .04em;
+      padding: 2px 8px; border-radius: 999px; border: 1px solid;
+    }
+    .g-a { color: var(--ok); border-color: rgba(52,211,153,.4); background: rgba(52,211,153,.08); }
+    .g-b { color: var(--blue); border-color: rgba(96,165,250,.4); background: rgba(96,165,250,.08); }
+    .g-c { color: var(--amber); border-color: rgba(251,191,36,.4); background: rgba(251,191,36,.08); }
+    .g-d { color: var(--rose); border-color: rgba(251,113,133,.4); background: rgba(251,113,133,.08); }
+
+    /* timeline */
+    .tl { display: grid; gap: 12px; }
+    .tl-item {
+      display: grid; grid-template-columns: 88px 1fr; gap: 12px;
+      padding: 14px; border: 1px solid var(--line); border-radius: var(--radius);
+      background: linear-gradient(90deg, rgba(96,165,250,.06), transparent 40%), var(--panel);
+    }
+    .tl-year { color: var(--cyan); font-weight: 800; font-size: 18px; }
+    .tl-item h3 { margin: 0 0 6px; font-size: 15px; }
+    .tl-item p { margin: 0; color: var(--muted); font-size: 13.5px; }
+
+    /* gantt */
+    .gantt { display: grid; gap: 10px; }
+    .gantt-row {
+      display: grid; grid-template-columns: 140px 1fr; gap: 10px; align-items: center;
+    }
+    .gantt-label strong { display: block; font-size: 13px; }
+    .gantt-label span { color: var(--muted); font-size: 11px; }
+    .track {
+      position: relative; height: 38px; border-radius: 10px;
+      background: #0b1018; border: 1px solid var(--line); overflow: hidden;
+    }
+    .bar {
+      position: absolute; top: 4px; bottom: 4px; border-radius: 8px;
+      display: flex; align-items: center; padding: 0 10px;
+      font-size: 11px; font-weight: 600; color: #041018; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+      background: linear-gradient(90deg, #60a5fa, #5eead4);
+    }
+    .bar.future { background: linear-gradient(90deg, #a78bfa, #60a5fa); color: #0b1020; }
+    .scale {
+      display: grid; grid-template-columns: repeat(12, 1fr);
+      font-size: 10px; color: var(--muted); margin: 0 0 8px 150px;
+    }
+
+    /* experts */
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .tab {
+      border: 1px solid var(--line); background: var(--panel2); color: var(--muted);
+      border-radius: 999px; padding: 8px 12px; cursor: pointer; font-size: 12px;
+    }
+    .tab.active { color: #041018; background: var(--cyan); border-color: transparent; font-weight: 700; }
+    .expert-panel { display: none; }
+    .expert-panel.active { display: block; }
+    .vote {
+      display: inline-flex; flex-direction: column; gap: 2px;
+      padding: 10px 14px; border-radius: 12px;
+      border: 1px solid rgba(94,234,212,.35); background: rgba(94,234,212,.08);
+    }
+    .vote small { color: var(--muted); font-size: 11px; }
+    .vote b { color: var(--cyan); font-size: 15px; }
+    .dual { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .dual .card h4 { margin: 0 0 8px; font-size: 13px; color: var(--cyan); }
+    .finding { border-left: 3px solid var(--violet); padding-left: 12px; margin: 10px 0; }
+    .finding strong { display: block; margin-bottom: 4px; }
+
+    /* table */
+    .table {
+      width: 100%; border-collapse: collapse; font-size: 12px;
+      border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+    }
+    .table th, .table td {
+      border-bottom: 1px solid var(--line); border-right: 1px solid var(--line);
+      padding: 10px 8px; text-align: left; vertical-align: top;
+    }
+    .table th { background: var(--panel2); color: var(--text); font-weight: 700; }
+    .table td { color: var(--muted); background: var(--panel); }
+    .table tr:last-child td { border-bottom: 0; }
+    .table .st { color: var(--amber); font-weight: 700; }
+
+    .banner {
+      padding: 18px; border-radius: var(--radius);
+      border: 1px solid rgba(251,191,36,.35);
+      background: linear-gradient(90deg, rgba(251,191,36,.1), rgba(167,139,250,.08));
+      margin-bottom: 16px;
+    }
+    .banner strong { display: block; font-size: 22px; color: var(--amber); margin: 4px 0 8px; }
+    .banner span { color: var(--muted); font-size: 12px; letter-spacing: .1em; }
+
+    .warn {
+      border: 1px solid rgba(251,113,133,.35);
+      background: rgba(251,113,133,.07);
+      border-radius: var(--radius); padding: 14px; color: #fecdd3; font-size: 13px;
+    }
+
+    .foot {
+      padding: 28px 0 40px; color: var(--muted); font-size: 12px;
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    .share-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+    .share-row button {
+      min-height:44px; padding:0 18px; border:1px solid var(--cyan); border-radius:999px;
+      background:rgba(94,234,212,.08); color:var(--cyan); font:inherit; font-weight:700; cursor:pointer;
+    }
+    .share-status { min-height:24px; margin:10px 0 0; color:var(--muted); font-size:13px; }
+    .back-top {
+      position:fixed; right:max(16px,env(safe-area-inset-right)); bottom:max(18px,env(safe-area-inset-bottom));
+      width:46px; height:46px; border:1px solid var(--line); border-radius:50%; background:var(--panel2);
+      color:var(--text); opacity:0; transform:translateY(70px); transition:.2s; z-index:50;
+    }
+    .back-top.visible { opacity:1; transform:none; }
+
+    @media (max-width: 800px) {
+      .stats, .grid-2, .grid-3, .dual { grid-template-columns: 1fr; }
+      .nav { display: none; }
+      .tl-item { grid-template-columns: 1fr; }
+      .gantt-row { grid-template-columns: 1fr; }
+      .scale { margin-left: 0; }
+      .table-wrap { overflow-x: auto; }
+      .table { min-width: 720px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <div class="brand">
+        <span class="badge">GROK 汇总版</span>
+        <span>街舞十年证据复盘</span>
+      </div>
+      <nav class="nav">
+        <a href="#method">方法</a>
+        <a href="#timeline">十年</a>
+        <a href="#gantt">甘特</a>
+        <a href="#experts">专家</a>
+        <a href="#align">对齐</a>
+        <a href="#verdict">裁决</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" id="top" style="border:0;padding-top:36px">
+      <p class="kicker">GROK SYNTHESIS · 2015—2026</p>
+      <h1>中国街舞<br /><span>从热度到资产</span></h1>
+      <p class="lead">
+        本页为 <b style="color:var(--text)">Grok 汇总版型</b>：把五位专家独立研究、官方环境证据与项目冲突审计，压成一份可汇报的数字化模块。
+        不是招商海报，而是<strong style="color:var(--text)">证据对齐报告</strong>。
+      </p>
+      <div class="meta-row">
+        <span class="pill">版本 <b>Grok R1.1</b></span>
+        <span class="pill">截止 <b>2026-08-01</b></span>
+        <span class="pill">投票 <b>5/5 条件式参与</b></span>
+        <span class="pill">状态 <b>Conditional Hold</b></span>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong>5</strong><span>位专家 R1 研究</span></div>
+        <div class="stat"><strong>28</strong><span>条官方环境证据（台账）</span></div>
+        <div class="stat"><strong>10+</strong><span>项项目待核/冲突主张</span></div>
+        <div class="stat"><strong>12</strong><span>汇报模块</span></div>
+      </div>
+      <div class="share-row">
+        <button type="button" data-share-review>分享给朋友</button>
+        <button type="button" data-copy-review>复制文章链接</button>
+      </div>
+      <p class="share-status" data-share-status aria-live="polite"></p>
+    </section>
+
+    <section id="thesis" style="padding-top:8px">
+      <div class="banner">
+        <span>GROK 一句话裁判</span>
+        <strong>十年留下的是组织、赛事、竞技通道与经营方法；不是“128.6 亿”式无源规模故事。</strong>
+        <p style="margin:0;color:var(--muted);font-size:14px">下一阶段稀缺品：可信交付、统一基线、可逆支付与可停止的阶段门——不是再造一个更大的热度峰值。</p>
+      </div>
+      <div class="warn">
+        ⚠ R2 交叉攻击、R3 修正下注尚未完成。本汇总是阶段性证据复盘，<b>不是最终 Go/No-Go</b>，也不是活动已确认页。禁止把待定单位、拟邀嘉宾、基金愿景写成已确认事实。
+      </div>
+    </section>
+
+    <section id="method">
+      <p class="sec-k">00 / METHOD</p>
+      <h2>方法论（论文级结构）</h2>
+      <p class="sec-intro">先分级，再对齐；共识不自动升格为事实。任何公开数字必须能回跳来源。</p>
+      <div class="grid-3">
+        <article class="card"><h3>M1 问题</h3><p>十年后留下资产还是泡沫？谁在何种条件下参加论坛/研修有正净价值？</p></article>
+        <article class="card"><h3>M2 证据分级</h3><p><span class="grade g-a">A 官方</span> <span class="grade g-b">B 可追溯</span> <span class="grade g-c">C 专家模型</span> <span class="grade g-d">D 禁止公开</span></p></article>
+        <article class="card"><h3>M3 跨专家对齐</h3><p>同一命题对比五人证据、概率与反证；禁止对概率取平均作预算。</p></article>
+        <article class="card"><h3>M4 冲突保留</h3><p>日期/场地/人数冲突进黑名单，不抹平、不“看起来接近就过”。</p></article>
+        <article class="card"><h3>M5 甘特阶段门</h3><p>历史十年看制度节点；未来十年每阶段设可停止门槛。</p></article>
+        <article class="card"><h3>M6 决策输出</h3><p>Conditional Hold + 人群分层 + Go 闸门，不做“所有人都该来”。</p></article>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <p class="sec-k">01 / TIMELINE</p>
+      <h2>十年坐标：制度与经营</h2>
+      <p class="sec-intro">只保留可追溯节点。曝光与奥运首秀是峰值事件，不是永续增长证明。</p>
+      <div class="tl">
+        <article class="tl-item"><div class="tl-year">2015</div><div><h3>组织化与教练培训成为基础设施 <span class="grade g-a">A</span></h3><p>全国性教练培训、考试、证书备案与联盟活动出现。留下的是组织能力，不是当年热度数字。</p></div></article>
+        <article class="tl-item"><div class="tl-year">2018</div><div><h3>大众媒介把街舞推入公共视野 <span class="grade g-a">A</span></h3><p>综艺与短视频降低认知门槛；曝光≠稳定利润、续费或行业信用。</p></div></article>
+        <article class="tl-item"><div class="tl-year">2019</div><div><h3>国家级赛事通道成形 <span class="grade g-a">A</span></h3><p>中国街舞联赛创立，分站赛+总决赛，与竞技人才选拔衔接。</p></div></article>
+        <article class="tl-item"><div class="tl-year">2020</div><div><h3>巴黎奥运周期启动 <span class="grade g-a">A</span></h3><p>霹雳舞纳入巴黎 2024，政策与训练资源向竞技链条集中。</p></div></article>
+        <article class="tl-item"><div class="tl-year">2021</div><div><h3>全运会与“双减”同时改写行业 <span class="grade g-a">A</span></h3><p>竞技路径与校外培训经营逻辑从此不可混用同一套叙事。</p></div></article>
+        <article class="tl-item"><div class="tl-year">22—23</div><div><h3>等级、国家队、亚运成绩固化竞技资产 <span class="grade g-a">A</span></h3><p>技术等级与选拔机制证明竞技体系获得可持续制度位置。</p></div></article>
+        <article class="tl-item"><div class="tl-year">2024</div><div><h3>巴黎首秀峰值 + 红利边界 <span class="grade g-a">A</span></h3><p>中国获 3 个奥运席位；LA28 新增项目不含霹雳舞——不能写成连续十年奥运红利。</p></div></article>
+        <article class="tl-item"><div class="tl-year">2025</div><div><h3>经营进入信任与合规周期 <span class="grade g-a">A</span></h3><p>预付式消费司法解释、AI 内容标识、教培投诉高压，约束退款与内容生产。</p></div></article>
+        <article class="tl-item"><div class="tl-year">2026</div><div><h3>最大缺口：统一统计基线 <span class="grade g-c">C 判断</span></h3><p>宏观数据充足；街舞机构数、营收、续费、闭店缺统一口径——这是产业基础设施问题。</p></div></article>
+      </div>
+    </section>
+
+    <section id="gantt">
+      <p class="sec-k">02 / GANTT</p>
+      <h2>历史甘特 · 2015—2026</h2>
+      <p class="sec-intro">阶段门：任务清楚、门槛清楚、证据等级清楚。</p>
+      <div class="scale"><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span></div>
+      <div class="gantt">
+        <div class="gantt-row"><div class="gantt-label"><strong>组织化奠基</strong><span>2015—17 · 制度</span></div><div class="track"><div class="bar" style="left:0%;width:22%">教练培训 · 联盟 · 证书</div></div></div>
+        <div class="gantt-row"><div class="gantt-label"><strong>大众传播扩张</strong><span>2018—19 · 认知</span></div><div class="track"><div class="bar" style="left:20%;width:18%">综艺/短视频 · 联赛</div></div></div>
+        <div class="gantt-row"><div class="gantt-label"><strong>竞技制度化</strong><span>2020—23 · 竞技</span></div><div class="track"><div class="bar" style="left:36%;width:30%">奥运周期 · 全运 · 等级 · 亚运</div></div></div>
+        <div class="gantt-row"><div class="gantt-label"><strong>红利见顶</strong><span>2024 · 边界</span></div><div class="track"><div class="bar" style="left:64%;width:10%">巴黎峰值 · LA28 边界</div></div></div>
+        <div class="gantt-row"><div class="gantt-label"><strong>信任合规</strong><span>2025—26 · 经营</span></div><div class="track"><div class="bar" style="left:72%;width:28%">预付规则 · AI 标识 · 基线缺口</div></div></div>
+      </div>
+
+      <h2 style="margin-top:32px;font-size:22px">未来基础设施甘特 · 2026—2036</h2>
+      <p class="sec-intro">先基线，再验证，后联网，最后扩散。每一阶段可停止。</p>
+      <div class="gantt">
+        <div class="gantt-row"><div class="gantt-label"><strong>01 基线</strong><span>2026—27</span></div><div class="track"><div class="bar future" style="left:0%;width:18%">口径 · 样本 · 退款/续费指标</div></div></div>
+        <div class="gantt-row"><div class="gantt-label"><strong>02 验证</strong><span>2028—30</span></div><div class="track"><div class="bar future" style="left:16%;width:28%">城市试点 · 单位经济 · 失败案例</div></div></div>
+        <div class="gantt-row"><div class="gantt-label"><strong>03 联网</strong><span>2031—33</span></div><div class="track"><div class="bar future" style="left:42%;width:28%">跨城网络 · 互认 · 可审计接口</div></div></div>
+        <div class="gantt-row"><div class="gantt-label"><strong>04 扩散</strong><span>2034—36</span></div><div class="track"><div class="bar future" style="left:68%;width:28%">IP 输出 · 透明度年报</div></div></div>
+      </div>
+    </section>
+
+    <section id="assets">
+      <p class="sec-k">03 / ASSETS VS BOOMS</p>
+      <h2>五项资产 · 五项泡沫</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="color:var(--ok)">真正留下</h3>
+          <ul>
+            <li>组织与训练基础设施 <span class="grade g-a">A</span></li>
+            <li>竞技体育上升通道 <span class="grade g-a">A</span></li>
+            <li>大众文化认知与内容表达 <span class="grade g-a">A</span></li>
+            <li>城市赛事与跨界协作方法 <span class="grade g-c">C</span></li>
+            <li>从流量转向经营数据的共识 <span class="grade g-c">C</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--rose)">被高估</h3>
+          <ul>
+            <li>曝光繁荣：热度 ≠ 利润</li>
+            <li>奥运繁荣：巴黎 ≠ 连续红利</li>
+            <li>机构数繁荣：注册 ≠ 活跃 ≠ 盈利</li>
+            <li>证书繁荣：持证 ≠ 交付信用</li>
+            <li>宏观规模繁荣：总量 ≠ 街舞份额</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="metrics">
+      <p class="sec-k">04 / OFFICIAL METRICS</p>
+      <h2>官方环境数据（可引用边界）</h2>
+      <p class="sec-intro">宏观总量 ≠ 街舞份额 ≠ 论坛可转化金额 ≠ 单店利润。</p>
+      <div class="grid-3">
+        <article class="card"><h3>15.2135 万亿元</h3><p>2025 规模以上文化企业营收 +7.4% · <span class="grade g-a">A</span><br/>边界：文化产业总盘</p></article>
+        <article class="card"><h3>新业态 +14.3%</h3><p>文化新业态特征行业 · <span class="grade g-a">A</span><br/>边界：不可直接外推街舞</p></article>
+        <article class="card"><h3>AI 用户 6.02 亿</h3><p>2025 末生成式 AI · 普及率 42.8% · <span class="grade g-a">A</span><br/>边界：≠ 机构采用率</p></article>
+        <article class="card"><h3>演出 7822.2 亿</h3><p>2025 全国演出市场 · <span class="grade g-a">A</span><br/>边界：全品类</p></article>
+        <article class="card"><h3>旅博会签约 300.7 亿</h3><p>2024 天津 · <span class="grade g-a">A</span><br/>边界：≠ 2026 论坛身份确认</p></article>
+        <article class="card"><h3>教培投诉 65.2 万件</h3><p>2025 全国 12315 · <span class="grade g-a">A</span><br/>边界：非街舞专项</p></article>
+      </div>
+    </section>
+
+    <section id="experts">
+      <p class="sec-k">05 / EXPERTS · GROK 汇总</p>
+      <h2>五位专家研究结果</h2>
+      <p class="sec-intro">同一投票，五套方法。点选切换查看 Grok 提炼的发现、正反方与反证条件。</p>
+      <div class="tabs" id="expertTabs">
+        <button class="tab active" data-x="tianjin">01 天津顾问</button>
+        <button class="tab" data-x="xiaok">02 小K</button>
+        <button class="tab" data-x="feas">03 可行性</button>
+        <button class="tab" data-x="rev">04 复盘</button>
+        <button class="tab" data-x="xiaom">05 小M</button>
+      </div>
+
+      <!-- 天津 -->
+      <article class="expert-panel active card" id="x-tianjin">
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start">
+          <div>
+            <h3 style="margin:0 0 4px">天津街舞论坛顾问</h3>
+            <p style="margin:0;color:var(--muted);font-size:13px">政策 · 公共文化 · 城市文旅 · 产业落地</p>
+          </div>
+          <div class="vote"><small>最终投票 · 置信 65%</small><b>满足条件后再来</b></div>
+        </div>
+        <p style="margin:14px 0 0"><b>十年总命题：</b><span style="color:var(--muted)">平台价值 ≠ 单次论坛身份已确认；城市文旅对接缺可审计身份清单。</span></p>
+        <div class="finding"><strong>发现 1 · <span class="grade g-a">A</span></strong><span style="color:var(--muted)">2024 旅博会平台数据成立，不能证明 2026 街舞论坛已获专项身份。</span></div>
+        <div class="finding"><strong>发现 2 · <span class="grade g-a">A</span></strong><span style="color:var(--muted)">联合主办待定、嘉宾拟邀、未见书面回执 → 确定性宣传阻断。</span></div>
+        <div class="finding"><strong>发现 3 · <span class="grade g-a">A</span></strong><span style="color:var(--muted)">“政策发布”与“拟发布”必须分词；无局方审定稿不得写正式发布。</span></div>
+        <div class="dual">
+          <div class="card"><h4>正方（可来的理由）</h4>
+            <p>· 旅博会资源密度（前提：专项身份确认）<br/>· 信任重建需要线下可验证平台<br/>· 政策与 AI 合规窗口期面对面校准</p>
+          </div>
+          <div class="card"><h4>反方（不弱化）</h4>
+            <p>· 组织/嘉宾未确认，取消缩水风险高<br/>· 付费研修 ROI 未验证<br/>· 9 月招生旺季离店机会成本</p>
+          </div>
+        </div>
+        <p style="margin:12px 0 0;font-size:13px;color:var(--muted)"><b style="color:var(--text)">反证条件：</b>8/10 前书面确认主办与专项身份；核心嘉宾回执；日期场地唯一版本。</p>
+      </article>
+
+      <!-- 小K -->
+      <article class="expert-panel card" id="x-xiaok">
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start">
+          <div>
+            <h3 style="margin:0 0 4px">街舞商业专家小K</h3>
+            <p style="margin:0;color:var(--muted);font-size:13px">商业模型 · 机会成本 · 研修净价值</p>
+          </div>
+          <div class="vote"><small>最终投票 · 置信 65%</small><b>满足条件后再来</b></div>
+        </div>
+        <p style="margin:14px 0 0"><b>十年总命题：</b><span style="color:var(--muted)">稀缺的是单位经济与可逆支付；宏观增速不能写成单店利润承诺。</span></p>
+        <div class="finding"><strong>发现 1 · <span class="grade g-a">A</span></strong><span style="color:var(--muted)">新业态 +14.3%、AI 6.02 亿只作环境变量，缺街舞份额。</span></div>
+        <div class="finding"><strong>发现 2 · <span class="grade g-c">C 模型</span></strong><span style="color:var(--muted)">基准情景：交付概率约 40% 时，参加净价值可能约 −3100 元（情景非承诺）。</span></div>
+        <div class="finding"><strong>发现 3 · <span class="grade g-a">A</span></strong><span style="color:var(--muted)">日期/场地/权益待定抬高风险溢价，应下调交付概率。</span></div>
+        <div class="dual">
+          <div class="card"><h4>正方</h4><p>· AI 工具降本（若课程可操作）<br/>· 洗牌后需要精细化工具<br/>· 天津具备产业对接场景（平台级）</p></div>
+          <div class="card"><h4>反方</h4><p>· 基础信息冲突<br/>· 权益待定但定价已定<br/>· 基准净价值为负（模型）</p></div>
+        </div>
+        <p style="margin:12px 0 0;font-size:13px;color:var(--muted)"><b style="color:var(--text)">反证条件：</b>预售验证交付概率上修；权益与退款入合同；90 天单位经济改善案例。</p>
+      </article>
+
+      <!-- 可行性 -->
+      <article class="expert-panel card" id="x-feas">
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start">
+          <div>
+            <h3 style="margin:0 0 4px">街舞商业研修可行性分析专家</h3>
+            <p style="margin:0;color:var(--muted);font-size:13px">需求验证 · 价格实验 · 转化漏斗</p>
+          </div>
+          <div class="vote"><small>最终投票 · 置信 85%（结论置信≠成功概率）</small><b>满足条件后再来</b></div>
+        </div>
+        <p style="margin:14px 0 0"><b>十年总命题：</b><span style="color:var(--muted)">进入行为证据决策时代；没有问卷/预售/漏斗校准，500 人目标只是愿望函数。</span></p>
+        <div class="finding"><strong>发现 1 · <span class="grade g-a">A</span></strong><span style="color:var(--muted)">需求验证关键字段目前为空集：问卷、预售、历史转化、真实 ROI 均无。</span></div>
+        <div class="finding"><strong>发现 2 · <span class="grade g-c">C</span></strong><span style="color:var(--muted)">有效线索池回推：200 人付费可能需要万级触达；CHUC 触达无核验。</span></div>
+        <div class="finding"><strong>发现 3 · <span class="grade g-c">C</span></strong><span style="color:var(--muted)">可退意向金是最低成本信任机制；支付率 ≥30% 才谈 Go，&lt;15% 应 No-Go。</span></div>
+        <div class="dual">
+          <div class="card"><h4>正方</h4><p>· 旅博会 A 级平台（仍要专项确认）<br/>· 可退机制降购买风险<br/>· 经营困难期或有知识输入需求（待测）</p></div>
+          <div class="card"><h4>反方</h4><p>· 零需求验证=赌履约<br/>· 行业付费研修信任负债<br/>· 离店成本可能超过课程收益</p></div>
+        </div>
+        <p style="margin:12px 0 0;font-size:13px;color:var(--muted)"><b style="color:var(--text)">反证条件：</b>≥100 有效问卷；意向金支付率达阈值；渠道触达数据书面披露。</p>
+      </article>
+
+      <!-- 复盘 -->
+      <article class="expert-panel card" id="x-rev">
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start">
+          <div>
+            <h3 style="margin:0 0 4px">街舞商业辩论复盘专家</h3>
+            <p style="margin:0;color:var(--muted);font-size:13px">证据审计 · 反证 · 概率模型</p>
+          </div>
+          <div class="vote"><small>最终投票 · 置信 72%</small><b>满足条件后再来</b></div>
+        </div>
+        <p style="margin:14px 0 0"><b>十年总命题：</b><span style="color:var(--muted)">复盘核心是证据制度：什么可进公开页，什么进黑名单，什么试验能升级 C 级假设。</span></p>
+        <div class="finding"><strong>发现 1 · <span class="grade g-a">A</span></strong><span style="color:var(--muted)">活动核心主张 A/B 级证据接近空；宏观 A 级不能替补。</span></div>
+        <div class="finding"><strong>发现 2 · <span class="grade g-a">A</span></strong><span style="color:var(--muted)">预付规则 + AI 标识构成 2025 后经营硬约束。</span></div>
+        <div class="finding"><strong>发现 3 · <span class="grade g-c">C</span></strong><span style="color:var(--muted)">付费研修 120 人概率 12%—55%，离散度禁止取平均。</span></div>
+        <div class="dual">
+          <div class="card"><h4>正方</h4><p>· 共建行业数据基线（若会后真发布）<br/>· AI 合规清单刚需（若可执行）<br/>· 跨区域对接降低信息孤岛</p></div>
+          <div class="card"><h4>反方</h4><p>· 交付能力未验证<br/>· 定价缺需求验证<br/>· 信任护城河未落地</p></div>
+        </div>
+        <p style="margin:12px 0 0;font-size:13px;color:var(--muted)"><b style="color:var(--text)">反证条件：</b>P0 冲突关闭；会后 90 天公开数据字典/试验；退款与利益披露入合同。</p>
+      </article>
+
+      <!-- 小m -->
+      <article class="expert-panel card" id="x-xiaom">
+        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start">
+          <div>
+            <h3 style="margin:0 0 4px">街舞招生实战专家小M</h3>
+            <p style="margin:0;color:var(--muted);font-size:13px">招生实战 · 省级动员 · 工具交付</p>
+          </div>
+          <div class="vote"><small>最终投票 · 置信 68%</small><b>满足条件后再来</b></div>
+        </div>
+        <p style="margin:14px 0 0"><b>十年总命题：</b><span style="color:var(--muted)">从流量狂奔进入续费与转介绍竞赛；胜负手是 SOP 与现金流节奏，不是再听宏观课。</span></p>
+        <div class="finding"><strong>发现 1 · <span class="grade g-c">C</span></strong><span style="color:var(--muted)">经营指标应以内生 SOP 定义，不以无源市场总额定义。</span></div>
+        <div class="finding"><strong>发现 2 · <span class="grade g-c">C</span></strong><span style="color:var(--muted)">9 月高机会成本窗口：离店 2—3 天可能损失招生动作。</span></div>
+        <div class="finding"><strong>发现 3 · <span class="grade g-c">C</span></strong><span style="color:var(--muted)">说明会可双向筛选；未执行则筛选价值为 0。精确 ROI/基金杠杆须降级。</span></div>
+        <div class="dual">
+          <div class="card"><h4>正方</h4><p>· 跨省对照数据场域（若动员真实）<br/>· 工具修复单项错误或可回本（模型）<br/>· 说明会降低买错概率</p></div>
+          <div class="card"><h4>反方</h4><p>· P0 未满足时交付概率偏低<br/>· 预付费投诉环境抬高谨慎度<br/>· 旺季离店损失可能大于课程</p></div>
+        </div>
+        <p style="margin:12px 0 0;font-size:13px;color:var(--muted)"><b style="color:var(--text)">反证条件：</b>工具实体版盲测通过；P0 确认达标；预售与说明会数据公开。</p>
+      </article>
+    </section>
+
+    <section id="align">
+      <p class="sec-k">06 / ALIGNMENT MATRIX</p>
+      <h2>跨专家数据对齐（Grok 压表）</h2>
+      <p class="sec-intro">能对齐写清边界；不能对齐保留离散；禁止项单独拉黑。</p>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>命题</th><th>天津</th><th>小K</th><th>可行性</th><th>复盘</th><th>小M</th><th>对齐结论</th><th>状态</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>宏观文化/AI/文旅改善</td>
+              <td>A</td><td>A</td><td>A</td><td>A</td><td>A</td>
+              <td>一致：环境可用，不可当街舞份额</td>
+              <td class="st">已对齐</td>
+            </tr>
+            <tr>
+              <td>活动日期/场地唯一</td>
+              <td>冲突</td><td>冲突</td><td>冲突</td><td>冲突</td><td>冲突</td>
+              <td>硬冲突，阻断公开</td>
+              <td class="st">阻断</td>
+            </tr>
+            <tr>
+              <td>128.6亿 / 18432家等</td>
+              <td>禁</td><td>禁</td><td>禁</td><td>禁</td><td>降级</td>
+              <td>无原始口径，公开禁用</td>
+              <td class="st">黑名单</td>
+            </tr>
+            <tr>
+              <td>付费研修≈120人概率</td>
+              <td>20—35</td><td>≈30</td><td>≈12</td><td>≈15</td><td>≈55</td>
+              <td>高度离散，禁止取平均</td>
+              <td class="st">模型分歧</td>
+            </tr>
+            <tr>
+              <td>最终投票</td>
+              <td>条件</td><td>条件</td><td>条件</td><td>条件</td><td>条件</td>
+              <td>5/5 满足条件后再来</td>
+              <td class="st">投票对齐</td>
+            </tr>
+            <tr>
+              <td>需求验证（问卷/预售）</td>
+              <td>缺</td><td>缺</td><td>空集</td><td>缺</td><td>设计中</td>
+              <td>行为证据尚未产生</td>
+              <td class="st">待实验</td>
+            </tr>
+            <tr>
+              <td>信任&gt;流量（十年方向）</td>
+              <td>高</td><td>高</td><td>高</td><td>高</td><td>高</td>
+              <td>70%—85% 情景，方向一致</td>
+              <td class="st">方向对齐</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="conflict">
+      <p class="sec-k">07 / CONFLICT BLACKLIST</p>
+      <h2>公开页阻断清单</h2>
+      <div class="grid-2">
+        <article class="card"><h3>日期</h3><p>论坛 9/5 vs 9/6；研修 9/6—7 vs 9/7—8</p></article>
+        <article class="card"><h3>场地</h3><p>梅江 / 国展表述 / 市内酒店待定 —— 须合同唯一</p></article>
+        <article class="card"><h3>人数</h3><p>论坛 500 / 研修 500 / 保障 200 / 宣传 300 混用</p></article>
+        <article class="card"><h3>身份与嘉宾</h3><p>联合主办待定；嘉宾 0 书面回执不得称“顶配齐聚”</p></article>
+        <article class="card"><h3>市场精确数</h3><p>128.6 亿、18432 家、300 万从业 —— 无源禁用</p></article>
+        <article class="card"><h3>基金/职业标准</h3><p>5 亿专项基金无批文；“国家职业标准”须与运动员等级区分</p></article>
+      </div>
+    </section>
+
+    <section id="audience">
+      <p class="sec-k">08 / WHO SHOULD COME</p>
+      <h2>适合来 / 不适合来（Grok 分层）</h2>
+      <div class="grid-2">
+        <article class="card">
+          <h3 style="color:var(--ok)">更适合（条件满足后）</h3>
+          <ul>
+            <li>有明确文旅/赛事/商圈议题，能预约对接对象</li>
+            <li>多店或跨区域经营，需要合规与跨省对照</li>
+            <li>把论坛当尽调，不把拟邀当已获资源</li>
+            <li>研修：课程/退款/交付书面确认后，仍有具体经营问题；有 30/60/90 天执行人</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3 style="color:var(--rose)">不参加更合理</h3>
+          <ul>
+            <li>现金流不足约 3 个月，9 月处招生/续费关键期</li>
+            <li>仅为追星、拿证、听宏观趋势</li>
+            <li>差旅离店成本高于可验证信息收益</li>
+            <li>学员很少、团队极小，首要任务是存活；或存在欠薪/退费危机</li>
+            <li>权益待定、需借贷才能参训</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="verdict">
+      <p class="sec-k">09 / VERDICT</p>
+      <h2>Grok 汇总裁决</h2>
+      <div class="banner">
+        <span>CURRENT RULING</span>
+        <strong>CONDITIONAL HOLD · 条件式搁置公开承诺</strong>
+        <p style="margin:0;color:var(--muted)">允许继续核验与小样本预售实验；不允许把待定写成已确认，不允许用专家共识替代复算。</p>
+      </div>
+      <div class="grid-2">
+        <article class="card">
+          <h3>Go 前必须关闭</h3>
+          <ul>
+            <li>G1 身份书面确认（指导/主办/专项）</li>
+            <li>G2 日期场地人数价格唯一版本</li>
+            <li>G3 嘉宾书面回执</li>
+            <li>G4 问卷 + 可退意向金行为证据</li>
+            <li>G5 课程交付清单（含 30/60/90）</li>
+            <li>G6 退款与取消入合同</li>
+            <li>G7 数据与利益披露</li>
+            <li>G8 不诱导贷款/加盟/证书包装</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>三档结果</h3>
+          <p><b style="color:var(--ok)">GO</b> — G1—G8 有凭证，且支付实验达阈值</p>
+          <p><b style="color:var(--amber)">缩减/延期</b> — 身份可确认但动员/支付不足</p>
+          <p><b style="color:var(--rose)">NO-GO</b> — 冲突持续、嘉宾/身份无法确认、退款交付不成立</p>
+          <p style="margin-top:12px;color:var(--muted);font-size:13px">概率模型是情景分析，不是统计推断。R2/R3 完成后应重算版本号。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="source" style="border-bottom:0">
+      <p class="sec-k">10 / SOURCES</p>
+      <h2>主要来源锚点</h2>
+      <div class="grid-2">
+        <article class="card">
+          <h3>A 级环境（台账）</h3>
+          <p>国家统计局文化运行解读 · CNNIC 第 57 次报告 · 文旅部统计公报 · 天津文旅局 2024 旅博会 · 工信部 AI 标识 · 最高法预付式消费解释 · 市监总局 12315 · 体育总局赛事/奥运公开稿 · IOC LA28 信息</p>
+        </article>
+        <article class="card">
+          <h3>专家研究与证据台账</h3>
+          <p>五位专家 R1 结论与投票已按同一证据分级规则对齐；原始材料中的冲突项继续保留，不把内部判断升级为公开事实。</p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div>
+        <b style="color:var(--text)">Grok 汇总版 · 中国街舞 2015—2026</b><br/>
+        版型：数字化 · 模块化 · 甘特阶段门 · 证据分级<br/>
+        数据截止 2026-08-01 · 不构成投资/报名/政策承诺
+      </div>
+      <div style="text-align:right">公众号菜单与阅读原文均可进入本页</div>
+    </footer>
+  </main>
+  <button class="back-top" type="button" data-back-to-top aria-label="返回顶部">↑</button>
+  <script type="module" src="/scripts/streetdance-review.js"></script>
+</body>
+</html>

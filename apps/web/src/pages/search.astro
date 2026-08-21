@@ -1,0 +1,18 @@
+---
+import ArticleCard from '@/components/ArticleCard.astro';
+import { fetchPublishedArticles } from '@/lib/directus';
+import { runtimeConfig } from '@/lib/routes';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const query = Astro.url.searchParams.get('q')?.trim() ?? '';
+const articles = query ? (await fetchPublishedArticles({ apiUrl: runtimeConfig().directusInternalUrl, search: query, limit: 100 })).data : [];
+---
+
+<BaseLayout title="搜索">
+  <section class="page-hero"><p>SEARCH</p><h1>搜索文章</h1></section>
+  <form class="search-form" method="get" action="/search">
+    <label for="search-query">标题、摘要、正文或标签</label>
+    <div><input id="search-query" type="search" name="q" value={query} maxlength="80" required /><button type="submit">搜索</button></div>
+  </form>
+  {query && <section class="content-section"><p class="search-summary">“{query}” 找到 {articles.length} 篇</p>{articles.length ? <div class="article-grid">{articles.map((article) => <ArticleCard article={article} />)}</div> : <p class="empty-state">没有匹配的已发布文章。</p>}</section>}
+</BaseLayout>

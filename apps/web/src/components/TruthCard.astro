@@ -1,0 +1,13 @@
+---
+interface Props {
+  label?: string;
+  text: string;
+}
+
+const { label = '现实真相', text } = Astro.props;
+---
+
+<aside class="truth-card">
+  <span class="truth-card__label">{label}</span>
+  <p class="truth-card__text">{text}</p>
+</aside>

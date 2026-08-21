@@ -1,0 +1,61 @@
+---
+import ArticleCard from '@/components/ArticleCard.astro';
+import { fetchPublishedArticles, fetchPublicCollection } from '@/lib/directus';
+import { runtimeConfig } from '@/lib/routes';
+import type { Article, Category } from '@/lib/types';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const config = runtimeConfig();
+let articles: Article[] = [];
+let featured: Article[] = [];
+let categories: Category[] = [];
+let unavailable = false;
+try {
+  [articles, featured, categories] = await Promise.all([
+    fetchPublishedArticles({ apiUrl: config.directusInternalUrl, limit: 12 }).then((response) => response.data),
+    fetchPublishedArticles({ apiUrl: config.directusInternalUrl, featured: true, limit: 3 }).then((response) => response.data),
+    fetchPublicCollection<Category>({ baseUrl: config.directusInternalUrl, collection: 'categories', sort: 'sort,name' }),
+  ]);
+} catch {
+  unavailable = true;
+  Astro.response.status = 503;
+}
+---
+
+<BaseLayout>
+  <section class="home-hero">
+    <p class="home-hero__kicker">GAZI ENTREPRENEURSHIP LAB</p>
+    <h1>把每天经历的事，<br /><em>变成长期资产。</em></h1>
+    <p>创业、制造、AI、文化与真实项目。这里不贩卖速成，只记录判断、行动和代价。</p>
+    <div class="home-hero__stats">
+      <span><strong>{articles.length}</strong> 已发布文章</span>
+      <span><strong>{articles[0] ? new Date(articles[0].published_at).toLocaleDateString('zh-CN') : '—'}</strong> 最新更新</span>
+    </div>
+  </section>
+  {unavailable ? (
+    <section class="service-message" role="status">
+      <p class="eyebrow">SERVICE NOTICE</p>
+      <h2>内容服务暂时不可用</h2>
+      <p>文章数据没有丢失，请稍后刷新。系统不会向你展示错误堆栈。</p>
+    </section>
+  ) : (
+    <>
+      {featured.length > 0 && (
+        <section class="content-section">
+          <div class="section-heading"><p>FEATURED</p><h2>值得反复阅读</h2></div>
+          <div class="featured-grid">{featured.map((article) => <ArticleCard article={article} featured />)}</div>
+        </section>
+      )}
+      <section class="content-section">
+        <div class="section-heading"><p>LATEST</p><h2>最新日更</h2></div>
+        {articles.length > 0 ? <div class="article-grid">{articles.map((article) => <ArticleCard article={article} />)}</div> : <p class="empty-state">第一篇文章正在路上。</p>}
+      </section>
+      {categories.length > 0 && (
+        <section class="content-section category-cloud">
+          <div class="section-heading"><p>EXPLORE</p><h2>按主题进入</h2></div>
+          <div class="category-cloud__links">{categories.map((category) => <a href={`/category/${category.slug}`}>{category.name}</a>)}</div>
+        </section>
+      )}
+    </>
+  )}
+</BaseLayout>

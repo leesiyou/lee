@@ -1,0 +1,25 @@
+---
+interface Props {
+  leftLabel: string;
+  leftText: string;
+  rightLabel: string;
+  rightText: string;
+  title: string;
+}
+
+const { leftLabel, leftText, rightLabel, rightText, title } = Astro.props;
+---
+
+<section class="dimension-compare">
+  <p class="dimension-compare__title">{title}</p>
+  <div class="dimension-compare__grid">
+    <article class="dimension-compare__side dimension-compare__side--left">
+      <h3>{leftLabel}</h3>
+      <p>{leftText}</p>
+    </article>
+    <article class="dimension-compare__side dimension-compare__side--right">
+      <h3>{rightLabel}</h3>
+      <p>{rightText}</p>
+    </article>
+  </div>
+</section>

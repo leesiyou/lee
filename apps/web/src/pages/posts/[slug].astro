@@ -1,0 +1,34 @@
+---
+import ArticleCard from '@/components/ArticleCard.astro';
+import { fetchPublishedArticle, fetchPublishedArticles } from '@/lib/directus';
+import { runtimeConfig } from '@/lib/routes';
+import type { Article } from '@/lib/types';
+import ArticleLayout from '@/layouts/ArticleLayout.astro';
+
+const config = runtimeConfig();
+const slug = Astro.params.slug ?? '';
+let article: Article | null = null;
+let related: Article[] = [];
+try {
+  article = await fetchPublishedArticle({ apiUrl: config.directusInternalUrl, slug });
+  if (article) {
+    const category = typeof article.category === 'object' && article.category ? article.category.slug : undefined;
+    related = (await fetchPublishedArticles({ apiUrl: config.directusInternalUrl, category, limit: 4 })).data
+      .filter((item) => item.slug !== article?.slug)
+      .slice(0, 3);
+  }
+} catch {
+  Astro.response.status = 503;
+}
+if (!article && Astro.response.status !== 503) Astro.response.status = 404;
+---
+
+{article ? (
+  <ArticleLayout article={article}>
+    {related.length > 0 && <section class="related-posts"><h2>继续阅读</h2><div class="article-grid">{related.map((item) => <ArticleCard article={item} />)}</div></section>}
+  </ArticleLayout>
+) : (
+  <Fragment>
+    {Astro.response.status === 503 ? <p class="standalone-error">内容服务暂时不可用，请稍后刷新。</p> : <p class="standalone-error">这篇文章不存在，或尚未到发布时间。</p>}
+  </Fragment>
+)}

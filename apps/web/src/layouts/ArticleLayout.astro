@@ -1,0 +1,73 @@
+---
+import Hero from '@/components/Hero.astro';
+import ShareCard from '@/components/ShareCard.astro';
+import { addHeadingIds, buildTableOfContents, calculateReadingMinutes, renderStructuredBlocks } from '@/lib/content';
+import { buildArticleCoverUrl, buildPostUrl, runtimeConfig } from '@/lib/routes';
+import type { Article } from '@/lib/types';
+
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  article: Article;
+  preview?: boolean;
+}
+
+const { article, preview = false } = Astro.props;
+const config = runtimeConfig();
+const cover = buildArticleCoverUrl(article, config);
+const canonical = buildPostUrl(article.slug, config);
+const content = addHeadingIds(`${article.content}${renderStructuredBlocks(article.blocks)}`);
+const toc = buildTableOfContents(content);
+const readingMinutes = article.reading_minutes || calculateReadingMinutes(content);
+const authorName = typeof article.author === 'object' && article.author?.name
+  ? article.author.name
+  : '李思友';
+const category = typeof article.category === 'object' && article.category ? article.category : null;
+const tags = article.tags
+  ?.map((entry) => (typeof entry.tags_id === 'object' ? entry.tags_id : null))
+  .filter((tag) => tag !== null) ?? [];
+---
+
+<BaseLayout
+  canonical={canonical}
+  description={article.seo_description || article.summary}
+  image={cover}
+  title={article.seo_title || article.title}
+  type="article"
+>
+  {preview && <aside class="preview-banner" role="status">草稿预览 · 此页面不会被公开索引</aside>}
+  <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
+  <article class={`article article--${article.template}`} style={`--article-accent:${article.theme || '#c6a96b'}`}>
+    <Hero title={article.title} subtitle={article.subtitle} eyebrow={category?.name || '创业日更'} />
+    <div class="article-meta">
+      <span>{authorName}</span>
+      <time datetime={article.published_at}>{new Date(article.published_at).toLocaleDateString('zh-CN')}</time>
+      <span>{readingMinutes} 分钟阅读</span>
+    </div>
+    {cover && (
+      <figure class="article-cover">
+        <img src={cover} alt={article.title} width="1200" height="675" loading="eager" fetchpriority="high" />
+      </figure>
+    )}
+    {toc.length > 1 && (
+      <details class="article-toc">
+        <summary>文章目录</summary>
+        <ol>
+          {toc.map((item) => <li class={`depth-${item.depth}`}><a href={`#${item.id}`}>{item.text}</a></li>)}
+        </ol>
+      </details>
+    )}
+    <div class="article-prose" set:html={content} />
+    {(category || tags.length > 0) && (
+      <div class="article-taxonomy">
+        {category && <a href={`/category/${category.slug}`}>{category.name}</a>}
+        {tags.map((tag) => <a href={`/tag/${tag.slug}`}>#{tag.name}</a>)}
+      </div>
+    )}
+    <ShareCard title={article.title} summary={article.summary} url={canonical} />
+    <slot />
+  </article>
+  <button class="back-to-top" type="button" data-back-to-top aria-label="返回顶部">↑</button>
+</BaseLayout>
+
+<script is:inline type="module" src="/scripts/article.js"></script>

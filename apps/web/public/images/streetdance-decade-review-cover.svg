@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070a0f"/>
+      <stop offset="0.58" stop-color="#10182a"/>
+      <stop offset="1" stop-color="#261748"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5eead4"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1020" cy="68" r="260" fill="#5eead4" opacity="0.08"/>
+  <circle cx="104" cy="604" r="330" fill="#a78bfa" opacity="0.1"/>
+  <rect x="72" y="68" width="158" height="38" rx="19" fill="none" stroke="#5eead4" opacity="0.8"/>
+  <text x="151" y="94" text-anchor="middle" fill="#5eead4" font-family="PingFang SC, sans-serif" font-size="18" font-weight="700">十年证据复盘</text>
+  <text x="72" y="206" fill="#f4f7fb" font-family="PingFang SC, sans-serif" font-size="74" font-weight="750">中国街舞</text>
+  <text x="72" y="302" fill="url(#accent)" font-family="PingFang SC, sans-serif" font-size="84" font-weight="800">从热度到资产</text>
+  <text x="75" y="372" fill="#96a3b7" font-family="PingFang SC, sans-serif" font-size="26">2015—2026 · 五位专家 · 数据对齐 · 条件裁决</text>
+  <line x1="72" y1="440" x2="1128" y2="440" stroke="#34425a"/>
+  <text x="72" y="502" fill="#eef2f7" font-family="PingFang SC, sans-serif" font-size="26">12 个交互模块</text>
+  <text x="370" y="502" fill="#eef2f7" font-family="PingFang SC, sans-serif" font-size="26">官方证据分级</text>
+  <text x="704" y="502" fill="#eef2f7" font-family="PingFang SC, sans-serif" font-size="26">资产 / 泡沫对照</text>
+  <text x="72" y="574" fill="#5eead4" font-family="PingFang SC, sans-serif" font-size="19" font-weight="700">李思友的思想实验室</text>
+</svg>

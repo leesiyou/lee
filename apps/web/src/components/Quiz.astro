@@ -1,0 +1,37 @@
+---
+interface QuizOption {
+  label: string;
+  score: number;
+}
+
+interface QuizQuestion {
+  options: QuizOption[];
+  question: string;
+}
+
+interface Props {
+  questions: QuizQuestion[];
+  title?: string;
+}
+
+const { questions, title = '自我测试' } = Astro.props;
+---
+
+<section class="quiz" data-quiz>
+  <h2 class="quiz__title">{title}</h2>
+  {questions.map((item, questionIndex) => (
+    <fieldset class="quiz__question">
+      <legend>{questionIndex + 1}. {item.question}</legend>
+      {item.options.map((option) => (
+        <label class="quiz__option">
+          <input type="radio" name={`quiz-${questionIndex}`} value={option.score} />
+          <span>{option.label}</span>
+        </label>
+      ))}
+    </fieldset>
+  ))}
+  <button class="quiz__submit" type="button" data-quiz-submit>查看结果</button>
+  <p class="quiz__result" data-quiz-result aria-live="polite"></p>
+</section>
+
+<script is:inline type="module" src="/scripts/quiz.js"></script>

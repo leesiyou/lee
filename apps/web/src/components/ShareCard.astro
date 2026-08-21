@@ -1,0 +1,21 @@
+---
+interface Props {
+  summary: string;
+  title: string;
+  url: string;
+}
+
+const { summary, title, url } = Astro.props;
+---
+
+<aside class="share-card" data-share-card data-share-title={title} data-share-text={summary} data-share-url={url}>
+  <p class="share-card__label">SHARE</p>
+  <h2 class="share-card__title">把值得积累的观点，分享给同路人</h2>
+  <div class="share-card__actions">
+    <button class="share-card__button" type="button" data-share-native>分享文章</button>
+    <button class="share-card__button share-card__button--secondary" type="button" data-share-copy>复制链接</button>
+  </div>
+  <p class="share-card__status" data-share-status aria-live="polite"></p>
+</aside>
+
+<script is:inline type="module" src="/scripts/share-card.js"></script>
