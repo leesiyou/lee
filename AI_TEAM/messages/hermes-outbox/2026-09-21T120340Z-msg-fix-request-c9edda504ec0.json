@@ -1,0 +1,26 @@
+{
+  "protocol_version": 1,
+  "message_id": "msg-fix-request-c9edda504ec0",
+  "timestamp": "2026-09-21T12:03:40Z",
+  "from": "qa-release",
+  "to": "engineering-os",
+  "type": "FIX_REQUEST",
+  "task_id": "HANDSHAKE-002",
+  "repo": "leesiyou/lee",
+  "branch": "feature/h5-blog-system",
+  "base_head": "1318969b5eddbec02b2357e734a034130769de38",
+  "current_head": "1318969b5eddbec02b2357e734a034130769de38",
+  "payload": {
+    "note": "模拟修复请求演练（TEST4），不修改业务代码",
+    "severity": "P2",
+    "files": [],
+    "reason": "channel drill",
+    "expected": "FIX_ACK from engineering-os",
+    "actual": "drill",
+    "reproduction": "n/a",
+    "recommended_fix": "ack only"
+  },
+  "requires_ack": true,
+  "mirror_status": "sent:t_9137913e",
+  "mirror_ts": "2026-09-21T12:03:40Z"
+}

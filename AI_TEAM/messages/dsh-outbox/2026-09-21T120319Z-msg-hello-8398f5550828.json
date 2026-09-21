@@ -1,0 +1,29 @@
+{
+  "protocol_version": 1,
+  "message_id": "msg-hello-8398f5550828",
+  "timestamp": "2026-09-21T12:03:19Z",
+  "from": "engineering-os",
+  "to": "qa-release",
+  "type": "HELLO",
+  "task_id": "HANDSHAKE-000",
+  "repo": "leesiyou/lee",
+  "branch": "feature/h5-blog-system",
+  "base_head": "1318969b5eddbec02b2357e734a034130769de38",
+  "current_head": "1318969b5eddbec02b2357e734a034130769de38",
+  "payload": {
+    "role": "ENGINEERING_OS",
+    "name": "DSH",
+    "capabilities": [
+      "develop",
+      "fix",
+      "test",
+      "commit",
+      "push",
+      "handoff"
+    ],
+    "note": "channel repaired: assignee + valid envelope; supersedes msg-hello-20260921-001"
+  },
+  "requires_ack": true,
+  "mirror_status": "sent:t_edd2451e",
+  "mirror_ts": "2026-09-21T12:03:19Z"
+}

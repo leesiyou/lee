@@ -1,0 +1,33 @@
+{
+  "protocol_version": 1,
+  "message_id": "msg-qa-request-70a9aa3315a1",
+  "timestamp": "2026-09-21T12:03:29Z",
+  "from": "engineering-os",
+  "to": "qa-release",
+  "type": "QA_REQUEST",
+  "task_id": "HANDSHAKE-001",
+  "repo": "leesiyou/lee",
+  "branch": "feature/h5-blog-system",
+  "base_head": "1318969b5eddbec02b2357e734a034130769de38",
+  "current_head": "1318969b5eddbec02b2357e734a034130769de38",
+  "payload": {
+    "note": "通讯链路测试，不修改生产代码。此卡取代空载荷卡 t_1533d154。",
+    "commit": "1318969b5eddbec02b2357e734a034130769de38",
+    "changed_files": [
+      "AI_TEAM/PROTOCOL.md",
+      "AI_TEAM/PROJECT_STATE.md",
+      "AI_TEAM/channel.py",
+      "AI_TEAM/messages/*"
+    ],
+    "test_results": "channel round-trip only; repo tests untouched",
+    "build_results": "n/a",
+    "api_changes": "none",
+    "db_changes": "none",
+    "migration_changes": "none",
+    "known_risks": "none",
+    "rollback": "delete AI_TEAM/ dir"
+  },
+  "requires_ack": true,
+  "mirror_status": "sent:t_ebb8cf67",
+  "mirror_ts": "2026-09-21T12:03:29Z"
+}

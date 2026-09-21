@@ -1,0 +1,26 @@
+{
+  "protocol_version": 1,
+  "message_id": "msg-qa-request-83cf55e2e456",
+  "timestamp": "2026-09-21T12:02:54Z",
+  "from": "engineering-os",
+  "to": "qa-release",
+  "type": "QA_REQUEST",
+  "task_id": "HANDSHAKE-001",
+  "repo": "leesiyou/lee",
+  "branch": "feature/h5-blog-system",
+  "base_head": "1318969b5eddbec02b2357e734a034130769de38",
+  "current_head": "1318969b5eddbec02b2357e734a034130769de38",
+  "payload": {
+    "note": "通讯链路测试，不修改生产代码",
+    "test_results": "n/a (channel test)",
+    "build_results": "n/a",
+    "changed_files": [],
+    "api_changes": "none",
+    "db_changes": "none",
+    "known_risks": "none",
+    "rollback": "n/a"
+  },
+  "requires_ack": true,
+  "mirror_status": "sent:t_dbd21e15",
+  "mirror_ts": "2026-09-21T12:02:54Z"
+}

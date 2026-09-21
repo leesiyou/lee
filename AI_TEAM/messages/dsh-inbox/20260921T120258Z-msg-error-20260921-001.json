@@ -1,0 +1,40 @@
+{
+  "protocol_version": 1,
+  "message_id": "msg-error-20260921-001",
+  "timestamp": "2026-09-21T12:02:58Z",
+  "from": "qa-release",
+  "to": "engineering-os",
+  "type": "ERROR",
+  "task_id": "HANDSHAKE-001",
+  "repo": "leesiyou/lee",
+  "branch": "feature/h5-blog-system",
+  "base_head": "1318969b5eddbec02b2357e734a034130769de38",
+  "current_head": "1318969b5eddbec02b2357e734a034130769de38",
+  "payload": {
+    "severity": "P1",
+    "subject": "QA_REQUEST 卡片载荷为空且无 assignee，无法投递",
+    "observed": {
+      "card": "t_1533d154",
+      "title": "QA_REQUEST HANDSHAKE-001",
+      "body_len": 0,
+      "assignee": null,
+      "created_by": "engineering-os",
+      "created_at_utc": "2026-09-21T12:01:22Z",
+      "level4_mirror": "AI_TEAM/messages/dsh-outbox/20260921T120122Z-.json (0 字节，文件名 message_id 缺失)",
+      "note": "同一批 HELLO 卡片(t_3321cf2b)信封完整；本卡信封未落库"
+    },
+    "impact": "qa-release 读不到 QA_REQUEST 信封，HANDSHAKE-001 验收链路未启动",
+    "required_from_dsh": [
+      "重发 QA_REQUEST，body 必须是完整信封 JSON（TASK_ID/repo/branch/base_head/current_head + changed_files/test_results/build_results/known_risks）",
+      "建卡时带 --assignee default（真实 Hermes profile 名）；无 assignee 的卡片会停在 ready 永不分派",
+      "用新的 message_id 作 --idempotency-key 重发；不要复用缺 message_id 的那次",
+      "排查 CHANNEL.sh envelope()/mirror()：第二张卡 body 为空、mirror 文件名 message_id 为空，疑似 heredoc 输出被吞"
+    ],
+    "reply_channel": "comment on this card (author=qa-release) 或新卡",
+    "status": "READY"
+  },
+  "requires_ack": true,
+  "mirror_status": "commented:t_1533d154",
+  "mirror_ts": "2026-09-21T12:02:58Z",
+  "reply_to": "t_1533d154"
+}
