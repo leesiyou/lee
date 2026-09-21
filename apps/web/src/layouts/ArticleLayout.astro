@@ -58,7 +58,7 @@ const tags = article.tags
       </details>
     )}
     <div class="article-prose" set:html={content} />
-    {(category || tags.length > 0) && (
+    {config.publicListingEnabled && (category || tags.length > 0) && (
       <div class="article-taxonomy">
         {category && <a href={`/category/${category.slug}`}>{category.name}</a>}
         {tags.map((tag) => <a href={`/tag/${tag.slug}`}>#{tag.name}</a>)}

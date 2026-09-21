@@ -3,7 +3,11 @@ import { fetchPublishedArticles } from '@/lib/directus';
 import { runtimeConfig } from '@/lib/routes';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-const articles = (await fetchPublishedArticles({ apiUrl: runtimeConfig().directusInternalUrl, limit: 1000 })).data;
+const config = runtimeConfig();
+if (!config.publicListingEnabled) Astro.response.status = 404;
+const articles = config.publicListingEnabled
+  ? (await fetchPublishedArticles({ apiUrl: config.directusInternalUrl, limit: 1000 })).data
+  : [];
 const groups = new Map<string, typeof articles>();
 for (const article of articles) {
   const date = new Date(article.published_at);
@@ -13,10 +17,12 @@ for (const article of articles) {
 ---
 
 <BaseLayout title="文章归档">
+  {!config.publicListingEnabled && <section class="not-found"><p>UNLISTED MODE</p><h1>公开归档未启用。</h1><p>请使用作者分享的单篇链接。</p></section>}
+  {config.publicListingEnabled && <>
   <section class="page-hero"><p>ARCHIVE</p><h1>日更归档</h1></section>
   <section class="archive-list">
     {[...groups.entries()].map(([month, items]) => (
       <section class="archive-month"><h2>{month}</h2><ol>{items.map((article) => <li><time datetime={article.published_at}>{new Date(article.published_at).toLocaleDateString('zh-CN', { day: '2-digit', month: '2-digit' })}</time><a href={`/posts/${article.slug}`}>{article.title}</a></li>)}</ol></section>
     ))}
-  </section>
+  </section></>}
 </BaseLayout>

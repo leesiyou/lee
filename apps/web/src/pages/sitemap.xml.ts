@@ -10,6 +10,7 @@ function xmlEscape(value: string): string {
 
 export async function GET() {
   const config = runtimeConfig();
+  if (!config.publicListingEnabled) return new Response('Not Found', { status: 404 });
   const [articles, categories, tags] = await Promise.all([
     fetchPublishedArticles({ apiUrl: config.directusInternalUrl, limit: 1000 }).then((response) => response.data),
     fetchPublicCollection<Category>({ baseUrl: config.directusInternalUrl, collection: 'categories' }),

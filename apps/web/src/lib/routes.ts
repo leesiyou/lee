@@ -3,6 +3,7 @@ import type { Article } from './types';
 export interface RuntimeConfig {
   directusInternalUrl: string;
   directusPublicUrl: string;
+  publicListingEnabled: boolean;
   publicAdminUrl: string;
   publicBaseUrl: string;
 }
@@ -18,6 +19,7 @@ function validatedHttpUrl(name: string, value: string): string {
 }
 
 export function resolveRuntimeConfig(environment: RuntimeEnvironment): RuntimeConfig {
+  const listingValue = (environment.PUBLIC_LISTING_ENABLED ?? 'false').trim().toLowerCase();
   return {
     directusInternalUrl: validatedHttpUrl(
       'DIRECTUS_INTERNAL_URL',
@@ -27,6 +29,7 @@ export function resolveRuntimeConfig(environment: RuntimeEnvironment): RuntimeCo
       'DIRECTUS_PUBLIC_URL',
       environment.DIRECTUS_PUBLIC_URL ?? 'http://localhost:8055',
     ),
+    publicListingEnabled: ['1', 'true', 'yes', 'on'].includes(listingValue),
     publicAdminUrl: validatedHttpUrl(
       'PUBLIC_ADMIN_URL',
       environment.PUBLIC_ADMIN_URL ?? 'http://localhost:8055',

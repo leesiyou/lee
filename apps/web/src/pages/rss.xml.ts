@@ -7,6 +7,7 @@ export const prerender = false;
 
 export async function GET() {
   const config = runtimeConfig();
+  if (!config.publicListingEnabled) return new Response('Not Found', { status: 404 });
   const articles = (await fetchPublishedArticles({ apiUrl: config.directusInternalUrl, limit: 100 })).data;
   return rss({
     description: '记录创业、制造、AI、文化与真实项目的长期实验。',

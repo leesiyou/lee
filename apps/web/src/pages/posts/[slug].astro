@@ -11,7 +11,7 @@ let article: Article | null = null;
 let related: Article[] = [];
 try {
   article = await fetchPublishedArticle({ apiUrl: config.directusInternalUrl, slug });
-  if (article) {
+  if (article && config.publicListingEnabled) {
     const category = typeof article.category === 'object' && article.category ? article.category.slug : undefined;
     related = (await fetchPublishedArticles({ apiUrl: config.directusInternalUrl, category, limit: 4 })).data
       .filter((item) => item.slug !== article?.slug)

@@ -37,6 +37,10 @@ function isPrivateAdminUrl(url: string): boolean {
   }
 }
 const showAdminLink = !isPrivateAdminUrl(config.publicAdminUrl);
+Astro.response.headers.set(
+  'X-Robots-Tag',
+  config.publicListingEnabled ? 'index, follow' : 'noindex, nofollow, noarchive, nosnippet',
+);
 ---
 
 <!doctype html>
@@ -49,7 +53,8 @@ const showAdminLink = !isPrivateAdminUrl(config.publicAdminUrl);
     <meta name="color-scheme" content="dark light" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" type="application/rss+xml" title="李思友的思想实验室 RSS" href={`${config.publicBaseUrl}/rss.xml`} />
+    {config.publicListingEnabled && <link rel="alternate" type="application/rss+xml" title="李思友的思想实验室 RSS" href={`${config.publicBaseUrl}/rss.xml`} />}
+    <meta name="robots" content={config.publicListingEnabled ? 'index,follow' : 'noindex,nofollow,noarchive,nosnippet'} />
     <meta property="og:locale" content="zh_CN" />
     <meta property="og:site_name" content="李思友的思想实验室" />
     <meta property="og:type" content={type} />
@@ -68,8 +73,7 @@ const showAdminLink = !isPrivateAdminUrl(config.publicAdminUrl);
         <span>李思友的思想实验室</span>
       </a>
       <nav class="site-nav" aria-label="主导航">
-        <a href="/archive">归档</a>
-        <a href="/search">搜索</a>
+        {config.publicListingEnabled && <><a href="/archive">归档</a><a href="/search">搜索</a></>}
         {showAdminLink && <a href={config.publicAdminUrl}>写文章</a>}
       </nav>
     </header>
