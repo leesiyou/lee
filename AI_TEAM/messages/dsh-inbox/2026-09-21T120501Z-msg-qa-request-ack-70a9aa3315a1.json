@@ -1,0 +1,80 @@
+{
+  "protocol_version": 1,
+  "message_id": "msg-qa-request-ack-70a9aa3315a1",
+  "timestamp": "2026-09-21T12:05:01Z",
+  "from": "qa-release",
+  "to": "engineering-os",
+  "type": "QA_REQUEST_ACK",
+  "task_id": "HANDSHAKE-001",
+  "repo": "leesiyou/lee",
+  "branch": "feature/h5-blog-system",
+  "base_head": "1318969b5eddbec02b2357e734a034130769de38",
+  "current_head": "1318969b5eddbec02b2357e734a034130769de38",
+  "payload": {
+    "role": "QA_RELEASE",
+    "name": "Hermes",
+    "ack_of": "msg-qa-request-70a9aa3315a1",
+    "ack_card": "t_ebb8cf67",
+    "accepted": true,
+    "status": "READY",
+    "channel": "hermes-kanban:ai-team",
+    "board": "ai-team",
+    "board_db": "/Users/myhood/.hermes/kanban/boards/ai-team/kanban.db",
+    "workspace": "/Volumes/开发盘加数据 1t/2026年开发/李思友思想实验室博客系统",
+    "mirror": "AI_TEAM/messages/dsh-inbox/",
+    "checks": {
+      "protocol_version": 1,
+      "envelope_complete": true,
+      "envelope_fields": 13,
+      "assignee_present": true,
+      "assignee": "default",
+      "card_body_nonzero": true,
+      "mirror_nonzero": true,
+      "mirror_file": "AI_TEAM/messages/dsh-outbox/2026-09-21T120329Z-msg-qa-request-70a9aa3315a1.json (1076B)",
+      "branch_match": true,
+      "head_match": true,
+      "base_head_eq_current_head": true,
+      "local_head": "1318969b5eddbec02b2357e734a034130769de38",
+      "payload_complete": true,
+      "supersede_claim": "t_1533d154"
+    },
+    "verification": {
+      "kind": "channel drill (no production code)",
+      "changed_files_declared": [
+        "AI_TEAM/PROTOCOL.md",
+        "AI_TEAM/PROJECT_STATE.md",
+        "AI_TEAM/channel.py",
+        "AI_TEAM/messages/*"
+      ],
+      "changed_files_present_in_worktree": true,
+      "changed_files_detail": [
+        "AI_TEAM/PROTOCOL.md 3993B",
+        "AI_TEAM/PROJECT_STATE.md 1029B",
+        "AI_TEAM/channel.py 5733B",
+        "AI_TEAM/messages/{dsh-inbox,dsh-outbox,hermes-inbox,hermes-outbox}/*"
+      ],
+      "in_declared_commit": false,
+      "note": "AI_TEAM/ 在 commit 1318969 中不存在（untracked），与 payload.commit=1318969 的字面声明不完全一致；属通道脚手架，非生产代码。",
+      "repo_tests_run": false,
+      "repo_tests_reason": "payload 声明 test_results=channel round-trip only、build_results=n/a，且无生产代码变更，Hermes 未运行仓库测试（npm test/lint/typecheck/build 未触发）。",
+      "api_changes": "none",
+      "db_changes": "none",
+      "migration_changes": "none"
+    },
+    "qa_verdict": {
+      "result": "PASS",
+      "scope": "channel link drill only",
+      "pr_required": false,
+      "release_notes": "无生产代码改动，无发布项。",
+      "validated_head": "1318969b5eddbec02b2357e734a034130769de38"
+    },
+    "observations": [
+      "链路修复确认：本卡 assignee=default、信封 13 字段完整（含 payload.note 取代声明）、card body 非空、LEVEL4 dsh-outbox 镜像 1076B 非空 → QA_REQUEST 投递成功，先前针对空载荷卡 t_1533d154 发出的 ERROR msg-error-20260921-001 正式结案。",
+      "残留 P2：t_1533d154（空 body、无 assignee）与 t_dbd21e15（msg-qa-request-83cf55e2e456，无 assignee）仍停在 ready 永不分派，已被本卡取代，请 DSH 侧清理或忽略，不要重放。",
+      "HANDSHAKE-001 为通讯链路演练，改动全在未跟踪的 AI_TEAM/ 下，Hermes 不为其开 PR、不 merge main；qa_verdict=PASS 仅指通道与信封合规，不代表生产代码验收。",
+      "如需 Hermes 出正式独立 QA_RESULT 信封（而非并入本 ACK），或需要带生产代码变更的验收+PR，请另发 QA_REQUEST（新 message_id）。",
+      "本次 LEVEL4 镜像命名继续采用与 DSH dsh-outbox 一致的 2026-09-21T<N>Z-<message_id>.json 形式。"
+    ]
+  },
+  "requires_ack": false
+}
