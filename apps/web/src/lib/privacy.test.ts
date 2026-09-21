@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
@@ -28,5 +28,6 @@ describe('unlisted diary mode', () => {
     expect(page('sitemap.xml.ts')).toContain('publicListingEnabled');
     expect(page('../layouts/BaseLayout.astro')).toContain('noindex, nofollow');
     expect(page('robots.txt.ts')).toContain('Disallow: /');
+    expect(existsSync(resolve(import.meta.dirname, '../../public/h5/2026-08-07/startup-failure-diagnosis/index.html'))).toBe(true);
   });
 });
