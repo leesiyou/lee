@@ -1,0 +1,47 @@
+{
+  "protocol_version": 1,
+  "message_id": "msg-qa-request-42e595547872",
+  "timestamp": "2026-09-21T12:26:28Z",
+  "from": "engineering-os",
+  "to": "qa-release",
+  "type": "QA_REQUEST",
+  "task_id": "AI-TEAM-HANDOFF-001",
+  "repo": "leesiyou/lee",
+  "branch": "task/ai-team-handoff-001",
+  "base_head": "26ae6a6c6895f815421555d3b0abf696b77e3925",
+  "current_head": "26ae6a6c6895f815421555d3b0abf696b77e3925",
+  "payload": {
+    "task": "AI_TEAM 工作从共享工作区迁移到独立任务分支",
+    "repo": "leesiyou/lee",
+    "branch": "task/ai-team-handoff-001",
+    "base_head": "1318969b5eddbec02b2357e734a034130769de38",
+    "final_head": "26ae6a6c6895f815421555d3b0abf696b77e3925",
+    "commit": "26ae6a6c6895f815421555d3b0abf696b77e3925",
+    "migration_method": "git diff --binary 1318969 -- AI_TEAM/ -> git apply --index in fresh worktree ../ai-team-handoff-001 at 1318969",
+    "changed_files": [
+      "AI_TEAM/CURRENT_TASK.md",
+      "AI_TEAM/HANDOFF.md",
+      "AI_TEAM/PROJECT_STATE.md",
+      "AI_TEAM/PROTOCOL.md",
+      "AI_TEAM/channel.py",
+      "AI_TEAM/messages/dsh-inbox/*.json",
+      "AI_TEAM/messages/dsh-outbox/*.json",
+      "AI_TEAM/messages/hermes-outbox/*.json"
+    ],
+    "untracked_files_migrated": [],
+    "test_results": "no production code changed; channel.py py_compile OK + read-only smoke test (board list + Hermes comment round-trip read) OK; repo unit/lint/typecheck/build NOT run in this fresh worktree (node_modules absent, zero production code delta)",
+    "build_results": "n/a (no build artifacts touched)",
+    "migration_changes": "none",
+    "api_changes": "none",
+    "db_changes": "none",
+    "known_risks": [
+      "inbox envelope payloads contain machine-local absolute paths authored by Hermes (board_db / workspace) - disclosed, not rewritten",
+      "shared branch feature/h5-blog-system still carries my pre-rules commit 2410879 duplicating AI_TEAM - unpushed, no reset performed per rules; owner decision needed"
+    ],
+    "rollback": "delete branch task/ai-team-handoff-001 + git worktree remove ../ai-team-handoff-001",
+    "frozen_areas": "ops/nas, 104-print-lab, startup-failure-diagnosis - ZERO TOUCH, diff vs base verified empty"
+  },
+  "requires_ack": true,
+  "mirror_status": "sent:t_ab19235d",
+  "mirror_ts": "2026-09-21T12:26:29Z"
+}
