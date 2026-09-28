@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d0f0c">
+<meta name="description" content="一场关于生命意义的开放式探索：从存在、有限、痛苦与关系，走向自己的生活答案。八个章节，配原创环境音乐。">
+<meta property="og:title" content="生命探索｜把一生还给自己">
+<meta property="og:description" content="我们常常忙着成为某种人，却很少停下来问：这一生，究竟想怎样度过？">
+<title>生命探索｜把一生还给自己</title>
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css?v=20260928">
+<script src="js/main.js?v=20260928" defer></script>
+</head>
+<body>
+<canvas id="field" class="field" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" hidden>
+  <div class="gate-inner">
+    <div class="gate-orb" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+    <p class="eyebrow">NOTES ON BEING · 生命探索</p>
+    <h2 id="gate-title">在开始之前，<br>先让自己慢下来</h2>
+    <p class="gate-tip">本页配有原创环境音乐，建议戴上耳机</p>
+    <div class="gate-actions">
+      <button class="btn btn-primary" id="enter-music" type="button"><span class="dot" aria-hidden="true"></span>带着音乐进入</button>
+      <button class="btn btn-ghost" id="enter-quiet" type="button">安静阅读</button>
+    </div>
+  </div>
+</div>
+
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+<nav class="nav" aria-label="页面导航">
+  <a class="brand" href="#top">生命探索<i>NOTES ON BEING</i></a>
+  <span class="nav-now" id="nav-now">序章</span>
+  <a class="nav-link" href="#ending">留下一个问题</a>
+</nav>
+
+<nav class="rail" id="rail" aria-label="章节">
+  <a href="#c1"><b>01</b><span>存在</span></a>
+  <a href="#c2"><b>02</b><span>起点</span></a>
+  <a href="#c3"><b>03</b><span>意义</span></a>
+  <a href="#c4"><b>04</b><span>有限</span></a>
+  <a href="#c5"><b>05</b><span>痛苦</span></a>
+  <a href="#c6"><b>06</b><span>关系</span></a>
+  <a href="#c7"><b>07</b><span>日常</span></a>
+  <a href="#ending"><b>08</b><span>此刻</span></a>
+</nav>
+
+<button class="sound" id="sound" type="button" aria-pressed="false" aria-label="打开环境音乐">
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+  <span class="sound-label">环境音 <em id="sound-state">关</em></span>
+</button>
+<audio id="ambient" src="assets/audio/ambient.mp3" loop preload="none" playsinline></audio>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<header class="hero scene" id="top" data-scene="0" data-title="序章">
+  <div class="hero-inner">
+    <div class="eyebrow reveal-line">一场关于生命意义的开放式探索</div>
+    <h1 data-split><span class="l1">把一生</span><span class="l2">还给自己</span></h1>
+    <p class="hero-lead">我们常常忙着成为某种人，却很少停下来问：这一生，究竟想怎样度过？</p>
+    <p class="hero-meta">八个章节 · 约八分钟 · 没有标准答案</p>
+    <a class="scroll" href="#c1"><i></i>向下，开始思考</a>
+  </div>
+</header>
+
+<main>
+<section class="chapter scene" id="c1" data-scene="1" data-title="01 / 存在">
+  <div class="chapter-inner reveal">
+    <div class="chapter-head"><div class="chapter-no">01 / 存在</div><h2 data-split>如果今天只是<br><em>普通的一天</em></h2></div>
+    <p class="lead">没有人评价你，也没有人催促你证明自己。你还愿意为什么起床？</p>
+    <div class="bodycopy">
+      <p>生命意义听起来很大，大到像一道必须答对的题。但它也许先藏在很小的地方：一段想继续的关系、一件仍好奇的事，或只是今天想好好吃的一顿饭。</p>
+      <p>先别急着给人生下定义。试着回到自己的感受：什么让你觉得，活着不只是把日子过完？</p>
+    </div>
+    <div class="breath" id="breath">
+      <button class="breath-btn" id="breath-btn" type="button" aria-describedby="breath-note">
+        <span class="breath-ring" aria-hidden="true"><i></i></span>
+        <span class="breath-text" id="breath-cue" aria-live="polite">跟着光，呼吸一次</span>
+      </button>
+      <p class="breath-note" id="breath-note">吸气 4 秒 · 停 2 秒 · 呼气 6 秒。背景里的光，会和你一起呼吸。</p>
+    </div>
+    <div class="question">此刻，你愿意把注意力交给什么？<small>不必写出正确答案，只写真实的答案。</small></div>
+  </div>
+</section>
+
+<section class="chapter scene" id="c2" data-scene="2" data-title="02 / 起点">
+  <div class="chapter-inner reveal">
+    <div class="chapter-head"><div class="chapter-no">02 / 起点</div><h2 data-split>我为什么<br><em>在这里</em></h2></div>
+    <p class="lead">我们没有选择出生，却在此后不断选择如何回应生命。</p>
+    <div class="bodycopy">
+      <p>我们的起点由偶然、家庭、身体与时代共同写下。有人把它理解为命运，有人称之为随机。无论怎样，它都不是我们亲手挑选的。</p>
+      <p>也许“我为何出生”没有一个能让所有人信服的答案。但“我如何活着”，仍然可以由今天的选择，一点一点写出来。</p>
+    </div>
+    <div class="question">哪些东西不是你选择的？哪些回应，仍然属于你？</div>
+  </div>
+</section>
+
+<section class="chapter scene" id="c3" data-scene="3" data-title="03 / 意义">
+  <div class="chapter-inner reveal">
+    <div class="chapter-head"><div class="chapter-no">03 / 意义</div><h2 data-split>意义是被找到，<br>还是被<em>创造</em>？</h2></div>
+    <p class="lead">也许意义不是一件藏好的东西，而是你一次次认真回应生活后，留下的方向。</p>
+    <div class="bodycopy">
+      <p>有人相信，意义等待我们发现；也有人相信，意义来自选择、行动与关系。两种看法都试图回答同一个渴望：我的生命不只是偶然经过。</p>
+      <p>也许我们不必急着二选一。我们可能先被某件事召唤，又在投入其中的日子里，让它逐渐成为自己的意义。</p>
+    </div>
+    <p class="scene-hint" aria-hidden="true">背景里的星，正在一颗一颗连成线</p>
+    <button class="pause" type="button" aria-expanded="false">停一下 · 展开思考</button>
+    <div class="reflection">如果没有一个宏大的使命，你正在做的哪件小事，仍值得认真？</div>
+  </div>
+</section>
+
+<section class="chapter scene" id="c4" data-scene="4" data-title="04 / 有限">
+  <div class="chapter-inner reveal">
+    <div class="chapter-head"><div class="chapter-no">04 / 有限</div><h2 data-split>因为会结束，<br>所以更值得<em>选择</em></h2></div>
+    <p class="lead">时间有限，不是催促我们恐慌，而是提醒我们无法同时活成所有可能的自己。</p>
+    <div class="bodycopy">
+      <p>每一次选择都带着取舍。答应一种生活，也意味着暂时放下另一种生活。我们会失去，会告别，也会慢慢明白：有些事不能一直等到“以后”。</p>
+      <p>有限不是生命的缺陷。它让注意力变得珍贵，也让“我把时间给了什么”成为一个真实的问题。</p>
+    </div>
+    <div class="question">如果把接下来的十年认真交给三件事，你会选什么？</div>
+    <button class="pause" type="button" aria-expanded="false">停一下 · 展开思考</button>
+    <div class="reflection">想象十年后的你回头看今天：他会希望你，多留一点时间给什么？</div>
+  </div>
+</section>
+
+<section class="chapter scene" id="c5" data-scene="5" data-title="05 / 痛苦">
+  <div class="chapter-inner reveal">
+    <div class="chapter-head"><div class="chapter-no">05 / 痛苦</div><h2 data-split>受苦，不会自动<br>让人变得<em>伟大</em></h2></div>
+    <p class="lead">痛苦本身不必被美化。你不需要先从痛苦中找到意义，才值得被理解。</p>
+    <div class="bodycopy">
+      <p>有些经历只让人疲惫、愤怒或失去方向。把一切苦难都说成礼物，可能会让正在受苦的人更加孤单。允许自己暂时没有答案，也是一种诚实。</p>
+      <p>后来，如果你愿意，也许可以选择如何回应它：向谁求助、守住什么、从中重新认识自己。意义不是伤口的义务，更不是旁人替你规定的结论。</p>
+    </div>
+    <div class="question">有没有一段经历，你愿意先不解释，只承认它确实发生过？</div>
+    <p class="care">雨里仍有一点光。如果此刻的痛苦让你难以承受，请告诉一个你信任的人，或拨打全国心理援助热线 <a href="tel:12356">12356</a>。你不必一个人扛着。</p>
+  </div>
+</section>
+
+<section class="chapter scene" id="c6" data-scene="6" data-title="06 / 关系">
+  <div class="chapter-inner reveal">
+    <div class="chapter-head"><div class="chapter-no">06 / 关系</div><h2 data-split>我们如何成为<br>彼此生命的<em>一部分</em></h2></div>
+    <p class="lead">有些意义不在远方，而在某个人因为你的存在，少了一点孤单。</p>
+    <div class="visual" aria-hidden="true"><span class="meet"><i class="a"></i><b></b><i class="b"></i></span><small>一个人 · 与另一个人相遇</small></div>
+    <div class="bodycopy">
+      <p>爱、陪伴、责任、理解与告别，让生命彼此交织。我们被别人改变，也在不经意间改变别人。意义未必需要宏大的见证，有时它只存在于一通没有敷衍的电话，一次说到做到。</p>
+      <p>关系不是人生的全部，却让“我如何活”不再只是一个人的问题。</p>
+    </div>
+    <div class="question">谁曾让你觉得被看见？你又想怎样看见别人？</div>
+    <button class="pause" type="button" aria-expanded="false">停一下 · 展开思考</button>
+    <div class="reflection">有没有一句一直想说、却还没说出口的话？也许今天，就是合适的日子。</div>
+  </div>
+</section>
+
+<section class="chapter scene" id="c7" data-scene="7" data-title="07 / 日常">
+  <div class="chapter-inner reveal">
+    <div class="chapter-head"><div class="chapter-no">07 / 日常</div><h2 data-split>普通生活，<br>也可以是<em>答案</em></h2></div>
+    <p class="lead">认真生活，不等于每天都要活得非凡。</p>
+    <div class="bodycopy">
+      <p>照顾身体，做好手边的事，维系重要的关系，给好奇心留一点空间。这些听起来普通，却是生命真正发生的地方。</p>
+      <p>也许不必等到“想明白一生”，才能开始生活。可以先做好今天能做的一件小事；再在往后的日子里，看看它把你带向哪里。</p>
+    </div>
+    <div class="question">今天有什么小事，值得你不敷衍地做完？</div>
+  </div>
+</section>
+
+<section class="chapter last scene" id="ending" data-scene="8" data-title="08 / 此刻">
+  <div class="chapter-inner reveal">
+    <div class="chapter-head"><div class="chapter-no">08 / 此刻</div><h2 data-split>带着问题，<br>回到<em>生活</em></h2></div>
+    <p class="lead">生命的意义，也许不是终于想明白了什么，而是在还没有答案的时候，仍愿意认真生活。</p>
+    <div class="bodycopy">
+      <p>这不是结论，只是一个暂时可以带走的念头。你可以不同意，可以改写，也可以在某一天发现，自己已经走到了另一个答案旁边。</p>
+    </div>
+    <div class="question">此刻的你，愿意把生命交给什么？</div>
+
+    <label for="note" class="eyebrow note-label">写给此刻的自己 · 内容仅保存在这台设备</label>
+    <textarea id="note" placeholder="不必完整，一句话也可以……" maxlength="1000"></textarea>
+    <div class="row">
+      <button class="btn btn-primary" id="save" type="button">保存这一刻</button>
+      <span class="saved" id="saved" aria-live="polite"></span>
+    </div>
+
+    <div class="takeaway">
+      <p class="eyebrow">临走前</p>
+      <div class="row">
+        <button class="btn btn-ghost" id="draw" type="button">抽一句话，带走</button>
+        <button class="btn btn-ghost" id="share" type="button">复制链接，分享给一个人</button>
+      </div>
+      <blockquote class="card" id="card" hidden>
+        <p id="card-text"></p>
+        <cite id="card-from"></cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <span>生命探索 · 一篇未完成的思考</span>
+  <span>背景音乐：本页原创生成的环境音</span>
+  <a href="#top">回到开端 ↑</a>
+</footer>
+</body>
+</html>
