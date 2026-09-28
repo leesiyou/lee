@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B120F">
+<title>顺哥 · 一周康复手册 ｜ 42岁 · 天津 · 新冠居家康复</title>
+<style>
+:root{
+  --ink:#0B120F;        /* 近黑墨绿 */
+  --ink2:#16241E;
+  --ink3:#1E3129;
+  --paper:#F4F1EA;      /* 暖白 */
+  --paper2:#EAE4D8;
+  --line:rgba(11,18,15,.13);
+  --muted:#6E7A74;
+  --muted2:#98A29C;
+  --red:#C8342A;        /* 丹 / 中国红 = 危险·红线 */
+  --red-d:#9E251C;
+  --jade:#2E7D6F;       /* 青玉 = 循证·达标 */
+  --jade-l:#3E9B88;
+  --gold:#B08D3F;       /* 金 = 克制强调 */
+  --r:16px;
+  --pad:20px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC","Noto Sans CJK SC",sans-serif;
+  font-size:15px;line-height:1.7;
+  overflow-x:hidden;
+}
+img,svg{max-width:100%}
+h1,h2,h3,h4,p,ul,ol,figure{margin:0}
+ul,ol{padding-left:1.15em}
+li{margin:.28em 0}
+strong{font-weight:700}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+a{color:inherit}
+
+/* ---------- 读进度 ---------- */
+#readbar{position:fixed;left:0;top:0;height:2px;width:0;background:var(--red);z-index:99;transition:width .12s linear}
+
+/* ---------- 通用 ---------- */
+.wrap{max-width:560px;margin:0 auto;padding:0 var(--pad)}
+.sec{padding:52px 0 8px}
+.kick{
+  font-size:10px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--muted2);display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.kick::after{content:"";flex:1;height:1px;background:var(--line)}
+.h2{font-size:27px;line-height:1.24;font-weight:800;letter-spacing:-.02em}
+.h2 em{font-style:normal;color:var(--red)}
+.sub{color:var(--muted);font-size:13.5px;margin-top:10px}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ---------- HERO ---------- */
+.hero{
+  background:
+    radial-gradient(120% 80% at 82% 6%,rgba(46,125,111,.30) 0%,transparent 58%),
+    radial-gradient(90% 60% at 4% 96%,rgba(200,52,42,.20) 0%,transparent 62%),
+    var(--ink);
+  color:var(--paper);
+  padding:calc(26px + env(safe-area-inset-top)) 0 34px;
+  position:relative;overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(90deg,rgba(244,241,234,.05) 1px,transparent 1px);
+  background-size:33.33% 100%;
+}
+.hero .wrap{position:relative;z-index:2}
+.brandline{display:flex;align-items:center;gap:9px;font-size:10.5px;letter-spacing:.2em;color:rgba(244,241,234,.62)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:br 2.6s ease-in-out infinite}
+@keyframes br{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.72)}}
+.hero h1{
+  font-size:clamp(38px,12.5vw,60px);line-height:.98;font-weight:900;letter-spacing:-.045em;
+  margin:22px 0 0;
+}
+.hero h1 span{display:block}
+.hero h1 .thin{font-weight:300;color:rgba(244,241,234,.42);font-size:.52em;letter-spacing:-.01em;margin-top:8px;line-height:1.3}
+.hero .who{margin-top:22px;display:flex;flex-wrap:wrap;gap:7px}
+.tag{
+  font-size:11.5px;padding:5px 11px;border-radius:999px;
+  border:1px solid rgba(244,241,234,.22);color:rgba(244,241,234,.9);
+  background:rgba(244,241,234,.05);
+}
+.tag.hot{border-color:rgba(200,52,42,.75);color:#fff;background:rgba(200,52,42,.28)}
+.statusline{
+  margin-top:26px;border-top:1px solid rgba(244,241,234,.15);padding-top:16px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+}
+.statusline b{display:block;font-size:19px;font-weight:800;letter-spacing:-.02em}
+.statusline i{font-style:normal;font-size:10.5px;color:rgba(244,241,234,.5);letter-spacing:.06em}
+
+/* ---------- 信条 ---------- */
+.creed{background:var(--ink2);color:var(--paper);padding:40px 0 44px}
+.creed p{font-size:19px;line-height:1.6;font-weight:600;letter-spacing:-.01em}
+.creed p+p{margin-top:14px}
+.creed p em{font-style:normal;color:var(--gold)}
+.credo{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(244,241,234,.14);margin-top:26px;border-radius:12px;overflow:hidden}
+.credo div{background:var(--ink2);padding:15px 14px}
+.credo b{display:block;font-size:13.5px;font-weight:700}
+.credo i{font-style:normal;font-size:11px;color:rgba(244,241,234,.5);display:block;margin-top:3px}
+
+/* ---------- 量化红线大数字 ---------- */
+.vitals{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:22px}
+.vc{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:15px 15px 13px;
+  position:relative;overflow:hidden;
+}
+.vc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--jade)}
+.vc.red::before{background:var(--red)}
+.vc.gold::before{background:var(--gold)}
+.vc b{display:block;font-size:29px;font-weight:800;letter-spacing:-.045em;line-height:1.05}
+.vc b small{font-size:12.5px;font-weight:600;letter-spacing:0;margin-left:2px;color:var(--muted)}
+.vc span{display:block;font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.5}
+.vc em{font-style:normal;display:block;font-size:10.5px;letter-spacing:.16em;color:var(--muted2);margin-bottom:8px}
+
+/* ---------- 一周总览 ---------- */
+.ov{margin-top:24px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#fff}
+.ovr{display:flex;align-items:center;gap:12px;padding:13px 15px;border-bottom:1px solid var(--line);cursor:pointer}
+.ovr:last-child{border-bottom:0}
+.ovr:active{background:var(--paper2)}
+.ovr .d{font-size:11px;font-weight:800;letter-spacing:.1em;color:#fff;background:var(--ink);border-radius:7px;padding:5px 8px;min-width:44px;text-align:center}
+.ovr.warn .d{background:var(--red)}
+.ovr.turn .d{background:var(--gold)}
+.ovr.recover .d{background:var(--jade)}
+.ovr .t{flex:1;min-width:0}
+.ovr .t b{display:block;font-size:14px;font-weight:700}
+.ovr .t i{font-style:normal;font-size:11.5px;color:var(--muted)}
+.ovr .go{font-size:16px;color:var(--muted2)}
+
+/* ---------- 日切换 ---------- */
+.daybar{
+  position:sticky;top:0;z-index:40;margin-top:34px;
+  background:rgba(244,241,234,.94);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:9px 0;
+}
+.chips{display:flex;gap:7px;overflow-x:auto;padding:0 var(--pad);scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--ink);
+  border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700;
+  cursor:pointer;white-space:nowrap;transition:.2s;
+}
+.chip small{font-weight:500;color:var(--muted);font-size:10.5px;margin-left:5px}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip.on small{color:rgba(244,241,234,.6)}
+
+/* ---------- 日卡片 ---------- */
+.day{margin-top:22px}
+.dhead{border-radius:var(--r);background:var(--ink);color:var(--paper);padding:20px 18px 18px;position:relative;overflow:hidden}
+.dhead::before{content:"";position:absolute;right:-30px;top:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(200,52,42,.34),transparent 68%)}
+.dhead .ph{font-size:10.5px;letter-spacing:.2em;color:rgba(244,241,234,.55)}
+.dhead h3{font-size:24px;line-height:1.2;font-weight:900;letter-spacing:-.03em;margin:9px 0 0;position:relative}
+.dhead p{font-size:13.5px;color:rgba(244,241,234,.72);margin-top:11px;position:relative}
+.focus{margin-top:16px;display:grid;gap:7px;position:relative}
+.focus li{list-style:none;font-size:12.5px;color:rgba(244,241,234,.92);display:flex;gap:8px}
+.focus li::before{content:"▪";color:var(--red);flex:0 0 auto}
+ul.focus{padding-left:0;margin:16px 0 0}
+
+/* 时间轴 */
+.tlwrap{margin-top:26px}
+.tl{list-style:none;padding:0;margin:0;position:relative}
+.tl::before{content:"";position:absolute;left:47px;top:6px;bottom:6px;width:1px;background:var(--line)}
+.tl li{position:relative;display:grid;grid-template-columns:42px 1fr;gap:18px;padding:7px 0}
+.tl .tm{font-size:11.5px;font-weight:700;color:var(--muted);text-align:right;padding-top:2px;font-variant-numeric:tabular-nums}
+.tl .bd{position:relative;font-size:13.5px;line-height:1.62}
+.tl .bd::before{
+  content:"";position:absolute;left:-22px;top:9px;width:7px;height:7px;border-radius:50%;
+  background:var(--paper);border:1.5px solid var(--muted2);
+}
+.tl li.key .bd::before{background:var(--red);border-color:var(--red);box-shadow:0 0 0 3px rgba(200,52,42,.14)}
+.tl li.key .bd{font-weight:600}
+.tl li.eat .bd::before{background:var(--gold);border-color:var(--gold)}
+.tl li.air .bd::before{background:var(--jade);border-color:var(--jade)}
+.tl .bd .k{
+  display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;
+  padding:1px 6px;border-radius:4px;margin-right:6px;vertical-align:1px;
+}
+.k.k1{background:rgba(200,52,42,.12);color:var(--red-d)}
+.k.k2{background:rgba(176,141,63,.16);color:#8A6C1F}
+.k.k3{background:rgba(46,125,111,.13);color:var(--jade)}
+.k.k4{background:rgba(11,18,15,.07);color:var(--muted)}
+
+/* 三餐 */
+.block{margin-top:26px;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.block > .bt{padding:13px 15px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:9px}
+.block .bt b{font-size:13.5px;font-weight:800;letter-spacing:.01em}
+.block .bt i{font-style:normal;font-size:10.5px;color:var(--muted2);letter-spacing:.14em;text-transform:uppercase}
+.meal{padding:12px 15px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:74px 1fr;gap:11px;font-size:13px}
+.meal:last-child{border-bottom:0}
+.meal .mt{font-size:11.5px;font-weight:700;color:var(--muted)}
+.rx{padding:13px 15px;border-bottom:1px solid var(--line);font-size:13px;display:grid;grid-template-columns:56px 1fr;gap:12px}
+.rx:last-child{border-bottom:0}
+.rx .rt{font-size:11.5px;font-weight:800;color:var(--jade);letter-spacing:.04em}
+.rx.warn .rt{color:var(--red)}
+.rx .rb{line-height:1.65}
+.hint{padding:11px 15px;background:var(--paper2);font-size:12px;color:#5C6660}
+
+/* 打卡 */
+.docheck{margin-top:22px}
+.docheck .dh{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.docheck .dh b{font-size:14px;font-weight:800}
+.docheck .dh span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.ck{display:flex;align-items:flex-start;gap:11px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:.18s}
+.ck:active{transform:scale(.99)}
+.ck .bx{
+  flex:0 0 auto;width:20px;height:20px;border-radius:6px;border:1.6px solid var(--muted2);
+  margin-top:1px;position:relative;transition:.18s;
+}
+.ck .tx{font-size:13.5px;line-height:1.5}
+.ck.on{background:rgba(46,125,111,.06);border-color:rgba(46,125,111,.35)}
+.ck.on .bx{background:var(--jade);border-color:var(--jade)}
+.ck.on .bx::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(43deg)}
+.ck.on .tx{color:var(--muted);text-decoration:line-through}
+
+/* 指标记录 */
+.vrec{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:15px}
+.vrec .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.fld label{display:block;font-size:11px;color:var(--muted);letter-spacing:.06em;margin-bottom:5px}
+.fld input{
+  width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 11px;
+  font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;
+  background:var(--paper);color:var(--ink);-webkit-appearance:none;
+}
+.fld input:focus{outline:2px solid rgba(46,125,111,.4);outline-offset:0;background:#fff}
+.vrec .row{display:flex;gap:9px;margin-top:12px}
+.btn{
+  flex:1;border:0;border-radius:11px;padding:12px;font-size:13.5px;font-weight:800;
+  background:var(--ink);color:var(--paper);cursor:pointer;font-family:inherit;
+}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);flex:0 0 auto;padding:12px 16px;font-weight:600}
+.vsum{margin-top:14px;font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:12px}
+.vsum b{color:var(--ink)}
+.saved{font-size:12px;color:var(--jade);font-weight:700;margin-top:9px;display:none}
+.saved.show{display:block}
+
+/* ---------- 红线全幅 ---------- */
+.danger{background:linear-gradient(180deg,var(--red) 0%,var(--red-d) 100%);color:#fff;padding:52px 0 46px;margin-top:60px;position:relative;overflow:hidden}
+.danger::before{content:"";position:absolute;left:-40px;bottom:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 70%)}
+.danger .kick{color:rgba(255,255,255,.6)}
+.danger .kick::after{background:rgba(255,255,255,.28)}
+.danger .h2 em{color:#fff}
+.danger .sub{color:rgba(255,255,255,.8)}
+.dgrp{margin-top:24px}
+.dgrp h4{font-size:12px;letter-spacing:.18em;font-weight:800;color:rgba(255,255,255,.72);margin-bottom:11px}
+.dlist{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.dlist li{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  border-radius:12px;padding:12px 14px;font-size:13.5px;display:grid;grid-template-columns:20px 1fr;gap:10px;
+}
+.dlist li span:first-child{font-weight:800;opacity:.85}
+.dlist.calm li{background:rgba(255,255,255,.94);color:var(--red-d);border-color:transparent;font-weight:600}
+
+/* ---------- 天津 ---------- */
+.local{display:grid;gap:10px;margin-top:22px}
+.lc{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:15px;display:grid;grid-template-columns:34px 1fr;gap:12px}
+.lc .ic{width:34px;height:34px;border-radius:10px;background:var(--paper2);display:grid;place-items:center;font-size:15px}
+.lc b{display:block;font-size:13.5px;font-weight:800;margin-bottom:3px}
+.lc p{font-size:12.5px;color:var(--muted);line-height:1.65}
+.ladder{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.ladder span{font-size:11px;padding:4px 9px;border-radius:999px;background:var(--paper2);color:var(--ink2);font-weight:700}
+.ladder span:last-child{background:var(--red);color:#fff}
+
+/* ---------- 依据 ---------- */
+.basis{background:var(--ink);color:var(--paper);padding:52px 0 44px;margin-top:60px}
+.basis .kick{color:rgba(244,241,234,.45)}
+.basis .kick::after{background:rgba(244,241,234,.18)}
+.basis .h2{color:var(--paper)}
+.blist{list-style:none;padding:0;margin:22px 0 0;counter-reset:b}
+.blist li{
+  counter-increment:b;font-size:12.5px;color:rgba(244,241,234,.78);line-height:1.65;
+  padding:11px 0 11px 34px;border-bottom:1px solid rgba(244,241,234,.12);position:relative;
+}
+.blist li::before{
+  content:counter(b,decimal-leading-zero);position:absolute;left:0;top:11px;
+  font-size:11px;font-weight:800;color:var(--gold);letter-spacing:.04em;font-variant-numeric:tabular-nums;
+}
+.bnote{font-size:11.5px;color:rgba(244,241,234,.5);margin-top:18px;line-height:1.7}
+
+/* ---------- 页脚 ---------- */
+footer{background:var(--ink2);color:rgba(244,241,234,.62);padding:30px 0 calc(88px + env(safe-area-inset-bottom));font-size:11.5px;line-height:1.75}
+footer b{color:var(--paper);display:block;font-size:12.5px;margin-bottom:7px}
+footer .sig{margin-top:20px;padding-top:16px;border-top:1px solid rgba(244,241,234,.14);display:flex;justify-content:space-between;font-size:10.5px;color:rgba(244,241,234,.4)}
+
+/* ---------- 浮动红线按钮 ---------- */
+.fab{
+  position:fixed;right:16px;bottom:calc(20px + env(safe-area-inset-bottom));z-index:60;
+  border:0;border-radius:999px;padding:13px 18px;font-size:13px;font-weight:800;font-family:inherit;
+  background:var(--red);color:#fff;box-shadow:0 10px 26px rgba(200,52,42,.42);cursor:pointer;
+}
+.fab:active{transform:scale(.96)}
+.sheet{
+  position:fixed;inset:0;z-index:80;background:rgba(11,18,15,.55);backdrop-filter:blur(3px);
+  display:none;align-items:flex-end;
+}
+.sheet.on{display:flex}
+.sheet .inner{
+  background:var(--paper);width:100%;max-height:88vh;overflow-y:auto;
+  border-radius:22px 22px 0 0;padding:22px var(--pad) calc(26px + env(safe-area-inset-bottom));
+  animation:up .28s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+.sheet h3{font-size:20px;font-weight:900;letter-spacing:-.02em;color:var(--red)}
+.sheet .close{margin-top:18px;width:100%;border:0;border-radius:12px;padding:14px;background:var(--ink);color:var(--paper);font-size:14px;font-weight:800;font-family:inherit}
+.sheet .urgent{margin-top:14px;font-size:12.5px;color:var(--muted)}
+@media print{.fab,.sheet,.daybar,#readbar{display:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="readbar"></div>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div class="brandline"><span class="dot"></span>HOME CONVALESCENCE PROTOCOL · 国家级分级标准</div>
+    <h1>
+      顺哥的
+      <span>一周康复</span>
+      <span class="thin">42 岁 · 天津 · 新冠居家 · 发病第 1—2 天<br>无基础疾病</span>
+    </h1>
+    <div class="who">
+      <span class="tag hot">发热期</span>
+      <span class="tag">咳嗽</span>
+      <span class="tag">秋分后 · 昼夜温差 10℃+</span>
+      <span class="tag">国庆假期临近</span>
+    </div>
+    <div class="statusline">
+      <div><b class="num">D1–D7</b><i>逐小时时间表</i></div>
+      <div><b class="num">4 项</b><i>每日量化指标</i></div>
+      <div><b class="num">3 次</b><i>每日通风</i></div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= 信条 ================= -->
+<section class="creed">
+  <div class="wrap">
+    <p>康复不是熬过去，<em>是设计出来的</em>。</p>
+    <p>这份表把国家级方案里的"可执行动作"，翻译成顺哥这一周每一个小时该做什么。</p>
+    <div class="credo">
+      <div><b>循证</b><i>只保留有依据的动作</i></div>
+      <div><b>量化</b><i>血氧·呼吸·心率·体温</i></div>
+      <div><b>分级</b><i>居家 / 就诊 / 急诊 / 120</i></div>
+      <div><b>可执行</b><i>写到几点几分、几碗几克</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 量化红线 ================= -->
+<section class="sec">
+  <div class="wrap">
+    <div class="kick rv">Critical Numbers</div>
+    <h2 class="h2 rv">先记住这 <em>6 个数</em></h2>
+    <p class="sub rv">这四个指标每天测 4 次（早·午·下午·睡前），静坐 5 分钟后再测，测完记进下面第 7 天的记录卡。偏离红线，直接跳到「危险信号」。</p>
+    <div class="vitals">
+      <div class="vc rv"><em>SPO₂ 血氧</em><b class="num">≥ 94<small>%</small></b><span>静息指尖测量，复测 2 次。≤93% 当天就医，≤90% 立刻急诊。</span></div>
+      <div class="vc rv"><em>呼吸频率</em><b class="num">≤ 20<small>次/分</small></b><span>数满 60 秒。&gt;24 次/分是危险信号。</span></div>
+      <div class="vc rv"><em>静息心率</em><b class="num">≤ 100<small>次/分</small></b><span>持续 &gt;120 次/分且伴胸闷，就医。</span></div>
+      <div class="vc gold rv"><em>体温用药线</em><b class="num">38.5<small>℃</small></b><span>低于此值且能忍，先物理降温、先喝水。高于且难受再用药。</span></div>
+      <div class="vc rv"><em>全天饮水</em><b class="num">2 000–2 500<small>ml</small></b><span>体温每升 1℃ 额外 +300–500 ml。尿色淡黄为达标。</span></div>
+      <div class="vc rv"><em>蛋白质</em><b class="num">1.2–1.5<small>g/kg</small></b><span>按 70 kg 约 85–105 g/天，恢复期目标。发热期能吃下优先。</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 一周总览 ================= -->
+<section class="sec">
+  <div class="wrap">
+    <div class="kick rv">The Week</div>
+    <h2 class="h2 rv">一周怎么走，<em>先看全局</em></h2>
+    <p class="sub rv">点任意一行，直接跳到那一天的时间表。</p>
+    <div class="ov rv" id="ovlist"></div>
+  </div>
+</section>
+
+<!-- ================= 日切换 + 日详情 ================= -->
+<div class="daybar">
+  <div class="chips" id="chips"></div>
+</div>
+
+<main class="wrap" id="daywrap"></main>
+
+<!-- ================= 危险信号 ================= -->
+<section class="danger" id="danger">
+  <div class="wrap">
+    <div class="kick">Red Lines</div>
+    <h2 class="h2">危险信号：<em>不要观察，不要等明天</em></h2>
+    <p class="sub">下面这些情况，家里任何一个人看到，都有权直接决定送医。</p>
+
+    <div class="dgrp">
+      <h4>立刻拨 120（急救）</h4>
+      <ul class="dlist">
+        <li><span>01</span><span>喘不上气、说不完整一句话、静息也明显气短</span></li>
+        <li><span>02</span><span>血氧 ≤90%（复测 2 次仍低）</span></li>
+        <li><span>03</span><span>嘴唇、指甲发紫，面色发灰</span></li>
+        <li><span>04</span><span>意识模糊、叫不醒、嗜睡、抽搐、说胡话</span></li>
+        <li><span>05</span><span>剧烈胸痛、胸闷压榨感、心跳快到发慌伴冷汗</span></li>
+      </ul>
+    </div>
+
+    <div class="dgrp">
+      <h4>今天就去医院（发热门诊 / 急诊）</h4>
+      <ul class="dlist">
+        <li><span>06</span><span>血氧 91–93%，或比平时下降 ≥4 个百分点</span></li>
+        <li><span>07</span><span>发热超过 3 天不退，或退烧后又烧起来</span></li>
+        <li><span>08</span><span>痰变成黄绿色浓痰，且发热不退（可能合并细菌感染）</span></li>
+        <li><span>09</span><span>一天喝不进 1 000 ml 水、尿量明显减少、尿色深如浓茶</span></li>
+        <li><span>10</span><span>持续呕吐腹泻、明显脱水（头晕、站立发黑、皮肤干）</span></li>
+        <li><span>11</span><span>耳痛、剧烈头痛、脖子发硬、皮疹</span></li>
+        <li><span>12</span><span>咳血，或胸痛随呼吸加重</span></li>
+      </ul>
+    </div>
+
+    <div class="dgrp">
+      <h4>今天必须先问医生，再决定</h4>
+      <ul class="dlist calm">
+        <li><span>13</span><span>想自行吃抗病毒药（奈玛特韦/利托那韦等）：处方药，且要查药物相互作用，必须先问医生</span></li>
+        <li><span>14</span><span>想自行吃抗生素：对病毒无效，只会在合并细菌感染时由医生开</span></li>
+        <li><span>15</span><span>想叠加多种中成药或复方感冒药：成分会重复，肝损伤风险最高的操作</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 天津本地 ================= -->
+<section class="sec">
+  <div class="wrap">
+    <div class="kick rv">Tianjin · Local</div>
+    <h2 class="h2 rv">天津此刻的<em>本地条件</em></h2>
+    <p class="sub rv">时令、假期、就医动线，这三件事会直接影响执行。</p>
+    <div class="local" id="locallist"></div>
+  </div>
+</section>
+
+<!-- ================= 依据 ================= -->
+<section class="basis">
+  <div class="wrap">
+    <div class="kick">Guideline Basis</div>
+    <h2 class="h2">编制依据</h2>
+    <ol class="blist">
+      <li>国家卫生健康委员会《新型冠状病毒感染诊疗方案（试行第十版）》—— 疾病分级、临床分型与恢复期管理的顶层依据。</li>
+      <li>国务院联防联控机制《新冠病毒感染者居家治疗指南》—— 居家适用条件、健康监测项目、就医指征。</li>
+      <li>国家卫生健康委员会《新型冠状病毒感染恢复期康复指导》及相关呼吸康复指导 —— 呼吸训练、体能与活动分级。</li>
+      <li>中国营养学会《中国居民膳食指南（2022）》—— 食物多样、蔬果奶豆、少油少盐的执行框架。</li>
+      <li>中国营养学会《中国居民膳食营养素参考摄入量（2023 版）》—— 维生素 D、维生素 C、锌、蛋白质的推荐量与可耐受最高摄入量（UL）。</li>
+      <li>感染期临床营养共识：轻中度感染能量 25–30 kcal/kg·d、蛋白质 1.2–1.5 g/kg·d，少量多餐、足量饮水与电解质。</li>
+      <li>世界卫生组织 WHO《Clinical management of COVID-19: living guideline》—— 血氧监测、氧疗阈值与病情恶化预警指标。</li>
+      <li>ACSM《运动测试与运动处方指南》FITT-VP 原则 —— 恢复期运动的频率、强度、时间、类型、总量与进阶节奏。</li>
+      <li>《新型冠状病毒感染恢复期中医康复指导建议》相关共识 —— 瘥后防复、健脾益肺、循序渐进，忌骤补峻补。</li>
+      <li>中国疾病预防控制中心室内通风与环境消毒建议 —— 自然通风频次、含氯消毒剂 500 mg/L 使用、手卫生 20 秒。</li>
+      <li>运动相关心血管事件风险评估专家共识 —— 感染后心肌炎风险窗口，症状消失后至少 7 天再逐步恢复运动量。</li>
+      <li>美国 CDC 新冠隔离建议（2023 简化版）—— 发病 5 天 + 症状改善 24 小时可解除严格隔离，此后 5 天外出佩戴口罩。</li>
+    </ol>
+    <p class="bnote">以上为公开文件与共识名称，本页仅引用其分级与量化原则，不构成诊断、处方或疗效承诺。所有剂量与阈值用于家庭自我监测，任何用药调整、抗病毒药使用、症状加重时的处置，以面诊医生意见为准。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>使用说明</b>
+    ① 打开这一页，默认停在「第 1 天」，照着时间轴做，做完一项点掉一项。<br>
+    ② 每天 4 次测四项指标，填进当天的记录卡，会自动汇总成一周趋势。<br>
+    ③ 打卡记录存在本机浏览器里，刷新不丢；换手机或清缓存会清空。<br>
+    ④ 任何人看到「危险信号」里的任意一条，都可以直接执行，不需要等家属确认。
+    <div class="sig"><span>顺哥 · 一周康复手册</span><span>2026-09-29 编制</span></div>
+  </div>
+</footer>
+
+<button class="fab" id="fab">⚠ 危险信号</button>
+<div class="sheet" id="sheet">
+  <div class="inner">
+    <h3>立刻拨 120</h3>
+    <ul class="dlist" style="margin-top:12px">
+      <li><span>01</span><span>喘不上气、说不完整一句话</span></li>
+      <li><span>02</span><span>血氧 ≤90%（复测 2 次仍低）</span></li>
+      <li><span>03</span><span>嘴唇指甲发紫、面色发灰</span></li>
+      <li><span>04</span><span>意识模糊、叫不醒、抽搐</span></li>
+      <li><span>05</span><span>剧烈胸痛、心跳快到发慌伴冷汗</span></li>
+    </ul>
+    <h3 style="margin-top:22px;color:var(--ink)">今天就去医院</h3>
+    <ul class="dlist calm" style="margin-top:12px">
+      <li><span>06</span><span>血氧 91–93% 或比平时降 ≥4%</span></li>
+      <li><span>07</span><span>发热超过 3 天不退，或退了又烧</span></li>
+      <li><span>08</span><span>黄绿色浓痰 + 发热不退</span></li>
+      <li><span>09</span><span>喝不进水、尿量明显减少</span></li>
+      <li><span>10</span><span>持续呕吐腹泻、明显脱水</span></li>
+    </ul>
+    <p class="urgent">天津 120 ｜ 卫生热线 12320 / 12345 ｜ 发热门诊 24 小时开放</p>
+    <button class="close" id="sheetclose">知道了</button>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* ============ 数据：7 天 ============ */
+var DAYS = [
+{
+  n:1, kick:'D-01', phase:'发病第 1–2 天 · 发热期',
+  title:'压住体温，把水补进去',
+  lead:'今天的目标不是"快点好"，是把体温压住、把水补进去、把该测的四项测下来。',
+  cls:'warn',
+  focus:[
+    '静息血氧 ≥94% 是今天的头号指标，一天测 4 次',
+    '退热药两种只选一种，绝不叠加复方感冒药',
+    '每小时至少喝 100 ml 水，别等渴了再喝'
+  ],
+  tl:[
+    ['06:30','醒来先在床上坐 1 分钟再下地，防起立头晕','k4'],
+    ['06:40','测四项：体温 · 血氧 · 心率 · 呼吸（血氧要静坐 5 分钟后测）','k1'],
+    ['07:00','温水 200 ml，小口慢喝，别一次灌','k4'],
+    ['07:20','温盐水漱口 30 秒 + 生理盐水洗鼻，缓解咽干咽痛','k4'],
+    ['07:30','早餐：小米山药粥 1 碗 · 鸡蛋羹（1 个蛋）· 酱菜少许','k2'],
+    ['08:00','饭后服药（需要时）。不要同时吃两种复方感冒药','k1'],
+    ['08:30','准备通风：病人先换到另一间，或戴外科口罩、避开风口','k3'],
+    ['09:00','通风 A 时段，开窗 20–30 分钟（9:00–11:00 空气最好）','k3'],
+    ['09:30','呼吸操 10 分钟：腹式呼吸 4-2-6 共 10 次 + 缩唇呼吸 10 次','k1'],
+    ['10:00','踝泵 20 次 × 3 组（躺着也要做，防下肢血栓）','k1'],
+    ['10:30','加餐：温牛奶 250 ml + 半根香蕉；顺便测第 2 次体温','k2'],
+    ['11:00','卧床补觉 40 分钟。发热时睡眠就是治疗','k4'],
+    ['12:00','午餐：软米饭半碗 · 清蒸鲈鱼 100 g · 冬瓜汤 1 碗','k2'],
+    ['12:40','体温 <38.5℃ 且不头晕，可在室内慢走 5–10 分钟','k4'],
+    ['13:00','午睡 40–60 分钟','k4'],
+    ['14:00','测第 3 次体温；温水 200 ml','k1'],
+    ['14:30','加餐：蒸梨 1 个（润肺止咳，别加太多冰糖）','k2'],
+    ['15:00','通风 B 时段，开窗 20–30 分钟','k3'],
+    ['15:30','有效咳嗽排痰：坐直 → 深吸 → 屏 2 秒 → 短促有力咳 2–3 声；家人空心掌由下往上叩背','k1'],
+    ['16:00','电解质水 200 ml（出汗多、吃不下时必喝）','k4'],
+    ['17:00','物理降温：仅体温 ≥38.5℃ 且难受时，32–34℃ 温水擦颈、腋下、腹股沟。忌酒精擦浴、忌冰水','k1'],
+    ['18:00','晚餐：烂面条 1 碗 · 鸡丝 50 g · 西兰花 100 g','k2'],
+    ['18:40','饭后室内慢走 5 分钟','k4'],
+    ['19:00','测第 4 次体温 + 血氧，四项一起记进记录卡','k1'],
+    ['19:30','放松：看剧、听书。别刷手机到深夜','k4'],
+    ['20:00','泡脚 10 分钟，水温 38–40℃，别超过 15 分钟','k4'],
+    ['20:30','漱口 + 洗鼻 + 温水 150 ml','k4'],
+    ['21:00','睡前短通风 10 分钟，或开 HEPA 净化器','k3'],
+    ['21:30','床头四件套：水杯 · 退烧药 · 体温计 · 手机。关灯','k4'],
+    ['22:00','睡觉。枕头略垫高减轻夜间咳嗽；夜间出汗立刻换干衣服','k1']
+  ],
+  meals:[
+    ['早餐 07:30','小米山药粥 1 碗 + 鸡蛋羹 1 个 + 酱菜少许　约 350 kcal'],
+    ['加餐 10:30','温牛奶 250 ml + 香蕉半根　约 200 kcal'],
+    ['午餐 12:00','软米饭半碗 + 清蒸鲈鱼 100 g + 冬瓜汤　约 450 kcal'],
+    ['加餐 14:30','蒸梨 1 个　约 80 kcal'],
+    ['晚餐 18:00','烂面条 1 碗 + 鸡丝 50 g + 西兰花 100 g　约 420 kcal'],
+    ['睡前 20:30','温水 150 ml，不再进食（避免夜咳加重）']
+  ],
+  rx:[
+    ['营养','能量 25–30 kcal/kg（70 kg 约 1 750–2 100 kcal）。发热期以流质、半流质为主，一天 5–6 餐，每餐 6–7 分饱，吃不下就喝。',''],
+    ['运动','只做床上与室内微动：踝泵 20×3 组、每小时坐起活动肩颈 2 分钟。不散步、不爬楼、不追求出汗。',''],
+    ['呼吸','腹式呼吸 4-2-6 秒 × 10 次、缩唇呼吸 × 10 次、有效咳嗽排痰 × 3 轮，一天 3 组。',''],
+    ['环境','开窗 3 次（9:00 / 15:00 / 21:00），每次 20–30 分钟。室温 20–22℃，湿度 40–60%。',''],
+    ['用药','对乙酰氨基酚 0.5 g 或布洛芬 0.2–0.4 g，二选一；间隔 6 小时以上，24 小时不超过 4 次。体温 <38.5℃ 且能忍，先不吃。','warn'],
+    ['睡眠','目标 8–10 小时（含午睡）。发热期嗜睡正常，别硬撑，别熬夜看手机。','']
+  ],
+  hint:'退热药不要和对乙酰氨基酚复方制剂（泰诺、感康、快克、白加黑、999 感冒灵、维 C 银翘片等）同时吃，这是居家最常见的肝损伤原因。',
+  checks:['测四项 ≥4 次并记录','喝水 ≥2 000 ml','开窗通风 3 次','呼吸操 3 组','踝泵 3 组','三餐 + 2 次加餐','退热药没有叠加'],
+  red:'出现"喘不上气、说不完整一句话、血氧 ≤93%" —— 立刻拨 120。'
+},
+{
+  n:2, kick:'D-02', phase:'发病第 2–3 天 · 体温高峰',
+  title:'体温高峰，别硬扛',
+  lead:'咽痛会到最重的一天，体温可能冲到 39℃ 以上。今天的原则：把不舒服压下去，把睡眠保住。',
+  cls:'warn',
+  focus:[
+    '体温 ≥38.5℃ 且难受就吃退烧药，不要死扛',
+    '蜂蜜 1 勺含服缓解咽痛，比含片更舒服',
+    '今天不运动，只做呼吸操 + 踝泵'
+  ],
+  tl:[
+    ['06:40','测四项（今天起每天至少 4 次）','k1'],
+    ['07:00','温水 200 ml','k4'],
+    ['07:15','咽喉像刀割：温盐水漱口 30 秒，再含服蜂蜜 1 勺（慢慢咽）','k1'],
+    ['07:30','早餐：南瓜小米粥 + 蒸蛋羹（咽痛吃不下就只喝粥和蛋羹）','k2'],
+    ['08:00','饭后服药','k1'],
+    ['09:00','通风 A 时段 20–30 分钟','k3'],
+    ['09:30','呼吸操 + 缩唇呼吸（咽痛明显可减半量做）','k1'],
+    ['10:00','踝泵 20 次 × 3 组','k1'],
+    ['10:30','加餐：酸奶 150 g + 蒸苹果（常温，绝对别吃冰的）','k2'],
+    ['11:00','卧床休息，闭眼养神','k4'],
+    ['12:00','午餐：番茄龙须面 + 豆腐 100 g（软、温、不辣）','k2'],
+    ['13:00','午睡 1 小时','k4'],
+    ['14:00','测体温 + 温水 200 ml','k1'],
+    ['14:30','加餐：百合莲子羹 1 小碗（润燥，缓解咽干）','k2'],
+    ['15:00','通风 B 时段 20–30 分钟','k3'],
+    ['15:30','叩背排痰 3 轮；侧卧位效果更好','k1'],
+    ['16:00','电解质水 200 ml','k4'],
+    ['17:00','物理降温（≥38.5℃ 且难受时）','k1'],
+    ['18:00','晚餐：白粥 1 碗 + 蒸鸡胸 80 g + 胡萝卜泥','k2'],
+    ['19:00','测体温 + 血氧','k1'],
+    ['19:30','别刷手机，闭眼听书；今天情绪低落是正常的','k4'],
+    ['20:00','体温 <38.5℃ 才泡脚；≥38.5℃ 跳过，避免加重不适','k1'],
+    ['20:30','温水 + 漱口 + 洗鼻','k4'],
+    ['21:30','体温 ≥38.5℃ 影响入睡 → 睡前 1 次退热药，优先保证睡眠','k1'],
+    ['22:00','睡觉','k4']
+  ],
+  meals:[
+    ['早餐 07:30','南瓜小米粥 1 碗 + 蒸蛋羹 2 个蛋'],
+    ['加餐 10:30','酸奶 150 g + 蒸苹果 1 个'],
+    ['午餐 12:00','番茄龙须面 1 碗 + 嫩豆腐 100 g'],
+    ['加餐 14:30','百合莲子羹 1 小碗'],
+    ['晚餐 18:00','白粥 1 碗 + 蒸鸡胸 80 g + 胡萝卜泥 100 g'],
+    ['睡前 20:30','温水 150 ml']
+  ],
+  rx:[
+    ['营养','全天 2 500 ml 水（高热流失大）。吃不下不要硬塞，改用"喝"的形式：粥、羹、汤、奶、蛋羹。蛋白质目标 60–70 g。',''],
+    ['运动','不运动。只做踝泵 3 组 + 呼吸操 2–3 组，其余时间卧床。',''],
+    ['呼吸','呼吸操 2–3 组。咽痛时可改为只做缩唇呼吸，减少气流刺激。',''],
+    ['环境','开窗 3 次，每次 20–30 分钟。雾霾或大风天缩短到 10–15 分钟。',''],
+    ['用药','退热药间隔必须 ≥6 小时，24 小时 ≤4 次。对乙酰氨基酚一天总量 ≤2 g；布洛芬一天 ≤1.2 g 且饭后服。','warn'],
+    ['睡眠','今天睡眠优先级高于一切。睡够 9–10 小时，含午睡 1 小时。','']
+  ],
+  hint:'体温曲线在发病第 2–3 天最常见到高峰，这是病程规律，不等于病情变重。真正要警惕的是"高热 + 呼吸变快 + 血氧下降"同时出现。',
+  checks:['测四项 ≥4 次并记录','喝水 ≥2 500 ml','开窗通风 3 次','呼吸操 2–3 组','踝泵 3 组','5–6 餐：吃不下就用喝的','退热药间隔 ≥6 小时'],
+  red:'黄绿色浓痰 + 发热不退、耳痛、胸痛随呼吸加重 —— 今天就去发热门诊。'
+},
+{
+  n:3, kick:'D-03', phase:'发病第 3–4 天 · 症状最重',
+  title:'最重的一天，也是转折点',
+  lead:'咳嗽加重、痰变多，体温开始出现回落。今天开始把蛋白质顶上去，为恢复期攒本钱。',
+  cls:'turn',
+  focus:[
+    '白痰是正常的；黄绿浓痰 + 发热不退要就医',
+    '蛋白质往 1.2 g/kg 靠（70 kg 约 85 g）',
+    '情绪容易崩，允许自己躺平一整天'
+  ],
+  tl:[
+    ['06:40','测四项','k1'],
+    ['07:00','温水 200 ml','k4'],
+    ['07:30','早餐：山药小米粥 + 2 个鸡蛋（1 全蛋 + 1 蛋白）+ 牛奶 250 ml','k2'],
+    ['08:30','通风 A 时段','k3'],
+    ['09:00','呼吸操：加重"呵气排痰"（缩唇长呼）3 轮','k1'],
+    ['10:00','踝泵 20 次 × 3 组','k1'],
+    ['10:30','加餐：橙子 1 个（维 C）+ 原味坚果 10 g','k2'],
+    ['11:00','卧床休息','k4'],
+    ['12:00','午餐：软米饭 + 鲫鱼豆腐汤 + 清炒菠菜','k2'],
+    ['13:00','午睡 1 小时','k4'],
+    ['14:00','测体温 + 血氧；温水 200 ml','k1'],
+    ['14:30','加餐：银耳百合羹 1 小碗','k2'],
+    ['15:00','通风 B 时段','k3'],
+    ['15:30','叩背排痰（侧卧位更好，一次 5 分钟）','k1'],
+    ['16:00','温水或电解质水 200 ml','k4'],
+    ['17:00','退热药不要按点吃，≥38.5℃ 再考虑','k1'],
+    ['18:00','晚餐：鸡丝粥 + 蒸南瓜 + 凉拌木耳（少油少盐）','k2'],
+    ['19:00','测四项','k1'],
+    ['19:30','给家人打个电话，说出来就不那么堵','k4'],
+    ['20:00','泡脚 10 分钟（已退热才泡）','k4'],
+    ['21:00','睡前短通风 10 分钟','k3'],
+    ['22:00','睡觉','k4']
+  ],
+  meals:[
+    ['早餐 07:30','山药小米粥 1 碗 + 鸡蛋 2 个 + 牛奶 250 ml　蛋白约 26 g'],
+    ['加餐 10:30','橙子 1 个 + 坚果 10 g'],
+    ['午餐 12:00','软米饭 1 碗 + 鲫鱼豆腐汤（鱼 100 g + 豆腐 100 g）+ 清炒菠菜'],
+    ['加餐 14:30','银耳百合羹 1 小碗'],
+    ['晚餐 18:00','鸡丝粥（鸡丝 80 g）+ 蒸南瓜 + 凉拌木耳'],
+    ['睡前 20:30','温水 150 ml']
+  ],
+  rx:[
+    ['营养','蛋白质提到 80–90 g：2 个蛋 + 500 ml 奶 + 80 g 鸡 + 100 g 鱼 + 100 g 豆腐。全天 2 500 ml 水。',''],
+    ['运动','仍以休息为主。踝泵 3 组 + 呼吸操 3 组，可加坐位抬腿 10 次 × 2。',''],
+    ['呼吸','呼吸操 3 组，重点转向"排痰"：呵气 3 轮 + 有效咳嗽 3 轮 + 叩背 5 分钟。',''],
+    ['环境','开窗 3 次，每次 20–30 分钟。咳嗽期建议戴外科口罩出房间，减少家人暴露。',''],
+    ['用药','退热药改为"按需"而非按点。止咳：干咳用右美沙芬，痰粘用氨溴索或乙酰半胱氨酸，别同时上两种止咳药。','warn'],
+    ['睡眠','目标 9 小时。夜间咳嗽影响睡眠时把枕头垫高 15–20°，睡前 1 小时不再进食。','']
+  ],
+  hint:'痰的颜色是重要信号：白痰、透明痰属正常；黄绿色浓痰且发热不退，提示可能合并细菌感染，需要医生判断，不要自己吃抗生素。',
+  checks:['测四项 ≥4 次并记录','喝水 ≥2 500 ml','开窗通风 3 次','呼吸操 3 组（含排痰）','叩背排痰 5 分钟','蛋白质 ≥80 g','记录一次痰的颜色'],
+  red:'痰量突然大增、痰中带血、胸痛加重、呼吸困难 —— 今天就去医院。'
+},
+{
+  n:4, kick:'D-04', phase:'发病第 4–5 天 · 退热',
+  title:'退烧了，但别急着证明自己',
+  lead:'体温回落，乏力感反而更明显。今天开始最基础的活动量，同时盯住尿色和体重。',
+  cls:'recover',
+  focus:[
+    '尿色淡黄 = 水够了；深黄要立刻加量',
+    '室内慢走 10 分钟 × 2，心率不超过静息 +20',
+    '体重一天掉超过 2 kg 要警惕脱水'
+  ],
+  tl:[
+    ['06:40','测四项','k1'],
+    ['07:00','温水 200 ml','k4'],
+    ['07:30','早餐：全麦面包 2 片 + 少油煎蛋 1 个 + 牛奶 250 ml','k2'],
+    ['08:30','通风 A 时段','k3'],
+    ['09:00','呼吸操 + 缩唇 + 有效咳嗽各 1 轮','k1'],
+    ['09:30','室内慢走 10 分钟（能完整说话为准，走不动就停）','k1'],
+    ['10:30','加餐：酸奶 + 猕猴桃 1 个','k2'],
+    ['12:00','午餐：米饭 + 番茄龙利鱼 + 蒜蓉西兰花','k2'],
+    ['12:40','室内慢走 10 分钟','k4'],
+    ['13:00','午睡 45 分钟','k4'],
+    ['14:00','测体温 + 血氧','k1'],
+    ['14:30','加餐：蒸梨 1 个','k2'],
+    ['15:00','通风 B 时段','k3'],
+    ['15:30','叩背排痰 3 轮','k1'],
+    ['16:00','温水 200 ml','k4'],
+    ['17:00','洗温水澡：38–40℃、≤10 分钟、家里有人、别空腹，洗后立刻擦干穿暖','k1'],
+    ['18:00','晚餐：小米粥 + 香菇滑鸡 + 清炒芦笋','k2'],
+    ['19:00','测四项 + 称体重并记录','k1'],
+    ['20:00','泡脚 10 分钟','k4'],
+    ['21:00','睡前短通风 10 分钟','k3'],
+    ['22:00','睡觉','k4']
+  ],
+  meals:[
+    ['早餐 07:30','全麦面包 2 片 + 鸡蛋 1 个 + 牛奶 250 ml　蛋白约 20 g'],
+    ['加餐 10:30','酸奶 150 g + 猕猴桃 1 个'],
+    ['午餐 12:00','米饭 1 碗 + 番茄龙利鱼 120 g + 蒜蓉西兰花 150 g'],
+    ['加餐 14:30','蒸梨 1 个'],
+    ['晚餐 18:00','小米粥 1 碗 + 香菇滑鸡（鸡腿肉 100 g）+ 清炒芦笋'],
+    ['睡前 20:30','温水 200 ml']
+  ],
+  rx:[
+    ['营养','蛋白质 85–95 g。开始加"汤水类"：鲫鱼豆腐汤、山药排骨汤（去油）、银耳雪梨羹，一天 1 次。',''],
+    ['运动','进入第一阶段：室内慢走 10 分钟 × 2 次，强度以"能完整说一句话"为上限，心率不超过静息 +20。',''],
+    ['呼吸','呼吸操 2 组 + 有效咳嗽 3 轮。开始练"深呼吸后屏 2 秒再缓慢呼出"，帮助肺泡复张。',''],
+    ['环境','开窗 3 次，每次 20–30 分钟。房间每日湿擦一次，门把手、开关、手机每日消毒 1–2 次。',''],
+    ['用药','退热药基本可以停了。若仍有痰，继续氨溴索至痰液变稀；不再吃复方感冒药。',''],
+    ['睡眠','目标 8–9 小时。午睡控制在 45 分钟以内，避免影响夜间睡眠。','']
+  ],
+  hint:'体温正常 24 小时且不用退烧药，才算真正退热。如果今天又烧起来，按第 2 天的方案处理，并准备就医。',
+  checks:['测四项 ≥4 次并记录','喝水 ≥2 000 ml','开窗通风 3 次','室内慢走 2 次 × 10 分钟','呼吸操 2 组','记录尿色（淡黄）','称体重并记录'],
+  red:'退烧后又发烧、站立发黑头晕、尿色深如浓茶 —— 今天就去医院。'
+},
+{
+  n:5, kick:'D-05', phase:'发病第 5–6 天 · 关键窗口',
+  title:'假好转陷阱期，血氧不能停',
+  lead:'症状在退，但第 5–8 天是少数人会突然转重的窗口。今天起每天至少 3 次血氧，一次都不能省。',
+  cls:'warn',
+  focus:[
+    '血氧每天 ≥3 次，必须静息状态测',
+    '气短加重、心跳飙到 120 以上 → 立即就医',
+    '散步 15 分钟 × 2，绝对不加量'
+  ],
+  tl:[
+    ['06:40','测四项（含血氧）','k1'],
+    ['07:30','早餐：燕麦牛奶 + 水煮蛋 2 个 + 蓝莓','k2'],
+    ['08:30','通风 A 时段','k3'],
+    ['09:00','呼吸操 + 八段锦"两手托天理三焦" × 6 遍','k1'],
+    ['09:30','散步 15 分钟（户外选 9:00–11:00 或 15:00–17:00）','k1'],
+    ['10:30','加餐：牛奶 250 ml + 核桃 2 个','k2'],
+    ['12:00','午餐：杂粮饭 + 清蒸鲈鱼 120 g + 木耳炒山药','k2'],
+    ['12:40','散步 10 分钟','k4'],
+    ['13:00','午睡 40 分钟','k4'],
+    ['14:00','测四项（含血氧）','k1'],
+    ['14:30','加餐：银耳雪梨羹 1 碗','k2'],
+    ['15:00','通风 B 时段','k3'],
+    ['15:30','靠墙静蹲 15 秒 × 3（膝盖不适改坐姿抬腿）','k1'],
+    ['16:00','温水 200 ml','k4'],
+    ['18:00','晚餐：山药排骨汤（去油）+ 米饭半碗 + 清炒芥蓝','k2'],
+    ['19:00','测四项（含血氧）','k1'],
+    ['20:00','泡脚 10 分钟','k4'],
+    ['21:00','睡前短通风 10 分钟','k3'],
+    ['22:00','睡觉','k4']
+  ],
+  meals:[
+    ['早餐 07:30','燕麦牛奶 1 碗 + 水煮蛋 2 个 + 蓝莓 50 g　蛋白约 22 g'],
+    ['加餐 10:30','牛奶 250 ml + 核桃 2 个'],
+    ['午餐 12:00','杂粮饭 1 碗 + 清蒸鲈鱼 120 g + 木耳炒山药'],
+    ['加餐 14:30','银耳雪梨羹 1 碗'],
+    ['晚餐 18:00','山药排骨汤（撇油）+ 米饭半碗 + 清炒芥蓝'],
+    ['睡前 20:30','温水 200 ml']
+  ],
+  rx:[
+    ['营养','蛋白质 95–105 g。主食开始加杂粮（小米、燕麦、藜麦），蔬菜 300–500 g、水果 200–350 g。',''],
+    ['运动','第二阶段：散步 15 分钟 × 2 次，Borg 自觉疲劳 11–13 分（"有点累"）。一旦气短、心悸、头晕立即停。',''],
+    ['呼吸','加八段锦柔和动作，重点在"开胸、拉长呼气"。呼吸操 2 组 + 有效咳嗽 3 轮。',''],
+    ['环境','开窗 3 次 + 户外散步时也等于换气。秋分后注意早晚 15℃ 以下，出门加件外套、护住脖子。',''],
+    ['用药','仅保留祛痰药（如有痰）。不再用退热药、不再用复方制剂。',''],
+    ['睡眠','目标 8 小时。夜间若出现憋醒、心跳快，记录下来并在第二天就诊时告知医生。','']
+  ],
+  hint:'为什么第 5–8 天特别重要：部分人前期像普通感冒，这几天却出现肺部受累，表现为"退烧了但越来越喘"。血氧仪是这个窗口最便宜的早期预警。',
+  checks:['测四项 ≥3 次（含血氧）','喝水 ≥2 000 ml','开窗通风 3 次','散步 2 次 × 15 分钟','八段锦 6 遍','蛋白质 ≥95 g','记录夜间有无憋醒'],
+  red:'退烧后反而越来越喘、血氧掉到 93% 以下、心跳持续 >120 —— 立刻就医。'
+},
+{
+  n:6, kick:'D-06', phase:'发病第 6–7 天 · 恢复期',
+  title:'把饮食顶上去，恢复体力',
+  lead:'症状明显减轻，味觉可能还淡。今天开始按恢复期标准吃：蛋白 1.2–1.5 g/kg。',
+  cls:'recover',
+  focus:[
+    '蛋白质 1.2–1.5 g/kg（70 kg 约 85–105 g）',
+    '维生素 D 400–800 IU、维生素 C 200–500 mg',
+    '散步 20–30 分钟，不加量、不加重量'
+  ],
+  tl:[
+    ['06:40','测四项','k1'],
+    ['07:00','温水 200 ml','k4'],
+    ['07:30','早餐：鸡蛋 2 个 + 牛奶 250 ml + 全麦馒头半个 + 小菜','k2'],
+    ['08:30','通风 A 时段','k3'],
+    ['09:00','散步 20 分钟','k1'],
+    ['09:40','呼吸操 + 有效咳嗽','k1'],
+    ['10:30','加餐：酸奶 + 橙子 1 个','k2'],
+    ['12:00','午餐：米饭 + 黄芪党参炖鸡（少量、去油）+ 蒜蓉油麦菜','k2'],
+    ['13:00','午睡 30 分钟','k4'],
+    ['14:00','测四项','k1'],
+    ['14:30','加餐：蒸苹果 + 红枣 2 颗','k2'],
+    ['15:00','通风 B 时段','k3'],
+    ['15:30','靠墙静蹲 20 秒 × 3 + 弹力带上肢拉伸 10 次 × 2','k1'],
+    ['16:00','温水 200 ml','k4'],
+    ['17:00','洗温水澡（同第 4 天要求：≤10 分钟、别空腹、有人在家）','k4'],
+    ['18:00','晚餐：杂粮饭 + 清蒸鱼 + 白灼芥蓝 + 豆腐','k2'],
+    ['19:00','测四项 + 称体重','k1'],
+    ['20:00','泡脚 10 分钟','k4'],
+    ['21:00','睡前短通风 10 分钟','k3'],
+    ['22:00','睡觉','k4']
+  ],
+  meals:[
+    ['早餐 07:30','鸡蛋 2 个 + 牛奶 250 ml + 全麦馒头半个 + 小菜　蛋白约 24 g'],
+    ['加餐 10:30','酸奶 150 g + 橙子 1 个'],
+    ['午餐 12:00','米饭 1 碗 + 黄芪党参炖鸡（鸡腿肉 100 g）+ 蒜蓉油麦菜'],
+    ['加餐 14:30','蒸苹果 1 个 + 红枣 2 颗'],
+    ['晚餐 18:00','杂粮饭 1 碗 + 清蒸鱼 100 g + 白灼芥蓝 + 豆腐 100 g'],
+    ['睡前 20:30','温水 200 ml']
+  ],
+  rx:[
+    ['营养','蛋白质 95–110 g。中医调理走"健脾益肺"：山药、莲子、芡实、银耳、百合、少量黄芪党参炖汤。忌骤补峻补（人参、鹿茸、阿胶在痰多时先别用）。',''],
+    ['运动','第三阶段：散步 20–30 分钟（可拆 2 次）+ 靠墙静蹲 20 秒 × 3 + 弹力带上肢。强度仍控制在 Borg 11–13。',''],
+    ['呼吸','呼吸操 1–2 组维持即可。重点转为"日常活动能力"：爬一层楼不喘即为达标。',''],
+    ['环境','开窗照旧 3 次。可以恢复"出门散步"，但避开早晚低温和大风时段。',''],
+    ['用药','如无咳嗽咳痰，可停祛痰药。维生素 D 400–800 IU/天、维生素 C 200–500 mg/天、锌 15–25 mg/天短期补充（不超过 2 周）。',''],
+    ['睡眠','目标 8 小时，作息尽量回到正常时间，为返岗做准备。','']
+  ],
+  hint:'"进补"的准则是先通后补：先保证蛋白质和水够，再谈黄芪党参之类。发热期、痰多期用大补药，容易闭门留寇。',
+  checks:['测四项 ≥3 次并记录','蛋白质 ≥95 g','喝水 ≥2 000 ml','开窗通风 3 次','散步 20–30 分钟','靠墙静蹲 3 组','维生素 D / C 补充'],
+  red:'乏力突然加重、稍动就喘、下肢单侧肿痛 —— 立即就医（警惕血栓与心肌受累）。'
+},
+{
+  n:7, kick:'D-07', phase:'发病第 7 天 · 收尾',
+  title:'收工，不是回到从前',
+  lead:'可以复测抗原、可以自评体力，但先别加班、别饮酒、别上强度。剩下 2–4 周的咳嗽和乏力是正常收尾。',
+  cls:'recover',
+  focus:[
+    '返岗标准：体温正常 24 h 不用退烧药 + 症状明显好转 ≥24 h',
+    '做一次 6 分钟步行自测，和发病第 1 天比',
+    '未来 1–2 周：不加量、不熬夜、不饮酒、不剧烈运动'
+  ],
+  tl:[
+    ['06:40','测四项','k1'],
+    ['07:30','早餐：鸡蛋 2 个 + 牛奶 + 燕麦 + 猕猴桃','k2'],
+    ['08:30','通风 A 时段','k3'],
+    ['09:00','散步 30 分钟（可拆成 2 次）','k1'],
+    ['09:40','呼吸操 + 缩唇 + 有效咳嗽','k1'],
+    ['10:30','加餐：坚果 10 g + 牛奶 250 ml','k2'],
+    ['12:00','午餐：米饭 + 清蒸鲈鱼 + 西兰花 + 番茄蛋汤','k2'],
+    ['13:00','午睡 30 分钟','k4'],
+    ['14:00','测四项 + 复测抗原（可选）','k1'],
+    ['14:30','加餐：银耳羹 1 碗','k2'],
+    ['15:00','通风 B 时段','k3'],
+    ['15:30','6 分钟步行自测：平地快走 6 分钟，记录距离、结束后即刻心率与血氧','k1'],
+    ['16:00','温水 200 ml','k4'],
+    ['18:00','晚餐：正常家常饭，七分饱，少油少辣不喝酒','k2'],
+    ['19:00','测四项 + 称体重','k1'],
+    ['20:00','泡脚 10 分钟','k4'],
+    ['21:00','睡前短通风 10 分钟','k3'],
+    ['22:00','睡觉','k4']
+  ],
+  meals:[
+    ['早餐 07:30','鸡蛋 2 个 + 牛奶 250 ml + 燕麦 1 碗 + 猕猴桃 1 个　蛋白约 24 g'],
+    ['加餐 10:30','坚果 10 g + 牛奶 250 ml'],
+    ['午餐 12:00','米饭 1 碗 + 清蒸鲈鱼 120 g + 西兰花 150 g + 番茄蛋汤'],
+    ['加餐 14:30','银耳羹 1 碗'],
+    ['晚餐 18:00','家常饭七分饱：一荤一素一汤，少油少辣、不喝酒'],
+    ['睡前 20:30','温水 200 ml']
+  ],
+  rx:[
+    ['营养','维持蛋白质 95–110 g、蔬菜 300–500 g、水果 200–350 g。恢复期不节食、不减肥，先把体重和体力补回来。',''],
+    ['运动','第三阶段收尾：散步 30 分钟 + 6 分钟步行自测。本周不测极限、不做无氧、不举重。',''],
+    ['呼吸','呼吸操维持 1 组即可。若仍有咳嗽，继续有效咳嗽排痰，别硬憋。',''],
+    ['环境','恢复日常。家里做一次终末清洁：床品热水洗晒、门把手开关消毒、卫生间湿擦。',''],
+    ['用药','除必要的基础用药外，其他都可以停。任何"保健大补"先停一周再评估。',''],
+    ['睡眠','本周继续保证 8 小时，是防止症状反复最有效的一件事。','']
+  ],
+  hint:'解除隔离参考：发病满 5 天 + 症状改善 24 小时可解除严格隔离，之后 5 天外出佩戴口罩。若抗原/核酸仍阳性且家里有老人，延长戴口罩时间。',
+  checks:['测四项 ≥3 次并记录','散步 30 分钟','6 分钟步行自测并记录','七分饱 + 不饮酒','开窗通风 3 次','抗原复测（可选）','做一次终末清洁'],
+  red:'咳嗽或乏力持续超过 4 周，或活动后气短明显 —— 去呼吸科/康复科门诊评估。'
+}
+];
+
+/* ============ 天津本地 ============ */
+var LOCAL = [
+  ['🌤','秋分后的天津','白天 24–27℃、夜间 14–18℃，昼夜温差 10℃ 以上。通风条件很好，但风口别对着人。早晚出门加件外套、护住脖子。'],
+  ['💧','秋燥 · 湿度','目标室内湿度 40–60%。鼻腔干裂、出血用生理盐水喷鼻；加湿器只用纯净水或凉白开，每天换水、每周清洗（否则易致"加湿器肺"）。'],
+  ['🎌','国庆假期（10/1–10/7）','发热门诊与急诊 24 小时开放，普通门诊排班有调整。要开的药、要做的复查，尽量在 9/30 前办完，或用互联网医院续方。'],
+  ['🏥','就医动线','社区医院 / 互联网医院 → 发热门诊 → 急诊 → 120。轻症优先社区和线上，把急诊资源留给真正需要的人。']
+];
+
+/* ============ 存储 ============ */
+var KEY='shun_recovery_v1';
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{ck:{},vt:{}}}catch(e){return {ck:{},vt:{}}}}
+function save(d){try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
+var ST=load();
+function ckId(d,i){return d+'-'+i}
+
+/* ============ 总览 ============ */
+(function(){
+  var box=document.getElementById('ovlist');
+  box.innerHTML=DAYS.map(function(d){
+    return '<div class="ovr '+d.cls+'" data-jump="'+d.n+'">'+
+      '<span class="d">D-0'+d.n+'</span>'+
+      '<span class="t"><b>'+d.title+'</b><i>'+d.phase+'</i></span>'+
+      '<span class="go">›</span></div>';
+  }).join('');
+  box.addEventListener('click',function(e){
+    var r=e.target.closest('[data-jump]'); if(!r)return;
+    show(parseInt(r.getAttribute('data-jump'),10),true);
+  });
+})();
+
+/* ============ 日切换 ============ */
+var chips=document.getElementById('chips');
+chips.innerHTML=DAYS.map(function(d){
+  return '<button class="chip" data-day="'+d.n+'">D'+d.n+'<small>'+d.kick.replace('D-0','第')+'天</small></button>';
+}).join('');
+chips.addEventListener('click',function(e){
+  var c=e.target.closest('[data-day]'); if(!c)return;
+  show(parseInt(c.getAttribute('data-day'),10),false);
+});
+
+var cur=1;
+function show(n,scroll){
+  cur=n;
+  Array.prototype.forEach.call(chips.children,function(c){
+    c.classList.toggle('on',parseInt(c.getAttribute('data-day'),10)===n);
+  });
+  var d=DAYS[n-1];
+  var vt=ST.vt[n]||{};
+  var html='';
+
+  html+='<section class="day">';
+  html+='<div class="dhead"><div class="ph">'+d.kick+' ｜ '+d.phase+'</div>'+
+        '<h3>'+d.title+'</h3><p>'+d.lead+'</p><ul class="focus">'+
+        d.focus.map(function(f){return '<li>'+f+'</li>'}).join('')+'</ul></div>';
+
+  /* 时间轴 */
+  html+='<div class="tlwrap"><div class="kick" style="margin-bottom:6px">Day '+d.n+' Timeline · 逐小时</div>'+
+        '<ul class="tl">'+d.tl.map(function(t){
+          var cls=t[2]==='k1'?'key':(t[2]==='k2'?'eat':(t[2]==='k3'?'air':''));
+          var badge='';
+          if(t[2]==='k1')badge='<span class="k k1">必做</span>';
+          if(t[2]==='k2')badge='<span class="k k2">吃</span>';
+          if(t[2]==='k3')badge='<span class="k k3">通风</span>';
+          return '<li class="'+cls+'"><span class="tm">'+t[0]+'</span><span class="bd">'+badge+t[1]+'</span></li>';
+        }).join('')+'</ul></div>';
+
+  /* 三餐 */
+  html+='<div class="block"><div class="bt"><b>今天吃什么</b><i>Meals</i></div>'+
+        d.meals.map(function(m){return '<div class="meal"><span class="mt">'+m[0]+'</span><span>'+m[1]+'</span></div>'}).join('')+
+        '<div class="hint">'+d.hint+'</div></div>';
+
+  /* 处方 */
+  html+='<div class="block"><div class="bt"><b>今日处方</b><i>Prescription</i></div>'+
+        d.rx.map(function(r){return '<div class="rx '+(r[2]||'')+'"><span class="rt">'+r[0]+'</span><span class="rb">'+r[1]+'</span></div>'}).join('')+
+        '</div>';
+
+  /* 指标记录 */
+  html+='<div class="kick" style="margin-top:30px">Vitals · 今天测了记下来</div>'+
+        '<div class="vrec"><div class="grid">'+
+        fld('体温 ℃',n,'t',vt.t)+fld('血氧 %',n,'s',vt.s)+
+        fld('心率 次/分',n,'h',vt.h)+fld('呼吸 次/分',n,'r',vt.r)+
+        '</div><div class="row"><button class="btn" id="vsave">保存今天</button>'+
+        '<button class="btn ghost" id="vclear">清空</button></div>'+
+        '<div class="saved" id="vsaved">已保存到本机</div>'+
+        '<div class="vsum" id="vsum"></div></div>';
+
+  /* 打卡 */
+  html+='<div class="docheck"><div class="dh"><b>今日打卡</b><span id="cknum"></span></div>'+
+        d.checks.map(function(t,i){
+          var on=!!ST.ck[ckId(d.n,i)];
+          return '<div class="ck'+(on?' on':'')+'" data-ck="'+d.n+'-'+i+'"><span class="bx"></span><span class="tx">'+t+'</span></div>';
+        }).join('')+'</div>';
+
+  html+='<div class="block" style="margin-top:22px"><div class="rx warn"><span class="rt">今日红线</span><span class="rb">'+d.red+'</span></div></div>';
+
+  html+='</section>';
+  document.getElementById('daywrap').innerHTML=html;
+
+  bindDay(n);
+  if(scroll){
+    var y=document.querySelector('.daybar').getBoundingClientRect().top+window.pageYOffset-4;
+    window.scrollTo({top:y,behavior:'smooth'});
+  }
+}
+
+function fld(label,day,k,v){
+  return '<div class="fld"><label>'+label+'</label><input type="text" inputmode="decimal" data-vt="'+k+'" value="'+(v||'')+'" placeholder="—"></div>';
+}
+
+function bindDay(n){
+  /* 打卡 */
+  document.querySelectorAll('#daywrap [data-ck]').forEach(function(el){
+    el.addEventListener('click',function(){
+      var id=el.getAttribute('data-ck');
+      ST.ck[id]=!ST.ck[id];
+      if(!ST.ck[id])delete ST.ck[id];
+      save(ST);
+      el.classList.toggle('on',!!ST.ck[id]);
+      updCk(n);
+    });
+  });
+  updCk(n);
+
+  /* 指标 */
+  var sv=document.getElementById('vsave');
+  if(sv)sv.addEventListener('click',function(){
+    var o={};
+    document.querySelectorAll('#daywrap [data-vt]').forEach(function(i){o[i.getAttribute('data-vt')]=i.value.trim()});
+    ST.vt[n]=o; save(ST);
+    var s=document.getElementById('vsaved'); s.classList.add('show');
+    setTimeout(function(){s.classList.remove('show')},1600);
+    updSum(n);
+  });
+  var cl=document.getElementById('vclear');
+  if(cl)cl.addEventListener('click',function(){
+    document.querySelectorAll('#daywrap [data-vt]').forEach(function(i){i.value=''});
+    delete ST.vt[n]; save(ST); updSum(n);
+  });
+  updSum(n);
+}
+
+function updCk(n){
+  var d=DAYS[n-1],tot=d.checks.length,got=0;
+  d.checks.forEach(function(_,i){if(ST.ck[ckId(n,i)])got++});
+  var el=document.getElementById('cknum');
+  if(el)el.textContent=got+' / '+tot+(got===tot?'　✓ 今天满分':'');
+}
+
+function updSum(n){
+  var el=document.getElementById('vsum'); if(!el)return;
+  var rows=[];
+  for(var i=1;i<=7;i++){
+    var v=ST.vt[i];
+    if(v&&(v.t||v.s||v.h||v.r)){
+      rows.push('D'+i+'　体温 '+(v.t||'—')+' · 血氧 '+(v.s||'—')+' · 心率 '+(v.h||'—')+' · 呼吸 '+(v.r||'—'));
+    }
+  }
+  el.innerHTML=rows.length?('<b>一周记录</b><br>'+rows.join('<br>')):'还没有任何记录。测完填进去，点保存。';
+}
+
+/* ============ 天津 ============ */
+document.getElementById('locallist').innerHTML=LOCAL.map(function(l){
+  return '<div class="lc rv"><span class="ic">'+l[0]+'</span><span><b>'+l[1]+'</b><p>'+l[2]+'</p></span></div>';
+}).join('');
+document.getElementById('locallist').insertAdjacentHTML('beforeend',
+  '<div class="lc rv"><span class="ic">☎</span><span><b>关键电话</b><p>急救 120　卫生热线 12320 / 12345　天津市海河医院（传染病定点）　天津医科大学总医院　天津市第一中心医院</p>'+
+  '<div class="ladder"><span>社区医院 / 互联网医院</span><span>发热门诊</span><span>急诊</span><span>120</span></div></span></div>');
+
+/* ============ 弹层 ============ */
+var sheet=document.getElementById('sheet');
+document.getElementById('fab').addEventListener('click',function(){sheet.classList.add('on')});
+document.getElementById('sheetclose').addEventListener('click',function(){sheet.classList.remove('on')});
+sheet.addEventListener('click',function(e){if(e.target===sheet)sheet.classList.remove('on')});
+
+/* ============ 阅读进度 + 揭示 ============ */
+function onScroll(){
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  var p=h>0?(window.pageYOffset/h*100):0;
+  document.getElementById('readbar').style.width=p+'%';
+}
+window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+    });
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el,i){
+    el.style.transitionDelay=Math.min(i%6*60,240)+'ms';
+    io.observe(el);
+  });
+}else{
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')});
+}
+/* 兜底：3 秒后若一个都没揭示（部分内置浏览器/后台标签页 IO 不触发），强制全部显示，避免内容空白 */
+setTimeout(function(){
+  if(!document.querySelector('.rv.in')){
+    document.querySelectorAll('.rv').forEach(function(el){el.style.transitionDelay='0ms';el.classList.add('in')});
+  }
+},3000);
+
+/* ============ 启动 ============ */
+show(1,false);
+})();
+</script>
+</body>
+</html>
