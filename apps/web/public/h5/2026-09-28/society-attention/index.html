@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b12">
+<meta name="description" content="2026 年，人应不应该关注社会？这不是一道道德题，而是一道剂量题。九个层次，逐层拆开关注的成本、姿态、边界与出口。">
+<title>应不应该关注社会｜把世界调小，而不是关掉</title>
+<script>document.documentElement.className+=' js';</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080b12'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%235fb3c7' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='%23e07a3f'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#c1">跳到正文</a>
+<div class="grain" aria-hidden="true"></div>
+<canvas class="net" id="net" aria-hidden="true"></canvas>
+<div class="progress" id="progress"></div>
+
+<nav class="nav">
+  <a class="brand" href="#top">应不应该关注社会<i>SOCIETY · 2026</i></a>
+  <div class="nav-right">
+    <span class="counter" id="counter" aria-live="polite">00 / 09</span>
+    <a href="#ending">写下你的姿态</a>
+  </div>
+</nav>
+
+<aside class="spine" id="spine" aria-hidden="true">
+  <span class="spine-bg"></span>
+  <ol>
+    <li data-i="1"><b>题面</b></li>
+    <li data-i="2"><b>三种人</b></li>
+    <li data-i="3"><b>为什么难</b></li>
+    <li data-i="4"><b>关注的账</b></li>
+    <li data-i="5"><b>不看的账</b></li>
+    <li data-i="6"><b>四层</b></li>
+    <li data-i="7"><b>剂量</b></li>
+    <li data-i="8"><b>关系</b></li>
+    <li data-i="9"><b>姿态</b></li>
+  </ol>
+</aside>
+
+<header class="hero" id="top">
+  <div class="halo" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">2026 · 一篇关于注意力的开放式思考</div>
+    <h1>把世界调小<span>而不是关掉</span></h1>
+    <p>到了 2026 年，问题已经不是"人应不应该关注社会"。真正能回答的那个版本是：以什么剂量、什么姿态、把眼睛借给谁——以及，你是自己选的，还是被默认推到的。</p>
+    <div class="scroll"><i></i>向下，逐层拆</div>
+  </div>
+  <div class="hero-meta">
+    <span><b>9</b> 层</span><span><b>3</b> 种姿态</span><span><b>1</b> 个出口</span>
+  </div>
+</header>
+
+<main>
+
+<section class="chapter" id="c1"><div class="chapter-inner reveal">
+  <div class="chapter-head"><div class="chapter-no">01 / 题面</div><h2>先说明白：<br>这道题<em>问错了对象</em></h2></div>
+  <p class="lead">"应不应该"是道德问法。它先给人分成两堆：关心社会的是清醒的，不关心的是麻木的。然后题目就只剩站队了。</p>
+  <div class="bodycopy">
+    <p>但你会真的因为这个问法改变行为吗？通常不会。被说成麻木的人会回一句"我又改变不了什么"，被说成清醒的人点了个转发。两个人都没动，道德判断只在原地加了点情绪。</p>
+    <p>把题目换一种问法，它就变成可回答的：<strong>关注什么</strong>——对象；<strong>关注到多少</strong>——剂量；<strong>用什么方式关注</strong>——姿态。前一题是道德题，后三题是工程题。工程题有答案，而且答案因人而异。</p>
+    <p>这篇不打算劝你关注社会，也不打算替你不关注找理由。它只想把"关注"这个词拆开，让你能清楚地选择——包括清楚地选择不看。</p>
+  </div>
+  <div class="pull">一个人允许自己不看，和一个人不知道自己在不看，<br>是两种完全不同的处境。</div>
+  <button class="pause" type="button" aria-expanded="false">停一下 · 展开思考</button>
+  <div class="reflection">把"我应不应该关注社会"改写成你的三个问句：我想知道的是什么、我打算花多少时间、我准备用什么身份去碰它。哪一问最难答？</div>
+  <div class="question">你说"我关心社会"的时候，指的是知道，还是判断，还是做过什么？<small>先别评价，只分辨层次。</small></div>
+</div></section>
+
+<section class="chapter" id="c2"><div class="chapter-inner reveal">
+  <div class="chapter-head"><div class="chapter-no">02 / 三种人</div><h2>关闭者、围观者、参与者<br>各有<em>自己的道理</em></h2></div>
+  <p class="lead">把三种立场都当成有理由的选择，才看得清它们各自的账单。</p>
+  <div class="tabs" role="tablist" aria-label="三种姿态">
+    <button role="tab" aria-selected="true" data-panel="p-off">关闭者</button>
+    <button role="tab" aria-selected="false" data-panel="p-watch">围观者</button>
+    <button role="tab" aria-selected="false" data-panel="p-join">参与者</button>
+  </div>
+  <div class="panels">
+    <div class="panel is-on" id="p-off" role="tabpanel">
+      <div class="panel-line"><b>他的道理</b><span>注意力是有限资源，社会新闻大多不可行动。一天的精力只够应付自己眼前的事，把眼睛借给远处，等于从近处偷。</span></div>
+      <div class="panel-line"><b>真实的账单</b><span>你不看的那些规则、价格、条款，仍然按别人的版本落地。你不参与，不等于没被决定，只等于放弃了在场。</span></div>
+      <div class="panel-line warn"><b>最容易骗自己的地方</b><span>把"我改变不了什么"当结论。它其实只是当下这一步的结论，而多数议题的改变，本来就是很多人各自走一小步。</span></div>
+    </div>
+    <div class="panel" id="p-watch" role="tabpanel">
+      <div class="panel-line"><b>他的道理</b><span>知道总比不知道好。保持信息在场，是一种负责的姿态，也让自己在饭桌上不显得局外。</span></div>
+      <div class="panel-line"><b>真实的账单</b><span>知道很多、判断很少、行动没有。转发一次会产生"我做了事"的错觉，而错觉会抑制真正做事。</span></div>
+      <div class="panel-line warn"><b>最容易骗自己的地方</b><span>把信息摄入当成参与。看了一晚上评论不等于理解了一件事实，更不等于影响了任何结果。</span></div>
+    </div>
+    <div class="panel" id="p-join" role="tabpanel">
+      <div class="panel-line"><b>他的道理</b><span>把某一件具体的事，纳入自己长期的负责范围。小事也能形成结果，因为它有出口，而不只是有感。</span></div>
+      <div class="panel-line"><b>真实的账单</b><span>时间被长期占用，情绪被具体的人与事拖住，讲立场会真的得罪人。这是唯一会改变你生活形状的选项。</span></div>
+      <div class="panel-line warn"><b>最容易骗自己的地方</b><span>把参与扩张成全部。当一件事吞掉睡眠、关系和工作，它就不再是参与，而是替代生活。</span></div>
+    </div>
+  </div>
+  <div class="question">此刻的你，是选了这三个之一，还是被默认推到了其中一个？</div>
+</div></section>
+
+<section class="chapter" id="c3"><div class="chapter-inner reveal">
+  <div class="chapter-head"><div class="chapter-no">03 / 为什么难</div><h2>2026 年让这件事<br>变难的<em>三件事</em></h2></div>
+  <p class="lead">不是人变冷漠了。是环境把"关心"这件事的成本结构改了。</p>
+  <div class="bodycopy">
+    <p><strong>一、信息不再稀缺，判断才稀缺。</strong>当"知道"变成滑动一下屏幕的成本，"知道"就不再是能力，而是噪音。这时候还拿"我知道得多"当资格，等于拿别人塞给你的东西当自己的成绩。</p>
+    <p><strong>二、议题被情绪化打包。</strong>你收到的往往不是一条事实，而是一片已经带好结论的切片。立场先到，材料后补，于是讨论变成两队人互相确认自己是对的。这时候转发越多，理解越少。</p>
+    <p><strong>三、无力感会自我实现。</strong>越是远距离围观，越确信自己无用；越确信无用，就越只围观。这是一个闭环，而且在闭环里的人感觉自己是清醒的。</p>
+  </div>
+  <div class="meter" aria-hidden="true">
+    <div class="meter-row"><span>接触到</span><div class="bar" style="--w:94%"><i></i></div><span>很多</span></div>
+    <div class="meter-row"><span>理解了</span><div class="bar" style="--w:41%"><i></i></div><span>一部分</span></div>
+    <div class="meter-row"><span>能判断</span><div class="bar" style="--w:19%"><i></i></div><span>很少</span></div>
+    <div class="meter-row"><span>动过手</span><div class="bar" style="--w:6%"><i></i></div><span>几乎没有</span></div>
+  </div>
+  <p class="meter-note">上面这四条不是统计，是一张示意图：它想说的是，从"接触到"到"动过手"之间，隔着三道大多人没有跨过的门。</p>
+  <div class="question">如果只能跨过其中一道门——从接触到理解，从理解到判断，从判断到出手——你缺的是哪一道？</div>
+</div></section>
+
+<section class="chapter" id="c4"><div class="chapter-inner reveal">
+  <div class="chapter-head"><div class="chapter-no">04 / 关注的账</div><h2>先算清楚：<br>关注要付<em>多少</em></h2></div>
+  <p class="lead">这一层最不浪漫，但最能解释你为什么累。注意力不是态度，它是配额。</p>
+  <div class="bodycopy">
+    <p>勾选你大致会发生的项目。下面的数字会实时加起来——不是要吓你，是想让"我随便看看"这句自我描述，变成一个具体的数字。</p>
+  </div>
+  <div class="calc" id="calc">
+    <label class="calc-item"><input type="checkbox" data-min="40" checked><span class="box" aria-hidden="true"></span><span class="t"><b>早晚各刷一次热搜 / 信息流</b><i>约 40 分钟</i></span></label>
+    <label class="calc-item"><input type="checkbox" data-min="20"><span class="box" aria-hidden="true"></span><span class="t"><b>点进评论区看长文与争论</b><i>约 20 分钟</i></span></label>
+    <label class="calc-item"><input type="checkbox" data-min="30" checked><span class="box" aria-hidden="true"></span><span class="t"><b>被一条新闻影响情绪后，接着往下刷</b><i>约 30 分钟</i></span></label>
+    <label class="calc-item"><input type="checkbox" data-min="15"><span class="box" aria-hidden="true"></span><span class="t"><b>和身边人争论立场</b><i>约 15 分钟</i></span></label>
+    <label class="calc-item"><input type="checkbox" data-min="25"><span class="box" aria-hidden="true"></span><span class="t"><b>深夜补课式补看半天没看的消息</b><i>约 25 分钟</i></span></label>
+  </div>
+  <div class="tally" aria-live="polite">
+    <div class="tally-cell"><b id="t-min">0</b><span>分钟 / 天</span></div>
+    <div class="tally-cell"><b id="t-hour">0</b><span>小时 / 年</span></div>
+    <div class="tally-cell"><b id="t-day">0</b><span>个工作日 / 年</span></div>
+  </div>
+  <p class="tally-note" id="t-note">按每天合计折算到一年，再按 8 小时工作日折算。这是一份注意力账单，不是道德账单。</p>
+  <div class="bodycopy">
+    <p>除了注意力，还有两笔不写在账单上的：<strong>情绪余波</strong>——一场愤怒会占掉之后几个小时的工作记忆，你自己感觉得到，但很少记进"我今天做了什么"；<strong>关系摩擦</strong>——立场分歧最终会落到具体的人身上，而不是落在抽象的辩论里。</p>
+    <p>所以说"关注社会不要钱"是不准确的。它很贵，贵在你以为它是免费的。看清价格之后仍然选择花，这叫选择；看不见价格就一直在花，这叫被扣款。</p>
+  </div>
+  <div class="question">如果这份账单乘以十年，你愿意为它换掉什么？</div>
+</div></section>
+
+<section class="chapter" id="c5"><div class="chapter-inner reveal">
+  <div class="chapter-head"><div class="chapter-no">05 / 不看的账</div><h2>不关注也有账<br>只是<em>不在你手里结算</em></h2></div>
+  <p class="lead">你绕开的每一件事，都还在运行。区别只是运行的时候，你有没有位置。</p>
+  <div class="bodycopy">
+    <p>房租、工资算法、行业规则、平台条款、孩子的课本、你能说的话与不能说的话——这些没有一样是你一个人定的，也没有一样因为你没看而停下。不参与不等于置身事外，等于把在场的位子让了出去。</p>
+    <p>但这里必须立刻补一句，否则这个论证会被滥用成"你必须关心一切"。<strong>没有人能关心一切</strong>，试图那样做的人通常最先崩掉，然后什么都不关心了。正确的形式是缩小，而不是扩张：在所有会改变你生活的议题里，挑出真正影响你五年后处境的那一两个。</p>
+    <p>一个可用的尺子：如果一件事五年后仍然决定你的收入、健康、能做什么选择——它值得你长期在场。如果它只决定你今晚的情绪——知道就好，不必深追。</p>
+  </div>
+  <div class="pair">
+    <div class="card cold"><b>值得长期在场的</b><span>五年后仍然决定你的收入、健康和可选项。数量很少，通常不超过两个。</span></div>
+    <div class="card warm"><b>知道就够的</b><span>会影响今晚情绪，不动你的轨迹。允许自己只扫一眼，然后走开。</span></div>
+  </div>
+  <div class="question">把"社会"缩小到你真正会被它改变的那一两个议题上，它们是什么？</div>
+</div></section>
+
+<section class="chapter" id="c6"><div class="chapter-inner reveal">
+  <div class="chapter-head"><div class="chapter-no">06 / 四层</div><h2>"关注"是一个<br><em>被压扁</em>的词</h2></div>
+  <p class="lead">绝大多数人停在第一层，并且以为自己在第三层。这四层差别极大，成本差别也极大。</p>
+  <div class="layers">
+    <button class="layer" type="button" data-layer="1"><i>L1</i><div><strong>知道 · 接收</strong><p>被动，成本最低，最容易产生假的满足感。刷到即等于处理过。</p></div></button>
+    <button class="layer" type="button" data-layer="2"><i>L2</i><div><strong>判断 · 理解</strong><p>要背景知识，要读一手材料，要能容忍"我暂时不知道"。</p></div></button>
+    <button class="layer" type="button" data-layer="3"><i>L3</i><div><strong>表达 · 表态</strong><p>有代价。会得罪人，会被追问，要为自己的话负责。</p></div></button>
+    <button class="layer" type="button" data-layer="4"><i>L4</i><div><strong>行动 · 投入</strong><p>时间、钱、身份绑定。只有这一层能改变结果，也只有这一层最累。</p></div></button>
+  </div>
+  <div class="layer-read" id="layer-read" aria-live="polite">点一层，看看你通常在哪儿停下来。</div>
+  <div class="bodycopy">
+    <p>这四层不是道德阶梯。停在哪一层都可以，前提是你知道自己在哪一层。危险的不是停在 L1，是把 L1 当成 L4 来安慰自己——那种安慰是有代价的：它让真正想动手的那部分你，安静下来。</p>
+  </div>
+  <div class="question">你在哪一层停下来的次数最多？停在那儿的时候，你在对自己说什么？</div>
+</div></section>
+
+<section class="chapter" id="c7"><div class="chapter-inner reveal">
+  <div class="chapter-head"><div class="chapter-no">07 / 剂量</div><h2>关键不是开关<br>是<em>剂量</em></h2></div>
+  <p class="lead">药和毒的区别常常只在剂量。关注这件事也一样：不是关掉，是定量。</p>
+  <div class="dose">
+    <label class="dose-label" for="dose">假设你每周认真关注社会议题的时间</label>
+    <div class="dose-row">
+      <span class="dose-min">0</span>
+      <input type="range" id="dose" min="0" max="25" step="0.5" value="3" aria-describedby="dose-read">
+      <span class="dose-max">25 小时</span>
+    </div>
+    <div class="dose-value"><b id="dose-num">3</b> 小时 / 周</div>
+    <div class="dose-track" aria-hidden="true"><i id="dose-bar"></i></div>
+    <p class="dose-read" id="dose-read" aria-live="polite"></p>
+  </div>
+  <div class="steps">
+    <div class="step"><div><b>固定时段，不由推送触发</b><span>每周一次，自己选时间。不让算法决定你什么时候开始关心。</span></div></div>
+    <div class="step"><div><b>只追一到三个议题</b><span>超出的范围，知道即可，不深追。这是剂量纪律，不是冷漠。</span></div></div>
+    <div class="step"><div><b>至少读一次一手材料</b><span>原文、公告、数据、当事人说法。跳过二手结论，判断才长得出来。</span></div></div>
+    <div class="step"><div><b>留一个可行动的出口</b><span>捐款、写信、投票、到场、教别人、如实记录——规模不用大，但必须有。</span></div></div>
+    <div class="step"><div><b>事先定好停止条件</b><span>什么算看完？什么时候收手？没有停止条件的关注，会自己长成无限循环。</span></div></div>
+  </div>
+  <div class="question">如果只保留一条剂量规则，你选哪一条？</div>
+</div></section>
+
+<section class="chapter" id="c8"><div class="chapter-inner reveal">
+  <div class="chapter-head"><div class="chapter-no">08 / 关系</div><h2>社会不是新闻<br>社会是<em>你每天碰到的人</em></h2></div>
+  <p class="lead">这一层是整篇的转轴。前面都在谈注意力的分配，这一层要换掉"社会"这个词的位置。</p>
+  <div class="bodycopy">
+    <p>把社会当成发生在别处的坏消息，你就只能当一个观众，而且是永远赶不上进度、也永远插不上话的观众。所以怎么看都无力——因为观众这个位置本身就没有出口。</p>
+    <p>但社会其实是这些：你付的价、你得到的对待、你被默认接受的规则、你身边人不敢说的话、你自己习惯性咽下去的那一句。它不是远方的画面，它是你每天要经过的那条走廊。</p>
+    <p>于是"关注社会"最朴素的形式，不再宏大：<strong>当你在具体关系里遇到一件不合理的事，多问一句——这是个例，还是规则？</strong>是个例，处理它；是规则，你就摸到了社会的边缘。这一句问话不要成本，却把关注从"看"变成了"辨认"。</p>
+    <p>反过来也成立：一个对身边人永远不耐烦的人，说自己关心社会，多半关心的是自己的道德形象。社会不在远处等他，就在他挂电话的方式里。</p>
+  </div>
+  <div class="pull">你能对多近的人负责，才谈得上对多远的事负责。</div>
+  <div class="question">最近一次你觉得"这不合理但算了"，它是个例，还是规则？</div>
+</div></section>
+
+<section class="chapter last" id="ending"><div class="chapter-inner reveal">
+  <div class="chapter-head"><div class="chapter-no">09 / 姿态</div><h2>所以答案是：<br>别问应不应该，<em>问姿态</em></h2></div>
+  <p class="lead">不看、看、下场，三种都成立。唯一不成立的是——不知道自己在哪一种。</p>
+  <div class="bodycopy">
+    <p>允许自己关掉，但那是为了保住自己的生活，不是为了让生活安静到听不见任何东西。允许自己只看，但要承认那是看，不是做。允许自己下场，但要把边界一起带下去，否则它会替你决定剩下的一切。</p>
+    <p>2026 年，最贵的能力不是知道得多，是<strong>知道自己在把注意力交给谁，以及为什么</strong>。一个人守住这一件事，就已经比绝大多数信息流里的声音更清醒了。</p>
+  </div>
+  <div class="eyebrow" style="margin-top:38px">你此刻更接近哪一句</div>
+  <div class="choices" role="group" aria-label="选择一句姿态">
+    <button type="button" data-line="我有意识地关掉了一部分，我清楚我在用什么换什么。" aria-pressed="false">有意地关掉</button>
+    <button type="button" data-line="我只看，但我承认这是看，不是做。我准备挑一件事，从知道走到动手。" aria-pressed="false">只看，但挑一件事</button>
+    <button type="button" data-line="我已经在一件事上长期在场了。现在要做的不是更用力，而是带上停止条件。" aria-pressed="false">长期在场，但要边界</button>
+    <button type="button" data-line="我一直以为自己在关注，其实只是被推送推着走。先拿回时间的主导权。" aria-pressed="false">先拿回时间的主导权</button>
+  </div>
+  <p class="answer" id="answer" aria-live="polite"></p>
+  <label for="note" class="eyebrow lbl">写给此刻的自己 · 内容仅保存在这台设备</label>
+  <textarea id="note" placeholder="不必完整。你可以写一个你决定长期在场的议题，或一个你决定不再看的入口。" maxlength="1000"></textarea>
+  <button class="save" id="save" type="button">保存这一刻</button>
+  <span class="saved" id="saved" aria-live="polite"></span>
+</div></section>
+
+</main>
+
+<footer class="foot"><span>应不应该关注社会 · 一篇未完成的判断</span><a href="#top">回到开端 ↑</a></footer>
+
+<a class="to-end" id="to-end" href="#ending">写下你的姿态</a>
+
+<script src="js/main.js"></script>
+</body>
+</html>
