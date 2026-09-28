@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>决战中国 · 二十年</title>
+<meta name="description" content="决战中国 BATTLE CHINA 2026 二十周年赛季全国招商">
+<meta property="og:title" content="决战中国 · 二十年，决战不止">
+<link rel="stylesheet" href="css/style.css">
+</head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3"/></filter></svg>
+
+<div id="loader"><div class="ld-in"><div class="lg"></div><div class="yr">2006 — 2026</div><div class="ld-t">二十年，决战不止</div><button id="enter" class="btn solid" hidden>进入 · 开启音乐</button><button id="enterMute" class="ld-mute" hidden>静音进入</button><div class="ld-s" id="ldS">正在载入 · 古筝 × 街舞</div></div></div>
+<div id="bar"></div>
+<button class="fab" id="music" aria-label="播放古筝街舞背景音乐" aria-pressed="false"><span class="eq"><b></b><b></b><b></b></span></button>
+<div id="bgmTip" class="bgm-tip">轻触开启 · 古筝 × 街舞</div>
+<a class="fab" id="toCoop" href="#stage"><span class="dot"></span>看合作</a>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="kv"></div>
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="frame"><i></i><i></i><i></i><i></i></div>
+  <div class="hero-top">BATTLE CHINA · 国际街舞大师赛</div>
+  <div class="hero-body wrap">
+    <div class="dear" id="dear">致 <span id="dearCity">成都</span> 合作伙伴</div>
+    <div class="hero-logo" aria-hidden="true"></div><h1 class="hero-title gold-text">二十年<br>决战不止</h1>
+    <div class="hero-years"><span></span>2006 — 2026</div>
+    <p class="hero-sub">中国本土最早的全国性街舞联赛之一 · 决战中国 2026 · 二十周年全国招商</p>
+    <div class="btns">
+      <a class="btn solid" href="#timeline">看决战二十年</a>
+      <a class="btn ghost" href="#stage">直接看合作</a>
+    </div>
+    <div class="bgm-hint">BGM · 古筝 × 街舞 · 轻触屏幕任意处开启</div>
+    <div class="scroll-cue">向下滑动</div>
+  </div>
+</section>
+<div class="fret"></div>
+
+<!-- GUANGZHOU -->
+<section id="gz" class="night sec">
+  <div class="wrap">
+    <div class="chap"><i>第一章</i>广州出发 · GUANGZHOU</div>
+    <div class="gz-top">
+      <div>
+        <div class="gz-big">广州<small>WHERE IT BEGAN</small></div>
+        <h2 style="margin-top:.6em">舞步，与经济<span class="gold-text">同频腾飞</span></h2>
+        <p class="lead">改革开放让广东先行一步。香港的录像带、唱片和舞步最先抵达广州，市一宫、海珠广场成了第一代舞者的舞台。四十多年来，广东经济一路领跑，街舞也从街头长成产业。决战中国，正是从这片土地出发。</p>
+      </div>
+      <div class="gz-stats">
+        <div><b class="gold-text">14.58<small style="font-size:.5em">万亿</small></b><span>2025 年广东 GDP</span></div>
+        <div><b class="gold-text">37<small style="font-size:.5em">年</small></b><span>经济总量连续全国第一</span></div>
+        <div><b class="gold-text">10<small style="font-size:.5em">万+</small></b><span>广东街舞从业者</span></div>
+        <div><b class="gold-text">2006</b><span>决战中国从广州出发</span></div>
+      </div>
+    </div>
+    <div class="econ">
+      <h5>广东 GDP × 广州街舞大事记<span>金线 = 广东地区生产总值（亿元）· 圆点 = 街舞里程碑</span></h5>
+      <div class="econ-scroll"><svg id="econ" viewBox="0 0 720 300" role="img" aria-label="1978 至 2025 年广东 GDP 增长与广州街舞大事记对照图"></svg></div>
+    </div>
+    <ol class="gz-list" id="gzList"></ol>
+    <p class="src">资料：广东省人民政府（2026-01）、广东省统计局；羊城晚报《为什么是广州街舞？》（2021-01）、广州日报花城（2021-03）、界面新闻 Speed Dance Group 专访、中国舞协街舞委员会《回顾中国街舞三十年》；决战中国主办信息来自组委会资料。</p>
+  </div>
+</section>
+<div class="fret"></div>
+
+<!-- TIMELINE -->
+<section id="timeline" class="paper sec">
+  <div class="wrap">
+    <div class="chap"><i>第二章</i>四十年长卷 · 1987—2026</div>
+    <h2><span class="brush">街舞</span>在中国，走了四十年</h2>
+    <p class="lead" style="color:var(--ink-2)">从录像带里的霹雳舞，到奥运、亚运、世运、全运赛场。决战中国在这条主线上，走了二十年。</p>
+    <div class="hint"><span class="k"></span>金色节点 = 决战中国里程碑　·　左右滑动查看</div>
+  </div>
+  <div class="scroller" tabindex="0" aria-label="中国街舞时间线"><div class="track" id="track"></div></div>
+  <div class="wrap"><p class="src" style="color:var(--ink-2)">资料：澎湃新闻、CCTV 全国街舞电视大赛专题、中国舞协街舞委员会、杭州亚组委、中国奥委会、国家体育总局、新湖南、光明网、腾讯新闻；决战中国节点来自组委会资料。</p></div>
+</section>
+<div class="fret"></div>
+
+<!-- INDUSTRY -->
+<section id="industry" class="crimson sec">
+  <div class="wrap">
+    <div class="chap"><i>第三章</i>行业盘面 · THE MARKET</div>
+    <h2><span class="brush">千万</span>人在跳的赛道</h2>
+    <p class="lead">街舞已经是中国青少年参与度最高的文化体育项目之一，Z 世代与少儿家庭是核心人群。</p>
+    <div class="nums">
+      <div><b class="gold-text" data-n="300">300<small>万</small></b><span>街舞从业者</span></div>
+      <div><b class="gold-text" data-n="1000">1000<small>万+</small></b><span>每年学习街舞人次</span></div>
+      <div><b class="gold-text" data-n="10000">10000<small>家</small></b><span>街舞培训机构（近）</span></div>
+      <div><b class="gold-text" data-n="596">596<small>城</small></b><span>街舞机构覆盖城市</span></div>
+      <div><b class="gold-text" data-n="32">32<small>个</small></b><span>省级街舞联盟</span></div>
+      <div><b class="gold-text" data-n="1000">1000<small>场+</small></b><span>全国每年街舞赛事活动</span></div>
+    </div>
+    <p class="src">数据来源：《中国街舞产业发展研究报告》（中国舞协街舞委员会，2023）；国家体育总局《以产业促进街舞更好发展》，2023-10-17。</p>
+  </div>
+</section>
+
+<!-- MEDALS -->
+<section id="medals" class="night sec">
+  <div class="wrap">
+    <div class="chap"><i>第四章</i>国家队时刻 · GLORY</div>
+    <h2><span class="brush">站上</span>世界之巅</h2>
+    <p class="lead">霹雳舞进入竞技体育体系后，中国舞者在国际赛场连续登顶，街舞获得了前所未有的主流关注。</p>
+    <div class="medals" id="medalList"></div>
+    <p class="src">资料：杭州亚组委、中国奥委会、新湖南（2025-08）、光明网（2025-11-18）、腾讯新闻（2026-09-14）。奖牌图形为示意设计，非官方标识。</p>
+  </div>
+</section>
+
+<!-- GLOBAL -->
+<section id="global" class="sand sec">
+  <div class="wrap">
+    <div class="chap"><i>第五章</i>走向世界 · GO GLOBAL</div>
+    <h2><span class="brush">出海</span>，决战中国走向世界</h2>
+    <p class="lead" style="color:var(--ink-2)">决战中国早在 2017 年就走出了国门：澳门站、老挝海外选拔赛，冠军直通中国总决赛。今天，中国街舞正在成为世界认识中国年轻人的一张名片，也是品牌走向海外最自然的载体。</p>
+    <div class="gl-grid">
+      <div id="globeBox"><canvas id="globeCanvas" aria-label="决战中国出海路线三维地球"></canvas><div class="globe-fallback"></div><div class="globe-leg"><span><i style="background:#D9A441"></i>决战中国已落地海外站</span><span><i style="background:#E0404A"></i>世界之旅规划航线</span></div></div>
+      <ul class="feats">
+        <li><div class="d">2017<small>中国 · 澳门</small></div><div><b>决战中国 · 澳门站</b><span>1on1 / 2on2 Breaking Battle，国际选手同场竞技；澳门世界街舞协会担任赛事指导单位</span></div></li>
+        <li><div class="d">2017.09<small>老挝 · 万象</small></div><div><b>决战中国 · 老挝海外选拔赛</b><span>Bboy 1v1 冠军直通中国总决赛（Winner gets ticket to China），国际裁判阵容执裁</span></div></li>
+        <li><div class="d">每年 12 月<small>全国总决赛</small></div><div><b>全球招募 · 国际大师训练营</b><span>总决赛面向全球舞者开放，同期邀请国际重量级导师驻场授课</span></div></li>
+        <li><div class="d">2025—26<small>行业背景</small></div><div><b>中国少年闯进世界之巅</b><span>中国少年舞者在巴黎 Juste Debout 夺得少儿组全球总冠军；中国团队首次在 VIBE 世界街舞大赛获奖</span></div></li>
+      </ul>
+    </div>
+    <div class="tour">
+      <span class="tg">2026 新企划 · 可独立冠名</span>
+      <h3>决战中国 · <em>世界之旅</em></h3>
+      <p>把总决赛的冠军送上世界赛场，把世界舞者请进中国城市。一条双向的街舞文旅线路，让品牌跟着冠军走出去、跟着客人走进来。</p>
+      <div class="tour-g">
+        <div><span class="ic">OUTBOUND</span><b>冠军出征</b><p>全国总决赛冠军由冠名品牌护航，出征海外顶级街舞赛事，全程纪录片跟拍。</p></div>
+        <div><span class="ic">STUDY TOUR</span><b>街舞研学团</b><p>少儿组优胜者与家庭组团赴海外街舞之城研学、观赛、交流，形成可复购的文旅产品。</p></div>
+        <div><span class="ic">INBOUND</span><b>世界舞者 · 中国行</b><p>邀请海外裁判和舞者来华参赛授课，串联赛区城市的文旅线路，讲好中国故事。</p></div>
+      </div>
+      <div class="fit">适配品牌：航空公司 · 连锁酒店 · 城市文旅局 · 出境游 / 研学平台 · 运动品牌 · 手机影像</div>
+    </div>
+    <p class="src" style="color:var(--ink-2)">资料：决战中国组委会（历届海报与赛事资料）；新华网（2026-03-12）、光明网（2026-09-27）。「世界之旅」为 2026 赛季拟推出的企划，线路与赛事以最终发布为准。</p>
+  </div>
+</section>
+<div class="fret"></div>
+
+<!-- IP -->
+<section id="ip" class="paper sec">
+  <div class="wrap">
+    <div class="chap"><i>第六章</i>决战二十年 · THE IP</div>
+    <h2><span class="brush">决战</span>中国，从一场到一季</h2>
+    <p class="lead" style="color:var(--ink-2)">2006 年创办，2015 年从单场国际赛升级为全国联赛机制。二十年来，决战中国一直是舞者心中的标杆赛事。</p>
+    <div class="ipgrid">
+      <div>
+        <div class="ipnums">
+          <div><b>21</b><span>覆盖省份</span></div>
+          <div><b>20+</b><span>城市晋级赛</span></div>
+          <div><b>1000+</b><span>参赛机构</span></div>
+          <div><b>1万+</b><span>累计参赛</span></div>
+          <div><b>1亿+</b><span>整合传播影响</span></div>
+          <div><b>30+</b><span>省级街舞联盟协办</span></div>
+        </div>
+        <div class="media" aria-label="历届报道与合作平台">
+          <span>CCTV5</span><span>CCTV6 电影融媒体</span><span>中国网</span><span>微博</span><span>今日头条</span><span>腾讯</span><span>爱奇艺</span><span>优酷</span><span>东南卫视</span><span>抖音</span><span>B 站</span>
+        </div>
+        <p class="src" style="color:var(--ink-2)">数据来源：决战中国组委会。平台为历届报道与合作平台。</p>
+      </div>
+      <div class="chart-card">
+        <h5>往届增长 · 2006—2018</h5>
+        <div class="tabs" id="gTabs"></div>
+        <svg id="growth" viewBox="0 0 420 240" role="img" aria-label="决战中国往届增长柱状图"></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSTERS -->
+<section id="posters" class="night sec" style="padding-bottom:60px">
+  <div class="wrap">
+    <div class="chap"><i>第七章</i>海报长廊 · ARCHIVE</div>
+    <h2><span class="brush">一张</span>海报，一座城</h2>
+    <p class="lead">从广州到吐鲁番，从澳门到老挝万象。十二张海报，是决战中国走过的城市。左右拖动，或点击海报查看。</p>
+  </div>
+  <div class="ring" id="ring" role="region" aria-label="决战中国历届海报三维长廊">
+    <div class="beams" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="ring-in" id="ringIn"></div>
+    <div class="ring-floor" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="motes" aria-hidden="true"></div>
+  </div>
+  <div class="wrap ring-ctl">
+    <button class="rbtn" id="rPrev" aria-label="上一张">&#8249;</button>
+    <div class="ring-cap" aria-live="polite"><div class="rc-y" id="rcY">2017</div><div><b id="rcT">老挝站</b><span id="rcD"></span></div><div class="rc-n" id="rcN">01 / 12</div></div>
+    <button class="rbtn" id="rNext" aria-label="下一张">&#8250;</button>
+  </div>
+  <div class="lb" id="lb" hidden><div class="lb-in"><img id="lbImg" alt=""><div class="lb-cap"><b id="lbT"></b><span id="lbD"></span></div><button class="rbtn lb-x" id="lbX" aria-label="关闭">&times;</button></div></div>
+</section>
+<div class="fret"></div>
+
+<!-- HALL -->
+<section id="hall" class="paper sec">
+  <div class="wrap">
+    <div class="chap"><i>第八章</i>街舞名人堂 · HALL OF FAME</div>
+    <h2><span class="brush">名人</span>堂，首批二十人</h2>
+    <p class="lead" style="color:var(--ink-2)">由决战中国组委会发起，表彰为中国街舞做出卓越贡献的舞者。首批 20 位成员均为 Bboy / Bgirl。</p>
+    <div class="hall" id="hallGrid"></div>
+  </div>
+</section>
+
+<!-- SYSTEM + MAP -->
+<section id="system" class="night sec">
+  <div class="wrap">
+    <div class="chap"><i>第九章</i>赛事体系 · THE LEAGUE</div>
+    <h2><span class="brush">全国</span>一盘棋</h2>
+    <p class="lead">城市晋级赛 → 省级决赛 → 全国总决赛。三级赛制，把每一座城市连进同一个赛季。</p>
+  </div>
+  <div class="wrap">
+    <div id="mapBox">
+      <div class="map-ui"><button class="chip" id="mFlags" aria-pressed="true">省级赛区</button></div>
+      <canvas id="mapCanvas" aria-label="决战中国三维赛区地图"></canvas>
+      <div class="map-legend">红旗 = 省级赛区 · 左右拖动旋转</div>
+    </div>
+    <div class="tiers">
+      <div class="tier"><div class="st">STAGE 01</div><h4>城市晋级赛</h4><p>各城市机构承办，海选全国舞者，覆盖少儿组与成人组。</p></div>
+      <div class="tier"><div class="st">STAGE 02</div><h4>省级决赛</h4><p>各省赛区选拔单项冠军，代表本省出征全国。</p></div>
+      <div class="tier"><div class="st">STAGE 03</div><h4>全国总决赛</h4><p>两天决战，角逐年度总冠军；同期举办国际大师训练营。</p></div>
+    </div>
+    <div class="events">
+      <div class="ev-card"><b>BREAKING 1V1</b><span>霹雳舞个人斗舞</span></div>
+      <div class="ev-card"><b>FREESTYLE 2V2</b><span>舞种不限 · 双人斗舞</span></div>
+      <div class="ev-card"><b>CREW BATTLE</b><span>霹雳舞团队赛 · 8—15 人</span></div>
+      <div class="ev-card"><b>团队齐舞</b><span>原创编舞 · 8—40 人</span></div>
+    </div>
+    <div class="fates"><span class="l">国际通用 F.A.T.E.S 评分</span><b title="Foundation 基础">F</b><b title="Artistic 艺术性">A</b><b title="Technique 技术">T</b><b title="Execution 完成">E</b><b title="Strategy 策略">S</b></div>
+  </div>
+</section>
+<div class="fret"></div>
+
+<!-- SEASON -->
+<section id="season" class="paper sec">
+  <div class="wrap">
+    <div class="chap"><i>第十章</i>2026 赛季 · 二十周年</div>
+    <h2><span class="brush">二十</span>周年，主场一起建</h2>
+    <p class="lead" style="color:var(--ink-2)">让每座城市，都有自己的主场。决战中国 2026 二十周年赛季按以下节奏推进，具体城市与档期随合作落地发布。</p>
+    <div class="months">
+      <div><div class="m">3 月</div><h4>赛季发布会</h4><p>招商签约 · 赛区公布</p></div>
+      <div><div class="m">4—8 月</div><h4>城市晋级赛</h4><p>全国城市海选</p></div>
+      <div><div class="m">9—10 月</div><h4>省级决赛</h4><p>各省冠军产生</p></div>
+      <div><div class="m">12 月</div><h4>全国总决赛</h4><p>年度总冠军 + 大师营</p></div>
+    </div>
+    <span class="goal-tag">2026 赛季目标 · 以最终发布为准</span>
+    <div class="goal">
+      <div><b>30+</b><span>省级赛区</span></div>
+      <div><b>100+</b><span>覆盖城市</span></div>
+      <div><b>200+</b><span>城市晋级赛</span></div>
+      <div><b>5万+</b><span>报名参赛人数</span></div>
+    </div>
+    <div class="doc">
+      <div class="t">二十年</div>
+      <div><h4>二十周年特别企划</h4><p>全国总决赛同期举办：街舞名人堂年度颁奖、国际大师训练营、二十年历届海报与影像展。每个赛区一支城市舞者短片，赛前预热、赛后回顾，让赞助品牌拥有一整季可持续传播的内容。</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- WHY -->
+<section id="why" class="crimson sec">
+  <div class="wrap">
+    <div class="chap"><i>第十一章</i>商业汇报 · WHY BATTLE CHINA</div>
+    <h2><span class="brush">为什么</span>赞助决战中国</h2>
+    <p class="lead">六个理由，一份写给品牌市场部的商业汇报。</p>
+    <div class="why">
+      <div><div class="k">AUDIENCE<i>壹</i></div><b class="big gold-text">1000<small>万+</small></b><h4>品牌最想要的两代人</h4><p>每年超千万人次学习街舞。Z 世代舞者与少儿家庭，一个定义潮流，一个掌握消费决策。</p></div>
+      <div><div class="k">MOMENTUM<i>贰</i></div><b class="big gold-text">4<small>大赛场</small></b><h4>国家竞技体系的红利</h4><p>奥运、亚运、世运、全运全线开花，霹雳舞进入国家竞技体系；《这！就是街舞》话题阅读超 600 亿。</p></div>
+      <div><div class="k">CITY ECONOMY<i>叁</i></div><b class="big gold-text">+42.7<small>%</small></b><h4>赛事就是城市流量入口</h4><p>赛事经济进入「票根经济」时代：苏超前六轮带动文体旅营收 379.6 亿元、同比增长 42.7%，外地观赛游客平均多停留 2—3 天。每一站决战中国，都是一次城市级客流。</p></div>
+      <div><div class="k">GO GLOBAL<i>肆</i></div><b class="big gold-text">7<small>年</small></b><h4>长期押注街舞，品牌赢得心智</h4><p>特步 2019 年起持续投入青少年街舞，2026 年成为 Juste Debout 中国赛区唯一指定运动品牌，在青少年街舞品牌调研中第一提及率居首。</p></div>
+      <div><div class="k">GUANGDONG<i>伍</i></div><b class="big gold-text">37<small>年第一</small></b><h4>最有消费力的市场</h4><p>广东经济总量连续 37 年全国第一，街舞从业者超 10 万人。决战中国扎根广东，辐射全国 21 省。</p></div>
+      <div><div class="k">THE IP<i>陆</i></div><b class="big gold-text">20<small>年</small></b><h4>不用从零起步</h4><p>二十年赛事积累：1 万+ 累计参赛、1000+ 参赛机构、1 亿+ 整合传播，完整的三级赛制与名人堂体系。</p></div>
+    </div>
+    <h3 style="font-family:var(--serif);font-weight:900;font-size:20px;margin:40px 0 0">品牌回报路径</h3>
+    <div class="funnel">
+      <div><b>曝光</b><span>赛场 + 直播</span></div>
+      <div><b>内容</b><span>短片 + 短视频</span></div>
+      <div><b>到场</b><span>体验区 + 门店</span></div>
+      <div><b>转化</b><span>领券 + 核销</span></div>
+      <div><b>结案</b><span>T+30 数据</span></div>
+    </div>
+    <div class="case">
+      <div class="cl"><span class="tg">品牌案例 · CASE</span><h4>特步 × 青少年街舞</h4><p>一个运动品牌如何用七年时间，把「中国街舞少年」和自己绑在一起。</p></div>
+      <ul>
+        <li><b>2019</b><span>起连续赞助 BDS 世界青少年街舞大赛，搭建少年舞者梯队</span></li>
+        <li><b>2023</b><span>旗下选手在 WDC 世界街舞大赛少儿组包揽冠亚军</span></li>
+        <li><b>2026</b><span>成为 Juste Debout 中国赛区唯一指定运动品牌；签约少年选手巴黎夺得全球总冠军</span></li>
+        <li><b>心智</b><span>青少年街舞品牌调研「第一提及率」居行业榜首</span></li>
+      </ul>
+    </div>
+    <p class="src">资料：《中国街舞产业发展研究报告》（2023）；腾讯新闻《文体旅融合的新密码》（2026-09-04）；网易、晋江经济报（2026-03）；广东省人民政府（2026-01）；决战中国组委会。特步案例仅作行业参考，不代表其与决战中国存在合作。</p>
+  </div>
+</section>
+<div class="fret dark"></div>
+
+<!-- STAGE -->
+<section id="stage" class="night sec">
+  <div class="wrap">
+    <div class="chap"><i>第十二章</i>品牌在哪里出现 · VISIBILITY</div>
+    <h2><span class="brush">你的</span>品牌，站在 Cypher 中央</h2>
+    <p class="lead">这是一座决战中国街头赛场：涂鸦墙、Cypher 圈、DJ 台、集装箱、快闪店。点击数字，看每一个曝光位属于哪一级合作。</p>
+    <div id="stageBox">
+      <div class="live"><i></i>LIVE<b>总冠名品牌 · 决战中国 CYPHER</b></div>
+      <canvas id="stageCanvas" aria-label="三维赛场曝光位模型"></canvas>
+      <div id="hots"></div>
+    </div>
+    <div class="drag-tip">左右拖动旋转赛场</div>
+    <div class="spot" id="spot" aria-live="polite"></div>
+  </div>
+</section>
+<div class="fret dark"></div>
+
+<!-- RIGHTS -->
+<section id="rights" class="crimson sec">
+  <div class="wrap">
+    <div class="chap"><i>第十三章</i>合作权益 · PARTNERSHIP</div>
+    <h2><span class="brush">六级</span>合作，总有一席</h2>
+    <p class="lead">从全国总冠名到一座城市的一站比赛，品牌可以按目标和预算选择入口。点击查看权益。</p>
+    <div class="rights">
+      <div class="pyr"><div class="pyr-in" id="pyr"></div></div>
+      <div class="rp" id="rp" aria-live="polite"></div>
+    </div>
+    <h3 style="font-family:var(--serif);font-weight:900;font-size:22px;margin:44px 0 0">每一站，品牌都能拿到</h3>
+    <div class="deliv">
+      <div><b>1</b><span>支城市人物短片</span></div>
+      <div><b>6</b><span>条竖屏短视频</span></div>
+      <div><b>30</b><span>张精选照片</span></div>
+      <div><b>T+7</b><span>首批素材与曝光实拍</span></div>
+      <div><b>T+30</b><span>结案报告（到场 / 观看 / 互动 / 核销）</span></div>
+      <div><b>全程</b><span>直播角标与主持口播</span></div>
+      <div><b>独家</b><span>同品类排他（总冠名 / 首席）</span></div>
+      <div><b>续约</b><span>下赛季优先洽谈权</span></div>
+    </div>
+    <h3 style="font-family:var(--serif);font-weight:900;font-size:18px;margin:34px 0 0">推荐合作品类</h3>
+    <div class="cats"><span>运动服饰鞋类</span><span>功能饮料 / 乳品</span><span>手机与影像</span><span>潮牌潮玩</span><span>汽车 / 两轮电动</span><span>商业综合体</span><span>城市文旅</span><span>连锁酒店</span><span>少儿教育</span></div>
+  </div>
+</section>
+<div class="fret"></div>
+
+<!-- CITY -->
+<section id="city" class="paper sec">
+  <div class="wrap">
+    <div class="chap"><i>第十四章</i>城市站 · YOUR CITY</div>
+    <h2><span class="brush">你的</span>城市，也可以是主场</h2>
+    <p class="lead" style="color:var(--ink-2)">每座城市一份专属版本。选择城市查看城市站合作方式。</p>
+    <div class="cities" id="cities"></div>
+    <div class="citycard">
+      <div class="cc-l"><div class="big" id="ccBig">蓉</div><div class="nm" id="ccName">决战中国 · 成都站</div><div class="en" id="ccEn">BATTLE CHINA · CHENGDU</div><div class="wm"></div></div>
+      <div class="cc-r">
+        <h4>城市站合作伙伴可获得</h4>
+        <ol>
+          <li>赛事命名：「决战中国 · <span class="cN">成都</span>站 · 品牌杯」</li>
+          <li>本站主背景板、Battle 圈地贴、围栏全部露出</li>
+          <li>商场 / 门店 / 商业街区联动，带来本地到场人流</li>
+          <li><span class="cN">成都</span>站城市舞者短片联合署名</li>
+          <li>本站独立结案报告，可延续为年度合作</li>
+        </ol>
+        <div class="link">城市专属链接：本页地址末尾加 <code id="ccHash">#chengdu</code></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="crimson sec">
+  <div class="wrap">
+    <div class="seal" id="seal" aria-hidden="true"><span>诚</span><span>邀</span><span>同</span><span>行</span></div>
+    <h2 class="gold-text" style="margin-top:0">下一站，与你同场</h2>
+    <p class="lead" style="margin-inline:auto">带着你的品牌目标、意向城市或产品来，我们一起把决战中国 2026 做成一件可以共同完成的事。</p>
+    <div class="btns"><button class="btn solid" id="share">复制本页链接</button></div>
+    <div class="contact">
+      <div><span>招商联系人</span><b class="tbd">姓名待填</b></div>
+      <div><span>电话 / 微信</span><b class="tbd">待填</b></div>
+      <div><span>招商手册</span><b class="tbd">PDF 版制作中</b></div>
+    </div>
+  </div>
+</section>
+<footer>决战中国 BATTLE CHINA · 2026 二十周年赛季全国招商 H5 · DEMO V4<br>决战中国数据来自组委会资料；行业数据来自公开报道；2026 赛季目标为规划口径，以正式发布为准。</footer>
+<script type="module" src="js/main.js"></script>
+</body></html>
