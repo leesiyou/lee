@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#0a0a0a">
+<title>104 GROUP｜15 年服装定制 · 广州实体工厂</title>
+<meta name="description" content="104 GROUP：15 年专注成衣供应链。广州实体工厂，山东织然纯棉面料，自研 BOXFIT 版型，DTF / DTG 双工艺，原创设计。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 进场 -->
+<div id="loader" aria-hidden="true">
+  <img src="assets/img/logo.webp" alt="" class="ld-logo">
+  <div class="ld-bar"><i id="ldFill"></i></div>
+  <div class="ld-txt"><span>104 GROUP</span><span id="ldPct">0%</span></div>
+  <button id="enterBtn" class="enter" aria-label="进入并播放音乐"><span class="ring-p"></span><b>▶</b><em>TAP TO ENTER</em><small>点击进入 · 开启 Jazz HipHop</small></button>
+</div>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+<div id="prog"></div>
+
+<header class="nav">
+  <a href="#hero" class="nav-logo"><img src="assets/img/logo.webp" alt="104 GROUP"></a>
+  <button id="soundBtn" class="sound" aria-label="背景音乐开关">
+    <span class="eq"><i></i><i></i><i></i><i></i></span><span id="soundTxt">JAZZ · HIPHOP</span>
+  </button>
+</header>
+<div id="soundTip">轻触屏幕 · 开启音乐 ♪</div>
+<audio id="bgm" src="assets/audio/104-jazzhop.mp3" loop autoplay preload="auto" playsinline webkit-playsinline></audio>
+
+<main>
+
+<!-- 00 HERO -->
+<section id="hero" class="s hero" data-scene="hero">
+  <div class="hero-bg"></div>
+  <div class="stage stage-full" id="heroStage"></div>
+  <div class="hero-logo-wrap"><img src="assets/img/logo.webp" alt="104 GROUP" class="hero-logo" id="heroLogo"><i class="sweep"></i></div>
+  <div class="hero-txt c">
+    <p class="k rv">15 YEARS · <span data-cfg="factoryCity">广州</span> · REAL FACTORY</p>
+    <h1 class="h1 rv"><span>让想法，</span><span>穿在身上。</span></h1>
+    <p class="en-sub rv">PRINT YOUR IDEA · WEAR YOUR STYLE</p>
+    <ul class="pills rv"><li>15 年成衣供应链</li><li>广州实体工厂</li><li>DTF + DTG</li><li>原创设计</li></ul>
+  </div>
+  <div class="scroll-cue"><span>SCROLL</span><i></i></div>
+</section>
+
+<div class="mq-wrap"><div class="marquee"><div class="mq-in"><span>104GROUP</span><b>✦</b><span>服装定制</span><b>✦</b><span>印花成衣一体化</span><b>✦</b><span>山东织然纯棉</span><b>✦</b><span>BOXFIT</span><b>✦</b><span>DTF / DTG</span><b>✦</b><span>支持打样</span><b>✦</b><span>24 小时加急出货</span><b>✦</b><span>104GROUP</span><b>✦</b><span>服装定制</span><b>✦</b><span>印花成衣一体化</span><b>✦</b><span>山东织然纯棉</span><b>✦</b><span>BOXFIT</span><b>✦</b><span>DTF / DTG</span><b>✦</b><span>支持打样</span><b>✦</b><span>24 小时加急出货</span><b>✦</b></div></div></div>
+
+<!-- 01 15 YEARS -->
+<section id="years" class="s years c">
+  <p class="k rv">01 · 15 YEARS IN APPAREL</p>
+  <div class="big15 rv"><span id="count15">0</span><small>YEARS</small></div>
+  <h2 class="h2 rv"><span>15 年，只做一件事：</span><span>把衣服做对。</span></h2>
+  <p class="lead rv">104 从服装定制做起。十五年里，我们把面料、版型、印花和生产一环一环接到自己手里——今天在<span data-cfg="factoryCity">广州</span>，有我们自己的工厂。</p>
+  <div class="pillars">
+    <div class="pl rv"><b>01</b><h4>面料有源头</h4><p><span data-cfg="fabricSource">山东织然</span>纯棉，从纱线开始把关</p></div>
+    <div class="pl rv"><b>02</b><h4>工厂是自己的</h4><p>DTF + DTG 双工艺，打样、生产、出货不外包</p></div>
+    <div class="pl rv"><b>03</b><h4>设计能原创</h4><p>没有图也没关系，104 设计团队从零开始画</p></div>
+  </div>
+  <ol class="timeline" id="timeline"></ol>
+</section>
+
+<!-- 02 FABRIC · 大圆机 -->
+<section id="fabric" class="pin" style="height:340vh">
+  <div class="sticky">
+    <div class="stage stage-full" id="knitStage" data-fallback="assets/img/f-shop-09.webp"></div>
+    <div class="pin-head c">
+      <p class="k">02 · FROM YARN TO FABRIC</p>
+      <h2 class="h2"><span>好 T 恤，</span><span>从一根纱开始。</span></h2>
+    </div>
+    <div class="steps" id="knitSteps">
+      <div class="st on"><b>① 纯棉纱上架</b><p>一筒筒精梳纯棉纱挂上纱架，几十路纱同时喂进机器。</p></div>
+      <div class="st"><b>② 大圆机针织</b><p>针筒高速旋转，上千枚织针起落，把纱线织成圆筒布。</p></div>
+      <div class="st"><b>③ 布筒成型</b><p>选用<span data-cfg="fabricSource">山东织然</span>纯棉面料：布面平整、手感扎实、经得起洗。</p></div>
+    </div>
+    <div class="spec c">
+      <div><span>面料来源</span><b data-cfg="fabricSource">山东织然</b></div>
+      <div><span>成分</span><b>100% 纯棉</b></div>
+      <div data-hide-empty="fabricYarn"><span>纱支</span><b data-cfg="fabricYarn"></b></div>
+      <div><span>克重</span><b>220–280G</b></div>
+    </div>
+    <div class="pin-bar"><i id="knitBar"></i></div>
+  </div>
+</section>
+
+<!-- 03 BOXFIT -->
+<section id="fit" class="s fit">
+  <div class="c">
+    <p class="k rv">03 · OUR OWN BOXFIT</p>
+    <h2 class="h2 rv"><span>版型是自己</span><span>一刀一刀改出来的。</span></h2>
+    <p class="lead rv">104 BOXFIT：落肩、方正、短一点的衣长。宽松但不邋遢，单穿、叠穿、印大图都好看。下面全是实拍上身。</p>
+  </div>
+  <div class="ring-wrap" id="ringWrap">
+    <div class="ring" id="ring">
+      <figure class="rc" data-cap="280G 重磅 · 104 胸标 · 宽松落肩"><img src="assets/img/look-280.webp" alt="280G 重磅 · 104 胸标 · 宽松落肩" draggable="false"></figure>
+      <figure class="rc" data-cap="BOXFIT 正面 · 方正衣身"><img src="assets/img/look-front.webp" alt="BOXFIT 正面 · 方正衣身" draggable="false"></figure>
+      <figure class="rc" data-cap="BOXFIT 背面 · 肩线下落"><img src="assets/img/look-back.webp" alt="BOXFIT 背面 · 肩线下落" draggable="false"></figure>
+      <figure class="rc" data-cap="240G PLUS · 日系宽松 · 军绿 / 黄"><img src="assets/img/look-240.webp" alt="240G PLUS · 日系宽松 · 军绿 / 黄" draggable="false"></figure>
+      <figure class="rc" data-cap="240G BOXFIT · 黑 · 男款"><img src="assets/img/look-bcm.webp" alt="240G BOXFIT · 黑 · 男款" draggable="false"></figure>
+      <figure class="rc" data-cap="240G BOXFIT · 白 · 女生 oversize"><img src="assets/img/look-bcw.webp" alt="240G BOXFIT · 白 · 女生 oversize" draggable="false"></figure>
+    </div>
+  </div>
+  <div class="c">
+    <p class="ring-cap" id="ringCap"></p>
+    <div class="ring-dots" id="ringDots"></div>
+
+    <h3 class="sub rv">版型拆解 · 为什么叫 BOX</h3>
+    <div class="sizes" id="sizes"><button>S</button><button>M</button><button class="on">L</button><button>XL</button><button>2XL</button><button>3XL</button><button>4XL</button></div>
+    <div class="pattern"><svg id="patSvg" viewBox="0 0 360 330" aria-label="BOXFIT 平铺尺寸图"></svg></div>
+    <div class="pat-legend"><span><i class="lg-or"></i>104 BOXFIT</span><span><i class="lg-gr"></i>常规修身 T（示意对比）</span></div>
+    <p class="pat-note" id="patNote"></p>
+    <p class="mini" style="margin-top:6px">数据：104 · 240G BOXFIT 尺码表，平铺手工测量，误差 1–3cm</p>
+
+    <h3 class="sub rv">16 色现货 · 实拍</h3>
+    <div class="cprev" id="cprev"><img id="cprevImg" src="assets/img/sw-01.webp" alt="当前颜色"><div><span class="mini">当前选择</span><b id="cprevName">黑色</b><em>240G BOXFIT · 精梳纯棉 · 实拍图</em></div></div>
+    <div class="colors" id="colors">
+      <button data-n="白"><img src="assets/img/sw-00.webp" alt="白" loading="lazy"><span>白</span></button>
+      <button class="on" data-n="黑"><img src="assets/img/sw-01.webp" alt="黑" loading="lazy"><span>黑</span></button>
+      <button data-n="卡其"><img src="assets/img/sw-02.webp" alt="卡其" loading="lazy"><span>卡其</span></button>
+      <button data-n="藏蓝"><img src="assets/img/sw-03.webp" alt="藏蓝" loading="lazy"><span>藏蓝</span></button>
+      <button data-n="墨绿"><img src="assets/img/sw-04.webp" alt="墨绿" loading="lazy"><span>墨绿</span></button>
+      <button data-n="宝蓝"><img src="assets/img/sw-05.webp" alt="宝蓝" loading="lazy"><span>宝蓝</span></button>
+      <button data-n="浅绿"><img src="assets/img/sw-06.webp" alt="浅绿" loading="lazy"><span>浅绿</span></button>
+      <button data-n="黄"><img src="assets/img/sw-07.webp" alt="黄" loading="lazy"><span>黄</span></button>
+      <button data-n="酒红"><img src="assets/img/sw-08.webp" alt="酒红" loading="lazy"><span>酒红</span></button>
+      <button data-n="杏"><img src="assets/img/sw-09.webp" alt="杏" loading="lazy"><span>杏</span></button>
+      <button data-n="咖啡"><img src="assets/img/sw-10.webp" alt="咖啡" loading="lazy"><span>咖啡</span></button>
+      <button data-n="橘黄"><img src="assets/img/sw-11.webp" alt="橘黄" loading="lazy"><span>橘黄</span></button>
+      <button data-n="麻灰"><img src="assets/img/sw-12.webp" alt="麻灰" loading="lazy"><span>麻灰</span></button>
+      <button data-n="荧光绿"><img src="assets/img/sw-13.webp" alt="荧光绿" loading="lazy"><span>荧光绿</span></button>
+      <button data-n="铁灰"><img src="assets/img/sw-14.webp" alt="铁灰" loading="lazy"><span>铁灰</span></button>
+      <button data-n="军绿"><img src="assets/img/sw-15.webp" alt="军绿" loading="lazy"><span>军绿</span></button>
+    </div>
+
+    <h3 class="sub rv">选克重 · 每档都有实拍</h3>
+    <div class="wview" id="wview"><img id="wImg" src="assets/img/look-280.webp" alt=""><div class="wph" id="wPh">320G 实拍图<br><small>待上传 · 放到 assets/img/wt-320.webp</small></div><span class="wbadge" id="wBadge">280G</span><figure class="wfab" id="wFab"><img id="wFabImg" src="assets/img/fab-280.webp" alt="面料特写"><figcaption>面料特写</figcaption></figure></div>
+    <div class="weights" id="weights">
+      <button data-w="220" data-img="assets/img/wt-220.webp" data-full="assets/img/w-220.webp"><i style="background-image:url(assets/img/wt-220.webp)"></i><b>220</b><span>轻盈基础</span></button>
+      <button data-w="240" data-img="assets/img/look-240.webp" data-full="assets/img/w-240.webp"><i style="background-image:url(assets/img/look-240.webp)"></i><b>240</b><span>厚度平衡</span></button>
+      <button data-w="280" data-img="assets/img/look-280.webp" data-full="assets/img/w-280.webp" class="on"><i style="background-image:url(assets/img/look-280.webp)"></i><b>280</b><span>重磅廓形</span></button>
+      <button data-w="320" data-img="" data-full=""><i class="ph"></i><b>320</b><span>超重磅</span></button>
+    </div>
+    <div class="wdesc" id="wdesc"></div>
+    <button class="wlink" id="wlink">查看 280G 完整资料 ↗</button>
+  </div>
+</section>
+
+<!-- 04 PRINT · DTF / DTG -->
+<section id="print" class="pin" style="height:320vh">
+  <div class="sticky">
+    <div class="stage stage-full" id="printStage" data-fallback="assets/img/f-real-02-press.webp"></div>
+    <div class="pin-head c">
+      <p class="k">04 · TWO WAYS TO PRINT</p>
+      <h2 class="h2"><span>两种数码印花，</span><span>我们都有。</span></h2>
+      <div class="tabs" id="ptabs"><button class="on" data-m="dtf">DTF 烫画</button><button data-m="dtg">DTG 直喷</button></div>
+    </div>
+    <div class="steps" id="printSteps"></div>
+    <div class="pin-bar"><i id="printBar"></i></div>
+  </div>
+</section>
+
+<section id="compare" class="s c">
+  <p class="k rv">DTF vs DTG</p>
+  <h2 class="h2 rv"><span>一张表，</span><span>看懂怎么选。</span></h2>
+  <div class="tbl rv">
+    <div class="tr th"><span></span><span class="or">DTF 烫画</span><span>DTG 直喷</span></div>
+    <div class="tr"><span>原理</span><span>图案先打印在膜上，撒粉烘干后热压到衣服</span><span>墨水直接喷印在衣服上</span></div>
+    <div class="tr"><span>手感</span><span>有一层薄薄的印膜，弹性好、耐洗</span><span>墨水渗进纤维，柔软透气</span></div>
+    <div class="tr"><span>面料</span><span>纯棉、涤纶、混纺，深浅色都行</span><span>纯棉效果最好</span></div>
+    <div class="tr"><span>颜色</span><span>饱和度高，细节锐利</span><span>过渡自然，适合照片级图</span></div>
+    <div class="tr"><span>适合</span><span>小批量多款、细线条、多位置印</span><span>大面积图案、追求手感的款</span></div>
+  </div>
+  <div class="quiz rv" id="quiz">
+    <p class="mini">不知道选哪个？3 道题帮你选</p>
+    <div class="q" data-q="0"><p>衣服是什么面料？</p><button data-v="dtf:2">涤纶 / 混纺 / 功能面料</button><button data-v="both:0">纯棉</button></div>
+    <div class="q" data-q="1"><p>你更在意哪一点？</p><button data-v="dtg:2">手感柔软、像没印一样</button><button data-v="dtf:1">颜色鲜艳、细节清楚</button></div>
+    <div class="q" data-q="2"><p>图案大概多大？</p><button data-v="dtg:1">后背满版大图</button><button data-v="dtf:1">胸标 / 小图 / 多个位置</button></div>
+    <div class="qres" id="qres"></div>
+  </div>
+  <div class="rail">
+    <figure class="lb" data-full="assets/img/f-shop-08.webp"><img src="assets/img/f-shop-08.webp" loading="lazy" alt="DTF 打印机实拍"><figcaption>工厂实拍 · DTF 打印设备</figcaption></figure>
+    <figure class="lb" data-full="assets/img/f-real-02-press.webp"><img src="assets/img/f-real-02-press.webp" loading="lazy" alt="热压上机"><figcaption>工厂实拍 · 热压上机</figcaption></figure>
+    <figure class="lb" data-full="assets/img/f-shop-13.webp"><img src="assets/img/f-shop-13.webp" loading="lazy" alt="印花车间"><figcaption>工厂实拍 · 印花车间</figcaption></figure>
+  </div>
+</section>
+
+<!-- 05 ORIGINAL DESIGN -->
+<section id="design" class="s design">
+  <div class="c">
+    <p class="k rv">05 · ORIGINAL DESIGN LAB</p>
+    <h2 class="h2 rv"><span>没有图？</span><span>我们自己画。</span></h2>
+    <p class="lead rv">104 设计团队原创街头图案；也可以按你的品牌、战队、活动，从一张白纸开始设计。点下面的图案，直接印到衣服上看效果。</p>
+  </div>
+  <div class="mock-wrap"><div class="mock" id="mock"><img src="assets/img/blank-280.webp" alt="104 黑色 280G T 恤上身" class="mbase"><img src="assets/tex/print-01.webp" alt="" class="mprint" id="mprint"><i class="gloss"></i><span class="mtag">实拍上身 · 印花效果预览</span></div></div>
+  <div class="c">
+    <div class="tiles" id="tiles">
+      <button class="on" data-t="assets/tex/print-01.webp" data-w="34" style="background-image:url(assets/img/d-print-01.webp)"></button>
+      <button data-t="assets/tex/print-02.webp" data-w="30" style="background-image:url(assets/img/d-print-02.webp)"></button>
+      <button data-t="assets/tex/print-03.webp" data-w="36" style="background-image:url(assets/img/d-print-03.webp)"></button>
+      <button data-t="assets/tex/print-05.webp" data-w="32" style="background-image:url(assets/img/d-print-05.webp)"></button>
+    </div>
+    <p class="mini" style="margin-top:34px">104 原创系列 · 左右滑动</p>
+  </div>
+  <div class="rail rail-tall">
+    <figure class="lb" data-full="assets/img/d-tee-graffiti.webp"><img src="assets/img/d-tee-graffiti.webp" loading="lazy" alt=""><figcaption>解忧战袍 · 涂鸦</figcaption></figure>
+    <figure class="lb" data-full="assets/img/d-tee-jersey.webp"><img src="assets/img/d-tee-jersey.webp" loading="lazy" alt=""><figcaption>解忧战袍 · 球衣</figcaption></figure>
+    <figure class="lb" data-full="assets/img/d-tee-back.webp"><img src="assets/img/d-tee-back.webp" loading="lazy" alt=""><figcaption>爆翻街头</figcaption></figure>
+    <figure class="lb" data-full="assets/img/d-card-battle.webp"><img src="assets/img/d-card-battle.webp" loading="lazy" alt=""><figcaption>240G 街头轻甲</figcaption></figure>
+    <figure class="lb" data-full="assets/img/d-card-street.webp"><img src="assets/img/d-card-street.webp" loading="lazy" alt=""><figcaption>STREETWEAR</figcaption></figure>
+    <figure class="lb" data-full="assets/img/d-merch.webp"><img src="assets/img/d-merch.webp" loading="lazy" alt=""><figcaption>印花成衣一体化</figcaption></figure>
+  </div>
+</section>
+
+<!-- 06 FACTORY -->
+<section id="factory" class="s factory">
+  <div class="fac-hero"><img src="assets/img/f-shop-09.webp" alt="104 广州工厂 DTF 车间" loading="lazy"><span class="tag">● 工厂实拍 · 不是效果图</span></div>
+  <div class="c">
+    <p class="k rv">06 · REAL FACTORY · <span data-cfg="factoryCity">广州</span></p>
+    <h2 class="h2 rv"><span>不是贸易公司，</span><span>是自己的工厂。</span></h2>
+    <p class="lead rv">从接单、改稿、打样，到印花、质检、打包，都在自己车间完成。你看到的每张照片，都来自 104 的生产现场。</p>
+    <div class="facts rv" id="facts"></div>
+  </div>
+  <div class="rail rail-tall">
+    <figure class="lb" data-full="assets/img/f-real-01-order.webp"><img src="assets/img/f-real-01-order.webp" loading="lazy" alt=""><figcaption>01 · 对稿确认</figcaption></figure>
+    <figure class="lb" data-full="assets/img/f-real-02-press.webp"><img src="assets/img/f-real-02-press.webp" loading="lazy" alt=""><figcaption>02 · 上机热压</figcaption></figure>
+    <figure class="lb" data-full="assets/img/f-real-03-pack.webp"><img src="assets/img/f-real-03-pack.webp" loading="lazy" alt=""><figcaption>03 · 整理包装</figcaption></figure>
+    <figure class="lb" data-full="assets/img/f-shop-01.webp"><img src="assets/img/f-shop-01.webp" loading="lazy" alt=""><figcaption>热压工位</figcaption></figure>
+    <figure class="lb" data-full="assets/img/f-shop-04.webp"><img src="assets/img/f-shop-04.webp" loading="lazy" alt=""><figcaption>烫画设备</figcaption></figure>
+    <figure class="lb" data-full="assets/img/f-label.webp"><img src="assets/img/f-label.webp" loading="lazy" alt=""><figcaption>104 GROUP 自有领标</figcaption></figure>
+    <figure class="lb" data-full="assets/img/f-stack.webp"><img src="assets/img/f-stack.webp" loading="lazy" alt=""><figcaption>现货底衫 · 打包待发</figcaption></figure>
+    <figure class="lb" data-full="assets/img/f-shop-10.webp"><img src="assets/img/f-shop-10.webp" loading="lazy" alt=""><figcaption>生产车间</figcaption></figure>
+  </div>
+  <div class="c">
+    <div class="process rv"><span>接单</span><span>改稿</span><span>打样</span><span>印花</span><span>热压</span><span>质检</span><span>包装</span><span>发货</span></div>
+  </div>
+</section>
+
+<!-- 07 SUPPLY CHAIN -->
+<section id="chain" class="s chain c">
+  <p class="k rv">07 · FULL GARMENT SUPPLY CHAIN</p>
+  <h2 class="h2 rv"><span>从纱线到包裹，</span><span>一条线做完。</span></h2>
+  <div class="line" id="chainLine">
+    <i class="line-fill" id="chainFill"></i>
+    <div class="ln"><b>01</b><div><h4>纯棉纱线</h4><p><span data-cfg="fabricSource">山东织然</span> · 100% 纯棉</p></div></div>
+    <div class="ln"><b>02</b><div><h4>大圆机织布</h4><p>针织圆筒布，布面匀净</p></div></div>
+    <div class="ln"><b>03</b><div><h4>染整定型</h4><p>定色、定幅，控制缩水</p></div></div>
+    <div class="ln"><b>04</b><div><h4>BOXFIT 裁剪</h4><p>自研版型，尺码齐全</p></div></div>
+    <div class="ln"><b>05</b><div><h4>缝制成衣</h4><p>领口、肩线、下摆逐件过</p></div></div>
+    <div class="ln"><b>06</b><div><h4>印花 DTF / DTG</h4><p>广州自有车间</p></div></div>
+    <div class="ln"><b>07</b><div><h4>质检</h4><p>对稿、对色、查线头</p></div></div>
+    <div class="ln"><b>08</b><div><h4>包装 · 一码一箱</h4><p>按尺码分装，收货不乱</p></div></div>
+    <div class="ln"><b>09</b><div><h4>发货</h4><p data-cfg="rush">24 小时加急出货</p></div></div>
+  </div>
+  <div class="modes">
+    <div class="md rv"><h4>现货底衫 + 印花</h4><p>220–280G 多色现货，选好颜色尺码直接印，最快出货。</p></div>
+    <div class="md rv hot"><h4>来图定制</h4><p>团服、战队服、活动服、品牌周边。发图报数量，我们出方案。</p></div>
+    <div class="md rv"><h4>品牌成衣 ODM</h4><p>从面料、版型到印花包装，整单帮你做成自己的品牌货。</p></div>
+  </div>
+  <p class="mini rv" style="margin-top:36px">产品线 · 点开看完整资料</p>
+  <div class="prod rv">
+    <figure class="lb" data-full="assets/img/p-tee-series-220-280.webp"><img src="assets/img/p-tee-series-220-280.webp" loading="lazy" alt=""><figcaption>短袖 T 恤<br>220–280G</figcaption></figure>
+    <figure class="lb" data-full="assets/img/p-broclub-240-boxfit.webp"><img src="assets/img/p-broclub-240-boxfit.webp" loading="lazy" alt=""><figcaption>240G<br>BOXFIT</figcaption></figure>
+    <figure class="lb" data-full="assets/img/p-broclub-longsleeve-240.webp"><img src="assets/img/p-broclub-longsleeve-240.webp" loading="lazy" alt=""><figcaption>长袖<br>240G</figcaption></figure>
+    <figure class="lb" data-full="assets/img/p-hoodie-360.webp"><img src="assets/img/p-hoodie-360.webp" loading="lazy" alt=""><figcaption>连帽卫衣<br>360G</figcaption></figure>
+    <figure class="lb" data-full="assets/img/p-kids-tee-240.webp"><img src="assets/img/p-kids-tee-240.webp" loading="lazy" alt=""><figcaption>儿童短袖<br>240G</figcaption></figure>
+    <figure class="lb" data-full="assets/img/p-kids-longsleeve-120-150.webp"><img src="assets/img/p-kids-longsleeve-120-150.webp" loading="lazy" alt=""><figcaption>儿童长袖<br>120–150</figcaption></figure>
+  </div>
+</section>
+
+<!-- 08 WORN BY -->
+<section id="clients" class="s clients">
+  <div class="c">
+    <p class="k rv">08 · WORN BY</p>
+    <h2 class="h2 rv"><span>他们，</span><span>穿着 104。</span></h2>
+    <p class="lead rv">团队服、战队服、街头品牌款、亲子同款——穿上身的 104，才是最好的样品。</p>
+      <figure class="lb rv wide" data-full="assets/img/crew.webp"><img src="assets/img/crew.webp" loading="lazy" alt="104 印花研究所 · 团队上身"><figcaption>104 印花研究所 · 团队上身</figcaption></figure>
+    <div class="lookbook">
+      <figure class="lb rv" data-full="assets/img/lp-team.webp"><img src="assets/img/lp-team.webp" loading="lazy" alt="团队服 · 统一画面"><figcaption>团队服 · 统一画面</figcaption></figure>
+      <figure class="lb rv" data-full="assets/img/lp-street.webp"><img src="assets/img/lp-street.webp" loading="lazy" alt="104 定制 · 街头团服"><figcaption>104 定制 · 街头团服</figcaption></figure>
+      <figure class="lb rv" data-full="assets/img/lp-sit.webp"><img src="assets/img/lp-sit.webp" loading="lazy" alt="多色团服 · 胸前大印"><figcaption>多色团服 · 胸前大印</figcaption></figure>
+      <figure class="lb rv" data-full="assets/img/lp-duo.webp"><img src="assets/img/lp-duo.webp" loading="lazy" alt="104 GROUP · 街头款"><figcaption>104 GROUP · 街头款</figcaption></figure>
+      <figure class="lb rv" data-full="assets/img/lp-crew4.webp"><img src="assets/img/lp-crew4.webp" loading="lazy" alt="成人 / 儿童 · 全家同款"><figcaption>成人 / 儿童 · 全家同款</figcaption></figure>
+      <figure class="lb rv" data-full="assets/img/lp-solo.webp"><img src="assets/img/lp-solo.webp" loading="lazy" alt="白 T · 胸标款"><figcaption>白 T · 胸标款</figcaption></figure>
+      <figure class="lb rv" data-full="assets/img/look-bcw.webp"><img src="assets/img/look-bcw.webp" loading="lazy" alt="240G BOXFIT · 女生 oversize"><figcaption>240G BOXFIT · 女生 oversize</figcaption></figure>
+      <figure class="lb rv" data-full="assets/img/look-280.webp"><img src="assets/img/look-280.webp" loading="lazy" alt="280G 重磅 · 104 胸标"><figcaption>280G 重磅 · 104 胸标</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 09 CTA -->
+<section id="cta" class="s cta">
+  <div class="cta-bg"><img src="assets/img/crew.webp" alt="" loading="lazy"></div>
+  <div class="c">
+    <p class="k rv">09 · LET'S MAKE IT</p>
+    <h2 class="h2 rv"><span>下一件，</span><span>轮到你的想法。</span></h2>
+    <div class="gen rv" id="gen">
+      <p class="lbl">品类</p>
+      <div class="chips" data-g="cat"><button class="on">短袖 T 恤</button><button>长袖</button><button>卫衣</button><button>儿童款</button></div>
+      <p class="lbl">工艺</p>
+      <div class="chips" data-g="proc"><button class="on">DTF 烫画</button><button>DTG 直喷</button><button>帮我选</button></div>
+      <p class="lbl">交期</p>
+      <div class="chips" data-g="time"><button>不急</button><button class="on">2 周内</button><button>1 周内</button><button>加急</button></div>
+      <p class="lbl">数量 <b id="qtyV">50 件</b></p>
+      <input type="range" id="qty" min="0" max="100" value="30" aria-label="数量">
+      <div class="sum" id="sum"></div>
+      <a class="cta-btn" id="copyBtn" href="https://mp.weixin.qq.com/s/un1Em9aC__8NLenU2_slKw">复制需求 · 发给 104 ↗</a>
+      <p class="mini" style="text-align:center;margin-top:10px">点击自动复制需求，并打开 104 团队定制页</p>
+    </div>
+    <div class="qrs rv">
+      <div class="qrc boss"><img src="assets/img/qr-boss.png" alt="104 老板微信二维码"><b>加老板微信</b><span>一对一沟通 · 直接报价</span></div>
+      <div class="qrc off"><img src="assets/img/qr-official.png" alt="104 官方公众号二维码"><b>104 官方账号</b><span>案例 · 新款 · 团队定制</span></div>
+    </div>
+    <p class="mini" style="text-align:center;margin-top:12px">微信里长按二维码即可识别</p>
+    <div class="ci" id="ci"></div>
+  </div>
+  <footer class="foot c">
+    <img src="assets/img/logo.webp" alt="104 GROUP">
+    <p>104GROUP ｜ 服装定制 ｜ 印花成衣一体化 ｜ 支持打样 ｜ 24 小时加急出货</p>
+    <p class="mini">© 104 GROUP · <span data-cfg="factoryCity">广州</span></p>
+  </footer>
+</section>
+
+</main>
+
+<div id="lightbox" aria-hidden="true"><img alt=""><button aria-label="关闭">×</button></div>
+<div id="toast"></div>
+
+<script src="js/config.js"></script>
+<script src="js/gl.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
