@@ -31,7 +31,7 @@
 html,body{background:var(--ink);color:var(--ash)}
 body{font-family:var(--f-body);font-size:15px;line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body.locked{overflow:hidden;height:100%}
-body.locked main{visibility:hidden}
+body.locked main{display:none}
 img{max-width:100%;display:block}
 ::selection{background:var(--gold);color:var(--ink)}
 
@@ -40,7 +40,7 @@ img{max-width:100%;display:block}
 .fallback-bg{position:fixed;inset:0;z-index:0;background:
   radial-gradient(120% 60% at 50% 100%,rgba(215,38,30,.35),transparent 60%),
   radial-gradient(60% 40% at 80% 10%,rgba(255,198,26,.12),transparent 70%),var(--ink)}
-.grain{position:fixed;inset:-50%;z-index:50;pointer-events:none;opacity:.09;mix-blend-mode:overlay;animation:grain 1s steps(6) infinite}
+.grain{position:fixed;inset:-50%;z-index:30;pointer-events:none;opacity:.09;mix-blend-mode:overlay;animation:grain 1s steps(6) infinite}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
 .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(130% 90% at 50% 45%,transparent 45%,rgba(0,0,0,.75))}
 .progress{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--gold);z-index:60;margin-top:env(safe-area-inset-top,0px)}
@@ -56,8 +56,8 @@ img{max-width:100%;display:block}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ---------- gate ---------- */
-.gate{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:24px 18px;background:radial-gradient(90% 60% at 50% 40%,rgba(11,10,10,.35),rgba(11,10,10,.92) 70%);transition:opacity .9s ease,visibility .9s}
-.gate.gone{opacity:0;visibility:hidden}
+.gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px 18px;background:#0b0a0a;touch-action:manipulation}
+.gate.gone{display:none}
 .gate-inner{text-align:center;display:grid;gap:18px;justify-items:center;max-width:460px}
 .gate .area{font:700 11px/1 var(--f-mono);letter-spacing:.35em;color:var(--mute)}
 .gate .area b{color:var(--gold);font-weight:700}
@@ -566,14 +566,20 @@ const bgm = $("#bgm"), bgmTxt = $("#bgmTxt"), eqBars = [...document.querySelecto
 function setBgmUI(on){ bgm.classList.toggle("on", on); bgm.setAttribute("aria-pressed", on); bgmTxt.textContent = on ? "BGM ON" : "BGM OFF"; }
 bgm.addEventListener("click", () => { if (Music.playing){ Music.stop(); setBgmUI(false); } else { Music.start(); setBgmUI(true); } });
 
+let entered = false;
 function enter(withSound){
+  if (entered) return;
+  entered = true;
   $("#gate").classList.add("gone");
   document.body.classList.remove("locked");
-  if (withSound){ Music.start(); setBgmUI(true); }
+  if (withSound){ Music.start().catch(() => setBgmUI(false)); setBgmUI(true); }
   revealVisible();
 }
-$("#enter").addEventListener("click", () => enter(true));
-$("#enterMute").addEventListener("click", () => enter(false));
+for (const [id, sound] of [["enter", true], ["enterMute", false]]){
+  const el = document.getElementById(id);
+  el.addEventListener("touchend", e => { e.preventDefault(); enter(sound); }, { passive: false });
+  el.addEventListener("click", () => enter(sound));
+}
 
 /* ================= REVEAL ================= */
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px 12% 0px" });
