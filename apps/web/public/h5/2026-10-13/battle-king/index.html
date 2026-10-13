@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#9cff00">
+  <title>BATTLE KING 王者之战 · 浙江赛区动态 H5</title>
+  <meta name="description" content="BATTLE KING 王者之战国际街舞挑战赛浙江赛区，2026年10月24日-25日，温州文成侨立方商场。">
+  <style>
+    :root{
+      --green:#9cff00;
+      --lime:#b9ff19;
+      --yellow:#ffe236;
+      --purple:#e85bff;
+      --cyan:#37f7ff;
+      --black:#08090b;
+      --card:#121516;
+      --ink:#f7ffe8;
+      --muted:rgba(247,255,232,.68);
+      --line:rgba(255,255,255,.14);
+      --gold:#f4bd22;
+      --danger:#ff3d2e;
+      --radius:28px;
+      --shadow:0 30px 80px rgba(0,0,0,.42);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:#040506;color:var(--ink);overflow-x:hidden}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#040506;color:var(--ink);overflow-x:hidden}
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .page{position:relative;min-height:100svh;isolation:isolate;background:radial-gradient(circle at 50% 0,rgba(156,255,0,.36),transparent 30%),radial-gradient(circle at 95% 12%,rgba(232,91,255,.16),transparent 28%),linear-gradient(180deg,#101706 0,#050606 42%,#0a0b0d 100%)}
+    .noise{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.11;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+    .progress{position:fixed;left:0;top:0;height:4px;width:0;background:linear-gradient(90deg,var(--green),var(--yellow),var(--purple));z-index:90;box-shadow:0 0 18px rgba(156,255,0,.7)}
+    .music-pill{position:fixed;right:14px;bottom:14px;z-index:80;border:1px solid rgba(255,255,255,.2);background:rgba(10,13,12,.72);backdrop-filter:blur(18px);border-radius:999px;padding:9px 10px 9px 9px;display:flex;gap:8px;align-items:center;color:#fff;box-shadow:0 16px 44px rgba(0,0,0,.32)}
+    .music-pill button{border:0;border-radius:999px;background:var(--green);color:#111;font-weight:1000;padding:8px 12px;min-height:38px;cursor:pointer}
+    .music-pill span{font-size:12px;color:rgba(255,255,255,.72);white-space:nowrap}
+    .gate{position:fixed;inset:0;z-index:120;background:radial-gradient(circle at 50% 22%,rgba(156,255,0,.36),transparent 36%),linear-gradient(180deg,#061002,#030404);display:grid;place-items:center;padding:24px;transition:opacity .55s ease,visibility .55s ease}
+    .gate.hide{opacity:0;visibility:hidden;pointer-events:none}
+    .gate-card{width:min(520px,100%);border:1px solid rgba(255,255,255,.18);border-radius:32px;background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.03));box-shadow:var(--shadow);padding:22px;position:relative;overflow:hidden;text-align:center;transform-style:preserve-3d}
+    .gate-card:before{content:"";position:absolute;inset:-60%;background:conic-gradient(from 180deg,transparent,var(--green),transparent,var(--purple),transparent);animation:gateSpin 6s linear infinite;opacity:.24}
+    .gate-card>*{position:relative;z-index:1}
+    .gate-logo{width:min(330px,80%);margin:0 auto 18px;filter:drop-shadow(0 18px 0 rgba(0,0,0,.62)) drop-shadow(0 0 30px rgba(156,255,0,.28));animation:breathe 2s ease-in-out infinite}
+    .gate h1{margin:0;font-size:clamp(34px,10vw,62px);line-height:.86;letter-spacing:-.08em;text-transform:uppercase;font-weight:1000;text-shadow:0 5px 0 #1e2600,0 12px 28px rgba(0,0,0,.55)}
+    .gate p{margin:16px auto 0;max-width:410px;color:rgba(255,255,255,.75);line-height:1.75;font-size:14px}
+    .enter-btn{margin-top:22px;border:0;border-radius:999px;background:linear-gradient(135deg,var(--green),var(--yellow));color:#071000;font-weight:1000;letter-spacing:.08em;padding:15px 22px;min-height:54px;cursor:pointer;box-shadow:0 9px 0 #1c2c00,0 22px 40px rgba(156,255,0,.22)}
+    .enter-btn:active{transform:translateY(5px);box-shadow:0 4px 0 #1c2c00,0 14px 30px rgba(156,255,0,.2)}
+    .shell{width:min(1120px,100%);margin:0 auto;padding:0 16px 54px}
+    .hero{position:relative;min-height:100svh;display:grid;align-items:center;padding:52px 0 38px;perspective:1200px;overflow:hidden}
+    .hero:before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,#0b0b0b 1px,transparent 1.5px);background-size:18px 18px;mask-image:linear-gradient(110deg,#000 0,transparent 58%);opacity:.42;pointer-events:none}
+    .hero-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,520px);gap:30px;align-items:center;position:relative;z-index:2}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);backdrop-filter:blur(12px);border-radius:999px;padding:9px 12px;color:#eaffd4;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+    .pulse-dot{width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 18px var(--green);animation:pulse 1.1s ease-in-out infinite}
+    .mega-title{margin:18px 0 0;font-size:clamp(55px,13vw,148px);line-height:.78;font-weight:1000;letter-spacing:-.1em;text-transform:uppercase;color:#fff;text-shadow:0 7px 0 #192300,0 11px 0 rgba(156,255,0,.85),0 21px 38px rgba(0,0,0,.48);transform:skew(-7deg);max-width:780px}
+    .mega-title span{display:block}
+    .hero-copy{max-width:620px;margin:24px 0 0;font-size:clamp(16px,2.3vw,21px);line-height:1.8;color:rgba(247,255,232,.82);font-weight:560}
+    .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+    .meta-chip{border:1px solid rgba(255,255,255,.22);background:rgba(8,9,11,.54);border-radius:16px;padding:12px 14px;box-shadow:inset 0 0 0 1px rgba(156,255,0,.12)}
+    .meta-chip b{display:block;color:var(--yellow);font-size:13px;margin-bottom:3px}.meta-chip span{font-size:14px;color:#fff;font-weight:800}
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .btn{border:0;border-radius:999px;padding:15px 18px;min-height:54px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:1000;cursor:pointer;letter-spacing:.04em;transition:.2s ease}
+    .btn-primary{background:linear-gradient(135deg,var(--green),var(--yellow));color:#071000;box-shadow:0 8px 0 #1f2c00}
+    .btn-primary:active{transform:translateY(4px);box-shadow:0 4px 0 #1f2c00}
+    .btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.2)}
+    .stage-3d{position:relative;transform-style:preserve-3d;min-height:610px;display:grid;place-items:center}
+    .poster-card{position:relative;width:min(430px,94%);border-radius:30px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.54);transform:rotateY(-11deg) rotateX(5deg);transform-style:preserve-3d;transition:transform .35s ease;will-change:transform;border:1px solid rgba(255,255,255,.18);background:#111}
+    .poster-card:hover{transform:rotateY(-3deg) rotateX(1deg) translateY(-8px)}
+    .poster-card img{height:min(78svh,760px);width:100%;object-fit:cover;object-position:top}
+    .poster-card:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.18),transparent 22%,transparent 72%,rgba(0,0,0,.28));pointer-events:none;mix-blend-mode:overlay}
+    .orbit{position:absolute;width:96%;max-width:560px;aspect-ratio:1;top:50%;left:50%;transform:translate(-50%,-50%) translateZ(-80px);border-radius:50%;border:1px dashed rgba(156,255,0,.36);animation:spin 18s linear infinite;pointer-events:none}
+    .orbit:before,.orbit:after{content:"";position:absolute;width:22px;height:22px;border-radius:50%;background:var(--green);box-shadow:0 0 26px var(--green)}
+    .orbit:before{left:10%;top:16%}.orbit:after{right:10%;bottom:16%;background:var(--purple);box-shadow:0 0 26px var(--purple)}
+    .floating-logo{position:absolute;left:0;top:10%;width:150px;filter:drop-shadow(0 18px 24px rgba(0,0,0,.8));animation:float 4s ease-in-out infinite;z-index:3}
+    .ticker{margin:0 -16px;border-block:1px solid rgba(255,255,255,.14);background:var(--green);color:#060606;overflow:hidden;display:flex;white-space:nowrap;font-size:clamp(22px,7vw,58px);line-height:.9;font-weight:1000;letter-spacing:-.06em;text-transform:uppercase;box-shadow:0 0 40px rgba(156,255,0,.24)}
+    .ticker div{padding:18px 0;animation:ticker 16s linear infinite}.ticker span{padding:0 16px}
+    .section{position:relative;padding:80px 0;overflow:hidden}
+    .section-inner{width:min(1120px,100%);margin:0 auto;padding:0 16px;position:relative;z-index:2}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:26px}.section-head>div{min-width:0}
+    .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:1000;color:var(--green);display:inline-flex;align-items:center;gap:9px}.kicker:before{content:"";width:28px;height:3px;border-radius:99px;background:var(--green);box-shadow:0 0 18px var(--green)}
+    .title{margin:8px 0 0;font-size:clamp(32px,8vw,80px);line-height:.88;font-weight:1000;letter-spacing:-.07em;text-transform:uppercase;text-shadow:0 8px 0 rgba(0,0,0,.28)}
+    .lead{color:var(--muted);font-size:16px;line-height:1.9;max-width:790px;margin:18px 0 0}.lead strong{color:#fff}
+    .grid{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .glass{position:relative;border:1px solid rgba(255,255,255,.15);background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));border-radius:var(--radius);padding:22px;box-shadow:0 22px 60px rgba(0,0,0,.22);overflow:hidden}.glass:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 0 0,rgba(156,255,0,.18),transparent 40%);pointer-events:none}.glass>*{position:relative;z-index:1}
+    .image-frame{border-radius:30px;overflow:hidden;border:1px solid rgba(255,255,255,.16);box-shadow:var(--shadow);background:#0e0f0f}.image-frame img{width:100%;height:100%;object-fit:cover}.image-frame.tall img{max-height:720px;object-position:top}.image-frame.wide{aspect-ratio:16/10}.image-frame.square{aspect-ratio:1}
+    .mini-stat{display:flex;align-items:center;gap:14px}.mini-stat .num{font-size:44px;line-height:1;font-weight:1000;color:var(--yellow);letter-spacing:-.08em}.mini-stat p{margin:2px 0 0;color:var(--muted);font-size:13px;line-height:1.45}
+    .prize-card{min-height:180px;transform-style:preserve-3d;transition:transform .25s ease}.prize-card:hover{transform:translateY(-8px) rotateX(4deg)}.prize-card h3{margin:0;font-size:23px;line-height:1.05}.prize-card .money{margin-top:16px;font-size:15px;color:#fff;line-height:1.8}.prize-card .money b{color:var(--yellow);font-size:22px}.fee{display:inline-flex;margin-top:14px;border-radius:999px;background:rgba(156,255,0,.14);color:#dfff97;border:1px solid rgba(156,255,0,.25);padding:8px 10px;font-size:12px;font-weight:900}
+    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.tab{border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);color:#fff;border-radius:999px;padding:11px 14px;font-weight:1000;cursor:pointer}.tab.active{background:var(--green);color:#071000;border-color:transparent}.schedule{display:none}.schedule.active{display:grid}.time-row{display:grid;grid-template-columns:108px minmax(0,1fr);gap:12px;align-items:start;border-bottom:1px solid rgba(255,255,255,.11);padding:13px 0}.time-row:last-child{border-bottom:0}.time-row b{color:var(--yellow);font-size:14px}.time-row span{color:rgba(255,255,255,.86);line-height:1.55}
+    .gallery{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;align-items:stretch}.gallery-main{min-height:560px}.gallery-side{display:grid;gap:16px}.gallery-side .image-frame{min-height:260px}.caption{position:absolute;left:16px;right:16px;bottom:16px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.52);backdrop-filter:blur(12px);border-radius:18px;padding:12px;color:#fff}.caption b{display:block;color:var(--yellow)}.photo-card{position:relative;overflow:hidden}
+    .tour-card h3,.hotel-card h3{margin:0;font-size:22px}.tour-card p,.hotel-card p,.org-card p{color:var(--muted);line-height:1.8;margin:12px 0 0}.tagline{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.tagline span{border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);padding:8px 10px;font-size:12px;color:#eaffd4}
+    .route{position:relative;padding-left:28px}.route:before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--green),var(--yellow),var(--purple))}.route-item{position:relative;margin:0 0 18px}.route-item:before{content:"";position:absolute;left:-26px;top:4px;width:16px;height:16px;background:var(--green);border-radius:50%;box-shadow:0 0 18px var(--green)}.route-item b{color:var(--yellow)}
+    .final{padding:84px 0 110px;text-align:center;background:radial-gradient(circle at 50% 10%,rgba(156,255,0,.26),transparent 34%),linear-gradient(180deg,transparent,#050605)}.final-logo{width:min(430px,86%);margin:0 auto 18px;filter:drop-shadow(0 22px 0 rgba(0,0,0,.55)) drop-shadow(0 0 42px rgba(156,255,0,.25));animation:breathe 2.8s ease-in-out infinite}.final h2{margin:0 auto;font-size:clamp(42px,12vw,112px);line-height:.82;font-weight:1000;letter-spacing:-.1em;text-transform:uppercase;max-width:860px}.final p{max-width:760px;margin:22px auto 0;color:rgba(255,255,255,.78);line-height:1.9}.official-note{margin:18px auto 0;max-width:720px;color:rgba(255,255,255,.62);font-size:13px;line-height:1.7}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}.reveal.show{opacity:1;transform:translateY(0)}
+    #particles{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55}
+    @keyframes gateSpin{to{transform:rotate(360deg)}}@keyframes breathe{0%,100%{transform:scale(1) rotate(-1deg)}50%{transform:scale(1.035) rotate(1deg)}}@keyframes pulse{0%,100%{transform:scale(.8);opacity:.65}50%{transform:scale(1.35);opacity:1}}@keyframes spin{to{transform:translate(-50%,-50%) translateZ(-80px) rotate(360deg)}}@keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-16px) rotate(3deg)}}@keyframes ticker{to{transform:translateX(-50%)}}
+    @media (max-width:900px){.hero-wrap{grid-template-columns:1fr}.stage-3d{min-height:520px}.poster-card{width:min(390px,92%)}.floating-logo{width:118px;left:3%;top:2%}.grid-4,.grid-3,.grid-2,.gallery{grid-template-columns:1fr}.gallery-main{min-height:auto}.section{padding:62px 0}.section-head{display:block}.title{max-width:760px}.hero{padding-top:36px}.mega-title{font-size:clamp(58px,18vw,100px)}}
+    @media (max-width:520px){.shell{padding-inline:12px}.hero-meta{display:grid;grid-template-columns:1fr 1fr}.meta-chip{padding:10px}.meta-chip span{font-size:12px}.poster-card img{height:auto}.stage-3d{min-height:auto;padding:28px 0}.music-pill span{display:none}.time-row{grid-template-columns:92px 1fr}.gallery-side .image-frame{min-height:auto}.btn{width:100%}.grid{gap:12px}.glass{border-radius:22px;padding:18px}.gate-card{border-radius:26px;padding:18px}.final{padding-bottom:96px}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1!important;transform:none!important}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="progress" id="progress"></div>
+
+    <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+      <div class="gate-card">
+        <img class="gate-logo" src="assets/logo-disc.webp" alt="BATTLE KING 标志">
+        <h1 id="gate-title">ENTER<br>THE CYPHER</h1>
+        <p>点击进入，启动 Breakin 鼓点、3D 视觉和滚动动效。移动端浏览器必须点击后才能播放音乐。</p>
+        <button class="enter-btn" id="enterBtn" type="button">开启音乐 · 进入 H5</button>
+      </div>
+    </div>
+
+    <div class="music-pill" aria-live="polite">
+      <button id="musicBtn" type="button">音乐 OFF</button>
+      <span id="musicText">Breakbeat 未开启</span>
+    </div>
+
+    <header class="shell hero" id="top">
+      <div class="hero-wrap">
+        <div class="hero-text reveal">
+          <div class="eyebrow"><i class="pulse-dot"></i> BATTLE KING 浙江赛区 · WENCHENG</div>
+          <h1 class="mega-title"><span>王者</span><span>之战</span></h1>
+          <p class="hero-copy">当动感霹雳舞步邂逅浙南秀山碧水，BATTLE KING 王者之战国际街舞挑战赛浙江赛区定档温州文成。一场汇聚全国街舞高手的巅峰对决，即将火热开启。</p>
+          <div class="hero-meta">
+            <div class="meta-chip"><b>DATE</b><span>2026.10.24—25</span></div>
+            <div class="meta-chip"><b>VENUE</b><span>温州文成侨立方商场</span></div>
+            <div class="meta-chip"><b>STYLE</b><span>Breaking / Freestyle / 齐舞</span></div>
+            <div class="meta-chip"><b>ACCOUNT</b><span>G.S.KING街舞</span></div>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-primary official-jump" href="https://mp.weixin.qq.com/s/VQiO_3iRGppwUXFvNorU8w" target="_blank" rel="noopener">跳转公众号原文</a>
+            <a class="btn btn-ghost" href="#schedule">查看赛事流程</a>
+          </div>
+        </div>
+        <div class="stage-3d reveal" id="tiltStage">
+          <div class="orbit" aria-hidden="true"></div>
+          <img class="floating-logo" src="assets/logo-disc.webp" alt="Battle King Logo">
+          <div class="poster-card" id="posterCard">
+            <img src="assets/poster-lineup.webp" alt="BATTLE KING 浙江赛区主海报与嘉宾阵容">
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="ticker" aria-hidden="true">
+      <div><span>BREAKING</span><span>POWER MOVE</span><span>FOOTWORK</span><span>FREEZE</span><span>WENCHENG</span><span>BATTLE KING</span></div>
+      <div><span>BREAKING</span><span>POWER MOVE</span><span>FOOTWORK</span><span>FREEZE</span><span>WENCHENG</span><span>BATTLE KING</span></div>
+    </div>
+
+    <main>
+      <section class="section" id="about">
+        <div class="section-inner">
+          <div class="section-head reveal">
+            <div>
+              <div class="kicker">Event Story</div>
+              <h2 class="title">街舞 × 文旅<br>一场城市出圈的赛事</h2>
+              <p class="lead">BATTLE KING 王者之战作为重磅国际街舞赛事 IP，本次浙江赛区面向少儿、青少年及成人舞者开放报名。托马斯、风车、头转、Freeze 等高难度技巧轮番登场，用力量与节奏点燃文成。</p>
+            </div>
+          </div>
+          <div class="grid grid-3">
+            <div class="glass reveal mini-stat"><div class="num">4</div><div><b>竞赛组别</b><p>少儿 Bboy 1on1、Bboy 4on4、Freestyle 1on1、齐舞</p></div></div>
+            <div class="glass reveal mini-stat"><div class="num">2</div><div><b>比赛日程</b><p>10月24日 Breaking，10月25日 Freestyle 与齐舞</p></div></div>
+            <div class="glass reveal mini-stat"><div class="num">1</div><div><b>文成目的地</b><p>观赛、参赛、非遗美食、山水旅行一次完成</p></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="visual">
+        <div class="section-inner">
+          <div class="section-head reveal">
+            <div>
+              <div class="kicker">3D Visual</div>
+              <h2 class="title">主视觉动效区</h2>
+              <p class="lead">海报、赛事流程、现场照片做成滑动式视觉墙，正式上线时可以继续加入更多公众号原图。</p>
+            </div>
+            <a class="btn btn-ghost official-jump" href="https://mp.weixin.qq.com/s/VQiO_3iRGppwUXFvNorU8w" target="_blank" rel="noopener">公众号原文</a>
+          </div>
+          <div class="gallery reveal">
+            <div class="image-frame tall photo-card gallery-main">
+              <img id="galleryMain" src="assets/poster-lineup.webp" alt="BATTLE KING 主视觉图片">
+              <div class="caption"><b id="galleryTitle">主海报 / 嘉宾阵容</b><span id="galleryText">全国街舞高手齐聚文成，强者对决即将开场。</span></div>
+            </div>
+            <div class="gallery-side">
+              <button class="image-frame photo-card gallery-btn" type="button" data-img="assets/poster-schedule.webp" data-title="赛事流程" data-text="10月24日 Breaking，10月25日 Freestyle 与齐舞。"><img src="assets/poster-schedule.webp" alt="赛事流程海报"></button>
+              <button class="image-frame photo-card gallery-btn" type="button" data-img="assets/battle-photo.webp" data-title="Battle 现场感" data-text="灯光、舞台、观众与舞者共同组成热血现场。"><img src="assets/battle-photo.webp" alt="街舞比赛现场照片"></button>
+              <button class="image-frame photo-card gallery-btn" type="button" data-img="assets/banner.webp" data-title="BATTLE KING 浙江赛区" data-text="主办、承办、支持单位信息与赛事品牌露出。"><img src="assets/banner.webp" alt="BATTLE KING 横幅"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="groups">
+        <div class="section-inner">
+          <div class="section-head reveal">
+            <div>
+              <div class="kicker">Competition</div>
+              <h2 class="title">赛事项目与奖金</h2>
+              <p class="lead">突出报名转化信息，把复杂海报内容拆成手机端更容易看的卡片。</p>
+            </div>
+          </div>
+          <div class="grid grid-4">
+            <article class="glass prize-card reveal"><h3>少儿 Bboy<br>1on1</h3><div class="money">冠军 <b>1500元</b><br>亚军 <b>800元</b><br><small>冠军直通 BATTLE KING 全球总决赛</small></div><span class="fee">报名费 150元/人</span></article>
+            <article class="glass prize-card reveal"><h3>Bboy<br>4on4</h3><div class="money">冠军 <b>3000元</b><br>亚军 <b>1500元</b></div><span class="fee">报名费 300元/团</span></article>
+            <article class="glass prize-card reveal"><h3>Freestyle<br>1on1</h3><div class="money">冠军 <b>1500元</b><br>亚军 <b>800元</b></div><span class="fee">报名费 150元/人</span></article>
+            <article class="glass prize-card reveal"><h3>齐舞</h3><div class="money">第一名 <b>3000元</b><br>第二名 <b>2000元</b><br>第三名 <b>1000元</b></div><span class="fee">报名费 500元/组</span></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="schedule">
+        <div class="section-inner">
+          <div class="section-head reveal">
+            <div>
+              <div class="kicker">Schedule</div>
+              <h2 class="title">赛事流程</h2>
+              <p class="lead">两天流程做成可切换时间轴，适合选手、家长、观众快速查看。</p>
+            </div>
+          </div>
+          <div class="tabs reveal" role="tablist" aria-label="赛事日期切换">
+            <button class="tab active" type="button" data-tab="day1">10月24日 · Breaking</button>
+            <button class="tab" type="button" data-tab="day2">10月25日 · Freestyle / 齐舞</button>
+          </div>
+          <div class="grid grid-2">
+            <div class="glass reveal">
+              <div id="day1" class="schedule active">
+                <div class="time-row"><b>12:00-13:00</b><span>签到</span></div>
+                <div class="time-row"><b>13:00-14:00</b><span>个人海选</span></div>
+                <div class="time-row"><b>14:00-15:00</b><span>团队海选</span></div>
+                <div class="time-row"><b>15:00-16:00</b><span>个人淘汰赛</span></div>
+                <div class="time-row"><b>16:00-17:00</b><span>团队淘汰赛</span></div>
+                <div class="time-row"><b>17:00-18:30</b><span>休息</span></div>
+                <div class="time-row"><b>18:30-19:00</b><span>开幕式表演</span></div>
+                <div class="time-row"><b>19:00-20:30</b><span>晋级赛 / 半决赛 / 决赛</span></div>
+                <div class="time-row"><b>20:30-21:00</b><span>颁奖 / 合影</span></div>
+              </div>
+              <div id="day2" class="schedule">
+                <div class="time-row"><b>12:00-13:00</b><span>Freestyle 项目签到</span></div>
+                <div class="time-row"><b>13:00-14:00</b><span>Freestyle 海选</span></div>
+                <div class="time-row"><b>14:00-15:00</b><span>Freestyle 淘汰赛</span></div>
+                <div class="time-row"><b>15:00-16:30</b><span>齐舞项目签到 / 彩排</span></div>
+                <div class="time-row"><b>16:30-18:30</b><span>休息</span></div>
+                <div class="time-row"><b>18:30-19:30</b><span>齐舞开赛</span></div>
+                <div class="time-row"><b>19:30-20:00</b><span>Freestyle 晋级赛 / 半决赛 / 决赛</span></div>
+                <div class="time-row"><b>20:00-20:30</b><span>颁奖 / 合影</span></div>
+              </div>
+            </div>
+            <div class="image-frame tall reveal"><img src="assets/poster-schedule.webp" alt="赛事流程完整海报"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="culture">
+        <div class="section-inner">
+          <div class="section-head reveal">
+            <div>
+              <div class="kicker">Culture + Travel</div>
+              <h2 class="title">观精彩赛事<br>品特色美食</h2>
+              <p class="lead">本次活动也是“2026和乐奉化·福地文成文化走亲活动”的展示活动，街舞赛事之外还有奉化、文成非遗美食及传统技艺摊位。</p>
+            </div>
+          </div>
+          <div class="grid grid-3">
+            <article class="glass tour-card reveal"><h3>文成山水</h3><p>百丈漈、刘伯温故里、刘基庙、铜铃山国家森林公园、畲族古村落，观赛之余打卡浙南秘境。</p><div class="tagline"><span>百丈漈</span><span>刘伯温故里</span><span>铜铃山</span><span>畲族古村</span></div></article>
+            <article class="glass tour-card reveal"><h3>非遗美食</h3><p>宁波汤圆、溪口千层饼、桃胶、木莲冻、卤水豆腐、生煎包、灰汁团、老宁波苔菜饼、伯温烧饼、糖画、灯盏糕。</p><div class="tagline"><span>奉化风味</span><span>文成风味</span><span>现场摊位</span></div></article>
+            <article class="glass tour-card reveal"><h3>传统技艺</h3><p>拼布艺术、紫金釉陶器、核桃雕刻、文成本土素面制作技艺、铁艺制作技艺，近距离感受指尖传承。</p><div class="tagline"><span>手作</span><span>非遗</span><span>文化走亲</span></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="hotel">
+        <div class="section-inner">
+          <div class="section-head reveal">
+            <div>
+              <div class="kicker">Hotel + Traffic</div>
+              <h2 class="title">酒店与交通指南</h2>
+              <p class="lead">把文章里的酒店和交通信息做成行动卡片，参赛家庭可以直接截图保存。</p>
+            </div>
+          </div>
+          <div class="grid grid-2">
+            <article class="glass hotel-card reveal"><h3>首旅南苑文成宾馆</h3><p>县城核心区域，紧邻交通枢纽，半小时内可达百丈漈、铜铃山等核心景区。协议价：标准大床 / 双床 <strong>398元/间夜</strong>。</p><div class="tagline"><span>联系人：胡君如</span><span>13806810274</span></div></article>
+            <article class="glass hotel-card reveal"><h3>文成国际大酒店</h3><p>坐落于文成县大峃镇城东大道，花园式酒店。协议价：标准大 / 双床房 <strong>228元/间夜</strong>，包含次日双早。</p><div class="tagline"><span>联系人：赵林海</span><span>13968928899</span></div></article>
+          </div>
+          <div class="grid grid-2" style="margin-top:16px">
+            <div class="glass reveal route">
+              <div class="route-item"><b>出租车 / 网约车</b><p>温州南站 → 文成县，约70KM，60–70分钟，约150–200元。</p></div>
+              <div class="route-item"><b>城际巴士</b><p>高铁温州南站（客运点） → 文成县，90分钟左右，约35元，30分钟/班次。</p></div>
+            </div>
+            <div class="image-frame square reveal"><img src="assets/traffic-guide.webp" alt="交通指南图"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="orgs">
+        <div class="section-inner">
+          <div class="section-head reveal">
+            <div>
+              <div class="kicker">Organizer</div>
+              <h2 class="title">组织单位</h2>
+            </div>
+          </div>
+          <div class="grid grid-3">
+            <div class="glass org-card reveal"><h3>主办单位</h3><p>宁波市奉化区文化和广电旅游体育局<br>温州市文成县文化广电和旅游体育局</p></div>
+            <div class="glass org-card reveal"><h3>承办单位</h3><p>宁波市奉化区文化馆<br>温州市文成县文化馆</p></div>
+            <div class="glass org-card reveal"><h3>支持单位</h3><p>温州市文成县街舞协会<br>宁波市奉化区吉事街舞俱乐部</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="final" id="join">
+        <div class="section-inner reveal">
+          <img class="final-logo" src="assets/logo-disc.webp" alt="BATTLE KING 标志">
+          <h2>舞步不息<br>热爱不止</h2>
+          <p>10月24—25日，相约温州文成侨立方商场，见证强者对决，畅游文成山水。一起来感受街舞热血，邂逅浙南秘境风光。</p>
+          <div class="cta-row" style="justify-content:center">
+            <a class="btn btn-primary official-jump" href="https://mp.weixin.qq.com/s/VQiO_3iRGppwUXFvNorU8w" target="_blank" rel="noopener">跳转公众号 / 阅读原文</a>
+            <a class="btn btn-ghost" href="#top">回到顶部</a>
+          </div>
+          <div class="official-note">公众号：G.S.KING街舞。现在按钮先跳转到微信公众号原文链接；如果你有公众号主页链接或关注二维码，我可以继续替换成“直接关注公众号”的版本。</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
