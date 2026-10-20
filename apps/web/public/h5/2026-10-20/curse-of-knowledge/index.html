@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F3EBDC">
+<meta name="description" content="知识的诅咒：七步引导，每一步只做一件事。走完会得到一张你自己的复盘卡。">
+<meta property="og:title" content="知识的诅咒｜你敲得越准，他越听不懂">
+<meta property="og:description" content="不是态度问题，是记忆结构问题。七步走完，你会拿到自己的复盘。">
+<title>知识的诅咒｜七步复盘</title>
+<link rel="icon" href="assets/icon.svg">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="app" id="app">
+
+  <header class="hud">
+    <div class="hud-left">
+      <span class="seal" aria-hidden="true">知</span>
+      <span class="hud-title">知识的诅咒</span>
+    </div>
+    <button class="sound" id="soundBtn" type="button" aria-pressed="false">
+      <span class="sound-dot" aria-hidden="true"></span><span id="soundText">声音</span>
+    </button>
+  </header>
+
+  <div class="progress" id="progress" aria-hidden="true">
+    <i data-s="1"></i><i data-s="2"></i><i data-s="3"></i><i data-s="4"></i><i data-s="5"></i><i data-s="6"></i><i data-s="7"></i>
+  </div>
+
+  <main class="stage" id="stage">
+
+    <section class="step gate active" id="step0">
+      <p class="meta">MYHOOD DAILY · 2026-10-20</p>
+      <h1>知识的<span class="cinnabar">诅咒</span></h1>
+      <p class="gate-sub">你敲得越准，他越听不懂。</p>
+      <p class="gate-note">不是你讲得不够细。是你学会的那一刻，脑子里那条通往答案的路被折叠了——连「我当初不懂」都没留下。</p>
+      <div class="gate-mid">
+        <div class="gate-tags">
+          <span>七步</span><span>每步只做一件事</span><span>约 6 分钟</span>
+        </div>
+      </div>
+      <div class="gate-bottom">
+      <button class="enter" id="enterBtn" type="button">
+        <span class="enter-seal" aria-hidden="true">入</span>
+        <span class="enter-text">进入 · 开始播放环境音</span>
+      </button>
+      <p class="gate-fine">七步走完，你会得到一张自己的复盘卡。进入后会自动播放一段轻音乐，随时可以点右上角静音。</p>
+      </div>
+    </section>
+
+    <section class="step" id="step1">
+      <p class="step-no">第 1 步 / 共 7 步</p>
+      <h2 class="step-title">先做一个动作</h2>
+      <p class="step-lede">在桌上用手指敲一段《生日快乐》。敲得准一点，然后问对方：猜得出来吗？</p>
+
+      <div class="card try-card">
+        <p class="try-head"><i aria-hidden="true"></i>你试试</p>
+        <p>别用嘴哼，用手指敲。敲完看对方的脸。</p>
+        <button class="mini" id="tappedBtn" type="button" data-done="0">我敲过了</button>
+      </div>
+
+      <p>几乎所有人都会觉得：这么明显，怎么会听不出来。</p>
+      <p>可这首歌在你脑子里是完整的旋律，在对方耳朵里，只是一串打在桌面上的闷响。隔着一张桌子，两个人听到的是两个东西。</p>
+      <p class="pull">你敲得越准，越觉得对方该听懂。</p>
+    </section>
+
+    <section class="step" id="step2">
+      <p class="step-no">第 2 步 / 共 7 步</p>
+      <h2 class="step-title">它有个名字</h2>
+      <p class="step-lede">1989 年，三位经济学者把这件小事命名了。他们的原话，比网上流传的版本冷得多。</p>
+
+      <div class="def">
+        <p class="def-a">知道得更多的人，</p>
+        <p class="def-b">没法假装自己<span class="mark">不知道</span>。</p>
+      </div>
+
+      <p>注意用词：不是「想不起来」，是<b class="ink-green">忽略不掉</b>。</p>
+      <p>你判断别人的时候，自己多知道的那一块会自动参与运算，而你不觉得自己在动用它。</p>
+
+      <div class="card">
+        <p class="card-title">一个手上的例子</p>
+        <p>你带新人装环境，说「把配置改成开发环境」。这句话里省了四件事：配置在哪个文件、用哪个编辑器、改哪一行、改完要重启。</p>
+        <p>这四件事对你来说不是知识，是动作。所以你压根没觉得它们需要讲。</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b>≈0</b><span>给奖励，没什么用</span></div>
+        <div class="stat"><b>≈0</b><span>给反馈，没什么用</span></div>
+        <div class="stat hot"><b>≈50%</b><span>换到会亏钱的场子里，偏差才减半</span></div>
+      </div>
+      <p class="fine">减半，但没有消除。它不长在态度上，所以「多提醒自己站在对方角度」改不了。</p>
+      <p class="pull">你丢掉的不是同情心，是那条通往答案的路。</p>
+    </section>
+
+    <section class="step" id="step3">
+      <p class="step-no">第 3 步 / 共 7 步</p>
+      <h2 class="step-title">做一道题</h2>
+      <p class="step-lede">球拍和球一共 1.10 美元，球拍比球贵 1 美元。球多少钱？</p>
+
+      <div class="quiz" id="quiz">
+        <button class="opt" data-answer="ten" type="button">10 美分</button>
+        <button class="opt" data-answer="five" type="button">5 美分</button>
+      </div>
+
+      <div class="verdict" id="verdict" hidden>
+        <p class="verdict-main">正确答案是 <b class="cinnabar">5 美分</b>。</p>
+        <p class="fine">答 10 美分的人，通常没回头验算那 1 美元的差：球拍 1.05、球 0.05，差正好 1 美元。</p>
+      </div>
+
+      <div class="fb" id="fb" hidden>
+        <p class="fb-title">2005 年，研究者还问了同一个问题：你觉得有多少人能答对？</p>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-lab">答错的人估</span><i class="bar warm" data-w="92"></i><b class="num cinnabar">92%</b></div>
+          <div class="bar-row"><span class="bar-lab">答对的人估</span><i class="bar cool" data-w="62"></i><b class="num ink-green">62%</b></div>
+        </div>
+        <p>方向是反的：答错的人觉得几乎人人都会，答对的人反而估得低。</p>
+        <p class="pull">不是专家才有这个病。谁手里多一条信息，谁就低估别人手里的信息量。</p>
+      </div>
+    </section>
+
+    <section class="step" id="step4">
+      <p class="step-no">第 4 步 / 共 7 步</p>
+      <h2 class="step-title">盒子只能是盒子</h2>
+      <p class="step-lede">一根蜡烛、一盒图钉、一盒火柴。把蜡烛固定在墙上，还不能让蜡油滴下来。</p>
+
+      <div class="box-stage" id="boxStage">
+        <div class="wall" aria-hidden="true"></div>
+        <div class="box" id="box" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="candle" aria-hidden="true"></div>
+        <button class="mini overlay-btn" id="pourBtn" type="button">倒出图钉</button>
+      </div>
+      <p class="fine" id="boxHint">先自己想 5 秒，再点上面的按钮。</p>
+
+      <p>答案是：倒出图钉，把空盒子钉在墙上当烛台。<b class="ink-green">盒子不只是装图钉的。</b></p>
+      <p>有意思的从来不是答案，而是它为什么难：盒子一旦装过东西，它的身份在你脑子里就固定成了「容器」。</p>
+
+      <div class="split">
+        <div class="split-cell"><b class="num ink-green">7 / 7</b><span>盒子空着，都想到</span></div>
+        <div class="split-cell"><b class="num cinnabar">3 / 7</b><span>装过东西，只剩 3 个</span></div>
+      </div>
+      <p>被问为什么想不到时，参与者的回答被记成一句：<q>可它们是盒子啊。</q></p>
+      <p>他不是在辩解，他是真的没看见那个选项。你也有你的「盒子」。</p>
+    </section>
+
+    <section class="step" id="step5">
+      <p class="step-no">第 5 步 / 共 7 步</p>
+      <h2 class="step-title">你连自己错过都不记得</h2>
+      <p class="step-lede">Wieman 是诺贝尔物理学奖得主、物理学家，研究教学很多年。他记录过一件反复发生的事。</p>
+
+      <div class="screens">
+        <div class="screen cool-side">
+          <p class="screen-lab">学生看到的</p>
+          <div class="dots" id="dotsStudent" data-empty-ok></div>
+        </div>
+        <div class="screen warm-side">
+          <p class="screen-lab">专家看到的</p>
+          <div class="dots" id="dotsExpert" data-empty-ok></div>
+        </div>
+      </div>
+      <p class="fine">同一块屏幕、同一段模拟。学生看到的和专家看到的，往往不是一回事。</p>
+
+      <p>他写的原话大意是：学生们不相信居然有人会这么理解——可就在几个月前，这些学生自己就是这样理解的。</p>
+      <p>可怕的地方在时间轴上：不是忘了细节，是连「我当初这么想过」都没留下。</p>
+      <p>更狠的是下一句：学生上完常规的入门物理课，对自然的理解，平均而言反而<b class="cinnabar">离科学家更远了</b>。</p>
+      <p class="pull">课上了，考试过了，方向反了。</p>
+    </section>
+
+    <section class="step" id="step6">
+      <p class="step-no">第 6 步 / 共 7 步</p>
+      <h2 class="step-title">一个好心怎么也会出错</h2>
+      <p class="step-lede">2005 年，MIT 的 Negroponte 发起一个项目：给发展中国家的孩子发便宜的笔记本电脑。</p>
+
+      <div class="schools" id="schools" data-empty-ok aria-hidden="true"></div>
+      <p class="fine">图：531 个格子代表秘鲁农村 531 所小学，蓝色是发到电脑的那一组。</p>
+
+      <div class="result">
+        <p><span class="x">学业成绩</span>没有显著影响</p>
+        <p><span class="x">升级进度</span>甚至有一些负面证据</p>
+        <p><span class="o">电脑技能</span>显著提高</p>
+        <p><span class="x">认知能力</span>没有提高</p>
+      </div>
+      <p class="fine">摘要原文：no significant effects on academic performance but some evidence of negative effects on grade progression；computer skills improved, cognitive skills did not。</p>
+
+      <p>这不是说发电脑没用。它说明「有电脑 → 会上网 → 会生兴趣 → 会长成本事」这条链子，中间断了好几环，而设计的人没看见，因为那几环在他自己身上自动接上了。</p>
+
+      <div class="guess">
+        <p class="guess-tag">作者推测</p>
+        <p>设计的人，很可能一直在按「见过电脑、知道上网是什么」的视角设计。可那间教室里缺的也许不是一台机器，而是一个能把机器变成课的人。这是推测，不是论文结论。</p>
+      </div>
+    </section>
+
+    <section class="step" id="step7">
+      <p class="step-no">第 7 步 / 共 7 步</p>
+      <h2 class="step-title">现在轮到你</h2>
+      <p class="step-lede">别问「你懂了没」。这个问题的答案几乎永远是懂了，因为说没懂是有代价的。也别问「你哪里不懂」——不懂的人不知道自己的不懂在哪儿。</p>
+
+      <p>做这件事：<b class="ink-green">让他用三句话，把刚才的东西写成「他准备怎么讲给别人听」</b>，你在旁边看那三行。</p>
+      <p>为什么是写，不是问？说的时候他可以点头、可以含糊、可以跟着你的话往下接；写的时候，他只能用自己的词。</p>
+
+      <div class="write">
+        <label class="write-lab" for="threeLines">你自己先试一次：用三句话讲清「知识的诅咒」</label>
+        <textarea id="threeLines" rows="3" maxlength="140" placeholder="比如：有个实验，敲歌的人觉得对方一定能猜出来……"></textarea>
+        <div class="write-foot">
+          <span class="count" id="count">0 / 140</span>
+          <span class="write-note">只留在本页，没有发送。</span>
+        </div>
+      </div>
+      <p class="fine">写完点右下角「看我的复盘」，会把你这一路的选择和这三句话，收成一张卡。</p>
+    </section>
+
+    <section class="step recap" id="recap">
+      <p class="step-no">复盘</p>
+      <h2 class="step-title">你这一路，留下了三样东西</h2>
+      <div class="rc-card">
+        <div class="rc-row">
+          <span class="rc-k">敲桌子那一步</span>
+          <span class="rc-v" id="rcTap">没有记录</span>
+        </div>
+        <div class="rc-row">
+          <span class="rc-k">球拍和球，你选了</span>
+          <span class="rc-v" id="rcPick">跳过</span>
+        </div>
+        <div class="rc-row">
+          <span class="rc-k">你写下的三句话</span>
+          <span class="rc-v quote-v" id="rcWrite">（空）</span>
+        </div>
+      </div>
+
+      <div class="rc-verdict" id="rcVerdict" data-empty-ok></div>
+
+      <div class="rc-do">
+        <p class="rc-do-title">带走一件事</p>
+        <p>今晚选一个你反复解释过的东西——一个软件功能、一个流程、一道题。说完别问「懂了吗」，给他一张纸，让他写三句话，你看他从哪里开始和你分岔。</p>
+      </div>
+
+      <div class="rc-actions">
+        <button class="btn primary" id="copyBtn" type="button">复制我的复盘</button>
+        <button class="btn ghost" id="againBtn" type="button">重新走一遍</button>
+      </div>
+      <p class="fine" id="copyHint">复制失败也不要紧，长按选中上面的文字即可。</p>
+
+      <details class="sources">
+        <summary>出处与说明（含英文原句）</summary>
+        <ol>
+          <li><b>Camerer, C., Loewenstein, G., &amp; Weber, M. (1989).</b> The Curse of Knowledge in Economic Settings: An Experimental Analysis. Journal of Political Economy, 97(5), 1232–1254.
+            <span class="orig">"Better-informed agents are unable to ignore private information even when it is in their interest to do so; more information is not always better."（p. 1232）</span>
+            <span class="orig">"We find that feedback alone has little effect, while market forces reduce the magnitude of the curse by approximately 50 percent."（p. 1234）</span>
+          </li>
+          <li><b>Duncker, K. (1945).</b> On problem-solving. Psychological Monographs, 58(5), Whole No. 270.
+            <span class="orig">装置与结果经 Mungan, E. (2021), <i>Nesne</i> 9(20) 复述；7/7 与 3/7 核对自 Duncker 1945 英译本 OCR 文本 Table 3。「可它们是盒子啊」为该文转述的参与者反应，属二手材料。</span>
+          </li>
+          <li><b>Frederick, S. (2005).</b> Cognitive Reflection and Decision Making. Journal of Economic Perspectives, 19(4), 25–42.
+            <span class="orig">"those who answered 10 cents to the 'bat and ball' problem estimated that 92 percent of people would correctly solve it, whereas those who answered '5 cents' estimated that 'only' 62 percent would."（p. 27）</span>
+          </li>
+          <li><b>Wieman, C. (2007).</b> The 'Curse of Knowledge' or Why Intuition About Teaching Often Fails. APS News, 16(10).（物理学家，2001 年诺贝尔物理学奖得主之一）
+            <span class="orig">"we saw students express disbelief that anyone could hold a certain misconception, yet we had seen those same students actually express this very misconception themselves, just a few months earlier!"</span>
+            <span class="orig">"it is dangerous, and often profoundly incorrect to think about student learning based on what appears best to faculty members, as opposed to what has been verified with students."</span>
+          </li>
+          <li><b>敲击者与听者：</b>Newton, E. (1990), 斯坦福大学博士论文，原论文未公开。数字转述自 OpenIntro <i>Introduction to Modern Statistics</i> 第 5 章：120 位敲击者、120 位听者，约 50% 的敲击者预期对方能猜中，实际 3 位猜中。
+            <span class="orig">"Tappers' typically overestimated the fraction recognized by a factor of 20!"（Wieman 语，非原始数据）</span>
+          </li>
+          <li><b>One Laptop per Child：</b>Negroponte 2005 年发起；长期效果见 Cueto, Beuermann, Cristia, Malamud &amp; Pardo (2025), NBER Working Paper 34495。
+            <span class="orig">"…no significant effects on academic performance but some evidence of negative effects on grade progression… computer access significantly improved students' computer skills but not their cognitive skills…"</span>
+          </li>
+          <li><b>Shaw, G. B. (1906).</b> The Doctor's Dilemma，第一幕。
+            <span class="orig">"All professions are conspiracies against the laity."</span>
+          </li>
+        </ol>
+      </details>
+      <p class="fine">背景音乐由浏览器实时合成，没有音频文件，也没有联网请求。</p>
+    </section>
+
+  </main>
+
+  <footer class="dock" id="dock" hidden>
+    <button class="btn ghost" id="prevBtn" type="button">上一步</button>
+    <button class="btn primary" id="nextBtn" type="button">完成这一步</button>
+  </footer>
+
+</div>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
