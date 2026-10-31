@@ -1,0 +1,224 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>104 车间</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="./fonts/fonts.css">
+<style>
+/* Layout: full-bleed 3D workshop; floating chrome — zones left, chat right (bottom sheet on phones). Single dark look over the scene. */
+:root{
+  color-scheme:dark;
+  --ink:#f3f1ea;           /* text on panels */
+  --mute:#a9b2ad;          /* secondary text */
+  --panel:rgba(24,30,29,.86);
+  --panel-solid:#1b2120;
+  --line:rgba(255,255,255,.10);
+  --accent:#ff6a3d;        /* heat-press platen red-orange */
+  --accent-ink:#1a0f0a;
+  --crate:#3d7ce0;         /* turnover-crate blue */
+  --ok:#7ad39a;
+  --bg:#1c2321;
+  --display:"ZCOOL KuaiLe","PingFang SC","Hiragino Sans GB",system-ui,sans-serif;
+  --body:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow:hidden;
+  padding-left:max(0px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px))}
+#app{position:fixed;inset:0}
+canvas#gl{display:block;width:100%;height:100%;touch-action:none;cursor:pointer}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* labels over characters */
+#labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.tag{position:absolute;left:0;top:0;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:4px;will-change:transform}
+.tag .nm{font-family:var(--display);font-size:13px;line-height:1;padding:4px 8px 3px;border-radius:999px;background:rgba(20,24,23,.78);color:#fff;white-space:nowrap;border:1px solid rgba(255,255,255,.14)}
+.tag.me .nm{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.tag.npc .nm{opacity:.82}
+.tag .nm small{font-family:var(--body);font-size:10px;opacity:.7;margin-left:4px}
+.bub{max-width:200px;background:#fff;color:#1d1f1e;font-size:13px;line-height:1.35;padding:6px 10px;border-radius:12px;position:relative;box-shadow:0 4px 14px rgba(0,0,0,.25);word-break:break-word;opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s}
+.bub.on{opacity:1;transform:none}
+.bub::after{content:"";position:absolute;left:50%;bottom:-6px;margin-left:-6px;border:6px solid transparent;border-bottom:0;border-top-color:#fff}
+.bub.npcb{background:#fffbe9;color:#5b5139;font-size:12px}
+
+/* danmaku */
+#dm{position:absolute;left:0;right:0;top:64px;height:42%;pointer-events:none;overflow:hidden}
+.dmi{position:absolute;left:100%;white-space:nowrap;font-weight:800;font-size:20px;color:#fff;
+  text-shadow:0 0 3px #000,0 1px 2px #000,0 0 8px rgba(0,0,0,.6);animation:fly linear forwards}
+.dmi b{color:#ffd166;font-weight:800;margin-right:6px}
+@keyframes fly{from{transform:translateX(0)}to{transform:translateX(calc(-100vw - 100%))}}
+
+/* top bar */
+#top{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));left:max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:10px;pointer-events:none}
+.brand{font-family:var(--display);font-size:26px;line-height:1;letter-spacing:.5px;text-shadow:0 2px 0 rgba(0,0,0,.35);pointer-events:auto}
+.brand i{font-style:normal;color:var(--accent)}
+.pill{pointer-events:auto;display:flex;align-items:center;gap:6px;font-size:12px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 10px;backdrop-filter:blur(8px)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px rgba(122,211,154,.18)}
+.dot.off{background:#c9a24a;box-shadow:0 0 0 3px rgba(201,162,74,.18)}
+
+/* zones */
+#zones{position:absolute;left:max(16px,env(safe-area-inset-left,0px));top:calc(60px + env(safe-area-inset-top,0px));width:176px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px;backdrop-filter:blur(8px);display:flex;flex-direction:column;gap:2px}
+#zones h3{font-size:11px;letter-spacing:.12em;color:var(--mute);font-weight:600;margin:4px 8px 6px}
+.zb{display:flex;align-items:center;gap:8px;width:100%;text-align:left;background:none;border:0;border-radius:9px;padding:7px 8px;font-size:14px}
+.zb:hover{background:rgba(255,255,255,.06)}
+.zb.on{background:rgba(255,106,61,.16);color:#ffd9cc}
+.zb .sw{width:10px;height:10px;border-radius:3px;flex:none}
+.zb .n{margin-left:auto;font-size:11px;color:var(--mute);font-variant-numeric:tabular-nums}
+#zones .sep{height:1px;background:var(--line);margin:6px 4px}
+.tool{font-size:13px;color:var(--mute)}
+
+/* photo card */
+#photo{position:absolute;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(360px,calc(100vw - 32px));background:var(--panel-solid);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+#photo img{display:block;width:100%;height:auto;max-height:220px;object-fit:cover}
+#photo .cap{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:12px;color:var(--mute)}
+#photo .cap b{color:var(--ink);font-size:13px}
+#photo .x{margin-left:auto;background:none;border:0;color:var(--mute);font-size:18px;line-height:1;padding:2px 4px}
+
+/* chat */
+#chat{position:absolute;right:max(16px,env(safe-area-inset-right,0px));top:calc(12px + env(safe-area-inset-top,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:330px;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:16px;backdrop-filter:blur(10px);overflow:hidden}
+#chat header{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line)}
+#chat header h2{font-family:var(--display);font-weight:400;font-size:20px;margin:0}
+#chat header .where{font-size:12px;color:var(--mute);margin-left:auto;white-space:nowrap}
+#chat header .fold{background:none;border:0;color:var(--mute);font-size:18px;padding:0 2px}
+#who{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--line)}
+.chip{display:flex;align-items:center;gap:5px;font-size:12px;padding:3px 8px 3px 3px;border-radius:999px;background:rgba(255,255,255,.06)}
+.chip.off{opacity:.45}
+.av{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:800;color:#fff;flex:none}
+#log{flex:1;overflow-y:auto;padding:10px 14px;display:flex;flex-direction:column;gap:10px;min-height:0}
+.msg{display:flex;gap:8px;min-width:0}
+.msg .av{width:28px;height:28px;font-size:13px;margin-top:2px}
+.msg .b{min-width:0}
+.msg .h{font-size:12px;color:var(--mute);display:flex;gap:6px;align-items:baseline}
+.msg .h b{color:var(--ink);font-weight:600}
+.msg .t{font-size:14px;line-height:1.45;word-break:break-word}
+.sys{font-size:12px;color:var(--mute);text-align:center}
+#send{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
+#send input{flex:1;min-width:0;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:10px 12px;font:inherit;font-size:14px}
+#send button{background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:0 14px;font-weight:800}
+#send label{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--mute);white-space:nowrap}
+#chatTab{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:10px 16px;font-weight:800;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+
+/* hud */
+#hud{position:absolute;left:50%;transform:translateX(-50%);top:calc(12px + env(safe-area-inset-top,0px));background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px 12px;backdrop-filter:blur(8px);display:flex;flex-direction:column;gap:6px;min-width:300px;max-width:calc(100vw - 32px)}
+#hud .ord{display:flex;align-items:center;gap:8px;font-size:13px}
+#hud .ord b{font-family:var(--display);font-weight:400;font-size:17px;white-space:nowrap}
+#hud .bar{flex:1;height:8px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;min-width:80px}
+#hud .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),#ffb36b);transition:width .4s}
+#hud .ord span{font-variant-numeric:tabular-nums;color:var(--mute);white-space:nowrap}
+#hud .bufs{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--mute)}
+#hud .bufs b{color:var(--ink);font-variant-numeric:tabular-nums}
+#act{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(52px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:center;background:var(--panel-solid);border:1px solid var(--accent);border-radius:14px;padding:8px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+#act .st{font-size:12px;color:var(--mute);padding:0 6px}
+#act button{display:flex;align-items:center;gap:6px;background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:9px 14px;font-weight:800;font-size:14px}
+#act button+button{background:#ffd166}
+#act kbd{font:inherit;font-size:11px;background:rgba(0,0,0,.18);border-radius:5px;padding:1px 5px}
+.pop{position:absolute;left:0;top:0;font-weight:800;font-size:15px;white-space:nowrap;text-shadow:0 1px 3px #000,0 0 6px rgba(0,0,0,.6);pointer-events:none}
+.pop.emo{font-size:30px}
+#fx{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+#fx i{position:absolute;top:-12px;width:8px;height:14px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg)}}
+#board{font-size:12px;color:var(--mute);padding:6px 14px;border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#emo{display:flex;gap:4px;padding:8px 10px 0;border-top:1px solid var(--line)}
+#emo button{background:rgba(255,255,255,.06);border:0;border-radius:8px;font-size:18px;padding:4px 0;flex:1}
+#emo button:hover{background:rgba(255,255,255,.14)}
+#send{border-top:0!important}
+#musicBtn{cursor:pointer;color:var(--ink)}
+/* help */
+#help{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));font-size:12px;color:var(--mute);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 12px;white-space:nowrap}
+
+/* entry */
+#entry{position:absolute;inset:0;display:grid;place-items:center;background:rgba(10,13,12,.55);backdrop-filter:blur(3px);padding:16px}
+.card{width:min(560px,100%);max-height:calc(100% - 20px);overflow:auto;background:var(--panel-solid);border:1px solid var(--line);border-radius:20px;padding:22px}
+.card h1{font-family:var(--display);font-weight:400;font-size:32px;margin:0 0 4px}
+.card p{color:var(--mute);margin:0 0 16px;font-size:14px;line-height:1.6}
+.roster{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.pick{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:10px 6px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative}
+.pick:hover{border-color:rgba(255,106,61,.6)}
+.pick.sel{border-color:var(--accent);background:rgba(255,106,61,.12)}
+.pick[disabled]{opacity:.4;cursor:not-allowed}
+.pick img{width:64px;height:64px}
+.pick b{font-family:var(--display);font-weight:400;font-size:17px}
+.pick small{font-size:11px;color:var(--mute)}
+.pick .busy{position:absolute;top:6px;right:6px;font-size:10px;background:var(--ok);color:#0d2416;border-radius:6px;padding:1px 5px}
+.guest{display:flex;gap:8px;margin-top:12px;align-items:center}
+.guest input{flex:1;min-width:0;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:10px 12px;font:inherit}
+.go{margin-top:16px;width:100%;background:var(--accent);color:var(--accent-ink);border:0;border-radius:12px;padding:12px;font-weight:800;font-size:16px}
+.go[disabled]{opacity:.45;cursor:not-allowed}
+
+@media (max-width:760px){
+  #zones{top:auto;bottom:calc(64px + env(safe-area-inset-bottom,0px));left:0;right:0;width:auto;flex-direction:row;overflow-x:auto;border-radius:0;border-left:0;border-right:0;padding:6px max(16px,env(safe-area-inset-left,0px))}
+  #zones h3,#zones .sep,.zb .n{display:none}
+  .zb{white-space:nowrap;width:auto;font-size:13px}
+  #chat{left:0;right:0;top:auto;bottom:0;width:auto;height:58%;border-radius:18px 18px 0 0;padding-bottom:env(safe-area-inset-bottom,0px)}
+  #help{display:none}
+  #hud{top:calc(52px + env(safe-area-inset-top,0px));min-width:0;width:calc(100vw - 32px)}
+  #act{bottom:calc(120px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 32px);flex-wrap:wrap;justify-content:center}
+  #hud .bufs{gap:8px;font-size:11px}#hud .ord b{font-size:15px}
+  #photo{bottom:calc(180px + env(safe-area-inset-bottom,0px))}
+  #photo{bottom:calc(120px + env(safe-area-inset-bottom,0px))}
+  .roster{grid-template-columns:repeat(4,1fr)}
+  .pick img{width:48px;height:48px}
+  .dmi{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){.bub{transition:none}}
+</style>
+
+<div id="app">
+  <canvas id="gl" aria-label="104 车间 3D 场景"></canvas>
+  <div id="labels"></div>
+  <div id="dm" aria-hidden="true"></div>
+
+  <div id="top">
+    <div class="brand">104<i>·</i>车间</div>
+    <div class="pill" title="连接状态"><span class="dot off" id="netDot"></span><span id="netTxt">连接中</span></div><button class="pill" id="musicBtn" type="button">♪ 音乐开</button>
+  </div>
+
+  <nav id="zones" aria-label="车间区域">
+    <h3>去哪个区</h3>
+    <div id="zlist"></div>
+    <div class="sep"></div>
+    <button class="zb tool" id="btnAll">上帝视角</button>
+    <button class="zb tool" id="btnFollow">跟随我</button>
+    <button class="zb tool" id="btnPhoto">看实拍照片</button>
+  </nav>
+
+  <figure id="photo" hidden style="margin:0">
+    <img id="photoImg" alt="">
+    <figcaption class="cap"><b id="photoT"></b><span id="photoP"></span><button class="x" id="photoX" aria-label="关闭照片">×</button></figcaption>
+  </figure>
+
+  <aside id="chat" aria-label="车间聊天">
+    <header><h2>车间聊天</h2><span class="where" id="where">—</span><button class="fold" id="fold" aria-label="收起聊天">—</button></header>
+    <div id="who"></div>
+    <div id="board" title="今日劳模"></div>
+    <div id="log" aria-live="polite"></div>
+    <div id="emo" aria-label="表情"><button type="button">👋</button><button type="button">☕</button><button type="button">💪</button><button type="button">🎉</button><button type="button">😂</button><button type="button">👍</button></div>
+    <form id="send" autocomplete="off">
+      <input id="msgIn" maxlength="120" placeholder="说点什么…" aria-label="聊天内容">
+      <button type="submit">发送</button>
+    </form>
+  </aside>
+  <button id="chatTab" hidden>聊天</button>
+  <div id="help">点工位走过去，按 E / R 干活 · 拖动转视角 · 滚轮缩放 · 双击人物跟随</div>
+  <section id="hud" aria-label="今日生产">
+    <div class="ord"><b id="oNo">第 1 单</b><div class="bar"><i id="oBar"></i></div><span id="oTxt">0 / 30 件</span></div>
+    <div class="bufs"><span title="DTF 墨水">墨水 <b id="bInk">0</b></span><span title="打印好的烫画膜">膜 <b id="bFilm">0</b></span><span title="裁好的衣片">衣片 <b id="bCloth">0</b></span><span title="压好的成衣">成衣 <b id="bGar">0</b></span><span title="今天已发货">已发 <b id="bShip">0</b></span><span title="你今天干的活">我 <b id="bMine">0</b></span></div>
+  </section>
+  <div id="act" hidden></div>
+  <div id="fx" aria-hidden="true"></div>
+  <audio id="bgm" src="bgm.mp3" loop preload="none"></audio>
+
+  <div id="entry">
+    <div class="card">
+      <h1>进 104 车间</h1>
+      <p>选你自己的角色进来。不在线的人会在自己工位上干活；你一选，那个小人就归你操作。大家一起把今天的订单做完：裁片 → DTF 打印 → 印花 → 打包发货。</p>
+      <div class="roster" id="roster"></div>
+      <div class="guest"><input id="guestName" maxlength="10" placeholder="不是员工？起个昵称当访客"></div>
+      <button class="go" id="goBtn" disabled>进入车间</button>
+    </div>
+  </div>
+</div>
+
+
+<script src="./photos.js"></script>
+<script type="module" src="./app.js"></script>
+
+</body></html>
