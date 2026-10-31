@@ -143,20 +143,40 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline
 .go{margin-top:16px;width:100%;background:var(--accent);color:var(--accent-ink);border:0;border-radius:12px;padding:12px;font-weight:800;font-size:16px}
 .go[disabled]{opacity:.45;cursor:not-allowed}
 
+#mnav{display:none}
+/* phone layout: compact top bar, slim order strip, bottom tab bar; zones and chat open as sheets above it */
 @media (max-width:760px){
-  #zones{top:auto;bottom:calc(64px + env(safe-area-inset-bottom,0px));left:0;right:0;width:auto;flex-direction:row;overflow-x:auto;border-radius:0;border-left:0;border-right:0;padding:6px max(16px,env(safe-area-inset-left,0px))}
-  #zones h3,#zones .sep,.zb .n{display:none}
-  .zb{white-space:nowrap;width:auto;font-size:13px}
-  #chat{left:0;right:0;top:auto;bottom:0;width:auto;height:58%;border-radius:18px 18px 0 0;padding-bottom:env(safe-area-inset-bottom,0px)}
-  #help{display:none}
-  #hud{top:calc(52px + env(safe-area-inset-top,0px));min-width:0;width:calc(100vw - 32px)}
-  #act{bottom:calc(120px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 32px);flex-wrap:wrap;justify-content:center}
-  #hud .bufs{gap:8px;font-size:11px}#hud .ord b{font-size:15px}
-  #photo{bottom:calc(180px + env(safe-area-inset-bottom,0px))}
-  #photo{bottom:calc(120px + env(safe-area-inset-bottom,0px))}
-  .roster{grid-template-columns:repeat(4,1fr)}
-  .pick img{width:48px;height:48px}
-  .dmi{font-size:16px}
+  #top{gap:6px;top:calc(8px + env(safe-area-inset-top,0px))}
+  .brand{font-size:19px}
+  .pill{font-size:11px;padding:4px 8px}
+  #hud{top:calc(42px + env(safe-area-inset-top,0px));left:max(10px,env(safe-area-inset-left,0px));right:max(10px,env(safe-area-inset-right,0px));transform:none;width:auto;min-width:0;padding:6px 10px;gap:3px;border-radius:12px}
+  #hud .ord{font-size:11px;gap:6px}#hud .ord b{font-size:14px}
+  #hud .bufs{gap:8px;font-size:11px}
+  #dm{top:110px;height:30%}
+  .dmi{font-size:15px}
+  .tag .nm{font-size:11px;padding:3px 6px 2px}
+  .tag .nm small{display:none}
+  .bub{font-size:12px;max-width:150px}
+  #help,#chatTab{display:none!important}
+  #mnav{display:flex;position:absolute;left:0;right:0;bottom:0;gap:4px;background:var(--panel-solid);border-top:1px solid var(--line);
+    padding:6px max(10px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
+  #mnav button{flex:1;min-width:0;background:none;border:0;border-radius:10px;padding:6px 0 4px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--mute)}
+  #mnav button span{font-size:19px;line-height:1}
+  #mnav button.on{color:var(--ink);background:rgba(255,106,61,.16)}
+  #zones{display:none;top:auto;left:0;right:0;width:auto;bottom:calc(58px + env(safe-area-inset-bottom,0px));border-radius:16px 16px 0 0;border-left:0;border-right:0;border-bottom:0;padding:12px 16px 14px}
+  #zones.open{display:flex}
+  #zones .sep,#zones .tool{display:none}
+  #zlist{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+  .zb{font-size:14px;padding:10px 8px;background:rgba(255,255,255,.04)}
+  #chat{left:0;right:0;top:auto;bottom:calc(58px + env(safe-area-inset-bottom,0px));width:auto;height:min(60%,520px);border-radius:16px 16px 0 0;border-left:0;border-right:0;border-bottom:0}
+  #act{bottom:calc(70px + env(safe-area-inset-bottom,0px));width:max-content;max-width:calc(100vw - 20px);flex-wrap:wrap;justify-content:center}
+  #act .st{flex-basis:100%;text-align:center}
+  #act kbd{display:none}
+  #act button{padding:11px 16px;font-size:15px}
+  #photo{bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+  .card{padding:16px}.card h1{font-size:26px}
+  .roster{grid-template-columns:repeat(4,1fr);gap:6px}
+  .pick{padding:8px 2px 6px}.pick img{width:44px;height:44px}.pick b{font-size:15px}.pick small{font-size:10px}
 }
 @media (prefers-reduced-motion:reduce){.bub{transition:none}}
 </style>
@@ -197,6 +217,13 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline
     </form>
   </aside>
   <button id="chatTab" hidden>聊天</button>
+  <nav id="mnav" aria-label="手机菜单">
+    <button type="button" id="mZones"><span>🗺</span>区域</button>
+    <button type="button" id="mAll"><span>🛰</span>全景</button>
+    <button type="button" id="mFollow"><span>🎯</span>跟随我</button>
+    <button type="button" id="mPhoto"><span>📷</span>实拍</button>
+    <button type="button" id="mChat"><span>💬</span>聊天</button>
+  </nav>
   <div id="help">点工位走过去，按 E / R 干活 · 拖动转视角 · 滚轮缩放 · 双击人物跟随</div>
   <section id="hud" aria-label="今日生产">
     <div class="ord"><b id="oNo">第 1 单</b><div class="bar"><i id="oBar"></i></div><span id="oTxt">0 / 30 件</span></div>

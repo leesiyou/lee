@@ -479,8 +479,8 @@ let fly=null,follow=null;
 function flyTo(pos,tgt,ms=1100){fly={p0:camera.position.clone(),t0:controls.target.clone(),p1:new THREE.Vector3(...pos),t1:new THREE.Vector3(...tgt),s:performance.now(),ms};follow=null;updFollowBtn()}
 // phones held upright: look along the workshop's long side so it fills the tall screen
 const portrait=()=>innerWidth<innerHeight;
-function godCam(x,z,d){if(portrait())return [[x+d*.42,d*1.15,z-d*.1],[x,0,z]];return [[x+d*.12,d,z+d*.42],[x,0,z]]}
-function overview(){return portrait()?godCam(8,0.5,78):[[8,58,16],[8,0,0.5]]}
+function godCam(x,z,d){if(portrait()){d*=1.35;return [[x+d*.42,d*1.15,z-d*.1],[x,0,z]]}return [[x+d*.12,d,z+d*.42],[x,0,z]]}
+function overview(){return portrait()?godCam(8,0.5,58):[[8,58,16],[8,0,0.5]]}
 
 /* ================= input ================= */
 const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
@@ -670,14 +670,24 @@ const zlist=document.getElementById('zlist');
 for(const Z of ZONES){if(Z.hidden)continue;const b=document.createElement('button');b.className='zb';b.dataset.z=Z.id;const sw=document.createElement('span');sw.className='sw';sw.style.background=Z.c;const n=document.createElement('span');n.className='n';b.append(sw,document.createTextNode(Z.name),n);b.onclick=()=>{const[x1,x2,z1,z2]=Z.r;flyTo(...godCam((x1+x2)/2,(z1+z2)/2,Math.max(14,Math.max(x2-x1,z2-z1)*1.6)));showPhoto(Z)};zlist.appendChild(b)}
 document.getElementById('btnAll').onclick=()=>flyTo(...overview());
 const fBtn=document.getElementById('btnFollow');fBtn.onclick=()=>{if(!me){ent.hidden=false;return}follow=follow===me?null:me;fly=null;updFollowBtn()};
-function updFollowBtn(){fBtn.textContent=follow===me&&me?'停止跟随':'跟随我'}
+function updFollowBtn(){const on=!!(follow===me&&me);fBtn.textContent=on?'停止跟随':'跟随我';const m=document.getElementById('mFollow');if(m)m.classList.toggle('on',on)}
 const photo=document.getElementById('photo');let curZone=null;
 function showPhoto(Z){if(!Z)return;document.getElementById('photoImg').src=window.PHOTOS[Z.ph];document.getElementById('photoT').textContent=Z.name+' · 实拍';document.getElementById('photoP').textContent=Z.p;photo.hidden=false}
 document.getElementById('btnPhoto').onclick=()=>{if(!photo.hidden){photo.hidden=true;return}showPhoto(curZone||ZBYID.cut)};
 document.getElementById('photoX').onclick=()=>photo.hidden=true;
 const chatEl=document.getElementById('chat'),chatTab=document.getElementById('chatTab');
 document.getElementById('fold').onclick=()=>{chatEl.hidden=true;chatTab.hidden=false};chatTab.onclick=()=>{chatEl.hidden=false;chatTab.hidden=true};
-if(innerWidth<760){chatEl.hidden=true;chatTab.hidden=false}
+const PHONE=()=>innerWidth<=760;
+if(PHONE()){chatEl.hidden=true;chatTab.hidden=false}
+const zonesEl=document.getElementById('zones'),mZ=document.getElementById('mZones'),mC=document.getElementById('mChat');
+function sheets(){mZ.classList.toggle('on',zonesEl.classList.contains('open'));mC.classList.toggle('on',!chatEl.hidden)}
+mZ.onclick=()=>{zonesEl.classList.toggle('open');if(zonesEl.classList.contains('open'))chatEl.hidden=true;sheets()};
+mC.onclick=()=>{chatEl.hidden=!chatEl.hidden;if(!chatEl.hidden)zonesEl.classList.remove('open');sheets()};
+document.getElementById('mAll').onclick=()=>{zonesEl.classList.remove('open');sheets();flyTo(...overview())};
+document.getElementById('mFollow').onclick=()=>fBtn.onclick();
+document.getElementById('mPhoto').onclick=()=>document.getElementById('btnPhoto').onclick();
+zlist.addEventListener('click',()=>{if(PHONE()){zonesEl.classList.remove('open');sheets()}});
+document.getElementById('fold').addEventListener('click',sheets);
 function updWhere(){if(!me)return;const Z=zoneAt(me.x,me.z);const id=Z?Z.id:null;if(id===curZone?.id)return;curZone=Z;document.getElementById('where').textContent=Z?'你在：'+Z.name:'';for(const b of zlist.children)b.classList.toggle('on',b.dataset.z===id)}
 function updZoneCounts(){const cnt={};for(const a of actors.values()){const Z=zoneAt(a.x,a.z);if(Z)cnt[Z.id]=(cnt[Z.id]||0)+1}for(const b of zlist.children){b.querySelector('.n').textContent=cnt[b.dataset.z]||''}}
 
